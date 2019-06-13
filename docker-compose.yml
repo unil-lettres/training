@@ -1,0 +1,66 @@
+version: '2.4'
+
+networks:
+  training-net:
+    driver: bridge
+
+services:
+  train-app:
+    build:
+      context: ./
+      dockerfile: app.dockerfile
+    env_file:
+      - ./.env
+    volumes:
+      - ./site:/var/www
+    working_dir: /var/www
+    links:
+      - train-mariadb:database
+      - train-mailhog:mail
+    networks:
+      - training-net
+    container_name: train-app
+  train-web:
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    env_file:
+      - ./.env
+    working_dir: /var/www
+    volumes_from:
+      - train-app
+    ports:
+      - "8686:80"
+    networks:
+      - training-net
+    container_name: train-web
+  train-mariadb:
+    image: mariadb:10.1
+    env_file:
+      - ./.env
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    ports:
+      - "3302:3306"
+    networks:
+      - training-net
+    container_name: train-mysql
+  train-myadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    env_file:
+      - ./.env
+    links:
+      - train-mariadb:db
+    ports:
+      - "9999:80"
+    networks:
+      - training-net
+    container_name: train-myadmin
+  train-mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - training-net
+    container_name: train-mailhog
