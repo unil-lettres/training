@@ -25,7 +25,7 @@ class TrainingCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Training');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/training');
-        $this->crud->setEntityNameStrings('training', 'trainings');
+        $this->crud->setEntityNameStrings('formation', 'formations');
 
         /*
         |--------------------------------------------------------------------------
@@ -89,9 +89,6 @@ class TrainingCrudController extends CrudController
 
         // Enable exports
         $this->crud->enableExportButtons();
-
-        // Customize model name
-        $this->crud->setEntityNameStrings('Formation', 'Formations');
     }
 
     public function store(StoreRequest $request)

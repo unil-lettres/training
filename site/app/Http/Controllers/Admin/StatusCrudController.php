@@ -25,7 +25,7 @@ class StatusCrudController extends CrudController
         */
         $this->crud->setModel('App\Models\Status');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/status');
-        $this->crud->setEntityNameStrings('status', 'statuses');
+        $this->crud->setEntityNameStrings('décision', 'décisions');
 
         /*
         |--------------------------------------------------------------------------
@@ -41,9 +41,6 @@ class StatusCrudController extends CrudController
         // add asterisk for fields that are required in StatusRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
-
-        // Customize model name
-        $this->crud->setEntityNameStrings('Statut', 'Statuts');
     }
 
     public function store(StoreRequest $request)
