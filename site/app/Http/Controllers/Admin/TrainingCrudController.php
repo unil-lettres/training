@@ -64,9 +64,34 @@ class TrainingCrudController extends CrudController
         ]);
         $this->crud->addField(['name' => 'visible', 'type' => 'checkbox', 'label' => 'Visible']);
 
+        // Filters
+        $this->crud->addFilter([
+          'name' => 'visible',
+          'type' => 'dropdown',
+          'label'=> 'Visibilité'
+        ], [
+          1 => 'Visible',
+          2 => 'Non-visible'
+        ], function($value) {
+            switch (intval($value)) {
+                case 1:
+                    $this->crud->addClause('where', 'visible', 1);
+                    break;
+                case 2:
+                    $this->crud->addClause('where', 'visible', 0);
+                    break;
+            }
+        });
+
         // add asterisk for fields that are required in TrainingRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
+
+        // Enable exports
+        $this->crud->enableExportButtons();
+
+        // Customize model name
+        $this->crud->setEntityNameStrings('Formation', 'Formations');
     }
 
     public function store(StoreRequest $request)

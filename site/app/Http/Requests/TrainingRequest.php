@@ -27,10 +27,10 @@ class TrainingRequest extends FormRequest
     {
         return [
             'name' => 'required|min:1|max:100',
-            'description' => 'min:1',
-            'start' => 'date',
-            'end' => 'date',
-            'visible' => 'required|boolean'
+            'description' => 'nullable|min:1',
+            'start' => 'nullable|date',
+            'end' => 'nullable|date',
+            'visible' => 'boolean'
         ];
     }
 

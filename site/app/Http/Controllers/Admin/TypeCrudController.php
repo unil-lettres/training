@@ -41,6 +41,9 @@ class TypeCrudController extends CrudController
         // add asterisk for fields that are required in TypeRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
+
+        // Customize model name
+        $this->crud->setEntityNameStrings('Type', 'Types');
     }
 
     public function store(StoreRequest $request)
