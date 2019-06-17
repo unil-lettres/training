@@ -3,6 +3,7 @@
 <li><a href='{{ backpack_url('status') }}'><i class='fa fa-tasks'></i> <span>Décisions</span></a></li>
 <li><a href='{{ backpack_url('type') }}'><i class='fa fa-th'></i> <span>Types</span></a></li>
 <li><a href='{{ backpack_url('training') }}'><i class='fa fa-certificate'></i> <span>Formations</span></a></li>
+<li><a href='{{ backpack_url('request') }}'><i class='fa fa-bell'></i> <span>Demandes</span></a></li>
 <!-- Users, Roles Permissions -->
 <li class="treeview">
     <a href="#"><i class="fa fa-group"></i> <span>Utilisateurs</span> <i class="fa fa-angle-left pull-right"></i></a>

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\CrudTrait;
 
-class Type extends Model
+class Request extends Model
 {
     use CrudTrait;
 
@@ -15,11 +15,29 @@ class Type extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'types';
+    protected $table = 'requests';
     protected $primaryKey = 'id';
     public $timestamps = true;
     // protected $guarded = ['id'];
-    protected $fillable = ['name'];
+    protected $fillable = [
+      'name',
+      'theme',
+      'description',
+      'deadline',
+      'level',
+      'applicants',
+      'contact',
+      'comments',
+      'filling_date',
+      'status',
+      'decision_date',
+      'decision_comments',
+      'file',
+      'extras',
+      'user_id',
+      'type_id',
+      'status_id'
+    ];
     // protected $hidden = [];
     // protected $dates = [];
 
@@ -36,11 +54,11 @@ class Type extends Model
     */
 
     /**
-     * Get the requests for the type.
+     * Get the type associated with the request.
      */
-    public function requests()
+    public function type()
     {
-        return $this->hasMany('App\Models\Request', 'id');
+        return $this->belongsTo('App\Models\Type', 'id');
     }
 
     /*
@@ -60,4 +78,13 @@ class Type extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function setFileAttribute($value)
+    {
+        $attribute_name = "file";
+        $disk = "uploads";
+        $destination_path = "uploads";
+
+        $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
+    }
 }
