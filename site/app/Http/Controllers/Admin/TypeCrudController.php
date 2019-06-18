@@ -8,6 +8,8 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use App\Http\Requests\TypeRequest as StoreRequest;
 use App\Http\Requests\TypeRequest as UpdateRequest;
 use Backpack\CRUD\CrudPanel;
+use App\Models\Type;
+use Illuminate\Http\Request;
 
 /**
  * Class TypeCrudController
@@ -59,5 +61,11 @@ class TypeCrudController extends CrudController
         // your additional operations after save here
         // use $this->data['entry'] or $this->crud->entry
         return $redirect_location;
+    }
+
+    public function typeOptions(Request $request) {
+        $term = $request->input('term');
+        $options = Type::where('name', 'like', '%'.$term.'%')->get()->pluck('name', 'id');
+        return $options;
     }
 }

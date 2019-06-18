@@ -212,6 +212,39 @@ class RequestCrudController extends CrudController
           'tab' => 'Champs d\'administration'
         ]);
 
+        // Filters
+        $this->crud->addFilter([
+          'name' => 'type_id',
+          'type' => 'select2_ajax',
+          'label'=> 'Catégorie',
+          'placeholder' => 'Filtrer une catégorie'
+        ],
+        url('admin/type/ajax-type-options'),
+        function($value) {
+            $this->crud->addClause('where', 'type_id', $value);
+        });
+        $this->crud->addFilter([
+          'name' => 'status_id',
+          'type' => 'select2_ajax',
+          'label'=> 'Décision',
+          'placeholder' => 'Filtrer une décision'
+        ],
+        url('admin/status/ajax-status-options'),
+        function($value) {
+            $this->crud->addClause('where', 'status_id', $value);
+        });
+        $this->crud->addFilter([
+          'name' => 'status',
+          'type' => 'dropdown',
+          'label'=> 'Statut'
+        ], [
+          'new' => 'Nouveau',
+          'pending' => 'En attente',
+          'resolved' => 'Résolue',
+        ], function($value) {
+            $this->crud->addClause('where', 'status', $value);
+        });
+
         // add asterisk for fields that are required in RequestRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
         $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
