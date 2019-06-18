@@ -35,6 +35,14 @@ class Status extends Model
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * Get the requests for the status.
+     */
+    public function requests()
+    {
+        return $this->hasMany('App\Models\Status', 'id');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

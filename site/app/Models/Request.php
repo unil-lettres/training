@@ -36,7 +36,12 @@ class Request extends Model
       'extras',
       'user_id',
       'type_id',
-      'status_id'
+      'status_id',
+      'extras'
+    ];
+    protected $fakeColumns = ['extras'];
+    protected $casts = [
+      'extras' => 'array',
     ];
     // protected $hidden = [];
     // protected $dates = [];
@@ -59,6 +64,22 @@ class Request extends Model
     public function type()
     {
         return $this->belongsTo('App\Models\Type', 'id');
+    }
+
+    /**
+     * Get the status associated with the request.
+     */
+    public function status()
+    {
+        return $this->belongsTo('App\Models\Status', 'id');
+    }
+
+    /**
+     * Get the user associated with the request.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\Models\BackpackUser', 'id');
     }
 
     /*

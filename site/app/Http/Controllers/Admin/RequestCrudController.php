@@ -36,31 +36,11 @@ class RequestCrudController extends CrudController
         // Columns
         $this->crud->addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
         $this->crud->addColumn(['name' => 'description', 'type' => 'text', 'label' => 'Description']);
-        $this->crud->addColumn([
-            'name' => 'status',
-            'label' => "Statut",
-            'type' => 'select_from_array',
-            'options' => ['new' => 'Nouveau', 'pending' => 'En attente', 'resolved' => 'Résolue'],
-        ]);
+
 
         // Fields
-        $this->crud->addField(['name' => 'name', 'type' => 'text', 'label' => 'Libellé']);
-        $this->crud->addField(['name' => 'theme', 'type' => 'text', 'label' => 'Thème']);
-        $this->crud->addField(['name' => 'description', 'type' => 'simplemde', 'label' => 'Description']);
-        $this->crud->addField([
-          'name' => '	deadline',
-          'type' => 'date_picker',
-          'datetime_picker_options' => [
-            'format' => 'DD/MM/YYYY',
-            'language' => 'fr'
-          ],
-          'allows_null' => true,
-          'label' => 'Délai production'
-        ]);
-        $this->crud->addField(['name' => 'level', 'type' => 'text', 'label' => 'Niveau requis']);
-        $this->crud->addField(['name' => 'applicants', 'type' => 'text', 'label' => 'Demandeur(s)']);
-        $this->crud->addField(['name' => 'contact', 'type' => 'email', 'label' => 'Mail contact']);
-        $this->crud->addField(['name' => 'comments', 'type' => 'simplemde', 'label' => 'Remarques']);
+        $this->crud->addField(['name' => 'name', 'type' => 'text', 'label' => 'Libellé', 'tab' => 'Champs communs']);
+        $this->crud->addField(['name' => 'description', 'type' => 'summernote', 'label' => 'Description', 'tab' => 'Champs communs']);
         $this->crud->addField([
           'name' => 'filling_date',
           'type' => 'datetime_picker',
@@ -69,14 +49,117 @@ class RequestCrudController extends CrudController
             'language' => 'fr'
           ],
           'allows_null' => true,
-          'label' => 'Date dépot'
+          'label' => 'Date dépot',
+          'tab' => 'Champs communs'
+        ]);
+        $this->crud->addField(['name' => 'applicants', 'type' => 'text', 'label' => 'Demandeur(s)', 'tab' => 'Champs communs']);
+        $this->crud->addField(['name' => 'theme', 'type' => 'text', 'label' => 'Thème', 'tab' => 'Champs communs']);
+        $this->crud->addField([
+          'name' => '	deadline',
+          'type' => 'date_picker',
+          'datetime_picker_options' => [
+            'format' => 'DD/MM/YYYY',
+            'language' => 'fr'
+          ],
+          'allows_null' => true,
+          'label' => 'Délai production',
+          'tab' => 'Champs communs'
+        ]);
+        $this->crud->addField(['name' => 'level', 'type' => 'text', 'label' => 'Niveau requis', 'tab' => 'Champs communs']);
+        $this->crud->addField(['name' => 'comments', 'type' => 'summernote', 'label' => 'Remarques', 'tab' => 'Champs communs']);
+        $this->crud->addField(['name' => 'contact', 'type' => 'email', 'label' => 'Mail contact', 'tab' => 'Champs communs']);
+
+        $this->crud->addField([
+          'name' => 'doctoral_school',
+          'label' => "École doctorale",
+          'type' => 'text',
+          'fake' => true,
+          'store_in' => 'extras',
+          'tab' => 'Champs chercheur/doctorant'
+        ]);
+
+        $this->crud->addField([
+          'name' => 'fns',
+          'label' => "Fns",
+          'type' => 'checkbox',
+          'fake' => true,
+          'store_in' => 'extras',
+          'tab' => 'Champs chercheur/doctorant'
         ]);
         $this->crud->addField([
+          'name' => 'doctoral_status',
+          'label' => "Doctorat statut",
+          'type' => 'text',
+          'fake' => true,
+          'store_in' => 'extras',
+          'tab' => 'Champs chercheur/doctorant'
+        ]);
+        $this->crud->addField([
+          'name' => 'doctoral_level',
+          'label' => "Niveau actuel",
+          'type' => 'text',
+          'fake' => true,
+          'store_in' => 'extras',
+          'tab' => 'Champs chercheur/doctorant'
+        ]);
+        $this->crud->addField([
+          'name' => 'tested_products',
+          'label' => "Produits testés",
+          'type' => 'text',
+          'fake' => true,
+          'store_in' => 'extras',
+          'tab' => 'Champs chercheur/doctorant'
+        ]);
+
+        $this->crud->addField([
+          'name' => 'teachers_nbr',
+          'label' => "Seul ou avec d'autres enseignants",
+          'type' => 'checkbox',
+          'fake' => true,
+          'store_in' => 'extras',
+          'tab' => 'Champs enseignant'
+        ]);
+        $this->crud->addField([
+          'name' => 'students_nbr',
+          'label' => "Avec un ou des étudiants",
+          'type' => 'checkbox',
+          'fake' => true,
+          'store_in' => 'extras',
+          'tab' => 'Champs enseignant'
+        ]);
+        $this->crud->addField([
+          'name' => 'action_type',
+          'label' => "Intervention pour toute une classe, pendant les cours",
+          'type' => 'checkbox',
+          'fake' => true,
+          'store_in' => 'extras',
+          'tab' => 'Champs enseignant'
+        ]);
+
+        $this->crud->addColumn([
           'name' => 'status',
           'label' => "Statut",
           'type' => 'select_from_array',
           'options' => ['new' => 'Nouveau', 'pending' => 'En attente', 'resolved' => 'Résolue'],
-          'allows_null' => true
+          'tab' => 'Champs d\'administration'
+        ]);
+        $this->crud->addField([
+          'label' => "Catégorie",
+          'type' => 'select',
+          'name' => 'type_id',
+          'entity' => 'type',
+          'attribute' => 'name',
+          'model' => "App\Models\Type",
+          'tab' => 'Champs d\'administration'
+        ]);
+        $this->crud->addField([
+          'label' => "Décisions",
+          'type' => 'select',
+          'name' => 'status_id',
+          'entity' => 'status',
+          'attribute' => 'name',
+          'model' => "App\Models\Status",
+          'tab' => 'Champs d\'administration'
         ]);
         $this->crud->addField([
           'name' => 'decision_date',
@@ -86,23 +169,31 @@ class RequestCrudController extends CrudController
             'language' => 'fr'
           ],
           'allows_null' => true,
-          'label' => 'Date de décision'
+          'label' => 'Date de décision',
+          'tab' => 'Champs d\'administration'
         ]);
-        $this->crud->addField(['name' => 'decision_comments', 'type' => 'simplemde', 'label' => 'Commentaire relatif à la décision']);
+        $this->crud->addField([
+          'name' => 'decision_comments',
+          'type' => 'summernote',
+          'label' => 'Commentaire relatif à la décision',
+          'tab' => 'Champs d\'administration'
+        ]);
         $this->crud->addField([
           'name' => 'file',
           'label' => 'Document',
           'type' => 'upload',
-          'upload' => true
+          'upload' => true,
+          'tab' => 'Champs d\'administration'
         ]);
-
-        $this->crud->addField([  // Select
-          'label' => "Catégorie",
+        $this->crud->addField([
+          'label' => "Utilisateur",
           'type' => 'select',
-          'name' => 'type_id', // the db column for the foreign key
-          'entity' => 'type', // the method that defines the relationship in your Model
-          'attribute' => 'name', // foreign key attribute that is shown to user
-          'model' => "App\Models\Type"
+          'name' => 'user_id',
+          'entity' => 'user',
+          'attribute' => 'name',
+          'model' => "App\Models\BackpackUser",
+          'default'   => auth()->user()->id,
+          'tab' => 'Champs d\'administration'
         ]);
 
         // add asterisk for fields that are required in RequestRequest

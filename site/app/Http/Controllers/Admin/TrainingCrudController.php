@@ -41,7 +41,7 @@ class TrainingCrudController extends CrudController
 
         // Fields
         $this->crud->addField(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
-        $this->crud->addField(['name' => 'description', 'type' => 'simplemde', 'label' => 'Description']);
+        $this->crud->addField(['name' => 'description', 'type' => 'summernote', 'label' => 'Description']);
         $this->crud->addField([
           'name' => 'start',
           'type' => 'datetime_picker',

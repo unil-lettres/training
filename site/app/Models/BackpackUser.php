@@ -33,4 +33,12 @@ class BackpackUser extends User
     {
         return $this->email;
     }
+
+    /**
+     * Get the requests for the user.
+     */
+    public function requests()
+    {
+        return $this->hasMany('App\Models\Request', 'id');
+    }
 }

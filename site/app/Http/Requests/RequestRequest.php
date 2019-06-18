@@ -27,7 +27,7 @@ class RequestRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:1|max:100',
+            'name' => 'required|min:1|max:150',
             'theme' => 'nullable|min:1|max:300',
             'description' => 'nullable|min:1',
             'deadline' => 'nullable|date',
@@ -42,7 +42,18 @@ class RequestRequest extends FormRequest
             ],
             'decision_date' => 'nullable|date',
             'decision_comments' => 'nullable|min:1',
-            'file' => 'nullable|file'
+            'file' => 'nullable|file',
+            'user_id' => 'required|integer',
+            'type_id' => 'nullable|integer',
+            'status_id' => 'nullable|integer',
+            'doctoral_school' => 'nullable|min:1|max:300',
+            'fns' => 'nullable|boolean',
+            'doctoral_status' => 'nullable|min:1|max:300',
+            'doctoral_level' => 'nullable|min:1|max:300',
+            'tested_products' => 'nullable|min:1|max:300',
+            'teachers_nbr' => 'nullable|boolean',
+            'students_nbr' => 'nullable|boolean',
+            'action_type' => 'nullable|boolean'
         ];
     }
 
