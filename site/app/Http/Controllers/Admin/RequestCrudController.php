@@ -36,7 +36,22 @@ class RequestCrudController extends CrudController
         // Columns
         $this->crud->addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
         $this->crud->addColumn(['name' => 'description', 'type' => 'text', 'label' => 'Description']);
-
+        $this->crud->addColumn(['name' => 'filling_date', 'type' => 'datetime', 'label' => 'Date dépot']);
+        $this->crud->addColumn([
+          'label' => "Catégorie",
+          'type' => "select",
+          'name' => 'type_id',
+          'entity' => 'type',
+          'attribute' => "name",
+          'model' => "App\Models\Type"
+        ]);
+        $this->crud->addColumn([
+          'name' => 'status',
+          'label' => "Statut",
+          'type' => 'select_from_array',
+          'options' => ['new' => 'Nouveau', 'pending' => 'En attente', 'resolved' => 'Résolue']
+        ]);
+        $this->crud->addColumn(['name' => 'comments', 'type' => 'text', 'label' => 'Remarques']);
 
         // Fields
         $this->crud->addField(['name' => 'name', 'type' => 'text', 'label' => 'Libellé', 'tab' => 'Champs communs']);
@@ -137,7 +152,7 @@ class RequestCrudController extends CrudController
           'tab' => 'Champs enseignant'
         ]);
 
-        $this->crud->addColumn([
+        $this->crud->addField([
           'name' => 'status',
           'label' => "Statut",
           'type' => 'select_from_array',
