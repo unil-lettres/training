@@ -63,7 +63,7 @@ class Request extends Model
      */
     public function type()
     {
-        return $this->belongsTo('App\Models\Type', 'id');
+        return $this->belongsTo('App\Models\Type');
     }
 
     /**
@@ -71,7 +71,7 @@ class Request extends Model
      */
     public function status()
     {
-        return $this->belongsTo('App\Models\Status', 'id');
+        return $this->belongsTo('App\Models\Status');
     }
 
     /**
@@ -79,7 +79,7 @@ class Request extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\BackpackUser', 'id');
+        return $this->belongsTo('App\Models\BackpackUser');
     }
 
     /*

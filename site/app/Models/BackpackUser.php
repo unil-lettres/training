@@ -39,6 +39,6 @@ class BackpackUser extends User
      */
     public function requests()
     {
-        return $this->hasMany('App\Models\Request', 'id');
+        return $this->hasMany('App\Models\Request');
     }
 }

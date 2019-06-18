@@ -50,6 +50,7 @@ class RequestCrudController extends CrudController
           ],
           'allows_null' => true,
           'label' => 'Date dépot',
+          'default' => now(),
           'tab' => 'Champs communs'
         ]);
         $this->crud->addField(['name' => 'applicants', 'type' => 'text', 'label' => 'Demandeur(s)', 'tab' => 'Champs communs']);

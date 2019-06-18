@@ -43,7 +43,7 @@ class RequestRequest extends FormRequest
             'decision_date' => 'nullable|date',
             'decision_comments' => 'nullable|min:1',
             'file' => 'nullable|file',
-            'user_id' => 'required|integer',
+            'user_id' => 'nullable|integer',
             'type_id' => 'nullable|integer',
             'status_id' => 'nullable|integer',
             'doctoral_school' => 'nullable|min:1|max:300',

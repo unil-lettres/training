@@ -40,7 +40,7 @@ class Status extends Model
      */
     public function requests()
     {
-        return $this->hasMany('App\Models\Status', 'id');
+        return $this->hasMany('App\Models\Request');
     }
 
     /*

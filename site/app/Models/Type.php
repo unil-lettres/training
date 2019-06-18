@@ -40,7 +40,7 @@ class Type extends Model
      */
     public function requests()
     {
-        return $this->hasMany('App\Models\Request', 'id');
+        return $this->hasMany('App\Models\Request');
     }
 
     /*
