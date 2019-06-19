@@ -30,7 +30,7 @@ Update the Laravel .env file
 
 Update the application key
 
-``docker exec train-app cp php artisan key:generate``
+``docker exec train-app php artisan key:generate``
 
 Install php dependencies
 
