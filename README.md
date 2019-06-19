@@ -42,17 +42,17 @@ Install js dependencies
 
 ``docker exec train-app npm run dev``
 
-Laravel migrations
+Run migrations
 
 ``docker exec train-app php artisan migrate --no-interaction --force``
 
 Seeding first user
 
-``php artisan db:seed`` 
+``docker exec train-app php artisan db:seed`` 
 
 This is only needed when you launch the project for the first time. After that you can simply use the following command from the project root directory.
 
-``docker-compose up``
+``docker-compose up -d``
 
 ## Stop docker containers
 
