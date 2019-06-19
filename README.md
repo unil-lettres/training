@@ -77,6 +77,12 @@ To access the administration please use the following link.
 login: user@example.com
 password: password
 
+### Telescope
+
+To access the debug tool please use the following link.
+
+[http://training.lan:8686/telescope](http://training.lan:8686/telescope)
+
 ### phpMyAdmin
 
 To access the database please use the following link.
