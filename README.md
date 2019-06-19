@@ -32,19 +32,21 @@ Update the application key
 
 ``docker exec train-app cp php artisan key:generate``
 
-Composer install
+Install php dependencies
 
 ``docker exec train-app composer install``
 
-Yarn install
+Install js dependencies
 
-``docker exec train-app yarn install``
+``docker exec train-app npm install``
+
+``docker exec train-app npm run dev``
 
 Laravel migrations
 
 ``docker exec train-app php artisan migrate --no-interaction --force``
 
-Seeding first user (login: user@example.com, password: password)
+Seeding first user
 
 ``php artisan db:seed`` 
 
@@ -67,6 +69,13 @@ You can check if the containers are indeed stopped with the following command (o
 To access the main application please use the following link.
 
 [http://training.lan:8686](http://training.lan:8686)
+
+To access the administration please use the following link.
+
+[http://training.lan:8686/admin](http://training.lan:8686/admin)
+
+login: user@example.com
+password: password
 
 ### phpMyAdmin
 
