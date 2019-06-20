@@ -60,12 +60,6 @@ This is only needed when you launch the project for the first time. After that y
 
 ``docker-compose up -d``
 
-## Stop docker containers
-
-Terminate execution to stop the containers OR use the following command from the project root directory.
-
-``docker-compose stop``
-
 ## Frontends
 
 To access the main application please use the following link.
