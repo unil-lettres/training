@@ -4,7 +4,7 @@ Development of technical skills in the Faculty of Arts.
 
 A Laravel 5.8 app with a Backpack administration.
 
-#Development
+# Development
 
 ## Docker installation
 
