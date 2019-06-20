@@ -1,5 +1,11 @@
 # Training project
 
+Development of technical skills in the Faculty of Arts.
+
+A Laravel 5.8 app with a Backpack administration.
+
+#Development
+
 ## Docker installation
 
 A working [Docker](https://docs.docker.com/engine/installation/) installation is mandatory.
@@ -59,10 +65,6 @@ This is only needed when you launch the project for the first time. After that y
 Terminate execution to stop the containers OR use the following command from the project root directory.
 
 ``docker-compose stop``
-
-You can check if the containers are indeed stopped with the following command (output should be empty).
-
-``docker ps``
 
 ## Frontends
 
