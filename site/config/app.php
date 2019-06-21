@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        StudentAffairsUwm\Shibboleth\ShibalikeServiceProvider::class,
 
         /*
          * Application Service Providers...

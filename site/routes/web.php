@@ -13,4 +13,6 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware(['auth']);
+
+Route::redirect('/login', '/shibboleth-login')->name('login');
