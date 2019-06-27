@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home');
 })->middleware(['auth']);
 
 Route::redirect('/login', '/shibboleth-login')->name('login');
