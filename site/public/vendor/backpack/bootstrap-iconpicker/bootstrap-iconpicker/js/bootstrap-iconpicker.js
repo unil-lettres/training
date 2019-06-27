@@ -234,7 +234,7 @@
     
     Iconpicker.prototype.updateIconsCount = function () {
         var op = this.options;
-        if(op.footer === true){
+        if(op._footer === true){
             var icons_count = [
                 '<tr>',
                 '   <td colspan="' + op.cols + '" class="text-center">',

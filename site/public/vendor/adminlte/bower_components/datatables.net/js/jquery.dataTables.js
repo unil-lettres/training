@@ -3484,7 +3484,7 @@
 		_fnCallbackFire( oSettings, 'aoHeaderCallback', 'header', [ $(oSettings.nTHead).children('tr')[0],
 			_fnGetDataMaster( oSettings ), iDisplayStart, iDisplayEnd, aiDisplay ] );
 	
-		_fnCallbackFire( oSettings, 'aoFooterCallback', 'footer', [ $(oSettings.nTFoot).children('tr')[0],
+		_fnCallbackFire( oSettings, 'aoFooterCallback', '_footer.scss', [ $(oSettings.nTFoot).children('tr')[0],
 			_fnGetDataMaster( oSettings ), iDisplayStart, iDisplayEnd, aiDisplay ] );
 	
 		var body = $(oSettings.nTBody);

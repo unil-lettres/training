@@ -6371,7 +6371,7 @@
      * @return {Object}
      * @return {function(label, options=):string} return.button {@link #tplButton function to make text button}
      * @return {function(iconClass, options=):string} return.iconButton {@link #tplIconButton function to make icon button}
-     * @return {function(className, title=, body=, footer=):string} return.dialog {@link #tplDialog function to make dialog}
+     * @return {function(className, title=, body=, _footer.scss=):string} return.dialog {@link #tplDialog function to make dialog}
      */
     this.getTemplate = function () {
       return {

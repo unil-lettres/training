@@ -1,35 +1,46 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Formations</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Accueil</a></li>
-                <li><a href="#">Nouvelle demande</a></li>
-                <li><a href="#">Mes demandes</a></li>
-                <li><a href="#" target="_blank">Administration</a></li>
+        <span class="navbar-brand">FormationLettres</span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-coll" aria-controls="navbar-coll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Aide <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">À propos</a></li>
-                    </ul>
+        <div class="collapse navbar-collapse" id="navbar-coll">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home') }}">Accueil</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('request.create') }}">Nouvelle demande</a>
+                </li>
+                @if (backpack_auth()->check() && backpack_auth()->user()->hasRole('Admin'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Administration</a>
+                    </li>
+                @endif
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Aide
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Contact</a>
+                        <a class="dropdown-item" href="#">A propos</a>
+                    </div>
+                </li>
             </ul>
-
-            <div class="navbar-right">
-                <a href="#">
-                    <button type="button" class="btn btn-default navbar-btn">Connexion</button>
-                </a>
+            <div class="my-2 my-md-0">
+                @if (backpack_auth()->check())
+                    <span class="username">
+                        {{{ isset(backpack_user()->name) ? backpack_user()->name : backpack_user()->email }}}
+                    </span>
+                    <a href="{{ route('logout') }}">
+                        <button type="button" class="btn btn-outline-secondary">Déconnexion</button>
+                    </a>
+                @else
+                    <a href="{{ route('login') }}">
+                        <button type="button" class="btn btn-outline-secondary">Connexion</button>
+                    </a>
+                @endif
             </div>
         </div>
     </div>

@@ -13,6 +13,15 @@
 
 Route::get('/', function () {
     return view('pages.home');
-})->middleware(['auth']);
+})->name('home');
+
+Route::get('/logout', function () {
+    backpack_auth()->logout();
+    return view('pages.home');
+})->name('logout');
+
+Route::resource('request', 'RequestController')->only([
+  'index', 'show', 'create', 'store'
+])->middleware(['auth']);
 
 Route::redirect('/login', '/shibboleth-login')->name('login');

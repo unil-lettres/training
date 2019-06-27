@@ -1,0 +1,25 @@
+.img-circle {
+  border-radius: 50%;
+}
+
+@media (max-width: 1200px)
+{
+  .trainings-infos
+  {
+    margin-top: 60px;
+  }
+}
+
+@media (max-width: 768px)
+{
+  .trainings-infos
+  {
+    margin-top: 10px;
+  }
+}
+
+.btn-request {
+  color: #fff;
+  background-color: #939498 !important;
+  border-color: #939498 !important;
+}

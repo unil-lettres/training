@@ -2702,7 +2702,7 @@ exports.rtlDefaults = {
 };
 var complexOptions = [
     'header',
-    'footer',
+    '_footer.scss',
     'buttonText',
     'buttonIcons',
     'themeButtonIcons'
@@ -9765,7 +9765,7 @@ var Calendar = /** @class */ (function () {
     Calendar.prototype.computeFooterOptions = function () {
         return {
             extraClasses: 'fc-footer-toolbar',
-            layout: this.opt('footer')
+            layout: this.opt('_footer.scss')
         };
     };
     // can be called repeatedly and Header will rerender
