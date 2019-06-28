@@ -10646,18 +10646,61 @@ a.text-dark:focus {
   }
 }
 
+.username {
+  color: white;
+  margin-right: 10px;
+}
+
 footer {
-  position: fixed;
-  bottom: 0;
+  height: 30px;
+  margin-top: 25px;
 }
 
 #main-content {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  padding: 30px 15px 0;
+}
+
+.home-content {
+  margin-bottom: 40px;
 }
 
 .img-circle {
   border-radius: 50%;
+  margin-bottom: -30px;
+  background-color: #00cccc;
+  width: 206px;
+  height: 206px;
+  padding: 25px;
+  text-align: center;
+}
+
+.img-circle div:nth-child(1) {
+  padding-bottom: 5px;
+}
+
+.img-circle div:nth-child(2) {
+  padding-bottom: 5px;
+}
+
+.img-circle div:nth-child(3) {
+  font-size: 13px;
+}
+
+.img-circle div {
+  line-height: 18px;
+}
+
+.trainings-content {
+  margin-top: 40px;
+}
+
+.trainings-content .col-sm-4,
+.trainings-content .col-lg-4 {
+  margin-left: -15px;
+}
+
+.trainings-infos {
+  margin-top: 50px;
 }
 
 @media (max-width: 1200px) {
@@ -10676,10 +10719,5 @@ footer {
   color: #fff;
   background-color: #939498 !important;
   border-color: #939498 !important;
-}
-
-.username {
-  color: white;
-  margin-right: 10px;
 }
 

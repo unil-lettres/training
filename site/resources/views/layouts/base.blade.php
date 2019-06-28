@@ -4,20 +4,21 @@
         @include('includes.head')
     </head>
     <body>
-        @include('includes.header')
-        <div class="row">
-            <div class="container">
-                <div id="main-content">
-                    @yield('content')
+        <div id='app'>
+            @include('includes.header')
+            <div id="main-content" class="container">
+                <div class="page-header">
+                    <h1>@yield('title')</h1>
                 </div>
+                @yield('content')
             </div>
-        </div>
-        <div class="row">
-            <div class="container">
-                <footer>
+            <footer>
+                <div class="container">
                     @include('includes.footer')
-                </footer>
-            </div>
+                </div>
+            </footer>
         </div>
+        <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+        @yield('scripts')
     </body>
 </html>

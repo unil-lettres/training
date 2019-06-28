@@ -1,7 +1,10 @@
 @extends('layouts.base')
+@section('title')
+    Nouvelle demande
+    <hr>
+@stop
 @section('content')
     <div class="col-12">
-        <h1 class="display-3">Nouvelle demande</h1>
         <div>
             @if ($errors->any())
                 <div class="alert alert-danger">

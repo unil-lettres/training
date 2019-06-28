@@ -1,8 +1,8 @@
 @extends('layouts.base')
 @section('content')
-    <div class="container" style="margin-bottom: 40px;margin-top:20px;">
+    <div class="container home-content">
         <div class="row">
-            <div class="col-sm-10" style="color:#828282;font-weight: 700;font-size: 18px;padding-left: 0px;" >
+            <div class="col-sm-10" style="color:#828282;font-weight: 700;font-size: 18px;margin-bottom: 20px;" >
                 Développement des compétences techniques en Faculté des Lettres
             </div>
         </div>
@@ -21,8 +21,8 @@
                     </div>
                 </div>
                 <div class="row" >
-                    <div class="col-sm-10" style="margin-top:40px;font-size: 24px;font-weight: 700;">
-                        Si vous êtes...
+                    <div class="col-sm-10">
+                        <div style="margin-top:40px;font-size: 24px;font-weight: 700;">Si vous êtes...</div>
                         <div class="panel-group" id="accordion" style="margin-top:20px;">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -32,7 +32,7 @@
                                     </h4>
                                 </div>
                                 <div id="collapse1" class="panel-collapse collapse">
-                                    <div class="panel-body" style="font-size: 12px;font-weight: normal;">
+                                    <div class="panel-body" style="font-size: 12px;font-weight: normal;margin: 15px 0 15px;">
                                         Si un document ou une présentation que vous réalisez dans le cadre de vos études peut
                                         être rendu plus clair ou plus percutant par l'ajout d'un élément visuel / d'un
                                         enregistrement audio / d'un catalogue d'images, nous pouvons vous aider. Nous vous
@@ -49,7 +49,7 @@
                                     </h4>
                                 </div>
                                 <div id="collapse2" class="panel-collapse collapse">
-                                    <div class="panel-body" style="font-size: 12px;font-weight: normal;">
+                                    <div class="panel-body" style="font-size: 12px;font-weight: normal;margin: 15px 0 15px;">
                                         Si vous souhaitez que vos étudiants intègrent des éléments visuels ou audio / créent
                                         seuls ou ensemble un catalogue d'images dans leurs travaux écrits ou oraux, nous
                                         pouvons vous aider à formuler votre exigence et vous offrir une formation de base
@@ -72,7 +72,7 @@
                                     </h4>
                                 </div>
                                 <div id="collapse3" class="panel-collapse collapse">
-                                    <div class="panel-body" style="font-size: 12px;font-weight: normal;">
+                                    <div class="panel-body" style="font-size: 12px;font-weight: normal;margin: 15px 0 15px;">
                                         Si c'est en tant que chercheur/se que vous avez des besoins de formation aux démarches
                                         et outils informatiques, il est possible qu'aucune des offres existantes ne convienne.
                                         Communiquez-nous quand même votre demande.
@@ -96,42 +96,50 @@
                 </div>
             </div>
 
-            <div class="trainings-content">
-                <div class="trainings-content" style="margin-top:40px;">
-                    <div class="col-xs-5 col-sm-3 col-lg-2">
-                        <div class="img-circle" style="margin-bottom:-30px;background-color: #FFF078;width:206px;height:206px;padding:30px 15px;text-align: center;">
-                            <div style="padding-bottom: 10px;"><b>#1 FORMATION</b></div>
-                            <div><b>Présenter visuellement des informations</b></div><div style="font-size: 13px;">Chronologies, cartes géo., infographies, ...</div>
+            <div class="trainings-content col-sm-7">
+                <div class="trainings-content">
+                    <div class="row">
+                        <div class="col-xs-7 col-sm-4 col-lg-4">
+                            <div class="img-circle" style="background-color: #FFF078;">
+                                <div><b>#1 FORMATION</b></div>
+                                <div><b>Présenter visuellement des informations</b></div>
+                                <div>Chronologies, cartes géo., infographies, ...</div>
+                            </div>
+                        </div>
+                        <div class="col-xs-7 col-sm-4 col-lg-4">
+                            <div class="img-circle" style="background-color: #00CCCC;">
+                                <div><b>#2 FORMATION</b></div>
+                                <div><b>Créer, optimiser et diffuser des informations sous forme audio</b></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-7 col-sm-4 col-lg-4">
+                            <div class="img-circle" style="background-color: #E26498;">
+                                <div><b>#3 FORMATION</b></div>
+                                <div><b>Créer des catalogues d'images accessibles en ligne</b></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-xs-5 col-sm-3 col-lg-2">
-                        <div class="img-circle" style="margin-bottom:-30px;background-color: #00CCCC;width:206px;height:206px;padding:30px 15px;text-align: center;">
-                            <div style="padding-bottom: 10px;"><b>#2 FORMATION</b></div>
-                            <div><b>Créer, optimiser et diffuser des informations sous forme audio</b></div>
+                    <div class="row">
+                        <div class="col-xs-7 col-sm-4 col-lg-4">
+                            <div class="img-circle" style="background-color: #F38574;">
+                                <div><b>#4 FORMATION</b></div>
+                                <div><b>Documenter ses compétences</b></div>
+                                <div>Réfléchir à son parcours de formation et mettre en valeur ses connaissances</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xs-5 col-sm-3 col-lg-2">
-                        <div class="img-circle" style="margin-bottom:-30px;background-color: #E26498;width:206px;height:206px;padding:30px 15px;text-align: center;">
-                            <div style="padding-bottom: 10px;"><b>#3 FORMATION</b></div>
-                            <div><b>Créer des catalogues d'images accessibles en ligne</b></div>
+                        <div class="col-xs-7 col-sm-4 col-lg-4">
+                            <div class="img-circle" style="background-color: #B7A1AA;">
+                                <div><b>#5 OFFRE</b></div>
+                                <div><b>Enseigner avec des outils informatiques</b></div>
+                                <div>Identifier les outils d’enseignement adéquats et les maîtriser : Moodle, Xerte, CORREX, Outil Voc, etc.</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xs-5 col-sm-3 col-lg-2">
-                        <div class="img-circle" style="margin-bottom:-30px;background-color: #F38574;width:206px;height:206px;padding:30px 15px;text-align: center;">
-                            <div style="padding-bottom: 10px;"><b>#4 FORMATION</b></div>
-                            <div><b>Documenter ses compétences</b></div><div style="font-size: 13px;">Réfléchir à son parcours de formation et mettre en valeur ses connaissances</div>
-                        </div>
-                    </div>
-                    <div class="col-xs-5 col-sm-3 col-lg-2">
-                        <div class="img-circle" style="margin-bottom:-30px;background-color: #B7A1AA;width:206px;height:206px;padding:30px 15px;text-align: center;">
-                            <div style="padding-bottom: 10px;"><b>#5 OFFRE</b></div>
-                            <div><b>Enseigner avec des outils informatiques</b></div><div style="font-size: 13px;">Identifier les outils d’enseignement adéquats et les maîtriser : Moodle, Xerte, CORREX, Outil Voc, etc.</div>
-                        </div>
-                    </div>
-                    <div class="col-xs-5 col-sm-3 col-lg-2">
-                        <div class="img-circle" style="margin-bottom:-30px;background-color: #BDDD37;width:206px;height:206px;padding:30px 15px;text-align: center;">
-                            <div style="padding-bottom: 10px;"><b>#6 OFFRE</b></div>
-                            <div><b>Bilan de compétences informatiques</b></div><div style="font-size: 13px;">Établir un plan de formation en autonomie</div>
+                        <div class="col-xs-7 col-sm-4 col-lg-4">
+                            <div class="img-circle" style="background-color: #BDDD37;">
+                                <div><b>#6 OFFRE</b></div>
+                                <div><b>Bilan de compétences informatiques</b></div>
+                                <div>Établir un plan de formation en autonomie</div>
+                            </div>
                         </div>
                     </div>
                 </div>

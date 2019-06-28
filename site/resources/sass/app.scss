@@ -7,14 +7,14 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Header
+@import 'header';
+
 // Footer
 @import 'footer';
 
 // Main content
 @import 'content';
 
-// Homepage
+// Page home
 @import 'home';
-
-// Header
-@import 'header';

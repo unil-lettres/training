@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('pages.home');
 })->name('home');
 
+Route::get('/contact', function () {
+    return view('pages.contact');
+})->name('contact');
+
+Route::get('/about', function () {
+    return view('pages.about');
+})->name('about');
+
 Route::get('/logout', function () {
     backpack_auth()->logout();
     return view('pages.home');

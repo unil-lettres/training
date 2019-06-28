@@ -23,8 +23,8 @@
                         Aide
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Contact</a>
-                        <a class="dropdown-item" href="#">A propos</a>
+                        <a class="dropdown-item" href="{{ route('contact') }}">Contact</a>
+                        <a class="dropdown-item" href="{{ route('about') }}">A propos</a>
                     </div>
                 </li>
             </ul>
