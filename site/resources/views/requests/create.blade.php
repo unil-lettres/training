@@ -18,33 +18,52 @@
             <form method="post" action="{{ route('request.store') }}">
                 @csrf
                 <div class="form-group">
-                    <label for="first_name">First Name:</label>
-                    <input type="text" class="form-control" name="first_name"/>
+                    <label for="name">Formation demandée:</label>
+                    <input type="text" class="form-control" name="name"/>
                 </div>
 
                 <div class="form-group">
-                    <label for="last_name">Last Name:</label>
-                    <input type="text" class="form-control" name="last_name"/>
+                    <label for="theme">Thème du travail demandé:</label>
+                    <input type="text" class="form-control" name="theme"/>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="text" class="form-control" name="email"/>
+                    <label for="description">Description:</label>
+                    <textarea class="form-control" name="description"></textarea>
                 </div>
+
                 <div class="form-group">
-                    <label for="city">City:</label>
-                    <input type="text" class="form-control" name="city"/>
+                    <label for="deadline">Délai de production du travail:</label>
+                    <input type="text" class="date form-control" name="deadline">
                 </div>
+
                 <div class="form-group">
-                    <label for="country">Country:</label>
-                    <input type="text" class="form-control" name="country"/>
+                    <label for="level">Niveau de connaissance préalable:</label>
+                    <input type="text" class="form-control" name="level"/>
                 </div>
+
                 <div class="form-group">
-                    <label for="job_title">Job Title:</label>
-                    <input type="text" class="form-control" name="job_title"/>
+                    <label for="applicants">Demandeur(s):</label>
+                    <input type="text" class="form-control" name="applicants"/>
                 </div>
+
+                <div class="form-group">
+                    <label for="contact">Mail de contact pour le suivi:</label>
+                    <input type="text" class="form-control" name="contact"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Remarques éventuelles:</label>
+                    <textarea class="form-control" name="comments"></textarea>
+                </div>
+
                 <button type="submit" class="btn btn-success">Envoyer</button>
             </form>
         </div>
     </div>
+@stop
+@section('scripts')
+    <script type="text/javascript">
+        $('.date').datepicker({ dateFormat: 'yy-mm-dd' });
+    </script>
 @stop

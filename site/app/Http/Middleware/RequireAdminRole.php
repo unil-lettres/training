@@ -21,7 +21,6 @@ class RequireAdminRole
 
         if (!$user->hasRole('Admin'))
         {
-            auth()->logout();
             abort(403, 'Access denied');
         }
 

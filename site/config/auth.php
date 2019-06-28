@@ -68,7 +68,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'shibboleth',
-            'model' => App\User::class,
+            'model' => App\Models\BackpackUser::class,
         ],
 
         // 'users' => [

@@ -13,11 +13,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('request.create') }}">Nouvelle demande</a>
                 </li>
-                @if (backpack_auth()->check() && backpack_auth()->user()->hasRole('Admin'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin">Administration</a>
-                    </li>
-                @endif
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Aide
@@ -29,17 +24,18 @@
                 </li>
             </ul>
             <div class="my-2 my-md-0">
-                @if (backpack_auth()->check())
+                @if (auth()->check())
                     <span class="username">
-                        {{{ isset(backpack_user()->name) ? backpack_user()->name : backpack_user()->email }}}
+                        {{{ isset(auth()->user()->name) ? auth()->user()->name : auth()->user()->email }}}
                     </span>
                     <a href="{{ route('logout') }}">
                         <button type="button" class="btn btn-outline-secondary">Déconnexion</button>
                     </a>
-                @else
-                    <a href="{{ route('login') }}">
-                        <button type="button" class="btn btn-outline-secondary">Connexion</button>
-                    </a>
+                    @if (auth()->check() && auth()->user()->hasRole('Admin'))
+                        <a href="/admin">
+                            <button type="button" class="btn btn-outline-secondary">Administration</button>
+                        </a>
+                    @endif
                 @endif
             </div>
         </div>
