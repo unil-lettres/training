@@ -25,4 +25,15 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <div class="box-title">Frontend</div>
+                </div>
+
+                <div class="box-body"><a href="{{ route('home') }}">Retournez à l'application</a></div>
+            </div>
+        </div>
+    </div>
 @endsection
