@@ -8,3 +8,8 @@
 form button[type=submit]{
   display: none;
 }
+
+.required {
+  font-weight: bold;
+  color: red;
+}

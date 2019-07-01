@@ -29,7 +29,7 @@
                 @csrf
                 <div id="request-student">
                     <div class="form-group">
-                        <label for="name">Formation demandée:</label>
+                        <label for="name">Formation demandée <span class="required">*</span>:</label>
                         <input type="text" class="form-control" name="name"/>
                     </div>
 
@@ -77,7 +77,7 @@
 
                     <div class="form-group">
                         <label for="fns">Employé de projet FNS:</label>
-                        <input type="checkbox" id="scales" name="fns">
+                        <input type="checkbox" name="fns">
                     </div>
 
                     <div class="form-group">
@@ -99,17 +99,17 @@
                     <hr>
                     <div class="form-group">
                         <label for="teachers_nbr">Seul ou avec d'autres enseignants:</label>
-                        <input type="checkbox" id="scales" name="teachers_nbr">
+                        <input type="checkbox" name="teachers_nbr">
                     </div>
 
                     <div class="form-group">
                         <label for="students_nbr">Avec un ou des étudiants:</label>
-                        <input type="checkbox" id="scales" name="students_nbr">
+                        <input type="checkbox" name="students_nbr">
                     </div>
 
                     <div class="form-group">
                         <label for="action_type">Intervention pour toute une classe, pendant les cours:</label>
-                        <input type="checkbox" id="scales" name="action_type">
+                        <input type="checkbox" name="action_type">
                     </div>
                 </div>
 
@@ -120,9 +120,23 @@
 @stop
 @section('scripts')
     <script type="text/javascript">
+        $.datepicker.setDefaults({
+            altField: "#datepicker",
+            closeText: 'Fermer',
+            prevText: 'Précédent',
+            nextText: 'Suivant',
+            currentText: 'Aujourd\'hui',
+            monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+            monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+            dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+            dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+            dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+            weekHeader: 'Sem.',
+            dateFormat: 'yy-mm-dd'
+        });
         $('.date').datepicker({ dateFormat: 'yy-mm-dd' });
 
-        $('.dropdown-menu a').click(function (event) {
+        $('.dropdown-menu a').click(function(event) {
             let studentFields = $("#request-student");
             let researcherFields = $("#request-researcher");
             let teacherFields = $("#request-teacher");
@@ -148,6 +162,16 @@
                     teacherFields.show();
                     submitButton.show();
                     break;
+            }
+        });
+
+        $("form input[type=checkbox]").click(function() {
+            let checked  = $(this).is(':checked');
+
+            if(checked){
+                $(this).attr("value", "1");
+            } else {
+                $(this).attr("value", null);
             }
         });
     </script>

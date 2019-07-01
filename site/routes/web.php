@@ -29,7 +29,7 @@ Route::get('/logout', function () {
 })->name('logout');
 
 Route::resource('request', 'RequestController')->only([
-  'index', 'show', 'create', 'store'
+    'create', 'store'
 ])->middleware(['auth']);
 
 Route::redirect('/login', '/shibboleth-login')->name('login');

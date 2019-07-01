@@ -11,6 +11,7 @@
                 <div class="page-header">
                     <h1>@yield('title')</h1>
                 </div>
+                @include('includes.messages')
                 @yield('content')
             </div>
             <footer>

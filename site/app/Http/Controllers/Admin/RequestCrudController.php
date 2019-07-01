@@ -73,8 +73,7 @@ class RequestCrudController extends CrudController
         $this->crud->addField([
           'name' => '	deadline',
           'type' => 'date_picker',
-          'datetime_picker_options' => [
-            'format' => 'DD/MM/YYYY',
+          'date_picker_options' => [
             'language' => 'fr'
           ],
           'allows_null' => true,

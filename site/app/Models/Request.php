@@ -20,28 +20,29 @@ class Request extends Model
     public $timestamps = true;
     // protected $guarded = ['id'];
     protected $fillable = [
-      'name',
-      'theme',
-      'description',
-      'deadline',
-      'level',
-      'applicants',
-      'contact',
-      'comments',
-      'filling_date',
-      'status',
-      'decision_date',
-      'decision_comments',
-      'file',
-      'extras',
-      'user_id',
-      'type_id',
-      'status_id',
-      'extras'
+        'name',
+        'theme',
+        'description',
+        'deadline',
+        'level',
+        'applicants',
+        'contact',
+        'comments',
+        'filling_date',
+        'status',
+        'decision_date',
+        'decision_comments',
+        'file',
+        'extras',
+        'user_id',
+        'type_id',
+        'status_id',
+        'extras'
     ];
     protected $fakeColumns = ['extras'];
     protected $casts = [
-      'extras' => 'array',
+        'extras' => 'array',
+        'deadline' => 'date'
     ];
     // protected $hidden = [];
     // protected $dates = [];
