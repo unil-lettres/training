@@ -71,7 +71,7 @@ class RequestCrudController extends CrudController
         $this->crud->addField(['name' => 'applicants', 'type' => 'text', 'label' => 'Demandeur(s)', 'tab' => 'Champs communs']);
         $this->crud->addField(['name' => 'theme', 'type' => 'text', 'label' => 'Thème', 'tab' => 'Champs communs']);
         $this->crud->addField([
-          'name' => '	deadline',
+          'name' => 'deadline',
           'type' => 'date_picker',
           'date_picker_options' => [
             'language' => 'fr'
