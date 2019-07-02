@@ -1,8 +1,10 @@
 @extends('layouts.base')
+
 @section('title')
     Nouvelle demande
     <hr>
 @stop
+
 @section('content')
     <div class="col-12">
         <div>
@@ -118,6 +120,7 @@
         </div>
     </div>
 @stop
+
 @section('scripts')
     <script type="text/javascript">
         $.datepicker.setDefaults({

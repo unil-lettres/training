@@ -1,4 +1,5 @@
 @extends('layouts.base')
+
 @section('content')
     <div class="container home-content">
         <div class="row">
@@ -154,5 +155,36 @@
                 mentionner dans votre demande.
             </div>
         </div>
+
+        @if($trainings->count())
+            <div class="container trainings">
+                <div class="row">
+                    <div class="col-sm-12 title">
+                        Liste des formations à inscriptions ouvertes
+                    </div>
+                </div>
+            </div>
+
+            <table id="tabForm" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Date de début</th>
+                    <th>Date de fin</th>
+                </tr>
+                </thead>
+                    @foreach ($trainings as $training)
+                        <tr>
+                            <td>{{ $training->name }}</td>
+                            <td>{!! $training->description !!}</td>
+                            <td>{{ $training->start->format('d-m-Y H:i:s') }}</td>
+                            <td>{{ $training->end->format('d-m-Y H:i:s') }}</td>
+                        </tr>
+                    @endforeach
+            </table>
+        @else
+            <p>Pas de formation en groupe annoncée pour l'instant.</p>
+        @endif
     </div>
 @stop

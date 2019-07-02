@@ -41,11 +41,14 @@ class Request extends Model
     ];
     protected $fakeColumns = ['extras'];
     protected $casts = [
-        'extras' => 'array',
-        'deadline' => 'date'
+        'extras' => 'array'
     ];
     // protected $hidden = [];
-    // protected $dates = [];
+    protected $dates = [
+      'deadline',
+      'filling_date',
+      'decision_date'
+    ];
 
     /*
     |--------------------------------------------------------------------------

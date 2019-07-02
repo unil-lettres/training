@@ -19,9 +19,18 @@ class Training extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     // protected $guarded = ['id'];
-    protected $fillable = ['name', 'description', 'start', 'end', 'visible'];
+    protected $fillable = [
+      'name',
+      'description',
+      'start',
+      'end',
+      'visible'
+    ];
+    protected $casts = [
+      'visible' => 'boolean'
+    ];
     // protected $hidden = [];
-    // protected $dates = [];
+    protected $dates = ['start', 'end'];
 
     /*
     |--------------------------------------------------------------------------

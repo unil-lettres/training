@@ -1,8 +1,10 @@
 @extends('layouts.base')
+
 @section('title')
     À propos
     <hr>
 @stop
+
 @section('content')
     <div class='about-current'>
         <div class='alert alert-info'>
