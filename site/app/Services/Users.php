@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Models\BackpackUser;
+use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Mail;
 
 class Users
@@ -39,10 +40,10 @@ class Users
     }
 
     /**
-     * Return all the users with the notification role.
+     * Send mail to users with a specific role.
      *
      * @param string $role
-     * @param mixed $mail
+     * @param Mailable $mail
      *
      * @return void
      */

@@ -23,7 +23,7 @@ Route::get('/about', function () {
 
 Route::get('/logout', function () {
     backpack_auth()->logout();
-    return redirect('home');
+    return redirect()->route('home');
 })->name('logout');
 
 Route::resource('request', 'RequestController')->only([
