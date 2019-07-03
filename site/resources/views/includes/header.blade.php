@@ -13,6 +13,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('request.create') }}">Nouvelle demande</a>
                 </li>
+                @if (auth()->check())
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('request.index') }}">Mes demandes</a>
+                    </li>
+                @endif
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Aide
@@ -36,6 +41,10 @@
                             <button type="button" class="btn btn-outline-secondary">Administration</button>
                         </a>
                     @endif
+                @else
+                    <a href="{{ route('login') }}">
+                        <button type="button" class="btn btn-outline-secondary">Connexion</button>
+                    </a>
                 @endif
             </div>
         </div>

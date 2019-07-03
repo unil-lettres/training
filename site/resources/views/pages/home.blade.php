@@ -174,6 +174,7 @@
                     <th>Date de fin</th>
                 </tr>
                 </thead>
+                <tbody>
                     @foreach ($trainings as $training)
                         <tr>
                             <td>{{ $training->name }}</td>
@@ -182,6 +183,7 @@
                             <td>{{ $training->end->format('d-m-Y H:i:s') }}</td>
                         </tr>
                     @endforeach
+                </tbody>
             </table>
         @else
             <p>Pas de formation en groupe annoncée pour l'instant.</p>

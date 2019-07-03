@@ -11,6 +11,18 @@ use App\Services\Users;
 class RequestController extends Controller
 {
     /**
+     * Index requests
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $requests = backpack_auth()->user()->requests()->get();
+
+        return view('requests.index')->with('requests', $requests);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

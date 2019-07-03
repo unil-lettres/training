@@ -50,6 +50,12 @@ class Request extends Model
       'decision_date'
     ];
 
+    public static $status = [
+      'new' => 'Nouveau',
+      'pending' => 'En attente',
+      'resolved' => 'Résolue'
+    ];
+
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS

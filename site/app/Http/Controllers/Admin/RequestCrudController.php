@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Request;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
@@ -49,7 +50,7 @@ class RequestCrudController extends CrudController
           'name' => 'status',
           'label' => "Statut",
           'type' => 'select_from_array',
-          'options' => ['new' => 'Nouveau', 'pending' => 'En attente', 'resolved' => 'Résolue']
+          'options' => Request::$status
         ]);
         $this->crud->addColumn(['name' => 'comments', 'type' => 'text', 'label' => 'Remarques']);
 
@@ -155,7 +156,7 @@ class RequestCrudController extends CrudController
           'name' => 'status',
           'label' => "Statut",
           'type' => 'select_from_array',
-          'options' => ['new' => 'Nouveau', 'pending' => 'En attente', 'resolved' => 'Résolue'],
+          'options' => Request::$status,
           'tab' => 'Champs d\'administration'
         ]);
         $this->crud->addField([
@@ -236,11 +237,7 @@ class RequestCrudController extends CrudController
           'name' => 'status',
           'type' => 'dropdown',
           'label'=> 'Statut'
-        ], [
-          'new' => 'Nouveau',
-          'pending' => 'En attente',
-          'resolved' => 'Résolue',
-        ], function($value) {
+        ], Request::$status, function($value) {
             $this->crud->addClause('where', 'status', $value);
         });
 
