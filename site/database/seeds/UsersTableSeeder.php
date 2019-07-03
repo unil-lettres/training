@@ -26,10 +26,17 @@ class UsersTableSeeder extends Seeder
           'updated_at' => $now,
         ]]);
 
-        $role = Role::create(['name' => 'Admin', 'guard_name' => 'backpack']);
+        $adminRole = Role::create(['name' => 'Admin', 'guard_name' => 'backpack']);
+        $notificationRole = Role::create(['name' => 'Notification', 'guard_name' => 'backpack']);
 
         DB::table('model_has_roles')->insert([
-          'role_id' => $role->id,
+          'role_id' => $adminRole->id,
+          'model_type' => 'App\Models\BackpackUser',
+          'model_id' => 1
+        ]);
+
+        DB::table('model_has_roles')->insert([
+          'role_id' => $notificationRole->id,
           'model_type' => 'App\Models\BackpackUser',
           'model_id' => 1
         ]);

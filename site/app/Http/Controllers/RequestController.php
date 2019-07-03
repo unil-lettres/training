@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Request;
 use App\Http\Requests\RequestRequest;
 use Illuminate\Support\Facades\Date;
+use App\Mail\RequestCreated;
+use App\Services\Users;
 
 class RequestController extends Controller
 {
@@ -22,9 +24,11 @@ class RequestController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  RequestRequest $request
+     * @param  Users $usersService
+     *
      * @return \Illuminate\Http\Response
      */
-    public function store(RequestRequest $request)
+    public function store(RequestRequest $request, Users $usersService)
     {
         $requestObj = new Request([
             'name' => $request->get('name'),
@@ -49,6 +53,9 @@ class RequestController extends Controller
             'user_id' => backpack_auth()->user()->id
         ]);
         $requestObj->save();
+
+        // Send request created notification to all the users with the Notification role
+        $usersService->mailUsersWithRole('Notification', new RequestCreated($requestObj));
 
         return redirect()->route('home')->with('success', 'Demande de formation enregistrée.');
     }
