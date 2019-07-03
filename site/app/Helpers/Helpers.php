@@ -13,6 +13,12 @@ class Helpers {
      * @return string $status
      */
     public static function requestStatus($status) {
-        return collect(Request::$status)->pull($status);
+        $status = collect(Request::$status)->pull($status);
+
+        if(is_string($status)) {
+            return $status;
+        }
+
+        return '-';
     }
 }

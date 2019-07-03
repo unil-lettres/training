@@ -179,8 +179,16 @@
                         <tr>
                             <td>{{ $training->name }}</td>
                             <td>{!! $training->description !!}</td>
-                            <td>{{ $training->start->format('d-m-Y H:i:s') }}</td>
-                            <td>{{ $training->end->format('d-m-Y H:i:s') }}</td>
+                            <td>
+                                @if($training->start)
+                                    {{ $training->start->format('d-m-Y H:i:s') }}
+                                @endif
+                            </td>
+                            <td>
+                                @if($training->end)
+                                    {{ $training->end->format('d-m-Y H:i:s') }}
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

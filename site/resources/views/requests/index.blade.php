@@ -21,7 +21,11 @@
                     <tr>
                         <td>{{ $request->name }}</td>
                         <td>{!! $request->description !!}</td>
-                        <td>{{ $request->filling_date->format('d-m-Y H:i:s') }}</td>
+                        <td>
+                            @if($request->filling_date)
+                                {{ $request->filling_date->format('d-m-Y H:i:s') }}
+                            @endif
+                        </td>
                         <td>{{ Helpers::requestStatus($request->status) }}</td>
                     </tr>
                 @endforeach
