@@ -7,7 +7,7 @@
 
 @section('content')
     @if($requests->count())
-        <table class="table">
+        <table class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th scope="col">Libellé</th>
@@ -20,9 +20,9 @@
                 @foreach ($requests as $request)
                     <tr>
                         <td>{{ $request->name }}</td>
-                        <td>{{ $request->description }}</td>
+                        <td>{!! $request->description !!}</td>
                         <td>{{ $request->filling_date->format('d-m-Y H:i:s') }}</td>
-                        <td>{{ $request->status }}</td>
+                        <td>{{ Helpers::requestStatus($request->status) }}</td>
                     </tr>
                 @endforeach
             </tbody>

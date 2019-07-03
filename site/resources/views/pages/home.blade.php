@@ -165,7 +165,7 @@
                 </div>
             </div>
 
-            <table id="tabForm" class="table table-striped table-bordered" width="100%" cellspacing="0">
+            <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th>Nom</th>
