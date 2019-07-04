@@ -1,4 +1,7 @@
-# Training project
+Development:
+[![Build Status](https://travis-ci.com/unil-lettres/training.svg?token=T7puWy4nJeaNtH7s3vRB&branch=development)](https://travis-ci.com/unil-lettres/training)
+
+# Introduction
 
 Development of technical skills in the Faculty of Arts.
 
