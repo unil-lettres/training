@@ -38,8 +38,8 @@ class HomeTest extends DuskTestCase
               ->loginAsUser('user', 'user');
 
             $browser->visit('/')
-              ->assertSee('Demandes de formation')->dump();
-          $browser->assertSee('Déconnexion')
+              ->assertSee('Demandes de formation')
+              ->assertSee('Déconnexion')
               ->assertSee('Mes demandes')
               ->assertDontSee('Connexion')
               ->assertDontSee('Administration');
