@@ -1,5 +1,6 @@
 Development:
 [![Build Status](https://travis-ci.com/unil-lettres/training.svg?token=T7puWy4nJeaNtH7s3vRB&branch=development)](https://travis-ci.com/unil-lettres/training)
+[![CodeFactor](https://www.codefactor.io/repository/github/unil-lettres/training/badge)](https://www.codefactor.io/repository/github/unil-lettres/training)
 
 # Introduction
 
