@@ -11,11 +11,11 @@
                     <a class="nav-link" href="{{ route('home') }}">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('request.create') }}">Nouvelle demande</a>
+                    <a class="nav-link" dusk="create-request" href="{{ route('request.create') }}">Nouvelle demande</a>
                 </li>
                 @if (auth()->check())
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('request.index') }}">Mes demandes</a>
+                        <a class="nav-link" dusk="my-requests" href="{{ route('request.index') }}">Mes demandes</a>
                     </li>
                 @endif
                 <li class="nav-item dropdown">
@@ -34,16 +34,16 @@
                         {{{ isset(auth()->user()->name) ? auth()->user()->name : auth()->user()->email }}}
                     </span>
                     <a href="{{ route('logout') }}">
-                        <button type="button" class="btn btn-outline-secondary">Déconnexion</button>
+                        <button type="button" dusk="logout" class="btn btn-outline-secondary">Déconnexion</button>
                     </a>
                     @if (auth()->check() && auth()->user()->hasRole('Admin'))
                         <a href="/admin">
-                            <button type="button" class="btn btn-outline-secondary">Administration</button>
+                            <button type="button" dusk="admin" class="btn btn-outline-secondary">Administration</button>
                         </a>
                     @endif
                 @else
                     <a href="{{ route('login') }}">
-                        <button type="button" class="btn btn-outline-secondary">Connexion</button>
+                        <button type="button" dusk="login" class="btn btn-outline-secondary">Connexion</button>
                     </a>
                 @endif
             </div>

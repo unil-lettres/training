@@ -9,7 +9,7 @@
     <div class="col-12">
         <div>
             <div id="request-dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-secondary dropdown-toggle" type="button" dusk="request-type" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Déposer votre demande en tant que
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

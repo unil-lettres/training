@@ -8,7 +8,7 @@ class Helpers {
     /**
      * Return a human readable status
      *
-     * @param array $status
+     * @param string $status
      *
      * @return string $status
      */
