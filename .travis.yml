@@ -22,8 +22,6 @@ install:
   - mysql -e 'CREATE DATABASE training;'
   - cp .env.testing .env
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
-  - npm install
-  - npm run prod
   - php artisan key:generate
   - php artisan migrate
 
