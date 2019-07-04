@@ -7,9 +7,18 @@ use Tests\Browser\Pages\Login;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Laravel\Dusk\Concerns\ProvidesBrowser;
 
 class RequestTest extends DuskTestCase
 {
+    use ProvidesBrowser;
+
+    public function tearDown(): void
+    {
+        parent::tearDown();
+        static::closeAll();
+    }
+
     /**
      * Create a new student request.
      *
@@ -150,7 +159,7 @@ class RequestTest extends DuskTestCase
     public function testGuestCannotCreateRequest()
     {
         $this->browse(function (Browser $browser) {
-            $browser->clickLink("Déconnexion");
+            $browser->visit('/');
 
             $browser->clickLink("Nouvelle demande");
 
