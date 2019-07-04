@@ -8,6 +8,11 @@ addons:
   mariadb: "10.1"
   chrome: stable
 
+cache:
+  directories:
+    - site/vendor
+    - $HOME/.composer/cache
+
 before_install: cd site
 
 install:
