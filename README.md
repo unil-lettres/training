@@ -101,3 +101,13 @@ To access the mail server please use the following link.
 Or to get the messages in JSON format.
 
 [http://training.lan:8025/api/v2/messages](http://impact.lan:8025/api/v2/messages)
+
+## Testing
+
+Run the following commands from the framework root directory (/site).
+
+### Unit testing
+``./vendor/bin/phpunit``
+
+### Functional testing
+``php artisan dusk``
