@@ -23,9 +23,7 @@ class CreateRequest extends Page
      * @return void
      */
     public function assert(Browser $browser)
-    {
-        $browser->assertPathIs($this->url());
-    }
+    {}
 
     /**
      * Get the element shortcuts for the page.
