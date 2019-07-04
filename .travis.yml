@@ -4,6 +4,9 @@ php:
   - "7.2"
   - "7.3"
 
+services:
+  - redis-server
+
 addons:
   mariadb: "10.1"
   chrome: stable
@@ -19,6 +22,8 @@ install:
   - mysql -e 'CREATE DATABASE training;'
   - cp .env.testing .env
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
+  - npm install
+  - npm run prod
   - php artisan key:generate
   - php artisan migrate
 
@@ -29,4 +34,3 @@ before_script:
 
 script:
   - php artisan dusk
-
