@@ -74,7 +74,7 @@ To access the administration please use the following link.
 
 [http://training.lan:8686/admin](http://training.lan:8686/admin)
 
-login: user@example.com
+login: first-user@example.com
 password: password
 
 ### Telescope
