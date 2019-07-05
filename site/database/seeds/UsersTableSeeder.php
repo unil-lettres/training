@@ -16,17 +16,17 @@ class UsersTableSeeder extends Seeder
     {
         $now = Carbon\Carbon::now();
 
-        $userId = DB::table('users')->insertGetId([[
+        $userId = DB::table('users')->insertGetId([
           'name' => 'First user',
           'email' => 'user@example.com',
           'password' => bcrypt('password'),
           'remember_token' => Str::random(10),
           'created_at' => $now,
           'updated_at' => $now,
-        ]]);
+        ]);
 
-        $adminRole = Role::create(['name' => 'Admin', 'guard_name' => 'backpack']);
-        $notificationRole = Role::create(['name' => 'Notification', 'guard_name' => 'backpack']);
+        $adminRole = Role::findOrCreate('Admin', 'backpack');
+        $notificationRole = Role::findOrCreate('Notification', 'backpack');
 
         DB::table('model_has_roles')->insert([
           'role_id' => $adminRole->id,
