@@ -19,11 +19,12 @@ cache:
 before_install: cd site
 
 install:
-  - mysql -e 'CREATE DATABASE training;'
+  - mysql -e 'CREATE DATABASE training_test;'
   - cp .env.testing .env
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
   - php artisan key:generate
   - php artisan migrate
+  - php artisan db:seed
 
 before_script:
   - php artisan dusk:chrome-driver

@@ -16,8 +16,7 @@ class UsersTableSeeder extends Seeder
     {
         $now = Carbon\Carbon::now();
 
-        DB::table('users')->insert([[
-          'id' => 1,
+        $userId = DB::table('users')->insertGetId([[
           'name' => 'First user',
           'email' => 'user@example.com',
           'password' => bcrypt('password'),
@@ -32,13 +31,13 @@ class UsersTableSeeder extends Seeder
         DB::table('model_has_roles')->insert([
           'role_id' => $adminRole->id,
           'model_type' => 'App\Models\BackpackUser',
-          'model_id' => 1
+          'model_id' => $userId
         ]);
 
         DB::table('model_has_roles')->insert([
           'role_id' => $notificationRole->id,
           'model_type' => 'App\Models\BackpackUser',
-          'model_id' => 1
+          'model_id' => $userId
         ]);
     }
 }
