@@ -12,10 +12,10 @@ return [
     */
 
     // Project name. Shown in the breadcrumbs and a few other places.
-    'project_name' => 'Formation Lettres',
+    'project_name' => 'FormationsLettres',
 
     // Menu logos
-    'logo_lg'   => '<b>Formation</b>Lettres',
+    'logo_lg'   => '<b>Formations</b>Lettres',
     'logo_mini' => '<b>F</b>L',
 
     // Developer or company name. Shown in footer.
