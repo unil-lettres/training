@@ -44,6 +44,8 @@ class RequestTest extends DuskTestCase
               ->type('description', $description)
               ->press('Envoyer');
 
+            $browser->assertPathIs('/')
+              ->assertSee('Demande de formation enregistrée.');
 
             $browser->clickLink("Mes demandes")
               ->assertPathIs('/request')
