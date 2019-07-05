@@ -24,6 +24,7 @@ install:
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
   - php artisan key:generate
   - php artisan migrate
+  - php artisan db:seed
 
 before_script:
   - php artisan dusk:chrome-driver
