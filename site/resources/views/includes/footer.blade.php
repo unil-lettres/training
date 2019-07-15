@@ -1,1 +1,1 @@
-<span class="text-muted">UNIL - RISET | © 2019</span>
+<span class="text-muted">UNIL - Faculté des lettres | <?php echo date("Y"); ?></span>
