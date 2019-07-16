@@ -22,7 +22,7 @@ A working [Docker](https://docs.docker.com/engine/installation/) installation is
 
 Please make sure to copy & rename the **example.env** file to **.env**.
 
-``cp example.env .env``
+``cp env.example .env``
 
 You can replace the values if needed, but the default ones should work.
 
@@ -38,6 +38,10 @@ Build & run all the containers for this project
 
 ``docker-compose up -d``
 
+Install php dependencies
+
+``docker exec train-app composer install``
+
 Update the Laravel .env file
 
 ``docker exec train-app cp .env.example .env``
@@ -45,10 +49,6 @@ Update the Laravel .env file
 Update the application key
 
 ``docker exec train-app php artisan key:generate``
-
-Install php dependencies
-
-``docker exec train-app composer install``
 
 Install js dependencies
 
