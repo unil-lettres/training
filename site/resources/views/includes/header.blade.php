@@ -33,7 +33,7 @@
                     <span class="username">
                         {{{ isset(auth()->user()->name) ? auth()->user()->name : auth()->user()->email }}}
                     </span>
-                    <a href="{{ route('backpack.auth.logout') }}">
+                    <a href="{{ route('logout') }}">
                         <button type="button" dusk="logout" class="btn btn-outline-secondary">Déconnexion</button>
                     </a>
                     @if (auth()->check() && auth()->user()->hasRole('Admin'))

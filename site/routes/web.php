@@ -21,10 +21,7 @@ Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
 
-Route::get('/logout', function () {
-    backpack_auth()->logout();
-    return redirect()->route('home');
-})->name('logout');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::resource('request', 'RequestController')->only([
     'index', 'create', 'store'
