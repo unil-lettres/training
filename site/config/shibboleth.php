@@ -68,8 +68,8 @@ return [
 
     'user' => [
         // fillable user model attribute => server variable
-        'name' => 'Shib-cn',
-        'email' => 'Shib-mail',
+        'name' => 'REDIRECT_uid',
+        'email' => 'REDIRECT_mail',
     ],
 
     /*
