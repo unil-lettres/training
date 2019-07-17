@@ -11,7 +11,7 @@ return [
     |
  */
 
-    'idp_login' => '/auth',
+    'idp_login' => '/Shibboleth.sso/Login',
     'idp_logout' => '/Shibboleth.sso/Logout',
     'authenticated' => '/',
 
