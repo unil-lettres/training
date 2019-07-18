@@ -4,7 +4,7 @@
     <div class="container home-content">
         <div class="row">
             <div class="col-sm-10" style="color:#828282;font-weight: 700;font-size: 18px;margin-bottom: 20px;" >
-                Développement des compétences techniques en Faculté des Lettres
+                Développement des compétences techniques en Faculté des lettres
             </div>
         </div>
         <div class="row">
