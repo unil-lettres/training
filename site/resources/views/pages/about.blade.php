@@ -6,18 +6,12 @@
 @stop
 
 @section('content')
-    <div class='about-current'>
-        <div class='alert alert-info'>
-            Version actuelle : <b>2.0</b>
-        </div>
-    </div>
     <div class="about-cl">
-        <b>Change log :</b>
         <ul class="list-group">
             <li class="list-group-item  list-group-item-success">
                 <b>2.0</b><span class="badge">20/07/2019</span>
                 <ul>
-                    <li>Migration sur stack LAMP</li>
+                    <li>Migration sur stack LAMP & Laravel</li>
                     <li>Authentification via Shibboleth</li>
                 </ul>
             </li>
