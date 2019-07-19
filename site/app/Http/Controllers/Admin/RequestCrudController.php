@@ -240,6 +240,17 @@ class RequestCrudController extends CrudController
         ], Request::$status, function($value) {
             $this->crud->addClause('where', 'status', $value);
         });
+        $this->crud->addFilter([
+          'type' => 'date_range',
+          'name' => 'deadline',
+          'label'=> 'Délai de production'
+        ],
+        false,
+        function($value) {
+          $dates = json_decode($value);
+          $this->crud->addClause('where', 'deadline', '>=', $dates->from);
+          $this->crud->addClause('where', 'deadline', '<=', $dates->to . ' 23:59:59');
+        });
 
         // add asterisk for fields that are required in RequestRequest
         $this->crud->setRequiredFields(StoreRequest::class, 'create');
