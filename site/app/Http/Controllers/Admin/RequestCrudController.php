@@ -30,6 +30,7 @@ class RequestCrudController extends CrudController
         if (!$this->request->has('order')) {
             $this->crud->orderBy('created_at', 'DESC');
         }
+        $this->crud->allowAccess('clone');
 
         /*
         |--------------------------------------------------------------------------
