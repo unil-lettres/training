@@ -27,6 +27,9 @@ class RequestCrudController extends CrudController
         $this->crud->setModel('App\Models\Request');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/request');
         $this->crud->setEntityNameStrings('demande', 'demandes');
+        if (!$this->request->has('order')) {
+            $this->crud->orderBy('created_at', 'DESC');
+        }
 
         /*
         |--------------------------------------------------------------------------

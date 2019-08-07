@@ -26,6 +26,9 @@ class TrainingCrudController extends CrudController
         $this->crud->setModel('App\Models\Training');
         $this->crud->setRoute(config('backpack.base.route_prefix') . '/training');
         $this->crud->setEntityNameStrings('formation', 'formations');
+        if (!$this->request->has('order')) {
+            $this->crud->orderBy('created_at', 'DESC');
+        }
 
         /*
         |--------------------------------------------------------------------------
