@@ -1,4 +1,20 @@
 .username {
-  color: white;
+  color: black;
   margin-right: 10px;
+}
+
+.navbar {
+    background-color: #05a69d;
+
+    .navbar-brand .nav-link {
+        color: black;
+    }
+
+    .navbar-brand {
+        font-size: 1.56rem;
+    }
+
+    li.nav-item {
+        font-size: 1.1rem;
+    }
 }

@@ -1,15 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-        <span class="navbar-brand">Formations</span>
+        <span class="navbar-brand"><a class="nav-link" href="{{ route('home') }}">Formations</a></span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-coll" aria-controls="navbar-coll" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbar-coll">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">Accueil</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" dusk="create-request" href="{{ route('request.create') }}">Nouvelle demande</a>
                 </li>
@@ -34,16 +31,16 @@
                         {{{ isset(auth()->user()->name) ? auth()->user()->name : auth()->user()->email }}}
                     </span>
                     <a href="{{ route('logout') }}">
-                        <button type="button" dusk="logout" class="btn btn-outline-secondary">Déconnexion</button>
+                        <button type="button" dusk="logout" class="btn btn-outline-dark">Déconnexion</button>
                     </a>
                     @if (auth()->check() && auth()->user()->hasRole('Admin'))
                         <a href="/admin">
-                            <button type="button" dusk="admin" class="btn btn-outline-secondary">Administration</button>
+                            <button type="button" dusk="admin" class="btn btn-outline-dark">Administration</button>
                         </a>
                     @endif
                 @else
                     <a href="{{ route('login') }}">
-                        <button type="button" dusk="login" class="btn btn-outline-secondary">Connexion</button>
+                        <button type="button" dusk="login" class="btn btn-outline-dark">Connexion</button>
                     </a>
                 @endif
             </div>
