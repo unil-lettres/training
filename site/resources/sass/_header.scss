@@ -7,7 +7,9 @@
     background-color: #05a69d;
 
     .navbar-brand .nav-link {
-        color: black;
+        color: white;
+        font-weight: bold;
+        border: 1px solid;
     }
 
     .navbar-brand {
@@ -16,5 +18,10 @@
 
     li.nav-item {
         font-size: 1.1rem;
+
+        .nav-link {
+            color: white;
+            font-weight: bold;
+        }
     }
 }
