@@ -7,9 +7,9 @@ php:
 
 services:
   - redis-server
+  - mysql
 
 addons:
-  mariadb: "10.1"
   chrome: stable
 
 cache:
