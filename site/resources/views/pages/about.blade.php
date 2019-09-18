@@ -8,7 +8,13 @@
 @section('content')
     <div class="about-cl">
         <ul class="list-group">
-            <li class="list-group-item  list-group-item-success">
+            <li class="list-group-item list-group-item-success">
+                <b>2.1</b><span class="badge">18/09/2019</span>
+                <ul>
+                    <li>Mise à jour du framework et des dépendances</li>
+                </ul>
+            </li>
+            <li class="list-group-item">
                 <b>2.0</b><span class="badge">20/07/2019</span>
                 <ul>
                     <li>Migration sur stack LAMP & Laravel</li>
