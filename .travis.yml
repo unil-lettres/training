@@ -1,5 +1,5 @@
 language: php
-dist: trusty
+dist: xenial
 
 php:
   - "7.2"
@@ -7,9 +7,9 @@ php:
 
 services:
   - redis-server
+  - mysql
 
 addons:
-  mariadb: "10.1"
   chrome: stable
 
 cache:
