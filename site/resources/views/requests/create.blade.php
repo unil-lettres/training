@@ -47,7 +47,7 @@
 
                     <div class="form-group">
                         <label for="deadline">Délai de production du travail:</label>
-                        <input type="text" class="date form-control" name="deadline">
+                        <input type="text" class="date form-control" name="deadline" autocomplete="off">
                     </div>
 
                     <div class="form-group">
