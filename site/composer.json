@@ -11,6 +11,7 @@
         "php": "^7.2",
         "backpack/crud": "^3.6.33",
         "backpack/permissionmanager": "^4.0.6",
+        "facade/ignition": "^1.8",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^6.0",
