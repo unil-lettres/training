@@ -1,5 +1,5 @@
 language: php
-dist: xenial
+dist: bionic
 
 php:
   - "7.2"
@@ -7,10 +7,10 @@ php:
 
 services:
   - redis-server
-  - mysql
 
 addons:
   chrome: stable
+  mariadb: "10.3"
 
 cache:
   directories:
@@ -21,6 +21,7 @@ before_install: cd site
 
 install:
   - mysql -e 'CREATE DATABASE training_test;'
+  - mysql -e "SET GLOBAL sql_mode = 'NO_ENGINE_SUBSTITUTION';"
   - cp .env.testing .env
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
   - php artisan key:generate
