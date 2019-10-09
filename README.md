@@ -100,11 +100,11 @@ Password: password
 
 To access the mail server please use the following link.
 
-[http://training.lan:8025](http://impact.lan:8025)
+[http://training.lan:8025](http://training.lan:8025)
 
 Or to get the messages in JSON format.
 
-[http://training.lan:8025/api/v2/messages](http://impact.lan:8025/api/v2/messages)
+[http://training.lan:8025/api/v2/messages](http://training.lan:8025/api/v2/messages)
 
 ## Testing
 
