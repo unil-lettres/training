@@ -9,6 +9,13 @@
     <div class="about-cl">
         <ul class="list-group">
             <li class="list-group-item list-group-item-success">
+                <b>2.2</b><span class="badge">10/10/2019</span>
+                <ul>
+                    <li>Ajout d'un tracker d'erreurs en production</li>
+                    <li>Mise à jour du framework et des dépendances</li>
+                </ul>
+            </li>
+            <li class="list-group-item">
                 <b>2.1</b><span class="badge">18/09/2019</span>
                 <ul>
                     <li>Mise à jour du framework et des dépendances</li>
