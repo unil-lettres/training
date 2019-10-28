@@ -7,32 +7,13 @@
 
 @section('content')
     <div class="about-cl">
+        <p class="text-secondary">Cette page ne répertorie que les évolutions applicatives majeures.</p>
         <ul class="list-group">
-            <li class="list-group-item list-group-item-success">
-                <b>2.2</b><span class="badge">10/10/2019</span>
-                <ul>
-                    <li>Ajout d'un tracker d'erreurs en production</li>
-                    <li>Mise à jour du framework et des dépendances</li>
-                </ul>
-            </li>
-            <li class="list-group-item">
-                <b>2.1</b><span class="badge">18/09/2019</span>
-                <ul>
-                    <li>Mise à jour du framework et des dépendances</li>
-                </ul>
-            </li>
             <li class="list-group-item">
                 <b>2.0</b><span class="badge">20/07/2019</span>
                 <ul>
                     <li>Migration sur stack LAMP & Laravel</li>
                     <li>Authentification via Shibboleth</li>
-                </ul>
-            </li>
-            <li class="list-group-item">
-                <b>1.2</b><span class="badge">15/04/2019</span>
-                <ul>
-                    <li>Migration framework</li>
-                    <li>Mise à jour librairies javascript et adaptations</li>
                 </ul>
             </li>
             <li class="list-group-item">
