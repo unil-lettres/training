@@ -4,7 +4,7 @@ FROM php:7.2-fpm
 RUN apt-get update
 
 # Install PHP and composer dependencies
-RUN apt-get install -y git curl nano zlib1g-dev libpng-dev libxml2-dev
+RUN apt-get install -y git curl nano zip unzip zlib1g-dev libpng-dev libxml2-dev
 
 # Install needed extensions
 # Here you can install any other extension that you need during the test and deployment process
