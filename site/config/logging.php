@@ -36,7 +36,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily', 'flare'],
+            'channels' => ['daily', 'bugsnag'],
             'ignore_exceptions' => false,
         ],
 
@@ -96,8 +96,8 @@ return [
             'level' => 'debug',
         ],
 
-        'flare' => [
-            'driver' => 'flare',
+        'bugsnag' => [
+            'driver' => 'bugsnag',
         ],
     ],
 
