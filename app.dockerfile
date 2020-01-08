@@ -1,13 +1,12 @@
-FROM php:7.2-fpm
+FROM php:7.3-fpm
 
 # Update packages
 RUN apt-get update
 
-# Install PHP and composer dependencies
-RUN apt-get install -y git curl nano zip unzip zlib1g-dev libpng-dev libxml2-dev
+# Install additional packages
+RUN apt-get install -y git curl nano zip unzip zlib1g-dev libpng-dev libxml2-dev libzip-dev curl git
 
 # Install needed extensions
-# Here you can install any other extension that you need during the test and deployment process
 RUN apt-get clean; docker-php-ext-install pdo pdo_mysql zip gd bcmath tokenizer ctype json mbstring xml
 
 # Installs Composer to easily manage your PHP dependencies.
