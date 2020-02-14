@@ -1,37 +1,29 @@
-@extends('backpack::layout')
+@extends(backpack_view('blank'))
 
-@section('header')
-    <section class="content-header">
-      <h1>
-        {{ trans('backpack::base.dashboard') }}
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="{{ backpack_url() }}">{{ config('backpack.base.project_name') }}</a></li>
-        <li class="active">{{ trans('backpack::base.dashboard') }}</li>
-      </ol>
-    </section>
-@endsection
+@php
+@endphp
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <div class="box-title">Bonjour {{ backpack_user()->name }}</div>
+            <div class="card">
+                <h5 class="card-header">
+                    Bonjour {{ backpack_user()->name }}
+                </h5>
+                <div class="card-body">
+                    <a href="{{ route('home') }}"><i class="nav-icon fa fa-home"></i> <span>Retourner à l'application</span></a><br>
+                    <a href="{{ backpack_url('user') }}"><i class="nav-icon fa fa-user"></i> <span>Gérer les utilisateurs</span></a> ({{ $users->count() }})
                 </div>
-
-                <div class="box-body"><a href="{{ route('home') }}">Retournez à l'application</a></div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <div class="box">
-                <div class="box-header with-border">
-                    <div class="box-title"><a href='{{ backpack_url('request') }}'>Demandes</a> ({{ $requests->count() }})</div>
-                </div>
-
-                <div class="box-body">
+        <div class="col">
+            <div class="card">
+                <h5 class="card-header">
+                    <a href='{{ backpack_url('request') }}'>Demandes</a> ({{ $requests->count() }})
+                </h5>
+                <div class="card-body">
                     @if($requests->count())
                         <div>
                             <a href='{{ backpack_url('request/'.$requests->last()->id.'/edit') }}'>{{ $requests->last()->name }}</a>
@@ -41,18 +33,19 @@
                             <div>...</div>
                         @endif
                     @else
-                        <p>Pas de demandes pour l'instant.</p>
+                        <div class="text-secondary">
+                            Pas de demandes pour l'instant
+                        </div>
                     @endif
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="box">
-                <div class="box-header with-border">
-                    <div class="box-title"><a href='{{ backpack_url('training') }}'>Formations</a> ({{ $trainings->count() }})</div>
-                </div>
-
-                <div class="box-body">
+        <div class="col">
+            <div class="card">
+                <h5 class="card-header">
+                    <a href='{{ backpack_url('training') }}'>Formations</a> ({{ $trainings->count() }})
+                </h5>
+                <div class="card-body">
                     @if($trainings->count())
                         <div>
                             <a href='{{ backpack_url('training/'.$trainings->last()->id.'/edit') }}'>{{ $trainings->last()->name }}</a>
@@ -62,7 +55,9 @@
                             <div>...</div>
                         @endif
                     @else
-                        <p>Pas de formations pour l'instant.</p>
+                        <div class="text-secondary">
+                            Pas de formations pour l'instant
+                        </div>
                     @endif
                 </div>
             </div>
