@@ -12,10 +12,10 @@ Route::group([
     'namespace'  => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
     Route::get('status/ajax-status-options', 'StatusCrudController@statusOptions');
-    CRUD::resource('status', 'StatusCrudController');
+    Route::crud('status', 'StatusCrudController');
     Route::get('type/ajax-type-options', 'TypeCrudController@typeOptions');
-    CRUD::resource('type', 'TypeCrudController');
-    CRUD::resource('training', 'TrainingCrudController');
-    CRUD::resource('request', 'RequestCrudController');
+    Route::crud('type', 'TypeCrudController');
+    Route::crud('training', 'TrainingCrudController');
+    Route::crud('request', 'RequestCrudController');
     Route::get('dashboard', 'DashboardController@dashboard');
 }); // this should be the absolute last line of this file

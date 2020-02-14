@@ -7,17 +7,21 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\TypeRequest as StoreRequest;
 use App\Http\Requests\TypeRequest as UpdateRequest;
-use Backpack\CRUD\CrudPanel;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
 /**
  * Class TypeCrudController
  * @package App\Http\Controllers\Admin
- * @property-read CrudPanel $crud
  */
 class TypeCrudController extends CrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+
     public function setup()
     {
         /*
@@ -25,9 +29,9 @@ class TypeCrudController extends CrudController
         | CrudPanel Basic Information
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Type');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/type');
-        $this->crud->setEntityNameStrings('type', 'types');
+        CRUD::setModel('App\Models\Type');
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/type');
+        CRUD::setEntityNameStrings('type', 'types');
 
         /*
         |--------------------------------------------------------------------------
@@ -35,32 +39,29 @@ class TypeCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        // Columns
-        $this->crud->addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
-        // Fields
-        $this->crud->addField(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
+        CRUD::operation('list', function() {
+            // Columns
+            CRUD::addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
+        });
 
-        // add asterisk for fields that are required in TypeRequest
-        $this->crud->setRequiredFields(StoreRequest::class, 'create');
-        $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
+        CRUD::operation(['create', 'update'], function() {
+            // Fields
+            CRUD::addField(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
+
+            // add asterisk for fields that are required in TypeRequest
+            CRUD::setRequiredFields(StoreRequest::class, 'create');
+            CRUD::setRequiredFields(UpdateRequest::class, 'edit');
+        });
     }
 
-    public function store(StoreRequest $request)
+    protected function setupCreateOperation()
     {
-        // your additional operations before save here
-        $redirect_location = parent::storeCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        CRUD::setValidation(StoreRequest::class);
     }
 
-    public function update(UpdateRequest $request)
+    protected function setupUpdateOperation()
     {
-        // your additional operations before save here
-        $redirect_location = parent::updateCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        CRUD::setValidation(UpdateRequest::class);
     }
 
     public function typeOptions(Request $request) {

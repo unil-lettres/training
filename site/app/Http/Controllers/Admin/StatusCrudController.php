@@ -7,17 +7,21 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\StatusRequest as StoreRequest;
 use App\Http\Requests\StatusRequest as UpdateRequest;
-use Backpack\CRUD\CrudPanel;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use App\Models\Status;
 use Illuminate\Http\Request;
 
 /**
  * Class StatusCrudController
  * @package App\Http\Controllers\Admin
- * @property-read CrudPanel $crud
  */
 class StatusCrudController extends CrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+
     public function setup()
     {
         /*
@@ -25,9 +29,9 @@ class StatusCrudController extends CrudController
         | CrudPanel Basic Information
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Status');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/status');
-        $this->crud->setEntityNameStrings('décision', 'décisions');
+        CRUD::setModel('App\Models\Status');
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/status');
+        CRUD::setEntityNameStrings('décision', 'décisions');
 
         /*
         |--------------------------------------------------------------------------
@@ -35,32 +39,29 @@ class StatusCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        // Columns
-        $this->crud->addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
-        // Fields
-        $this->crud->addField(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
+        CRUD::operation('list', function() {
+            // Columns
+            CRUD::addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
+        });
 
-        // add asterisk for fields that are required in StatusRequest
-        $this->crud->setRequiredFields(StoreRequest::class, 'create');
-        $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
+        CRUD::operation(['create', 'update'], function() {
+            // Fields
+            CRUD::addField(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
+
+            // add asterisk for fields that are required in StatusRequest
+            CRUD::setRequiredFields(StoreRequest::class, 'create');
+            CRUD::setRequiredFields(UpdateRequest::class, 'edit');
+        });
     }
 
-    public function store(StoreRequest $request)
+    protected function setupCreateOperation()
     {
-        // your additional operations before save here
-        $redirect_location = parent::storeCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        CRUD::setValidation(StoreRequest::class);
     }
 
-    public function update(UpdateRequest $request)
+    protected function setupUpdateOperation()
     {
-        // your additional operations before save here
-        $redirect_location = parent::updateCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        CRUD::setValidation(UpdateRequest::class);
     }
 
     public function statusOptions(Request $request) {

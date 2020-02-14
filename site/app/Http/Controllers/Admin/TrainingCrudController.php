@@ -7,15 +7,19 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\TrainingRequest as StoreRequest;
 use App\Http\Requests\TrainingRequest as UpdateRequest;
-use Backpack\CRUD\CrudPanel;
+use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
  * Class TrainingCrudController
  * @package App\Http\Controllers\Admin
- * @property-read CrudPanel $crud
  */
 class TrainingCrudController extends CrudController
 {
+    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+
     public function setup()
     {
         /*
@@ -23,11 +27,11 @@ class TrainingCrudController extends CrudController
         | CrudPanel Basic Information
         |--------------------------------------------------------------------------
         */
-        $this->crud->setModel('App\Models\Training');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/training');
-        $this->crud->setEntityNameStrings('formation', 'formations');
+        CRUD::setModel('App\Models\Training');
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/training');
+        CRUD::setEntityNameStrings('formation', 'formations');
         if (!$this->request->has('order')) {
-            $this->crud->orderBy('created_at', 'DESC');
+            CRUD::orderBy('created_at', 'DESC');
         }
 
         /*
@@ -36,79 +40,75 @@ class TrainingCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        // Columns
-        $this->crud->addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
-        $this->crud->addColumn(['name' => 'start', 'type' => 'datetime', 'label' => 'Début']);
-        $this->crud->addColumn(['name' => 'end', 'type' => 'datetime', 'label' => 'Fin']);
-        $this->crud->addColumn(['name' => 'visible', 'type' => 'check', 'label' => 'Visible?']);
+        CRUD::operation('list', function() {
+            // Columns
+            CRUD::addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
+            CRUD::addColumn(['name' => 'start', 'type' => 'datetime', 'label' => 'Début']);
+            CRUD::addColumn(['name' => 'end', 'type' => 'datetime', 'label' => 'Fin']);
+            CRUD::addColumn(['name' => 'visible', 'type' => 'check', 'label' => 'Visible?']);
 
-        // Fields
-        $this->crud->addField(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
-        $this->crud->addField(['name' => 'description', 'type' => 'summernote', 'label' => 'Description']);
-        $this->crud->addField([
-          'name' => 'start',
-          'type' => 'datetime_picker',
-          'datetime_picker_options' => [
-            'format' => 'DD/MM/YYYY HH:mm',
-            'language' => 'fr'
-          ],
-          'allows_null' => true,
-          'label' => 'Date début'
-        ]);
-        $this->crud->addField([
-          'name' => 'end',
-          'type' => 'datetime_picker',
-          'datetime_picker_options' => [
-            'format' => 'DD/MM/YYYY HH:mm',
-            'language' => 'fr'
-          ],
-          'allows_null' => true,
-          'label' => 'Date fin'
-        ]);
-        $this->crud->addField(['name' => 'visible', 'type' => 'checkbox', 'label' => 'Visible']);
+            // Filters
+            CRUD::addFilter([
+                'name' => 'visible',
+                'type' => 'dropdown',
+                'label'=> 'Visibilité'
+            ], [
+                1 => 'Visible',
+                2 => 'Non-visible'
+            ], function($value) {
+                switch (intval($value)) {
+                    case 1:
+                        CRUD::addClause('where', 'visible', 1);
+                        break;
+                    case 2:
+                        CRUD::addClause('where', 'visible', 0);
+                        break;
+                }
+            });
 
-        // Filters
-        $this->crud->addFilter([
-          'name' => 'visible',
-          'type' => 'dropdown',
-          'label'=> 'Visibilité'
-        ], [
-          1 => 'Visible',
-          2 => 'Non-visible'
-        ], function($value) {
-            switch (intval($value)) {
-                case 1:
-                    $this->crud->addClause('where', 'visible', 1);
-                    break;
-                case 2:
-                    $this->crud->addClause('where', 'visible', 0);
-                    break;
-            }
+            // Enable exports
+            CRUD::enableExportButtons();
         });
 
-        // add asterisk for fields that are required in TrainingRequest
-        $this->crud->setRequiredFields(StoreRequest::class, 'create');
-        $this->crud->setRequiredFields(UpdateRequest::class, 'edit');
+        CRUD::operation(['create', 'update'], function() {
+            // Fields
+            CRUD::addField(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
+            CRUD::addField(['name' => 'description', 'type' => 'summernote', 'label' => 'Description']);
+            CRUD::addField([
+                'name' => 'start',
+                'type' => 'datetime_picker',
+                'datetime_picker_options' => [
+                    'format' => 'DD/MM/YYYY HH:mm',
+                    'language' => 'fr'
+                ],
+                'allows_null' => true,
+                'label' => 'Date début'
+            ]);
+            CRUD::addField([
+                'name' => 'end',
+                'type' => 'datetime_picker',
+                'datetime_picker_options' => [
+                    'format' => 'DD/MM/YYYY HH:mm',
+                    'language' => 'fr'
+                ],
+                'allows_null' => true,
+                'label' => 'Date fin'
+            ]);
+            CRUD::addField(['name' => 'visible', 'type' => 'checkbox', 'label' => 'Visible']);
 
-        // Enable exports
-        $this->crud->enableExportButtons();
+            // add asterisk for fields that are required in TrainingRequest
+            CRUD::setRequiredFields(StoreRequest::class, 'create');
+            CRUD::setRequiredFields(UpdateRequest::class, 'edit');
+        });
     }
 
-    public function store(StoreRequest $request)
+    protected function setupCreateOperation()
     {
-        // your additional operations before save here
-        $redirect_location = parent::storeCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        CRUD::setValidation(StoreRequest::class);
     }
 
-    public function update(UpdateRequest $request)
+    protected function setupUpdateOperation()
     {
-        // your additional operations before save here
-        $redirect_location = parent::updateCrud($request);
-        // your additional operations after save here
-        // use $this->data['entry'] or $this->crud->entry
-        return $redirect_location;
+        CRUD::setValidation(UpdateRequest::class);
     }
 }
