@@ -10,7 +10,7 @@ Development:
 
 Development of technical skills in the Faculty of Arts.
 
-A Laravel 6 app with a Backpack administration.
+A Laravel 7 app with a Backpack administration.
 
 # Development
 
