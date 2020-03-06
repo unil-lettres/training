@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Training;
 use Illuminate\Support\Facades\Date;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {

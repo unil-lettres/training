@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Backpack\CRUD\app\Library\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -42,7 +43,7 @@ class LoginController extends Controller
      * Log the user out of the application.
      *
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function logout(Request $request)  {
         $this->guard()->logout();

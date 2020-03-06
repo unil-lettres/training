@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Request;
 use App\Http\Requests\RequestRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Date;
 use App\Mail\RequestCreated;
 use App\Services\Users;
+use Illuminate\View\View;
 
 class RequestController extends Controller
 {
     /**
      * Index requests
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
@@ -25,7 +27,7 @@ class RequestController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
@@ -38,7 +40,7 @@ class RequestController extends Controller
      * @param  RequestRequest $request
      * @param  Users $usersService
      *
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function store(RequestRequest $request, Users $usersService)
     {
