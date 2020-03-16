@@ -1613,16 +1613,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v7.0.8",
+            "version": "v7.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "d71ba61d51aec79a0a0f907991ec215dc24b09d4"
+                "reference": "951e10fbfed2a2d547c3fc33853125b4a619e01a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d71ba61d51aec79a0a0f907991ec215dc24b09d4",
-                "reference": "d71ba61d51aec79a0a0f907991ec215dc24b09d4",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/951e10fbfed2a2d547c3fc33853125b4a619e01a",
+                "reference": "951e10fbfed2a2d547c3fc33853125b4a619e01a",
                 "shasum": ""
             },
             "require": {
@@ -1710,7 +1710,7 @@
                 "ext-memcached": "Required to use the memcache cache driver.",
                 "ext-pcntl": "Required to use all features of the queue worker.",
                 "ext-posix": "Required to use all features of the queue worker.",
-                "ext-redis": "Required to use the Redis cache and queue drivers.",
+                "ext-redis": "Required to use the Redis cache and queue drivers (^4.0|^5.0).",
                 "filp/whoops": "Required for friendly error pages in development (^2.4).",
                 "fzaninotto/faker": "Required to use the eloquent factory builder (^1.9.1).",
                 "guzzlehttp/guzzle": "Required to use the HTTP Client, Mailgun mail driver and the ping methods on schedules (^6.3.1|^7.0).",
@@ -1760,7 +1760,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2020-03-08T16:03:46+00:00"
+            "time": "2020-03-13T13:52:44+00:00"
         },
         {
             "name": "laravel/helpers",
@@ -5043,16 +5043,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v4.1.1",
+            "version": "v4.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "32bd5ca5a4170f88e27073353013d210a3354ae9"
+                "reference": "939dfda2d7267ac8fc53ac3d642b5de357554c39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/32bd5ca5a4170f88e27073353013d210a3354ae9",
-                "reference": "32bd5ca5a4170f88e27073353013d210a3354ae9",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/939dfda2d7267ac8fc53ac3d642b5de357554c39",
+                "reference": "939dfda2d7267ac8fc53ac3d642b5de357554c39",
                 "shasum": ""
             },
             "require": {
@@ -5101,20 +5101,20 @@
                 "env",
                 "environment"
             ],
-            "time": "2020-03-01T23:56:01+00:00"
+            "time": "2020-03-12T13:44:15+00:00"
         },
         {
             "name": "voku/portable-ascii",
-            "version": "1.4.9",
+            "version": "1.4.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/voku/portable-ascii.git",
-                "reference": "9fd2b224c71448b5f84aef9d499a1428d79776a2"
+                "reference": "240e93829a5f985fab0984a6e55ae5e26b78a334"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/voku/portable-ascii/zipball/9fd2b224c71448b5f84aef9d499a1428d79776a2",
-                "reference": "9fd2b224c71448b5f84aef9d499a1428d79776a2",
+                "url": "https://api.github.com/repos/voku/portable-ascii/zipball/240e93829a5f985fab0984a6e55ae5e26b78a334",
+                "reference": "240e93829a5f985fab0984a6e55ae5e26b78a334",
                 "shasum": ""
             },
             "require": {
@@ -5150,7 +5150,7 @@
                 "clean",
                 "php"
             ],
-            "time": "2020-03-06T02:47:42+00:00"
+            "time": "2020-03-13T01:23:26+00:00"
         }
     ],
     "packages-dev": [
@@ -5435,16 +5435,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laracasts/Laravel-5-Generators-Extended.git",
-                "reference": "061b307e666545fa3e3205a044a77b0382d3ae3e"
+                "reference": "6b5ea9024065689ce36f41a45c3ffddcf875f23c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laracasts/Laravel-5-Generators-Extended/zipball/061b307e666545fa3e3205a044a77b0382d3ae3e",
-                "reference": "061b307e666545fa3e3205a044a77b0382d3ae3e",
+                "url": "https://api.github.com/repos/laracasts/Laravel-5-Generators-Extended/zipball/6b5ea9024065689ce36f41a45c3ffddcf875f23c",
+                "reference": "6b5ea9024065689ce36f41a45c3ffddcf875f23c",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "~5.0|~6.0|~7.0",
+                "illuminate/support": "^5.8|~6.0|~7.0",
                 "php": ">=5.4.0"
             },
             "require-dev": {
@@ -5473,12 +5473,12 @@
                     "email": "jeffrey@laracasts.com"
                 }
             ],
-            "description": "Extend Laravel 5's generators.",
+            "description": "Advanced Laravel generators, that include schema information.",
             "keywords": [
                 "generators",
                 "laravel"
             ],
-            "time": "2020-03-08T08:09:39+00:00"
+            "time": "2020-03-10T07:16:20+00:00"
         },
         {
             "name": "laravel/dusk",
