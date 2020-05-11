@@ -19,7 +19,7 @@ class RequestController extends Controller
      */
     public function index()
     {
-        $requests = backpack_auth()->user()->requests()->get();
+        $requests = auth()->user()->requests()->get();
 
         return view('requests.index')->with('requests', $requests);
     }
@@ -64,7 +64,7 @@ class RequestController extends Controller
                 'action_type' => $request->get('action_type')
             ],
             'filling_date' => Date::now(),
-            'user_id' => backpack_auth()->user()->id
+            'user_id' => auth()->user()->id
         ]);
         $requestObj->save();
 

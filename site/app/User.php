@@ -40,4 +40,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the requests for the user.
+     */
+    public function requests()
+    {
+        return $this->hasMany('App\Models\Request');
+    }
 }

@@ -89,7 +89,7 @@ class Request extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\Models\BackpackUser');
+        return $this->belongsTo('App\User');
     }
 
     /*

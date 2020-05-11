@@ -30,13 +30,13 @@ class UsersTableSeeder extends Seeder
 
         DB::table('model_has_roles')->insert([
           'role_id' => $adminRole->id,
-          'model_type' => 'App\Models\BackpackUser',
+          'model_type' => 'App\User',
           'model_id' => $firstUserId
         ]);
 
         DB::table('model_has_roles')->insert([
           'role_id' => $notificationRole->id,
-          'model_type' => 'App\Models\BackpackUser',
+          'model_type' => 'App\User',
           'model_id' => $firstUserId
         ]);
 

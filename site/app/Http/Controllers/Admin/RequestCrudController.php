@@ -8,6 +8,11 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\RequestRequest as StoreRequest;
 use App\Http\Requests\RequestRequest as UpdateRequest;
+use Backpack\CRUD\app\Http\Controllers\Operations\CloneOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
@@ -16,11 +21,11 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
  */
 class RequestCrudController extends CrudController
 {
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CloneOperation;
+    use ListOperation;
+    use CreateOperation;
+    use UpdateOperation;
+    use DeleteOperation;
+    use CloneOperation;
 
     public function setup()
     {
@@ -32,7 +37,7 @@ class RequestCrudController extends CrudController
         CRUD::setModel('App\Models\Request');
         CRUD::setRoute(config('backpack.base.route_prefix') . '/request');
         CRUD::setEntityNameStrings('demande', 'demandes');
-        if (!$this->request->has('order')) {
+        if (!$this->crud->getRequest()->has('order')) {
             CRUD::orderBy('created_at', 'DESC');
         }
 
@@ -253,7 +258,11 @@ class RequestCrudController extends CrudController
                 'label' => 'Document',
                 'type' => 'upload',
                 'upload' => true,
-                'tab' => 'Champs d\'administration'
+                'tab' => 'Champs d\'administration',
+                // https://github.com/Laravel-Backpack/CRUD/issues/2784
+                'wrapper' => [
+                    'data-field-name' => 'my_custom_field_name_to_avoid_file_field_bug'
+                ]
             ]);
             CRUD::addField([
                 'label' => "Utilisateur",
@@ -261,7 +270,7 @@ class RequestCrudController extends CrudController
                 'name' => 'user_id',
                 'entity' => 'user',
                 'attribute' => 'name',
-                'model' => "App\Models\BackpackUser",
+                'model' => "App\User",
                 'default'   => auth()->user()->id,
                 'tab' => 'Champs d\'administration'
             ]);

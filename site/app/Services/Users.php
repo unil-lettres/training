@@ -1,7 +1,8 @@
 <?php
 namespace App\Services;
 
-use App\Models\BackpackUser;
+use App\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Mail;
 
@@ -12,10 +13,10 @@ class Users
      *
      * @param string $role
      *
-     * @return BackpackUser $users
+     * @return Collection $users
      */
     public function usersWithRole($role) {
-        $users = BackpackUser::with('roles')->get();
+        $users = User::with('roles')->get();
         return $users->filter(function ($user) use ($role) {
             return $user->hasRole($role);
         });
@@ -24,7 +25,7 @@ class Users
     /**
      * Return all the users with the admin role.
      *
-     * @return BackpackUser $users
+     * @return Collection $users
      */
     public function admins() {
         return $this->usersWithRole('Admin');
@@ -33,7 +34,7 @@ class Users
     /**
      * Return all the users with the notification role.
      *
-     * @return BackpackUser $users
+     * @return Collection $users
      */
     public function notifications() {
         return $this->usersWithRole('Notification');
@@ -50,7 +51,7 @@ class Users
     public function mailUsersWithRole($role, $mail) {
         $users = $this->usersWithRole($role);
 
-        if ($users->count()) {
+        if ($users->isNotEmpty()) {
             Mail::to($users)->send($mail);
         }
     }
