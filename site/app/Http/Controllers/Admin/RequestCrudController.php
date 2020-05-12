@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Request;
+use App\Models\Status;
+use App\Models\Type;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
 // VALIDATION: change the requests to match your own file names if you need form validation
@@ -11,6 +13,7 @@ use App\Http\Requests\RequestRequest as UpdateRequest;
 use Backpack\CRUD\app\Http\Controllers\Operations\CloneOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+use Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -25,6 +28,7 @@ class RequestCrudController extends CrudController
     use CreateOperation;
     use UpdateOperation;
     use DeleteOperation;
+    use FetchOperation;
     use CloneOperation;
 
     public function setup()
@@ -211,6 +215,7 @@ class RequestCrudController extends CrudController
                 'tab' => 'Champs enseignant'
             ]);
 
+            // Administration fields
             CRUD::addField([
                 'name' => 'status',
                 'label' => "Statut",
@@ -220,23 +225,24 @@ class RequestCrudController extends CrudController
             ]);
             CRUD::addField([
                 'label' => "Catégorie",
-                'type' => 'select',
+                'type' => "relationship",
                 'name' => 'type_id',
-                'entity' => 'type',
-                'attribute' => 'name',
-                'model' => "App\Models\Type",
+                'attribute' => "name",
+                'placeholder' => "Sélectionner une catégorie",
+                'inline_create' => true,
                 'tab' => 'Champs d\'administration'
             ]);
             CRUD::addField([
                 'label' => "Décisions",
-                'type' => 'select',
+                'type' => 'relationship',
                 'name' => 'status_id',
-                'entity' => 'status',
-                'attribute' => 'name',
-                'model' => "App\Models\Status",
+                'attribute' => "name",
+                'placeholder' => "Sélectionner une décision",
+                'inline_create' => true,
                 'tab' => 'Champs d\'administration'
             ]);
             CRUD::addField([
+                'label' => 'Date de décision',
                 'name' => 'decision_date',
                 'type' => 'datetime_picker',
                 'datetime_picker_options' => [
@@ -244,18 +250,17 @@ class RequestCrudController extends CrudController
                     'language' => 'fr'
                 ],
                 'allows_null' => true,
-                'label' => 'Date de décision',
                 'tab' => 'Champs d\'administration'
             ]);
             CRUD::addField([
+                'label' => 'Commentaire relatif à la décision',
                 'name' => 'decision_comments',
                 'type' => 'summernote',
-                'label' => 'Commentaire relatif à la décision',
                 'tab' => 'Champs d\'administration'
             ]);
             CRUD::addField([
-                'name' => 'file',
                 'label' => 'Document',
+                'name' => 'file',
                 'type' => 'upload',
                 'upload' => true,
                 'tab' => 'Champs d\'administration',
@@ -289,5 +294,17 @@ class RequestCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         CRUD::setValidation(UpdateRequest::class);
+    }
+
+    // Needed for type inline create route
+    public function fetchType()
+    {
+        return $this->fetch(Type::class);
+    }
+
+    // Needed for status inline create route
+    public function fetchStatus()
+    {
+        return $this->fetch(Status::class);
     }
 }

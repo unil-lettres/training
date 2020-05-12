@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "backpack/crud",
-            "version": "4.1.2",
+            "version": "4.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Laravel-Backpack/CRUD.git",
-                "reference": "7084182b38bff6b19624788ff143bb249ecdc758"
+                "reference": "02988a0d14b09e55949781d729060df910f0d94b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/7084182b38bff6b19624788ff143bb249ecdc758",
-                "reference": "7084182b38bff6b19624788ff143bb249ecdc758",
+                "url": "https://api.github.com/repos/Laravel-Backpack/CRUD/zipball/02988a0d14b09e55949781d729060df910f0d94b",
+                "reference": "02988a0d14b09e55949781d729060df910f0d94b",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "read",
                 "update"
             ],
-            "time": "2020-05-08T14:57:27+00:00"
+            "time": "2020-05-12T05:21:01+00:00"
         },
         {
             "name": "backpack/permissionmanager",
