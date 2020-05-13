@@ -53,9 +53,23 @@ class RequestCrudController extends CrudController
 
         CRUD::operation('list', function() {
             // Columns
-            CRUD::addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
-            CRUD::addColumn(['name' => 'description', 'type' => 'text', 'label' => 'Description']);
-            CRUD::addColumn(['name' => 'filling_date', 'type' => 'datetime', 'label' => 'Date dépot']);
+            CRUD::addColumn([
+                'name' => 'name',
+                'type' => 'text',
+                'label' => 'Nom'
+            ]);
+            CRUD::addColumn([
+                'name' => 'description',
+                'type' => 'text',
+                'label' => 'Description',
+                'limit' => 60,
+                'escaped' => false
+            ]);
+            CRUD::addColumn([
+                'name' => 'filling_date',
+                'type' => 'datetime',
+                'label' => 'Date dépot'
+            ]);
             CRUD::addColumn([
                 'label' => "Catégorie",
                 'type' => "select",
@@ -70,7 +84,12 @@ class RequestCrudController extends CrudController
                 'type' => 'select_from_array',
                 'options' => Request::$status
             ]);
-            CRUD::addColumn(['name' => 'comments', 'type' => 'text', 'label' => 'Remarques']);
+            CRUD::addColumn([
+                'name' => 'comments',
+                'type' => 'text',
+                'label' => 'Remarques',
+                'escaped' => false
+            ]);
 
             // Filters
             CRUD::addFilter([

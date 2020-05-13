@@ -1,6 +1,22 @@
 @extends(backpack_view('blank'))
 
 @php
+    if($requests->isNotEmpty()) {
+        $widgets['after_content'][] = [
+            'type'        => 'progress_white',
+            'class'     => "card",
+            'value'     => \App\Helpers\Helpers::unsolvedRequestCount(),
+            'description' => \App\Helpers\Helpers::unsolvedRequestCount() === 0 ? "Demandes non résolues" : "Demandes non résolues " .
+                "(\"" . \App\Helpers\Helpers::requestStatus('new') . "\": " . \App\Helpers\Helpers::newRequestCount() . ", " .
+                "\"" . \App\Helpers\Helpers::requestStatus('pending') . "\": " . \App\Helpers\Helpers::pendingRequestCount() . ")",
+            'progress' => \App\Helpers\Helpers::solvedRequestPercentage(),
+            'hint' => "Sur un total de " . $requests->count() . " demandes",
+            'wrapper' => [
+                'class' => 'col-6',
+                'style' => 'border-radius: 10px;margin-left: -15px;padding-right: 0px;',
+            ]
+        ];
+    }
 @endphp
 
 @section('content')
@@ -27,7 +43,13 @@
                     @if($requests->count())
                         <div>
                             <a href='{{ backpack_url('request/'.$requests->last()->id.'/edit') }}'>{{ $requests->last()->name }}</a>
-                            <span>(créée le {{ $requests->last()->created_at->format('d m Y') }}</span>@if($requests->last()->user)<span> par "{{ $requests->last()->user->name }}"<span>@endif<span>)</span>
+                            <span>
+                                (créée le {{ $requests->last()->created_at->format('d m Y') }}
+                            </span>
+                            @if($requests->last()->user)
+                                <span> par "{{ $requests->last()->user->name }}"</span>
+                            @endif
+                            <span>)</span>
                         </div>
                         @if($requests->count() > 1)
                             <div>...</div>
