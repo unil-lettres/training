@@ -6,9 +6,7 @@ networks:
 
 services:
   train-app:
-    build:
-      context: ./
-      dockerfile: app.dockerfile
+    image: unillett/training:v1.0
     env_file:
       - ./.env
     volumes:
