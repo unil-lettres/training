@@ -38,31 +38,9 @@ Build & run all the containers for this project
 
 ``docker-compose up -d``
 
-Install php dependencies
+Run the setup script.
 
-``docker exec train-app composer install``
-
-Update the Laravel .env file
-
-``docker exec train-app cp .env.example .env``
-
-Update the application key
-
-``docker exec train-app php artisan key:generate``
-
-Install js dependencies
-
-``docker exec train-app npm install``
-
-``docker exec train-app npm run dev``
-
-Run migrations
-
-``docker exec train-app php artisan migrate --no-interaction --force``
-
-Seeding first user
-
-``docker exec train-app php artisan db:seed`` 
+``docker exec impact-app ./setup.sh``
 
 This is only needed when you launch the project for the first time. After that you can simply use the following command from the project root directory.
 
@@ -78,8 +56,7 @@ To access the administration please use the following link.
 
 [http://training.lan:8686/admin](http://training.lan:8686/admin)
 
-login: first-user@example.com
-password: password
++ first-user@example.com / password
 
 ### Telescope
 
@@ -93,8 +70,9 @@ To access the database please use the following link.
 
 [http://training.lan:9999](http://training.lan:9999)
 
-Username: user
-Password: password
++ Server: db
++ Username: user
++ Password: password
 
 ### MailHog
 

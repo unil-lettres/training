@@ -16,10 +16,7 @@ before_install: cd site
 install:
 - mysql -e 'CREATE DATABASE training_test;'
 - mysql -e "SET GLOBAL sql_mode = 'NO_ENGINE_SUBSTITUTION';"
-- cp .env.testing .env
-- travis_retry composer install --no-interaction --prefer-dist --no-suggest
-- php artisan key:generate
-- php artisan migrate
+- ./setup.sh
 before_script:
 - php artisan dusk:chrome-driver
 - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
