@@ -40,7 +40,7 @@ Build & run all the containers for this project
 
 Run the setup script.
 
-``docker exec impact-app ./setup.sh``
+``docker exec train-app ./setup.sh``
 
 This is only needed when you launch the project for the first time. After that you can simply use the following command from the project root directory.
 
