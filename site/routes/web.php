@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/contact', function () {
     return view('pages.contact');
@@ -28,3 +29,8 @@ Route::resource('request', 'RequestController')->only([
 ])->middleware(['auth']);
 
 Route::redirect('/login', '/shibboleth-login')->name('login');
+
+Auth::routes([
+    'register' => false,
+    'login' => false,
+]);

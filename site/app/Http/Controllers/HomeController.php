@@ -17,6 +17,6 @@ class HomeController extends Controller
     {
         $trainings = Training::where('visible', '=', true)->where('end', '>=', Date::now())->get();
 
-        return view('pages.home')->with('trainings', $trainings);
+        return view('home')->with('trainings', $trainings);
     }
 }
