@@ -6,3 +6,21 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Jquery UI
+@import '~jquery-ui/themes/base/all.css';
+
+// Header
+@import 'header';
+
+// Footer
+@import 'footer';
+
+// Main content
+@import 'content';
+
+// Page home
+@import 'home';
+
+// Request
+@import 'request';
