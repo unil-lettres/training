@@ -4,7 +4,7 @@ FROM php:7.4-fpm
 RUN apt-get update
 
 # Install additional packages
-RUN apt-get install -y git curl nano zip unzip zlib1g-dev libpng-dev libxml2-dev libzip-dev libonig-dev curl git
+RUN apt-get install -y git curl nano zip unzip zlib1g-dev libpng-dev libxml2-dev libzip-dev libonig-dev
 
 # Install needed extensions
 RUN apt-get clean; docker-php-ext-install pdo pdo_mysql zip gd bcmath tokenizer ctype json mbstring xml
