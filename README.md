@@ -76,23 +76,13 @@ To access the database please use the following link.
 
 ### MailHog
 
-To access the mail server please use the following link.
+To access mails please use the following link.
 
 [http://training.lan:8025](http://training.lan:8025)
 
 Or to get the messages in JSON format.
 
 [http://training.lan:8025/api/v2/messages](http://training.lan:8025/api/v2/messages)
-
-## Testing
-
-Run the following commands from the framework root directory (/site).
-
-### Unit testing
-``./vendor/bin/phpunit``
-
-### Functional testing
-``php artisan dusk``
 
 # Error tracker
 
