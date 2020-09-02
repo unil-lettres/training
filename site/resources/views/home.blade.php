@@ -132,7 +132,7 @@
                             <div class="img-circle" style="background-color: #B7A1AA;">
                                 <div><b>#5 OFFRE</b></div>
                                 <div><b>Enseigner avec des outils informatiques</b></div>
-                                <div>Identifier les outils d’enseignement adéquats et les maîtriser : Moodle, Xerte, CORREX, Outil Voc, etc.</div>
+                                <div>Identifier les outils d’enseignement adéquats et les maîtriser: CORREX, Outil Voc, etc.</div>
                             </div>
                         </div>
                         <div class="col-xs-7 col-sm-4 col-lg-4">
