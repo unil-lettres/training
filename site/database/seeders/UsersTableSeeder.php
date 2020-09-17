@@ -1,5 +1,8 @@
 <?php
 
+namespace Database\Seeders;
+
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -14,7 +17,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $now = Carbon\Carbon::now();
+        $now = Carbon::now();
 
         $firstUserId = DB::table('users')->insertGetId([
           'name' => 'First user',
