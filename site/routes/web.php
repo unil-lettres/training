@@ -11,8 +11,12 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/home', 'HomeController@index');
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RequestController;
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/contact', function () {
     return view('pages.contact');
@@ -22,9 +26,9 @@ Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
 
-Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::resource('request', 'RequestController')->only([
+Route::resource('request', RequestController::class)->only([
     'index', 'create', 'store'
 ])->middleware(['auth']);
 
