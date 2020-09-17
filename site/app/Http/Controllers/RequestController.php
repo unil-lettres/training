@@ -19,7 +19,9 @@ class RequestController extends Controller
      */
     public function index()
     {
-        $requests = auth()->user()->requests()->get();
+        $requests = auth()->user()->requests()
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('requests.index')->with('requests', $requests);
     }
