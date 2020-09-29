@@ -11,7 +11,7 @@ use App\Helpers\Helpers;
 class HelpersTest extends TestCase
 {
     /**
-     * Reuqest status helper should return the right human readable string
+     * Request status helper should return the right human readable string
      *
      * @return void
      */

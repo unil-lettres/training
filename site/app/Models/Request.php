@@ -62,6 +62,24 @@ class Request extends Model
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * Return cleaned description
+     *
+     * @return string
+     */
+    public function cleanDescription() {
+        return strip_tags($this->description);
+    }
+
+    /**
+     * Return cleaned comments
+     *
+     * @return string
+     */
+    public function cleanComments() {
+        return strip_tags($this->comments);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

@@ -60,10 +60,10 @@ class RequestCrudController extends CrudController
             ]);
             CRUD::addColumn([
                 'name' => 'description',
-                'type' => 'text',
+                'type' => 'model_function',
                 'label' => 'Description',
                 'limit' => 60,
-                'escaped' => false
+                'function_name' => 'cleanDescription'
             ]);
             CRUD::addColumn([
                 'name' => 'filling_date',
@@ -86,9 +86,9 @@ class RequestCrudController extends CrudController
             ]);
             CRUD::addColumn([
                 'name' => 'comments',
-                'type' => 'text',
+                'type' => 'model_function',
                 'label' => 'Remarques',
-                'escaped' => false
+                'function_name' => 'cleanComments'
             ]);
 
             // Filters
