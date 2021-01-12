@@ -1,9 +1,9 @@
 Master:
-[![Build Status](https://travis-ci.com/unil-lettres/training.svg?token=T7puWy4nJeaNtH7s3vRB&branch=master)](https://travis-ci.com/unil-lettres/training)
+![ci](https://github.com/unil-lettres/training/workflows/ci/badge.svg?branch=master)
 [![CodeFactor](https://www.codefactor.io/repository/github/unil-lettres/training/badge/master)](https://www.codefactor.io/repository/github/unil-lettres/training/overview/master)
 
 Development:
-[![Build Status](https://travis-ci.com/unil-lettres/training.svg?token=T7puWy4nJeaNtH7s3vRB&branch=development)](https://travis-ci.com/unil-lettres/training)
+![ci](https://github.com/unil-lettres/training/workflows/ci/badge.svg?branch=development)
 [![CodeFactor](https://www.codefactor.io/repository/github/unil-lettres/training/badge/development)](https://www.codefactor.io/repository/github/unil-lettres/training/overview/development)
 
 # Introduction
