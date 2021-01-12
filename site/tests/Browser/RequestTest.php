@@ -49,7 +49,7 @@ class RequestTest extends DuskTestCase
 
             $browser->clickLink("Mes demandes")
               ->assertPathIs('/request')
-              ->assertSee('Liste des demandes envoyéesDDDDD')
+              ->assertSee('Liste des demandes envoyées')
               ->assertSee($name)
               ->assertSee($description);
         });
