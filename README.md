@@ -22,13 +22,13 @@ A working [Docker](https://docs.docker.com/engine/installation/) installation is
 
 Please make sure to copy & rename the **example.env** file to **.env**.
 
-``cp env.example .env``
+``cp example.env .env``
 
 You can replace the values if needed, but the default ones should work.
 
 ## Edit hosts file
 
-Edit hosts file to point **training.lan** to you docker host.
+Edit hosts file to point **training.lan** to your docker host.
 
 ## Environment installation & configuration
 
@@ -36,7 +36,7 @@ Run the following docker commands from the project root directory.
 
 Build & run all the containers for this project
 
-``docker-compose up -d``
+``docker-compose up``
 
 Run the setup script.
 
