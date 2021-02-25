@@ -18,7 +18,7 @@ A Laravel 8 app with a Backpack administration.
 
 A working [Docker](https://docs.docker.com/engine/installation/) installation is mandatory.
 
-## Docker environment variables file
+## Docker environment file
 
 Please make sure to copy & rename the **example.env** file to **.env**.
 
