@@ -6,7 +6,7 @@ networks:
 
 services:
   train-app:
-    image: unillett/training:v1.3
+    image: unillett/training:latest
     env_file:
       - ./.env
     volumes:
