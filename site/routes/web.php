@@ -26,13 +26,16 @@ Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
 
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])
+    ->name('logout');
 
 Route::resource('request', RequestController::class)->only([
     'index', 'create', 'store'
 ])->middleware(['auth']);
 
-Route::redirect('/login', '/shibboleth-login')->name('login');
+Route::get('/login')
+    ->name('login')
+    ->middleware('check_aai');
 
 Auth::routes([
     'register' => false,

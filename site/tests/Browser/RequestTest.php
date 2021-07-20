@@ -28,30 +28,30 @@ class RequestTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new Login())
-              ->loginAsUser('user', 'user');
+                ->loginAsUser('second-user@example.com', 'password');
 
             $browser->visit(new CreateRequest())
-              ->selectRequestType('Étudiant');
+                ->selectRequestType('Étudiant');
 
             $browser->assertSee('Formation demandée')
-              ->assertDontSee('École doctorale')
-              ->assertDontSee('Avec un ou des étudiants');
+                ->assertDontSee('École doctorale')
+                ->assertDontSee('Avec un ou des étudiants');
 
             $name = 'Test Student Request';
             $description = 'Test Student Description';
 
             $browser->type('name', $name)
-              ->type('description', $description)
-              ->press('Envoyer');
+                ->type('description', $description)
+                ->press('Envoyer');
 
             $browser->assertPathIs('/')
-              ->assertSee('Demande de formation enregistrée.');
+                ->assertSee('Demande de formation enregistrée.');
 
             $browser->clickLink("Mes demandes")
-              ->assertPathIs('/request')
-              ->assertSee('Liste des demandes envoyées')
-              ->assertSee($name)
-              ->assertSee($description);
+                ->assertPathIs('/request')
+                ->assertSee('Liste des demandes envoyées')
+                ->assertSee($name)
+                ->assertSee($description);
         });
     }
 
@@ -64,32 +64,32 @@ class RequestTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new Login())
-              ->loginAsUser('user', 'user');
+                ->loginAsUser('second-user@example.com', 'password');
 
             $browser->visit(new CreateRequest())
-              ->selectRequestType('Chercheur/Doctorant');
+                ->selectRequestType('Chercheur/Doctorant');
 
             $browser->assertSee('Formation demandée')
-              ->assertSee('École doctorale')
-              ->assertDontSee('Avec un ou des étudiants');
+                ->assertSee('École doctorale')
+                ->assertDontSee('Avec un ou des étudiants');
 
             $name = 'Test Researcher Request';
             $description = 'Test Researcher Description';
             $doctoral_school = 'A Doctoral School';
 
             $browser->type('name', $name)
-              ->type('description', $description)
-              ->type('doctoral_school', $doctoral_school)
-              ->press('Envoyer');
+                ->type('description', $description)
+                ->type('doctoral_school', $doctoral_school)
+                ->press('Envoyer');
 
             $browser->assertPathIs('/')
-              ->assertSee('Demande de formation enregistrée.');
+                ->assertSee('Demande de formation enregistrée.');
 
             $browser->clickLink("Mes demandes")
-              ->assertPathIs('/request')
-              ->assertSee('Liste des demandes envoyées')
-              ->assertSee($name)
-              ->assertSee($description);
+                ->assertPathIs('/request')
+                ->assertSee('Liste des demandes envoyées')
+                ->assertSee($name)
+                ->assertSee($description);
         });
     }
 
@@ -102,31 +102,31 @@ class RequestTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new Login())
-              ->loginAsUser('user', 'user');
+                ->loginAsUser('second-user@example.com', 'password');
 
             $browser->visit(new CreateRequest())
-              ->selectRequestType('Enseignant');
+                ->selectRequestType('Enseignant');
 
             $browser->assertSee('Formation demandée')
-              ->assertSee('Avec un ou des étudiants')
-              ->assertDontSee('École doctorale');
+                ->assertSee('Avec un ou des étudiants')
+                ->assertDontSee('École doctorale');
 
             $name = 'Test Teacher Request';
             $description = 'Test Teacher Description';
 
             $browser->type('name', $name)
-              ->type('description', $description)
-              ->check('students_nbr')
-              ->press('Envoyer');
+                ->type('description', $description)
+                ->check('students_nbr')
+                ->press('Envoyer');
 
             $browser->assertPathIs('/')
-              ->assertSee('Demande de formation enregistrée.');
+                ->assertSee('Demande de formation enregistrée.');
 
             $browser->clickLink("Mes demandes")
-              ->assertPathIs('/request')
-              ->assertSee('Liste des demandes envoyées')
-              ->assertSee($name)
-              ->assertSee($description);
+                ->assertPathIs('/request')
+                ->assertSee('Liste des demandes envoyées')
+                ->assertSee($name)
+                ->assertSee($description);
         });
     }
 
@@ -139,15 +139,15 @@ class RequestTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new Login())
-              ->loginAsUser('user', 'user');
+                ->loginAsUser('second-user@example.com', 'password');
 
             $browser->visit(new CreateRequest())
-              ->selectRequestType('Étudiant');
+                ->selectRequestType('Étudiant');
 
             $browser->press('Envoyer');
 
             $browser->assertPathIs('/request/create')
-              ->assertSee('Le champ nom est requis.');
+                ->assertSee('Le champ nom est requis.');
         });
     }
 
@@ -164,7 +164,8 @@ class RequestTest extends DuskTestCase
             $browser->clickLink("Nouvelle demande");
 
             $browser->assertPathIsNot('/request/create')
-              ->assertDontSee('Déposer votre demande en tant que');
+                ->assertDontSee('Déposer votre demande en tant que')
+                ->assertPathIs('/');
         });
     }
 }

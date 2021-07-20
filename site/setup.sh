@@ -29,7 +29,4 @@ fi
 php artisan migrate --no-interaction --force
 
 # Seeding dummy data
-if [ -z "$CI" ]; then
-    # Not CI
-    php artisan db:seed
-fi
+php artisan db:seed

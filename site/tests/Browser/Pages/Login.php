@@ -13,7 +13,7 @@ class Login extends Page
      */
     public function url()
     {
-        return '/login';
+        return '/admin';
     }
 
     /**
@@ -48,7 +48,7 @@ class Login extends Page
      */
     public function loginAsUser(Browser $browser, $login, $password)
     {
-        $browser->type('username', $login)
+        $browser->type('email', $login)
           ->type('password', $password)
           ->press('Login');
     }
