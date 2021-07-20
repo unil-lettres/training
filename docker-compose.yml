@@ -21,8 +21,6 @@ services:
     image: nginx:1.17
     env_file:
       - ./.env
-    links:
-      - train-app:app
     working_dir: /var/www
     volumes:
       - ./config/vhost.conf:/etc/nginx/conf.d/default.conf
