@@ -165,7 +165,6 @@ return [
         /*
          * Package Service Providers...
          */
-        StudentAffairsUwm\Shibboleth\ShibalikeServiceProvider::class,
         Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
 
         /*

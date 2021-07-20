@@ -14,9 +14,6 @@ services:
     working_dir: /var/www
     expose:
       - "9000"
-    links:
-      - train-mariadb:database
-      - train-mailhog:mail
     networks:
       - training-net
     container_name: train-app
@@ -52,8 +49,6 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     env_file:
       - ./.env
-    links:
-      - train-mariadb:db
     ports:
       - "9999:80"
     networks:
