@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\User;
 use Closure;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +38,7 @@ class CheckAai
             // Log the user
             Auth::login($user, true);
 
-            return $next($request);
+            return Redirect::intended('/');
         }
 
         // Return to the app root with error message otherwise
