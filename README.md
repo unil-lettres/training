@@ -70,7 +70,7 @@ To access the database please use the following link.
 
 [http://training.lan:9999](http://training.lan:9999)
 
-+ Server: db
++ Server: train-mariadb
 + Username: user
 + Password: password
 
