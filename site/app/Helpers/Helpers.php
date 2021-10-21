@@ -28,7 +28,7 @@ class Helpers {
      * @return int
      */
     public static function newRequestCount() {
-        return Request::where('status', 'new')->count();
+        return Request::where('status_admin', 'new')->count();
     }
 
     /**
@@ -37,7 +37,7 @@ class Helpers {
      * @return int
      */
     public static function pendingRequestCount() {
-        return Request::where('status', 'pending')->count();
+        return Request::where('status_admin', 'pending')->count();
     }
 
     /**
@@ -46,7 +46,7 @@ class Helpers {
      * @return int
      */
     public static function unsolvedRequestCount() {
-        return Request::where('status', '!=', 'resolved')->count();
+        return Request::where('status_admin', '!=', 'resolved')->count();
     }
 
     /**
@@ -62,7 +62,7 @@ class Helpers {
         }
 
         $requestsTotal = $requests->count();
-        $requestsSolved = Request::where('status', 'resolved')->count();
+        $requestsSolved = Request::where('status_admin', 'resolved')->count();
 
         return round(($requestsSolved * 100) / $requestsTotal, 2);
     }

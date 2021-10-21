@@ -29,7 +29,7 @@ class Request extends Model
         'contact',
         'comments',
         'filling_date',
-        'status',
+        'status_admin',
         'decision_date',
         'decision_comments',
         'file',

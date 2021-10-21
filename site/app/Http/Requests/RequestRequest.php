@@ -36,7 +36,7 @@ class RequestRequest extends FormRequest
             'contact' => 'nullable|email',
             'comments' => 'nullable|min:1',
             'filling_date' => 'nullable|date',
-            'status' => [
+            'status_admin' => [
                 'nullable',
                 Rule::in(['new', 'pending', 'resolved']),
             ],

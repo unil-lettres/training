@@ -26,7 +26,7 @@
                                 {{ $request->filling_date->format('d-m-Y H:i:s') }}
                             @endif
                         </td>
-                        <td>{{ Helpers::requestStatus($request->status) }}</td>
+                        <td>{{ Helpers::requestStatus($request->status_admin) }}</td>
                     </tr>
                 @endforeach
             </tbody>

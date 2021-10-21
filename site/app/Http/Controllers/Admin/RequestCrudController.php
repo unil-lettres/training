@@ -79,7 +79,7 @@ class RequestCrudController extends CrudController
                 'model' => "App\Models\Type"
             ]);
             CRUD::addColumn([
-                'name' => 'status',
+                'name' => 'status_admin',
                 'label' => "Statut",
                 'type' => 'select_from_array',
                 'options' => Request::$status
@@ -113,11 +113,11 @@ class RequestCrudController extends CrudController
                     CRUD::addClause('where', 'status_id', $value);
                 });
             CRUD::addFilter([
-                'name' => 'status',
+                'name' => 'status_admin',
                 'type' => 'dropdown',
                 'label'=> 'Statut'
             ], Request::$status, function($value) {
-                CRUD::addClause('where', 'status', $value);
+                CRUD::addClause('where', 'status_admin', $value);
             });
             CRUD::addFilter([
                 'type' => 'date_range',
@@ -236,9 +236,9 @@ class RequestCrudController extends CrudController
 
             // Administration fields
             CRUD::addField([
-                'name' => 'status',
                 'label' => "Statut",
                 'type' => 'select_from_array',
+                'name' => 'status_admin',
                 'options' => Request::$status,
                 'tab' => 'Champs d\'administration'
             ]);
