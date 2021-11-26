@@ -32,7 +32,7 @@ services:
       - training-net
     container_name: train-web
   train-mariadb:
-    image: mariadb:10.3
+    image: mariadb:10.4
     env_file:
       - ./.env
     volumes:
