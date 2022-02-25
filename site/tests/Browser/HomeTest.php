@@ -74,38 +74,4 @@ class HomeTest extends DuskTestCase
                 ->assertDontSee('Connexion');
         });
     }
-
-    /**
-     * Browse administration as user
-     *
-     * @return void
-     */
-    public function testAdministrationAsUser()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit(new Login())
-                ->loginAsUser('second-user@example.com', 'password');
-
-            $browser->visit('/admin/dashboard')
-                ->assertSee('Access denied')
-                ->assertDontSee('Gérer les utilisateurs');
-        });
-    }
-
-    /**
-     * Browse administration as admin
-     *
-     * @return void
-     */
-    public function testAdministrationAsAdmin()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit(new Login())
-                ->loginAsUser('first-user@example.com', 'password');
-
-            $browser->visit('/admin/dashboard')
-                ->assertSee('Gérer les utilisateurs')
-                ->assertDontSee('Access denied');
-        });
-    }
 }

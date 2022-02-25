@@ -2,3 +2,4 @@
 .env
 dbdata/*
 !dbdata/.gitkeep
+site/auth.json

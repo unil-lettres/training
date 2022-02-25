@@ -42,7 +42,7 @@ return [
 
     // CSS files that are loaded in all pages, using Laravel's asset() helper
     'styles' => [
-        'packages/backpack/base/css/bundle.css',
+        'packages/backpack/base/css/blue-bundle.css',
 
         // Here's what's inside the bundle:
         // 'packages/@digitallyhappy/backstrap/css/style.min.css',
@@ -77,7 +77,7 @@ return [
     'breadcrumbs' => true,
 
     // Horizontal navbar classes. Helps make the admin panel look similar to your project's design.
-    'header_class' => 'app-header navbar navbar-color bg-primary border-0',
+    'header_class' => 'app-header bg-light border-0 navbar',
     // For background colors use: bg-dark, bg-primary, bg-secondary, bg-danger, bg-warning, bg-success, bg-info, bg-blue, bg-light-blue, bg-indigo, bg-purple, bg-pink, bg-red, bg-orange, bg-yellow, bg-green, bg-teal, bg-cyan, bg-white
     // For links to be visible on different background colors use: "navbar-dark", "navbar-light", "navbar-color"
 
@@ -90,7 +90,7 @@ return [
     // Try sidebar-hidden, sidebar-fixed, sidebar-compact, sidebar-lg-show
 
     // Sidebar element classes.
-    'sidebar_class' => 'sidebar',
+    'sidebar_class' => 'sidebar sidebar-pills bg-light',
     // Remove "sidebar-transparent" for standard sidebar look
     // Try "sidebar-light" or "sidebar-dark" for dark/light links
     // You can also add a background class like bg-dark, bg-primary, bg-secondary, bg-danger, bg-warning, bg-success, bg-info, bg-blue, bg-light-blue, bg-indigo, bg-purple, bg-pink, bg-red, bg-orange, bg-yellow, bg-green, bg-teal, bg-cyan
@@ -111,7 +111,7 @@ return [
     'developer_link' => 'https://www.unil.ch/lettres/fr/home.html',
 
     // Show powered by Laravel Backpack in the footer? true/false
-    'show_powered_by' => true,
+    'show_powered_by' => false,
 
     // -------
     // SCRIPTS
@@ -186,6 +186,28 @@ return [
     // Set this to false if you would like to skip adding "my account" routes
     // (you then need to manually define the routes in your web.php)
     'setup_my_account_routes' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Security
+    |--------------------------------------------------------------------------
+    */
+
+    // Backpack will prevent visitors from requesting password recovery too many times
+    // for a certain email, to make sure they cannot be spammed that way.
+    // How many seconds should a visitor wait, after they've requested a
+    // password reset, before they can try again for the same email?
+    'password_recovery_throttle_notifications' => 600, // time in seconds
+
+    // Backpack will prevent an IP from trying to reset the password too many times,
+    // so that a malicious actor cannot try too many emails, too see if they have
+    // accounts or to increase the AWS/SendGrid/etc bill.
+    //
+    // How many times in any given time period should the user be allowed to
+    // attempt a password reset? Take into account that user might wrongly
+    // type an email at first, so at least allow one more try.
+    // Defaults to 3,10 - 3 times in 10 minutes.
+    'password_recovery_throttle_access' => '3,10',
 
     /*
     |--------------------------------------------------------------------------
