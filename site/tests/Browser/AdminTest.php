@@ -93,6 +93,7 @@ class AdminTest extends DuskTestCase
 
             $browser->type('name', $name)
                 ->press('Enregistrer et retour')
+                ->waitForText($name)
                 ->assertSee($name)
                 ->assertDontSee('Aucune donnée à afficher')
                 ->assertPathIs('/admin/request');
@@ -121,6 +122,7 @@ class AdminTest extends DuskTestCase
 
             $browser->type('name', $name)
                 ->press('Enregistrer et retour')
+                ->waitForText($name)
                 ->assertSee($name)
                 ->assertDontSee('Aucune donnée à afficher')
                 ->assertPathIs('/admin/training');

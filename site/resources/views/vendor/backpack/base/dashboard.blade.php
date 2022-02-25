@@ -65,12 +65,12 @@
         <div class="col">
             <div class="card">
                 <h5 class="card-header">
-                    <a href='{{ backpack_url('training') }}'>Formations</a> ({{ $trainings->count() }})
+                    <a href='{{ backpack_url('training') }}' dusk="trainings-link">Formations</a> ({{ $trainings->count() }})
                 </h5>
                 <div class="card-body">
                     @if($trainings->count())
                         <div>
-                            <a href='{{ backpack_url('training/'.$trainings->last()->id.'/edit') }}' dusk="trainings-link">{{ $trainings->last()->name }}</a>
+                            <a href='{{ backpack_url('training/'.$trainings->last()->id.'/edit') }}'>{{ $trainings->last()->name }}</a>
                             (créée le {{ $trainings->last()->created_at->format('d m Y') }})
                         </div>
                         @if($trainings->count() > 1)
