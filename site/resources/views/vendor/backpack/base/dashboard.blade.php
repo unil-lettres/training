@@ -37,7 +37,7 @@
         <div class="col">
             <div class="card">
                 <h5 class="card-header">
-                    <a href='{{ backpack_url('request') }}'>Demandes</a> ({{ $requests->count() }})
+                    <a href='{{ backpack_url('request') }}' dusk="requests-link">Demandes</a> ({{ $requests->count() }})
                 </h5>
                 <div class="card-body">
                     @if($requests->count())
@@ -70,7 +70,7 @@
                 <div class="card-body">
                     @if($trainings->count())
                         <div>
-                            <a href='{{ backpack_url('training/'.$trainings->last()->id.'/edit') }}'>{{ $trainings->last()->name }}</a>
+                            <a href='{{ backpack_url('training/'.$trainings->last()->id.'/edit') }}' dusk="trainings-link">{{ $trainings->last()->name }}</a>
                             (créée le {{ $trainings->last()->created_at->format('d m Y') }})
                         </div>
                         @if($trainings->count() > 1)

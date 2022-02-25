@@ -83,16 +83,15 @@ class AdminTest extends DuskTestCase
                 ->loginAsUser('first-user@example.com', 'password');
 
             $browser->assertSee('Demandes')
-                ->clickLink('Demandes')
+                ->click('@requests-link')
+                ->waitForText('Aucune donnée à afficher')
                 ->assertSee('Aucune donnée à afficher')
                 ->clickLink('Ajouter demande')
                 ->assertPathIs('/admin/request/create');
 
             $name = 'Test create request';
-            $description = 'Test create request description';
 
             $browser->type('name', $name)
-                ->type('description', $description)
                 ->press('Enregistrer et retour')
                 ->assertSee($name)
                 ->assertDontSee('Aucune donnée à afficher')
@@ -112,16 +111,15 @@ class AdminTest extends DuskTestCase
                 ->loginAsUser('first-user@example.com', 'password');
 
             $browser->assertSee('Formations')
-                ->clickLink('Formations')
+                ->click('@trainings-link')
+                ->waitForText('Aucune donnée à afficher')
                 ->assertSee('Aucune donnée à afficher')
                 ->clickLink('Ajouter formation')
                 ->assertPathIs('/admin/training/create');
 
             $name = 'Test create training';
-            $description = 'Test create training description';
 
             $browser->type('name', $name)
-                ->type('description', $description)
                 ->press('Enregistrer et retour')
                 ->assertSee($name)
                 ->assertDontSee('Aucune donnée à afficher')
