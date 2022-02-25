@@ -70,4 +70,62 @@ class AdminTest extends DuskTestCase
                 ->assertSee('second-user@example.com');
         });
     }
+
+    /**
+     * Create a request in the administration as an admin
+     *
+     * @return void
+     */
+    public function testAdministrationCreateRequest()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new Login())
+                ->loginAsUser('first-user@example.com', 'password');
+
+            $browser->assertSee('Demandes')
+                ->clickLink('Demandes')
+                ->assertSee('Aucune donnée à afficher')
+                ->clickLink('Ajouter demande')
+                ->assertPathIs('/admin/request/create');
+
+            $name = 'Test create request';
+            $description = 'Test create request description';
+
+            $browser->type('name', $name)
+                ->type('description', $description)
+                ->press('Enregistrer et retour')
+                ->assertSee($name)
+                ->assertDontSee('Aucune donnée à afficher')
+                ->assertPathIs('/admin/request');
+        });
+    }
+
+    /**
+     * Create a training in the administration as an admin
+     *
+     * @return void
+     */
+    public function testAdministrationCreateTraining()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new Login())
+                ->loginAsUser('first-user@example.com', 'password');
+
+            $browser->assertSee('Formations')
+                ->clickLink('Formations')
+                ->assertSee('Aucune donnée à afficher')
+                ->clickLink('Ajouter formation')
+                ->assertPathIs('/admin/training/create');
+
+            $name = 'Test create training';
+            $description = 'Test create training description';
+
+            $browser->type('name', $name)
+                ->type('description', $description)
+                ->press('Enregistrer et retour')
+                ->assertSee($name)
+                ->assertDontSee('Aucune donnée à afficher')
+                ->assertPathIs('/admin/training');
+        });
+    }
 }
