@@ -61,6 +61,10 @@ jobs:
       - name: Mysql configuration
         run: mysql --protocol=tcp --user=root --execute='SET GLOBAL sql_mode = "";'
 
+      - name: Add Backpack credentials
+        working-directory: ./site
+        run: composer config http-basic.backpackforlaravel.com ${{ secrets.BACKPACK_USERNAME }} ${{ secrets.BACKPACK_PASSWORD }}
+
       - name: Build app
         id: app-build
         working-directory: ./site

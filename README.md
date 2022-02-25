@@ -40,7 +40,7 @@ Build & run all the containers for this project
 
 ``docker-compose up``
 
-Run the setup script.
+Run the setup script. At this point you'll need a ``backpack\pro`` licence and an ``site/auth.json`` file for your [credentials](https://getcomposer.org/doc/articles/authentication-for-private-packages.md#http-basic) to be able to run the setup script.
 
 ``docker exec train-app ./setup.sh``
 
