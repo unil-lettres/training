@@ -48,6 +48,7 @@ class AdminTest extends DuskTestCase
 
             $browser->visit('/admin/dashboard')
                 ->assertSee('Bonjour First user')
+                ->assertSee('Gérer les utilisateurs')
                 ->assertDontSee('Access denied');
         });
     }
