@@ -1,13 +1,13 @@
-FROM php:7.4-fpm
+FROM php:8.0-fpm
 
 # Update packages
 RUN apt-get update
 
 # Install additional packages
-RUN apt-get install -y git curl nano zip unzip zlib1g-dev libpng-dev libxml2-dev libzip-dev libonig-dev
+RUN apt-get install -y git curl nano zip unzip openssl zlib1g-dev libpng-dev libzip-dev
 
 # Install needed extensions
-RUN apt-get clean; docker-php-ext-install pdo pdo_mysql zip gd bcmath tokenizer ctype json mbstring xml
+RUN apt-get clean; docker-php-ext-install pdo_mysql zip gd bcmath
 
 # Installs Composer to easily manage your PHP dependencies.
 RUN curl --silent --show-error https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
