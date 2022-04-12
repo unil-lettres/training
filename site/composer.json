@@ -14,17 +14,18 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.0.2",
         "backpack/crud": "^5.0.0",
-        "backpack/pro": "^1.0.0",
         "backpack/permissionmanager": "^6.0.0",
+        "backpack/pro": "^1.0.0",
         "bugsnag/bugsnag-laravel": "^2.0",
-        "facade/ignition": "^2.3.6",
-        "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^8.0",
+        "laravel/framework": "^9.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^3.0"
+        "laravel/ui": "^3.0",
+        "spatie/laravel-ignition": "^1.0",
+        "symfony/http-client": "^6.0",
+        "symfony/postmark-mailer": "^6.0"
     },
     "require-dev": {
         "backpack/generators": "^3.0",
@@ -35,7 +36,7 @@
         "laravel/dusk": "^6.4",
         "laravel/telescope": "^4.0",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^5.0",
+        "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.0"
     },
     "config": {
