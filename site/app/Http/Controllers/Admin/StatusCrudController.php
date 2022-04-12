@@ -38,6 +38,9 @@ class StatusCrudController extends CrudController
         CRUD::setModel('App\Models\Status');
         CRUD::setRoute(config('backpack.base.route_prefix') . '/status');
         CRUD::setEntityNameStrings('décision', 'décisions');
+        if (!$this->crud->getRequest()->has('order')) {
+            CRUD::orderBy('name', 'ASC');
+        }
 
         /*
         |--------------------------------------------------------------------------

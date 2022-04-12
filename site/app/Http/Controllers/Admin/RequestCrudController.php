@@ -242,23 +242,33 @@ class RequestCrudController extends CrudController
                 'options' => Request::$status,
                 'tab' => 'Champs d\'administration'
             ]);
+            # Cannot orderBy if inline_create is active (https://github.com/Laravel-Backpack/CRUD/issues/4316)
             CRUD::addField([
                 'label' => "Catégorie",
                 'type' => "relationship",
                 'name' => 'type_id',
                 'attribute' => "name",
+                'model'     => "App\Models\Type",
                 'placeholder' => "Sélectionner une catégorie",
                 'inline_create' => true,
-                'tab' => 'Champs d\'administration'
+                'tab' => 'Champs d\'administration',
+                'options' => (function ($query) {
+                    return $query->orderBy('name', 'ASC')->get();
+                })
             ]);
+            # Cannot orderBy if inline_create is active (https://github.com/Laravel-Backpack/CRUD/issues/4316)
             CRUD::addField([
                 'label' => "Décisions",
                 'type' => 'relationship',
                 'name' => 'status_id',
                 'attribute' => "name",
+                'model'     => "App\Models\Status",
                 'placeholder' => "Sélectionner une décision",
                 'inline_create' => true,
-                'tab' => 'Champs d\'administration'
+                'tab' => 'Champs d\'administration',
+                'options' => (function ($query) {
+                    return $query->orderBy('name', 'ASC')->get();
+                })
             ]);
             CRUD::addField([
                 'label' => 'Date de décision',
@@ -282,11 +292,7 @@ class RequestCrudController extends CrudController
                 'name' => 'file',
                 'type' => 'upload',
                 'upload' => true,
-                'tab' => 'Champs d\'administration',
-                // https://github.com/Laravel-Backpack/CRUD/issues/2784
-                'wrapper' => [
-                    'data-field-name' => 'my_custom_field_name_to_avoid_file_field_bug'
-                ]
+                'tab' => 'Champs d\'administration'
             ]);
             CRUD::addField([
                 'label' => "Utilisateur",

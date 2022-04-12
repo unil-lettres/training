@@ -38,6 +38,9 @@ class TypeCrudController extends CrudController
         CRUD::setModel('App\Models\Type');
         CRUD::setRoute(config('backpack.base.route_prefix') . '/type');
         CRUD::setEntityNameStrings('type', 'types');
+        if (!$this->crud->getRequest()->has('order')) {
+            CRUD::orderBy('name', 'ASC');
+        }
 
         /*
         |--------------------------------------------------------------------------
