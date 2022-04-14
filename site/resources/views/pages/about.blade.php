@@ -8,7 +8,34 @@
 @section('content')
     <div class="about-cl">
         <p class="text-secondary">Cette page ne répertorie que les évolutions applicatives majeures.</p>
+       
         <ul class="list-group">
+        <li class="list-group-item">
+                <b>2.31</b><span class="badge">14/04/2022</span>
+                <ul>
+                    <li>Mise a jour de l'application (Laravel 9)</li>
+                    <li>Ajout d'un tri par défaut pour "Status" & "Type"</li>
+                </ul>
+            </li>
+            <li class="list-group-item">
+                <b>2.22</b><span class="badge">17/09/2020</span>
+                <ul>
+                    <li>Mise a jour de l'application (Laravel 8)</li>
+                    <li>Tri des requêtes par date de création</li>
+                </ul>
+            </li>
+            <li class="list-group-item">
+                <b>2.13</b><span class="badge">06/03/2020</span>
+                <ul>
+                    <li>Mise a jour de l'application (Laravel 7)</li>
+                </ul>
+            </li>
+            <li class="list-group-item">
+                <b>2.1</b><span class="badge">18/09/2019</span>
+                <ul>
+                    <li>Mise a jour de l'application (Laravel 6)</li>
+                </ul>
+            </li>
             <li class="list-group-item">
                 <b>2.0</b><span class="badge">20/07/2019</span>
                 <ul>
