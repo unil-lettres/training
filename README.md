@@ -18,7 +18,7 @@ Backpack is open-core, but we use features from ``backpack\pro`` which is a paid
 
 ## Docker installation
 
-A working [Docker](https://docs.docker.com/engine/installation/) installation is mandatory.
+A working [Docker](https://docs.docker.com/engine/install/) installation is mandatory.
 
 ## Docker environment file
 
