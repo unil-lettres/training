@@ -7,7 +7,6 @@ use App\Models\Status;
 use App\Models\Type;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 
-// VALIDATION: change the requests to match your own file names if you need form validation
 use App\Http\Requests\RequestRequest as StoreRequest;
 use App\Http\Requests\RequestRequest as UpdateRequest;
 use Backpack\CRUD\app\Http\Controllers\Operations\CloneOperation;
@@ -242,7 +241,6 @@ class RequestCrudController extends CrudController
                 'options' => Request::$status,
                 'tab' => 'Champs d\'administration'
             ]);
-            # Cannot orderBy if inline_create is active (https://github.com/Laravel-Backpack/CRUD/issues/4316)
             CRUD::addField([
                 'label' => "Catégorie",
                 'type' => "relationship",
@@ -251,12 +249,8 @@ class RequestCrudController extends CrudController
                 'model'     => "App\Models\Type",
                 'placeholder' => "Sélectionner une catégorie",
                 'inline_create' => true,
-                'tab' => 'Champs d\'administration',
-                'options' => (function ($query) {
-                    return $query->orderBy('name', 'ASC')->get();
-                })
+                'tab' => 'Champs d\'administration'
             ]);
-            # Cannot orderBy if inline_create is active (https://github.com/Laravel-Backpack/CRUD/issues/4316)
             CRUD::addField([
                 'label' => "Décisions",
                 'type' => 'relationship',
@@ -265,10 +259,7 @@ class RequestCrudController extends CrudController
                 'model'     => "App\Models\Status",
                 'placeholder' => "Sélectionner une décision",
                 'inline_create' => true,
-                'tab' => 'Champs d\'administration',
-                'options' => (function ($query) {
-                    return $query->orderBy('name', 'ASC')->get();
-                })
+                'tab' => 'Champs d\'administration'
             ]);
             CRUD::addField([
                 'label' => 'Date de décision',
@@ -322,14 +313,24 @@ class RequestCrudController extends CrudController
     }
 
     // Needed for type inline create route
-    public function fetchType()
+    protected function fetchType()
     {
-        return $this->fetch(Type::class);
+        return $this->fetch([
+            'model' => Type::class,
+            'query' => function($model) {
+                return $model->orderBy('name', 'ASC');
+            }
+        ]);
     }
 
     // Needed for status inline create route
-    public function fetchStatus()
+    protected function fetchStatus()
     {
-        return $this->fetch(Status::class);
+        return $this->fetch([
+            'model' => Status::class,
+            'query' => function($model) {
+                return $model->orderBy('name', 'ASC');
+            }
+        ]);
     }
 }
