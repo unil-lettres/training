@@ -17,10 +17,11 @@ class RequireAdminRole
     {
         $user = auth()->user();
 
-        if (!$user) return $next($request);
+        if (! $user) {
+            return $next($request);
+        }
 
-        if (!$user->hasRole('Admin'))
-        {
+        if (! $user->hasRole('Admin')) {
             abort(403, 'Access denied');
         }
 

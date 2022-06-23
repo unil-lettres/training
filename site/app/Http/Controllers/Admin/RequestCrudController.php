@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\RequestRequest as StoreRequest;
+use App\Http\Requests\RequestRequest as UpdateRequest;
 use App\Models\Request;
 use App\Models\Status;
 use App\Models\Type;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
-
-use App\Http\Requests\RequestRequest as StoreRequest;
-use App\Http\Requests\RequestRequest as UpdateRequest;
 use Backpack\CRUD\app\Http\Controllers\Operations\CloneOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
@@ -19,7 +18,6 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
  * Class RequestCrudController
- * @package App\Http\Controllers\Admin
  */
 class RequestCrudController extends CrudController
 {
@@ -38,9 +36,9 @@ class RequestCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         CRUD::setModel('App\Models\Request');
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/request');
+        CRUD::setRoute(config('backpack.base.route_prefix').'/request');
         CRUD::setEntityNameStrings('demande', 'demandes');
-        if (!$this->crud->getRequest()->has('order')) {
+        if (! $this->crud->getRequest()->has('order')) {
             CRUD::orderBy('created_at', 'DESC');
         }
 
@@ -50,44 +48,44 @@ class RequestCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        CRUD::operation('list', function() {
+        CRUD::operation('list', function () {
             // Columns
             CRUD::addColumn([
                 'name' => 'name',
                 'type' => 'text',
-                'label' => 'Nom'
+                'label' => 'Nom',
             ]);
             CRUD::addColumn([
                 'name' => 'description',
                 'type' => 'model_function',
                 'label' => 'Description',
                 'limit' => 60,
-                'function_name' => 'cleanDescription'
+                'function_name' => 'cleanDescription',
             ]);
             CRUD::addColumn([
                 'name' => 'filling_date',
                 'type' => 'datetime',
-                'label' => 'Date dépot'
+                'label' => 'Date dépot',
             ]);
             CRUD::addColumn([
-                'label' => "Catégorie",
-                'type' => "select",
+                'label' => 'Catégorie',
+                'type' => 'select',
                 'name' => 'type_id',
                 'entity' => 'type',
-                'attribute' => "name",
-                'model' => "App\Models\Type"
+                'attribute' => 'name',
+                'model' => "App\Models\Type",
             ]);
             CRUD::addColumn([
                 'name' => 'status_admin',
-                'label' => "Statut",
+                'label' => 'Statut',
                 'type' => 'select_from_array',
-                'options' => Request::$status
+                'options' => Request::$status,
             ]);
             CRUD::addColumn([
                 'name' => 'comments',
                 'type' => 'model_function',
                 'label' => 'Remarques',
-                'function_name' => 'cleanComments'
+                'function_name' => 'cleanComments',
             ]);
 
             // Filters
@@ -95,46 +93,46 @@ class RequestCrudController extends CrudController
                 'name' => 'type_id',
                 'type' => 'select2_ajax',
                 'label'=> 'Catégorie',
-                'placeholder' => 'Filtrer une catégorie'
+                'placeholder' => 'Filtrer une catégorie',
             ],
                 url('admin/type/ajax-type-options'),
-                function($value) {
+                function ($value) {
                     CRUD::addClause('where', 'type_id', $value);
                 });
             CRUD::addFilter([
                 'name' => 'status_id',
                 'type' => 'select2_ajax',
                 'label'=> 'Décision',
-                'placeholder' => 'Filtrer une décision'
+                'placeholder' => 'Filtrer une décision',
             ],
                 url('admin/status/ajax-status-options'),
-                function($value) {
+                function ($value) {
                     CRUD::addClause('where', 'status_id', $value);
                 });
             CRUD::addFilter([
                 'name' => 'status_admin',
                 'type' => 'dropdown',
-                'label'=> 'Statut'
-            ], Request::$status, function($value) {
+                'label'=> 'Statut',
+            ], Request::$status, function ($value) {
                 CRUD::addClause('where', 'status_admin', $value);
             });
             CRUD::addFilter([
                 'type' => 'date_range',
                 'name' => 'deadline',
-                'label'=> 'Délai de production'
+                'label'=> 'Délai de production',
             ],
             false,
-            function($value) {
+            function ($value) {
                 $dates = json_decode($value);
                 CRUD::addClause('where', 'deadline', '>=', $dates->from);
-                CRUD::addClause('where', 'deadline', '<=', $dates->to . ' 23:59:59');
+                CRUD::addClause('where', 'deadline', '<=', $dates->to.' 23:59:59');
             });
 
             // Enable exports
             CRUD::enableExportButtons();
         });
 
-        CRUD::operation(['create', 'update'], function() {
+        CRUD::operation(['create', 'update'], function () {
             // Fields
             CRUD::addField(['name' => 'name', 'type' => 'text', 'label' => 'Libellé', 'tab' => 'Champs communs']);
             CRUD::addField(['name' => 'description', 'type' => 'summernote', 'label' => 'Description', 'tab' => 'Champs communs']);
@@ -143,12 +141,12 @@ class RequestCrudController extends CrudController
                 'type' => 'datetime_picker',
                 'datetime_picker_options' => [
                     'format' => 'DD/MM/YYYY HH:mm',
-                    'language' => 'fr'
+                    'language' => 'fr',
                 ],
                 'allows_null' => true,
                 'label' => 'Date dépot',
                 'default' => now(),
-                'tab' => 'Champs communs'
+                'tab' => 'Champs communs',
             ]);
             CRUD::addField(['name' => 'applicants', 'type' => 'text', 'label' => 'Demandeur(s)', 'tab' => 'Champs communs']);
             CRUD::addField(['name' => 'theme', 'type' => 'text', 'label' => 'Thème', 'tab' => 'Champs communs']);
@@ -156,11 +154,11 @@ class RequestCrudController extends CrudController
                 'name' => 'deadline',
                 'type' => 'date_picker',
                 'date_picker_options' => [
-                    'language' => 'fr'
+                    'language' => 'fr',
                 ],
                 'allows_null' => true,
                 'label' => 'Délai production',
-                'tab' => 'Champs communs'
+                'tab' => 'Champs communs',
             ]);
             CRUD::addField(['name' => 'level', 'type' => 'text', 'label' => 'Niveau requis', 'tab' => 'Champs communs']);
             CRUD::addField(['name' => 'comments', 'type' => 'summernote', 'label' => 'Remarques', 'tab' => 'Champs communs']);
@@ -168,44 +166,44 @@ class RequestCrudController extends CrudController
 
             CRUD::addField([
                 'name' => 'doctoral_school',
-                'label' => "École doctorale",
+                'label' => 'École doctorale',
                 'type' => 'text',
                 'fake' => true,
                 'store_in' => 'extras',
-                'tab' => 'Champs chercheur/doctorant'
+                'tab' => 'Champs chercheur/doctorant',
             ]);
 
             CRUD::addField([
                 'name' => 'fns',
-                'label' => "Fns",
+                'label' => 'Fns',
                 'type' => 'checkbox',
                 'fake' => true,
                 'store_in' => 'extras',
-                'tab' => 'Champs chercheur/doctorant'
+                'tab' => 'Champs chercheur/doctorant',
             ]);
             CRUD::addField([
                 'name' => 'doctoral_status',
-                'label' => "Doctorat statut",
+                'label' => 'Doctorat statut',
                 'type' => 'text',
                 'fake' => true,
                 'store_in' => 'extras',
-                'tab' => 'Champs chercheur/doctorant'
+                'tab' => 'Champs chercheur/doctorant',
             ]);
             CRUD::addField([
                 'name' => 'doctoral_level',
-                'label' => "Niveau actuel",
+                'label' => 'Niveau actuel',
                 'type' => 'text',
                 'fake' => true,
                 'store_in' => 'extras',
-                'tab' => 'Champs chercheur/doctorant'
+                'tab' => 'Champs chercheur/doctorant',
             ]);
             CRUD::addField([
                 'name' => 'tested_products',
-                'label' => "Produits testés",
+                'label' => 'Produits testés',
                 'type' => 'text',
                 'fake' => true,
                 'store_in' => 'extras',
-                'tab' => 'Champs chercheur/doctorant'
+                'tab' => 'Champs chercheur/doctorant',
             ]);
 
             CRUD::addField([
@@ -214,52 +212,52 @@ class RequestCrudController extends CrudController
                 'type' => 'checkbox',
                 'fake' => true,
                 'store_in' => 'extras',
-                'tab' => 'Champs enseignant'
+                'tab' => 'Champs enseignant',
             ]);
             CRUD::addField([
                 'name' => 'students_nbr',
-                'label' => "Avec un ou des étudiants",
+                'label' => 'Avec un ou des étudiants',
                 'type' => 'checkbox',
                 'fake' => true,
                 'store_in' => 'extras',
-                'tab' => 'Champs enseignant'
+                'tab' => 'Champs enseignant',
             ]);
             CRUD::addField([
                 'name' => 'action_type',
-                'label' => "Intervention pour toute une classe, pendant les cours",
+                'label' => 'Intervention pour toute une classe, pendant les cours',
                 'type' => 'checkbox',
                 'fake' => true,
                 'store_in' => 'extras',
-                'tab' => 'Champs enseignant'
+                'tab' => 'Champs enseignant',
             ]);
 
             // Administration fields
             CRUD::addField([
-                'label' => "Statut",
+                'label' => 'Statut',
                 'type' => 'select_from_array',
                 'name' => 'status_admin',
                 'options' => Request::$status,
-                'tab' => 'Champs d\'administration'
+                'tab' => 'Champs d\'administration',
             ]);
             CRUD::addField([
-                'label' => "Catégorie",
-                'type' => "relationship",
+                'label' => 'Catégorie',
+                'type' => 'relationship',
                 'name' => 'type_id',
-                'attribute' => "name",
+                'attribute' => 'name',
                 'model'     => "App\Models\Type",
-                'placeholder' => "Sélectionner une catégorie",
+                'placeholder' => 'Sélectionner une catégorie',
                 'inline_create' => true,
-                'tab' => 'Champs d\'administration'
+                'tab' => 'Champs d\'administration',
             ]);
             CRUD::addField([
-                'label' => "Décisions",
+                'label' => 'Décisions',
                 'type' => 'relationship',
                 'name' => 'status_id',
-                'attribute' => "name",
+                'attribute' => 'name',
                 'model'     => "App\Models\Status",
-                'placeholder' => "Sélectionner une décision",
+                'placeholder' => 'Sélectionner une décision',
                 'inline_create' => true,
-                'tab' => 'Champs d\'administration'
+                'tab' => 'Champs d\'administration',
             ]);
             CRUD::addField([
                 'label' => 'Date de décision',
@@ -267,33 +265,33 @@ class RequestCrudController extends CrudController
                 'type' => 'datetime_picker',
                 'datetime_picker_options' => [
                     'format' => 'DD/MM/YYYY HH:mm',
-                    'language' => 'fr'
+                    'language' => 'fr',
                 ],
                 'allows_null' => true,
-                'tab' => 'Champs d\'administration'
+                'tab' => 'Champs d\'administration',
             ]);
             CRUD::addField([
                 'label' => 'Commentaire relatif à la décision',
                 'name' => 'decision_comments',
                 'type' => 'summernote',
-                'tab' => 'Champs d\'administration'
+                'tab' => 'Champs d\'administration',
             ]);
             CRUD::addField([
                 'label' => 'Document',
                 'name' => 'file',
                 'type' => 'upload',
                 'upload' => true,
-                'tab' => 'Champs d\'administration'
+                'tab' => 'Champs d\'administration',
             ]);
             CRUD::addField([
-                'label' => "Utilisateur",
+                'label' => 'Utilisateur',
                 'type' => 'select',
                 'name' => 'user_id',
                 'entity' => 'user',
                 'attribute' => 'name',
                 'model' => "App\User",
                 'default'   => auth()->user()->id,
-                'tab' => 'Champs d\'administration'
+                'tab' => 'Champs d\'administration',
             ]);
 
             // add asterisk for fields that are required in RequestRequest
@@ -317,9 +315,9 @@ class RequestCrudController extends CrudController
     {
         return $this->fetch([
             'model' => Type::class,
-            'query' => function($model) {
+            'query' => function ($model) {
                 return $model->orderBy('name', 'ASC');
-            }
+            },
         ]);
     }
 
@@ -328,9 +326,9 @@ class RequestCrudController extends CrudController
     {
         return $this->fetch([
             'model' => Status::class,
-            'query' => function($model) {
+            'query' => function ($model) {
                 return $model->orderBy('name', 'ASC');
-            }
+            },
         ]);
     }
 }

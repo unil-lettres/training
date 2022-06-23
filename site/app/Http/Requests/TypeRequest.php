@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TypeRequest extends FormRequest
@@ -26,7 +25,7 @@ class TypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:1|max:100|unique:types,name'
+            'name' => 'required|min:1|max:100|unique:types,name',
         ];
     }
 

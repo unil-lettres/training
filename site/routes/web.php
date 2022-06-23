@@ -30,7 +30,7 @@ Route::get('/logout', [LoginController::class, 'logout'])
     ->name('logout');
 
 Route::resource('request', RequestController::class)->only([
-    'index', 'create', 'store'
+    'index', 'create', 'store',
 ])->middleware(['auth']);
 
 Route::get('/login')

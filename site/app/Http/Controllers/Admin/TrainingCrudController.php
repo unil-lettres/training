@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Backpack\CRUD\app\Http\Controllers\CrudController;
-
 use App\Http\Requests\TrainingRequest as StoreRequest;
 use App\Http\Requests\TrainingRequest as UpdateRequest;
+use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
@@ -14,7 +13,6 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
  * Class TrainingCrudController
- * @package App\Http\Controllers\Admin
  */
 class TrainingCrudController extends CrudController
 {
@@ -31,9 +29,9 @@ class TrainingCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         CRUD::setModel('App\Models\Training');
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/training');
+        CRUD::setRoute(config('backpack.base.route_prefix').'/training');
         CRUD::setEntityNameStrings('formation', 'formations');
-        if (!$this->crud->getRequest()->has('order')) {
+        if (! $this->crud->getRequest()->has('order')) {
             CRUD::orderBy('created_at', 'DESC');
         }
 
@@ -43,7 +41,7 @@ class TrainingCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        CRUD::operation('list', function() {
+        CRUD::operation('list', function () {
             // Columns
             CRUD::addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
             CRUD::addColumn(['name' => 'start', 'type' => 'datetime', 'label' => 'Début']);
@@ -54,11 +52,11 @@ class TrainingCrudController extends CrudController
             CRUD::addFilter([
                 'name' => 'visible',
                 'type' => 'dropdown',
-                'label'=> 'Visibilité'
+                'label'=> 'Visibilité',
             ], [
                 1 => 'Visible',
-                2 => 'Non-visible'
-            ], function($value) {
+                2 => 'Non-visible',
+            ], function ($value) {
                 switch (intval($value)) {
                     case 1:
                         CRUD::addClause('where', 'visible', 1);
@@ -73,7 +71,7 @@ class TrainingCrudController extends CrudController
             CRUD::enableExportButtons();
         });
 
-        CRUD::operation(['create', 'update'], function() {
+        CRUD::operation(['create', 'update'], function () {
             // Fields
             CRUD::addField(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
             CRUD::addField(['name' => 'description', 'type' => 'summernote', 'label' => 'Description']);
@@ -82,20 +80,20 @@ class TrainingCrudController extends CrudController
                 'type' => 'datetime_picker',
                 'datetime_picker_options' => [
                     'format' => 'DD/MM/YYYY HH:mm',
-                    'language' => 'fr'
+                    'language' => 'fr',
                 ],
                 'allows_null' => true,
-                'label' => 'Date début'
+                'label' => 'Date début',
             ]);
             CRUD::addField([
                 'name' => 'end',
                 'type' => 'datetime_picker',
                 'datetime_picker_options' => [
                     'format' => 'DD/MM/YYYY HH:mm',
-                    'language' => 'fr'
+                    'language' => 'fr',
                 ],
                 'allows_null' => true,
-                'label' => 'Date fin'
+                'label' => 'Date fin',
             ]);
             CRUD::addField(['name' => 'visible', 'type' => 'checkbox', 'label' => 'Visible']);
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TrainingRequest extends FormRequest
@@ -30,7 +29,7 @@ class TrainingRequest extends FormRequest
             'description' => 'nullable|min:1',
             'start' => 'nullable|date',
             'end' => 'nullable|date',
-            'visible' => 'boolean'
+            'visible' => 'boolean',
         ];
     }
 

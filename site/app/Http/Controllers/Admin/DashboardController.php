@@ -25,7 +25,7 @@ class DashboardController
                 [
                     'trainings' => $trainings,
                     'requests' => $requests,
-                    'users' => $users
+                    'users' => $users,
                 ]
             );
     }

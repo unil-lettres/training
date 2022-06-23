@@ -2,12 +2,11 @@
 
 namespace Tests\Browser;
 
+use Laravel\Dusk\Browser;
+use Laravel\Dusk\Concerns\ProvidesBrowser;
 use Tests\Browser\Pages\CreateRequest;
 use Tests\Browser\Pages\Login;
 use Tests\DuskTestCase;
-use Laravel\Dusk\Browser;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Laravel\Dusk\Concerns\ProvidesBrowser;
 
 class RequestTest extends DuskTestCase
 {
@@ -47,7 +46,7 @@ class RequestTest extends DuskTestCase
             $browser->assertPathIs('/')
                 ->assertSee('Demande de formation enregistrée.');
 
-            $browser->clickLink("Mes demandes")
+            $browser->clickLink('Mes demandes')
                 ->assertPathIs('/request')
                 ->assertSee('Liste des demandes envoyées')
                 ->assertSee($name)
@@ -86,7 +85,7 @@ class RequestTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/');
 
-            $browser->clickLink("Nouvelle demande");
+            $browser->clickLink('Nouvelle demande');
 
             $browser->assertPathIsNot('/request/create')
                 ->assertDontSee('Déposer votre demande en tant que')

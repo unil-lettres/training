@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Database\Eloquent\Model;
 
 class Request extends Model
 {
@@ -16,8 +16,11 @@ class Request extends Model
     */
 
     protected $table = 'requests';
+
     protected $primaryKey = 'id';
+
     public $timestamps = true;
+
     // protected $guarded = ['id'];
     protected $fillable = [
         'name',
@@ -37,23 +40,26 @@ class Request extends Model
         'user_id',
         'type_id',
         'status_id',
-        'extras'
+        'extras',
     ];
+
     protected $fakeColumns = ['extras'];
+
     protected $casts = [
-        'extras' => 'array'
+        'extras' => 'array',
     ];
+
     // protected $hidden = [];
     protected $dates = [
-      'deadline',
-      'filling_date',
-      'decision_date'
+        'deadline',
+        'filling_date',
+        'decision_date',
     ];
 
     public static $status = [
-      'new' => 'Nouveau',
-      'pending' => 'En attente',
-      'resolved' => 'Résolue'
+        'new' => 'Nouveau',
+        'pending' => 'En attente',
+        'resolved' => 'Résolue',
     ];
 
     /*
@@ -67,7 +73,8 @@ class Request extends Model
      *
      * @return string
      */
-    public function cleanDescription() {
+    public function cleanDescription()
+    {
         return strip_tags($this->description);
     }
 
@@ -76,7 +83,8 @@ class Request extends Model
      *
      * @return string
      */
-    public function cleanComments() {
+    public function cleanComments()
+    {
         return strip_tags($this->comments);
     }
 
@@ -130,9 +138,9 @@ class Request extends Model
 
     public function setFileAttribute($value)
     {
-        $attribute_name = "file";
-        $disk = "uploads";
-        $destination_path = "uploads";
+        $attribute_name = 'file';
+        $disk = 'uploads';
+        $destination_path = 'uploads';
 
         $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
     }

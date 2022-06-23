@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Backpack\CRUD\app\Http\Controllers\CrudController;
-
 use App\Http\Requests\TypeRequest as StoreRequest;
 use App\Http\Requests\TypeRequest as UpdateRequest;
+use App\Models\Type;
+use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use App\Models\Type;
 use Illuminate\Http\Request;
 
 /**
  * Class TypeCrudController
- * @package App\Http\Controllers\Admin
  */
 class TypeCrudController extends CrudController
 {
@@ -35,9 +33,9 @@ class TypeCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         CRUD::setModel('App\Models\Type');
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/type');
+        CRUD::setRoute(config('backpack.base.route_prefix').'/type');
         CRUD::setEntityNameStrings('type', 'types');
-        if (!$this->crud->getRequest()->has('order')) {
+        if (! $this->crud->getRequest()->has('order')) {
             CRUD::orderBy('name', 'ASC');
         }
 
@@ -47,12 +45,12 @@ class TypeCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
 
-        CRUD::operation('list', function() {
+        CRUD::operation('list', function () {
             // Columns
             CRUD::addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
         });
 
-        CRUD::operation(['create', 'update'], function() {
+        CRUD::operation(['create', 'update'], function () {
             // Fields
             CRUD::addField(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
 
@@ -72,9 +70,11 @@ class TypeCrudController extends CrudController
         CRUD::setValidation(UpdateRequest::class);
     }
 
-    public function typeOptions(Request $request) {
+    public function typeOptions(Request $request)
+    {
         $term = $request->input('term');
         $options = Type::where('name', 'like', '%'.$term.'%')->get()->pluck('name', 'id');
+
         return $options;
     }
 }

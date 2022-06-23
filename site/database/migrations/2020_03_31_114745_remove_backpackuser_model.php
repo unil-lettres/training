@@ -24,9 +24,9 @@ class RemoveBackpackuserModel extends Migration
         // Replace guard names of the roles table
         $roles = config('permission.table_names.roles');
         DB::table($roles)
-            ->where('guard_name', "backpack")
+            ->where('guard_name', 'backpack')
             ->update([
-                'guard_name' => "web",
+                'guard_name' => 'web',
             ]);
     }
 

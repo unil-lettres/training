@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -53,7 +52,7 @@ class RequestRequest extends FormRequest
             'tested_products' => 'nullable|min:1|max:300',
             'teachers_nbr' => 'nullable|boolean',
             'students_nbr' => 'nullable|boolean',
-            'action_type' => 'nullable|boolean'
+            'action_type' => 'nullable|boolean',
         ];
     }
 
@@ -77,7 +76,7 @@ class RequestRequest extends FormRequest
     public function messages()
     {
         return [
-          'name.required' => 'Le champ nom est requis.',
+            'name.required' => 'Le champ nom est requis.',
         ];
     }
 }

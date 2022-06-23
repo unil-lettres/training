@@ -2,11 +2,10 @@
 
 namespace App\Mail;
 
+use App\Models\Request;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-
-use App\Models\Request;
 
 class RequestCreated extends Mailable
 {

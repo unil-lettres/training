@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Request;
 use App\Http\Requests\RequestRequest;
+use App\Mail\RequestCreated;
+use App\Models\Request;
+use App\Services\Users;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Date;
-use App\Mail\RequestCreated;
-use App\Services\Users;
 use Illuminate\View\View;
 
 class RequestController extends Controller
@@ -63,10 +63,10 @@ class RequestController extends Controller
                 'tested_products' => $request->get('tested_products'),
                 'teachers_nbr' => $request->get('teachers_nbr'),
                 'students_nbr' => $request->get('students_nbr'),
-                'action_type' => $request->get('action_type')
+                'action_type' => $request->get('action_type'),
             ],
             'filling_date' => Date::now(),
-            'user_id' => auth()->user()->id
+            'user_id' => auth()->user()->id,
         ]);
         $requestObj->save();
 

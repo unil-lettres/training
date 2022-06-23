@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use App\User;
@@ -15,8 +16,10 @@ class Users
      *
      * @return Collection $users
      */
-    public function usersWithRole($role) {
+    public function usersWithRole($role)
+    {
         $users = User::with('roles')->get();
+
         return $users->filter(function ($user) use ($role) {
             return $user->hasRole($role);
         });
@@ -27,7 +30,8 @@ class Users
      *
      * @return Collection $users
      */
-    public function admins() {
+    public function admins()
+    {
         return $this->usersWithRole('Admin');
     }
 
@@ -36,7 +40,8 @@ class Users
      *
      * @return Collection $users
      */
-    public function notifications() {
+    public function notifications()
+    {
         return $this->usersWithRole('Notification');
     }
 
@@ -48,7 +53,8 @@ class Users
      *
      * @return void
      */
-    public function mailUsersWithRole($role, $mail) {
+    public function mailUsersWithRole($role, $mail)
+    {
         $users = $this->usersWithRole($role);
 
         if ($users->isNotEmpty()) {

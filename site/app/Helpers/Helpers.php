@@ -4,7 +4,8 @@ namespace App\Helpers;
 
 use App\Models\Request;
 
-class Helpers {
+class Helpers
+{
     /**
      * Return a human readable status
      *
@@ -12,10 +13,11 @@ class Helpers {
      *
      * @return string $status
      */
-    public static function requestStatus($status) {
+    public static function requestStatus($status)
+    {
         $status = collect(Request::$status)->pull($status);
 
-        if(is_string($status)) {
+        if (is_string($status)) {
             return $status;
         }
 
@@ -27,7 +29,8 @@ class Helpers {
      *
      * @return int
      */
-    public static function newRequestCount() {
+    public static function newRequestCount()
+    {
         return Request::where('status_admin', 'new')->count();
     }
 
@@ -36,7 +39,8 @@ class Helpers {
      *
      * @return int
      */
-    public static function pendingRequestCount() {
+    public static function pendingRequestCount()
+    {
         return Request::where('status_admin', 'pending')->count();
     }
 
@@ -45,7 +49,8 @@ class Helpers {
      *
      * @return int
      */
-    public static function unsolvedRequestCount() {
+    public static function unsolvedRequestCount()
+    {
         return Request::where('status_admin', '!=', 'resolved')->count();
     }
 
@@ -54,10 +59,11 @@ class Helpers {
      *
      * @return float|null
      */
-    public static function solvedRequestPercentage() {
+    public static function solvedRequestPercentage()
+    {
         $requests = Request::all();
 
-        if($requests->isEmpty()) {
+        if ($requests->isEmpty()) {
             return null;
         }
 

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Database\Eloquent\Model;
 
 class Training extends Model
 {
@@ -16,19 +16,24 @@ class Training extends Model
     */
 
     protected $table = 'trainings';
+
     protected $primaryKey = 'id';
+
     public $timestamps = true;
+
     // protected $guarded = ['id'];
     protected $fillable = [
-      'name',
-      'description',
-      'start',
-      'end',
-      'visible'
+        'name',
+        'description',
+        'start',
+        'end',
+        'visible',
     ];
+
     protected $casts = [
-      'visible' => 'boolean'
+        'visible' => 'boolean',
     ];
+
     // protected $hidden = [];
     protected $dates = ['start', 'end'];
 
