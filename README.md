@@ -86,6 +86,16 @@ Or to get the messages in JSON format.
 
 [http://training.lan:8025/api/v2/messages](http://training.lan:8025/api/v2/messages)
 
+## PHP code style
+
+All PHP files will be inspected during CI for code style issues. If you want to make a dry run beforehand, use the following command.
+
+``docker exec train-app ./vendor/bin/pint --test``
+
+And if you want to automatically fix the issues.
+
+``docker exec train-app ./vendor/bin/pint``
+
 # Error tracker
 
 [https://www.bugsnag.com](https://www.bugsnag.com)
