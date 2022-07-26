@@ -92,7 +92,7 @@ class RequestCrudController extends CrudController
             CRUD::addFilter([
                 'name' => 'type_id',
                 'type' => 'select2_ajax',
-                'label'=> 'Catégorie',
+                'label' => 'Catégorie',
                 'placeholder' => 'Filtrer une catégorie',
             ],
                 url('admin/type/ajax-type-options'),
@@ -102,7 +102,7 @@ class RequestCrudController extends CrudController
             CRUD::addFilter([
                 'name' => 'status_id',
                 'type' => 'select2_ajax',
-                'label'=> 'Décision',
+                'label' => 'Décision',
                 'placeholder' => 'Filtrer une décision',
             ],
                 url('admin/status/ajax-status-options'),
@@ -112,14 +112,14 @@ class RequestCrudController extends CrudController
             CRUD::addFilter([
                 'name' => 'status_admin',
                 'type' => 'dropdown',
-                'label'=> 'Statut',
+                'label' => 'Statut',
             ], Request::$status, function ($value) {
                 CRUD::addClause('where', 'status_admin', $value);
             });
             CRUD::addFilter([
                 'type' => 'date_range',
                 'name' => 'deadline',
-                'label'=> 'Délai de production',
+                'label' => 'Délai de production',
             ],
             false,
             function ($value) {
@@ -244,7 +244,7 @@ class RequestCrudController extends CrudController
                 'type' => 'relationship',
                 'name' => 'type_id',
                 'attribute' => 'name',
-                'model'     => "App\Models\Type",
+                'model' => "App\Models\Type",
                 'placeholder' => 'Sélectionner une catégorie',
                 'inline_create' => true,
                 'tab' => 'Champs d\'administration',
@@ -254,7 +254,7 @@ class RequestCrudController extends CrudController
                 'type' => 'relationship',
                 'name' => 'status_id',
                 'attribute' => 'name',
-                'model'     => "App\Models\Status",
+                'model' => "App\Models\Status",
                 'placeholder' => 'Sélectionner une décision',
                 'inline_create' => true,
                 'tab' => 'Champs d\'administration',
@@ -290,7 +290,7 @@ class RequestCrudController extends CrudController
                 'entity' => 'user',
                 'attribute' => 'name',
                 'model' => "App\User",
-                'default'   => auth()->user()->id,
+                'default' => auth()->user()->id,
                 'tab' => 'Champs d\'administration',
             ]);
 

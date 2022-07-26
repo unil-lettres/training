@@ -52,7 +52,7 @@ class TrainingCrudController extends CrudController
             CRUD::addFilter([
                 'name' => 'visible',
                 'type' => 'dropdown',
-                'label'=> 'Visibilité',
+                'label' => 'Visibilité',
             ], [
                 1 => 'Visible',
                 2 => 'Non-visible',

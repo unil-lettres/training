@@ -9,8 +9,7 @@ class Helpers
     /**
      * Return a human readable status
      *
-     * @param string $status
-     *
+     * @param  string  $status
      * @return string $status
      */
     public static function requestStatus($status)

@@ -12,8 +12,7 @@ class Users
     /**
      * Return all the users with a specific role.
      *
-     * @param string $role
-     *
+     * @param  string  $role
      * @return Collection $users
      */
     public function usersWithRole($role)
@@ -48,9 +47,8 @@ class Users
     /**
      * Send mail to users with a specific role.
      *
-     * @param string $role
-     * @param Mailable $mail
-     *
+     * @param  string  $role
+     * @param  Mailable  $mail
      * @return void
      */
     public function mailUsersWithRole($role, $mail)

@@ -44,7 +44,6 @@ class Login extends Page
      * @param  \Laravel\Dusk\Browser  $browser
      * @param  string  $login
      * @param  string  $password
-     *
      * @return void
      */
     public function loginAsUser(Browser $browser, $login, $password)

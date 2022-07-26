@@ -43,7 +43,6 @@ class CreateRequest extends Page
      *
      * @param  \Laravel\Dusk\Browser  $browser
      * @param  string  $type
-     *
      * @return void
      */
     public function selectRequestType(Browser $browser, $type)
