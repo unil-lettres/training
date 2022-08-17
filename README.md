@@ -24,7 +24,7 @@ A working [Docker](https://docs.docker.com/engine/install/) installation is mand
 
 Please make sure to copy & rename the **example.env** file to **.env**.
 
-``cp example.env .env``
+``cp dev/example.env dev/.env``
 
 You can replace the values if needed, but the default ones should work.
 
