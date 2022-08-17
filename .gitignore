@@ -1,5 +1,6 @@
 .idea
-.env
-dbdata/*
-!dbdata/.gitkeep
+.DS_Store
+dev/.env
+dev/dbdata/*
+!dev/dbdata/.gitkeep
 site/auth.json
