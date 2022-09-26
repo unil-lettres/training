@@ -104,7 +104,7 @@ jobs:
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
-          webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL2 }}
+          webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
           deploy-card: true
           timezone: "Europe/Zurich"
           title: "Deployment Successful"
@@ -116,20 +116,8 @@ jobs:
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
-          webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL2 }}
+          webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
           deploy-card: true
           timezone: "Europe/Zurich"
           title: "Deployment Failed"
           color: "failure"
-
-      - name: Notify Teams (cancelled)
-        if: ${{ cancelled() }}
-        continue-on-error: true
-        uses: mikesprague/teams-incoming-webhook-action@v1
-        with:
-          github-token: ${{ github.token }}
-          webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL2 }}
-          deploy-card: true
-          timezone: "Europe/Zurich"
-          title: "Deployment Cancelled"
-          color: "warning"
