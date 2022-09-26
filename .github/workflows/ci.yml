@@ -107,6 +107,7 @@ jobs:
           webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
           deploy-card: true
           timezone: "Europe/Zurich"
+          title: "Success"
           color: "success"
 
       - name: Notify Teams (failure)
@@ -118,4 +119,5 @@ jobs:
           webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
           deploy-card: true
           timezone: "Europe/Zurich"
+          title: "Failure"
           color: "failure"
