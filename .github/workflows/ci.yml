@@ -113,4 +113,5 @@ jobs:
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
           steps: ${{ toJson(steps) }}
+          overwrite: "{title: `${GITHUB_REPOSITORY} / ${GITHUB_BASE_REF} / ${GITHUB_ACTOR}`}"
         if: always()
