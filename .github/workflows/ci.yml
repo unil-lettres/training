@@ -45,9 +45,6 @@ jobs:
       - name: Show PHP version
         run: php -v
 
-      - name: Show GITHUB REPOSITORY
-        run: $GITHUB_REPOSITORY
-
       - name: Cache composer
         uses: actions/cache@v3
         with:
@@ -116,5 +113,5 @@ jobs:
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
           steps: ${{ toJson(steps) }}
-          overwrite: "{title: `${$GITHUB_REPOSITORY} / ${$GITHUB_BASE_REF} / ${$GITHUB_ACTOR}`}"
+          overwrite: "{title: `${github.repository} | ${github.base_ref} | ${github.actor}`}"
         if: always()
