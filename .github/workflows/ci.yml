@@ -10,6 +10,7 @@ jobs:
 
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_CI_WEBHOOK_URL }}
+      TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
       MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
       MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
       CI: gha
@@ -104,4 +105,16 @@ jobs:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
           channel: '#-bot-ci'
+        if: always()
+
+      - uses: toko-bifrost/ms-teams-deploy-card@master
+        with:
+          github-token: ${{ github.token }}
+          webhook-uri: ${{ TEAMS_WEBHOOK_URL }}
+          card-layout-start: cozy
+          card-layout-exit: compact
+          environment: ci
+          timezone: Europe/Zurich
+          enable-view-status: true
+          enable-review-diffs: true
         if: always()
