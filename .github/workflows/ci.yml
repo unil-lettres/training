@@ -110,8 +110,7 @@ jobs:
         uses: skitionek/notify-microsoft-teams@master
         with:
           webhook_url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
-          needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
           steps: ${{ toJson(steps) }}
-          overwrite: "{title: `${github.repository} | ${github.base_ref} | ${github.actor}`}"
+          overwrite: "{description: `${github.event_name} | ${github.repository} | ${github.ref} | ${github.actor}`}"
         if: always()
