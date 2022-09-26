@@ -112,5 +112,5 @@ jobs:
           webhook_url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
           job: ${{ toJson(job) }}
           steps: ${{ toJson(steps) }}
-          overwrite: "{title: `${github.event.repository.name} | ${github.ref} | ${github.actor}`}"
+          overwrite: "{title: `${github.repository} | ${github.event_name} | ${github.ref_name} | ${github.actor}`}"
         if: always()
