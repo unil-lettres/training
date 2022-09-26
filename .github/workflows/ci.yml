@@ -106,14 +106,11 @@ jobs:
           channel: '#-bot-ci'
         if: always()
 
-      - uses: toko-bifrost/ms-teams-deploy-card@master
+      - name: Notify Teams
+        uses: skitionek/notify-microsoft-teams@master
         with:
-          github-token: ${{ github.token }}
-          webhook-uri: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
-          card-layout-start: cozy
-          card-layout-exit: compact
-          environment: ci
-          timezone: Europe/Zurich
-          enable-view-status: true
-          enable-review-diffs: true
+          webhook_url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
+          needs: ${{ toJson(needs) }}
+          job: ${{ toJson(job) }}
+          steps: ${{ toJson(steps) }}
         if: always()
