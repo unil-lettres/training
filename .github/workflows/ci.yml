@@ -113,5 +113,5 @@ jobs:
           needs: ${{ toJson(needs) }}
           job: ${{ toJson(job) }}
           steps: ${{ toJson(steps) }}
-          overwrite: "{title: `${env.GITHUB_REPOSITORY} / ${env.GITHUB_BASE_REF} / ${env.GITHUB_ACTOR}`}"
+          overwrite: "{title: `${github.GITHUB_REPOSITORY} / ${github.GITHUB_BASE_REF} / ${github.GITHUB_ACTOR}`}"
         if: always()
