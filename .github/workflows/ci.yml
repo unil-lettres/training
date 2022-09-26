@@ -107,10 +107,8 @@ jobs:
         if: always()
 
       - name: Notify Teams
-        uses: skitionek/notify-microsoft-teams@master
+        uses: opsless/ms-teams-github-actions@main
         with:
-          webhook_url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
-          job: ${{ toJson(job) }}
-          steps: ${{ toJson(steps) }}
-          overwrite: "{title: `${github.repository} | ${github.event_name} | ${github.ref_name} | ${github.actor}`}"
+          webhook-uri: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
+          github-token: ${{ github.token }}
         if: always()
