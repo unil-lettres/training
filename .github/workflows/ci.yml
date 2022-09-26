@@ -86,7 +86,7 @@ jobs:
       - name: Execute functional tests
         id: app-test-functional
         working-directory: ./site
-        run: php arti san dusk
+        run: php artisan dusk
 
       - name: Execute unit tests
         id: app-test-unit
@@ -98,40 +98,35 @@ jobs:
         working-directory: ./site
         run: php artisan email:failure
 
-      - name: Notify Slack
-        uses: act10ns/slack@v1
-        with:
-          status: ${{ job.status }}
-          steps: ${{ toJson(steps) }}
-          channel: '#-bot-ci'
-        if: always()
-
-      - name: Notify Slack (success)
+      - name: Notify Teams (success)
         if: ${{ success() }}
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
           webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
           deploy-card: true
+          timezone: "Europe/Zurich"
           title: "Deployment Successful"
           color: "success"
 
-      - name: Notify Slack (failure)
+      - name: Notify Teams (failure)
         if: ${{ failure() }}
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
           webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
           deploy-card: true
+          timezone: "Europe/Zurich"
           title: "Deployment Failed"
           color: "failure"
 
-      - name: Notify Slack (cancelled)
+      - name: Notify Teams (cancelled)
         if: ${{ cancelled() }}
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
           webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
           deploy-card: true
+          timezone: "Europe/Zurich"
           title: "Deployment Cancelled"
           color: "warning"
