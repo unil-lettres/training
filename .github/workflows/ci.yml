@@ -94,30 +94,19 @@ jobs:
         run: vendor/bin/phpunit
 
       - name: Expose failed tests
-        if: ${{ failure() }}
         working-directory: ./site
         run: php artisan email:failure
+        if: failure()
 
+      - uses: technote-space/workflow-conclusion-action@v3
       - name: Notify Teams (success)
-        if: ${{ success() }}
-        continue-on-error: true
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
           webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
           deploy-card: true
           timezone: "Europe/Zurich"
-          title: "Success"
-          color: "success"
-
-      - name: Notify Teams (failure)
-        if: ${{ failure() }}
+          title: ${{ env.WORKFLOW_CONCLUSION }}
+          color: ${{ env.WORKFLOW_CONCLUSION }}
+        if: always()
         continue-on-error: true
-        uses: mikesprague/teams-incoming-webhook-action@v1
-        with:
-          github-token: ${{ github.token }}
-          webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
-          deploy-card: true
-          timezone: "Europe/Zurich"
-          title: "Failure"
-          color: "failure"
