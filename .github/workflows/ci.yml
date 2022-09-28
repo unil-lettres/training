@@ -91,7 +91,7 @@ jobs:
       - name: Execute unit tests
         id: app-test-unit
         working-directory: ./site
-        run: vendor/bi n/phpunit
+        run: vendor/bin/phpunit
 
       - name: Expose failed tests
         working-directory: ./site
