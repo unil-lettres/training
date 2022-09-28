@@ -4,7 +4,7 @@ jobs:
   build:
     strategy:
       matrix:
-        php-versions: [ '8.0', '8.1' ]
+        php-versions: [ '8.0', '8.2' ]
 
     runs-on: ubuntu-20.04
 
@@ -111,7 +111,7 @@ jobs:
       - uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
-          webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL2 }}
+          webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
           deploy-card: true
           timezone: "Europe/Zurich"
           title: ${{ env.WORKFLOW_CONCLUSION }}
