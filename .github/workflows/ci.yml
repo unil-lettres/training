@@ -86,7 +86,7 @@ jobs:
       - name: Execute functional tests
         id: app-test-functional
         working-directory: ./site
-        run: php artisan dusk
+        run: php art isan dusk
 
       - name: Execute unit tests
         id: app-test-unit
