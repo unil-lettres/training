@@ -100,13 +100,12 @@ jobs:
 
   notification:
     name: Notify
-    needs: [build]
+    needs: build
+    runs-on: ubuntu-latest
     if: always()
-    runs-on: ubuntu-20.04
 
     steps:
-      - uses: martialonline/workflow-status@v2
-        id: check
+      - uses: technote-space/workflow-conclusion-action@v3
 
       - uses: mikesprague/teams-incoming-webhook-action@v1
         with:
@@ -114,6 +113,6 @@ jobs:
           webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
           deploy-card: true
           timezone: "Europe/Zurich"
-          title: ${{ steps.check.outputs.status }}
-          color: ${{ steps.check.outputs.status }}
+          title: ${{ env.WORKFLOW_CONCLUSION }}
+          color: ${{ env.WORKFLOW_CONCLUSION }}
         continue-on-error: true
