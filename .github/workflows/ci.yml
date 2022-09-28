@@ -98,7 +98,6 @@ jobs:
         run: php artisan email:failure
         if: failure()
 
-      - uses: technote-space/workflow-conclusion-action@v3
       - name: Notify Teams (success)
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
@@ -106,7 +105,7 @@ jobs:
           webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
           deploy-card: true
           timezone: "Europe/Zurich"
-          title: ${{ env.WORKFLOW_CONCLUSION }}
-          color: ${{ env.WORKFLOW_CONCLUSION }}
+          title: ${{ job.status }}
+          color: ${{ job.status }}
         if: always()
         continue-on-error: true
