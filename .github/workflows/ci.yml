@@ -9,7 +9,6 @@ jobs:
         php-versions: [ '8.0', '8.1' ]
 
     env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_CI_WEBHOOK_URL }}
       MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
       MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
       CI: gha
