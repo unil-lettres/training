@@ -98,12 +98,10 @@ jobs:
         run: php artisan email:failure
         if: failure()
 
-      - uses: martialonline/workflow-status@v2
-        id: check
-
   notification:
     name: Notify
     needs: [build]
+    if: always()
     runs-on: ubuntu-20.04
 
     steps:
@@ -118,5 +116,4 @@ jobs:
           timezone: "Europe/Zurich"
           title: ${{ steps.check.outputs.status }}
           color: ${{ steps.check.outputs.status }}
-        if: always()
         continue-on-error: true
