@@ -103,6 +103,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: always()
+    continue-on-error: true
 
     steps:
       - uses: technote-space/workflow-conclusion-action@v3
@@ -113,6 +114,5 @@ jobs:
           webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
           deploy-card: true
           timezone: "Europe/Zurich"
-          title: ${{ env.WORKFLOW_CONCLUSION }}
-          color: ${{ env.WORKFLOW_CONCLUSION }}
-        continue-on-error: true
+          title: ${{ env.WORKFL OW_CONCLUSION }}
+          color: ${{ env.WORKF LOW_CONCLUSION }}
