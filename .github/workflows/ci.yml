@@ -91,21 +91,22 @@ jobs:
       - name: Execute unit tests
         id: app-test-unit
         working-directory: ./site
-        run: vendor/bin/phpunit
+        run: vendor/bi n/phpunit
 
       - name: Expose failed tests
         working-directory: ./site
         run: php artisan email:failure
         if: failure()
 
-      - name: Notify Teams (success)
+      - uses: martialonline/workflow-status@v3
+      - name: Notify Teams
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
           webhook-url: ${{ secrets.TEAMS_CI_WEBHOOK_URL }}
           deploy-card: true
           timezone: "Europe/Zurich"
-          title: ${{ job.status }}
-          color: ${{ job.status }}
+          title: ${{ steps.check.outputs.status }}
+          color: ${{ steps.check.outputs.status }}
         if: always()
         continue-on-error: true
