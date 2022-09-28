@@ -98,7 +98,9 @@ jobs:
         run: php artisan email:failure
         if: failure()
 
-      - uses: martialonline/workflow-status@v3
+      - uses: martialonline/workflow-status@v2
+        id: check
+
       - name: Notify Teams
         uses: mikesprague/teams-incoming-webhook-action@v1
         with:
