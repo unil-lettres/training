@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        php-versions: [ '8.0', '8.1' ]
+        php-versions: [ '8.0' ]
 
     env:
       MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
@@ -101,12 +101,9 @@ jobs:
     needs: build
     if: always()
     continue-on-error: true
-    strategy:
-      matrix: ${{fromJson(needs.build.outputs.matrix)}}
 
     steps:
       - uses: technote-space/workflow-conclusion-action@v3
-
       - uses: mikesprague/teams-incoming-webhook-action@v1
         with:
           github-token: ${{ github.token }}
