@@ -4,6 +4,8 @@ networks:
   training-net:
     driver: bridge
 
+name: training
+
 services:
   train-app:
     image: unillett/training:latest
