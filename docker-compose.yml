@@ -9,6 +9,9 @@ name: training
 services:
   train-app:
     image: unillett/training:latest
+    build:
+      context: ./dev/config
+      dockerfile: ./app.dockerfile
     env_file:
       - ./dev/.env
     volumes:
