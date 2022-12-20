@@ -121,12 +121,12 @@ class RequestCrudController extends CrudController
                 'name' => 'deadline',
                 'label' => 'Délai de production',
             ],
-            false,
-            function ($value) {
-                $dates = json_decode($value);
-                CRUD::addClause('where', 'deadline', '>=', $dates->from);
-                CRUD::addClause('where', 'deadline', '<=', $dates->to.' 23:59:59');
-            });
+                false,
+                function ($value) {
+                    $dates = json_decode($value);
+                    CRUD::addClause('where', 'deadline', '>=', $dates->from);
+                    CRUD::addClause('where', 'deadline', '<=', $dates->to.' 23:59:59');
+                });
 
             // Enable exports
             CRUD::enableExportButtons();
