@@ -5,7 +5,7 @@ namespace App\Models;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class Type extends Model
+class Category extends Model
 {
     use CrudTrait;
 
@@ -15,7 +15,7 @@ class Type extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'types';
+    protected $table = 'categories';
 
     protected $primaryKey = 'id';
 
@@ -39,7 +39,7 @@ class Type extends Model
     */
 
     /**
-     * Get the requests for the type.
+     * Get the requests for the category.
      */
     public function requests()
     {

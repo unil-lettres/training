@@ -38,7 +38,7 @@ class Request extends Model
         'file',
         'extras',
         'user_id',
-        'type_id',
+        'category_id',
         'status_id',
         'extras',
     ];
@@ -95,11 +95,11 @@ class Request extends Model
     */
 
     /**
-     * Get the type associated with the request.
+     * Get the category associated with the request.
      */
-    public function type()
+    public function category()
     {
-        return $this->belongsTo('App\Models\Type');
+        return $this->belongsTo('App\Models\Category');
     }
 
     /**

@@ -127,4 +127,58 @@ class AdminTest extends DuskTestCase
                 ->assertPathIs('/admin/training');
         });
     }
+
+    /**
+     * Create a category in the administration as an admin
+     *
+     * @return void
+     */
+    public function testAdministrationCreateCategory()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new Login())
+                ->loginAsUser('first-user@example.com', 'password');
+
+            $browser->visit('/admin/category')
+                ->assertSee('Ajouter catégories')
+                ->clickLink('Ajouter catégories')
+                ->assertPathIs('/admin/category/create');
+
+            $name = 'Test create category';
+
+            $browser->type('name', $name)
+                ->press('Enregistrer et retour')
+                ->waitForText($name)
+                ->assertSee($name)
+                ->assertDontSee('Aucune donnée à afficher')
+                ->assertPathIs('/admin/category');
+        });
+    }
+
+    /**
+     * Create a status in the administration as an admin
+     *
+     * @return void
+     */
+    public function testAdministrationCreateStatus()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new Login())
+                ->loginAsUser('first-user@example.com', 'password');
+
+            $browser->visit('/admin/status')
+                ->assertSee('Ajouter décision')
+                ->clickLink('Ajouter décision')
+                ->assertPathIs('/admin/status/create');
+
+            $name = 'Test create status';
+
+            $browser->type('name', $name)
+                ->press('Enregistrer et retour')
+                ->waitForText($name)
+                ->assertSee($name)
+                ->assertDontSee('Aucune donnée à afficher')
+                ->assertPathIs('/admin/status');
+        });
+    }
 }

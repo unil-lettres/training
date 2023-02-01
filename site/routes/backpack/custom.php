@@ -13,8 +13,8 @@ Route::group([
 ], function () { // custom admin routes
 Route::get('status/ajax-status-options', 'StatusCrudController@statusOptions');
     Route::crud('status', 'StatusCrudController');
-    Route::get('type/ajax-type-options', 'TypeCrudController@typeOptions');
-    Route::crud('type', 'TypeCrudController');
+    Route::get('category/ajax-category-options', 'CategoryCrudController@categoryOptions');
+    Route::crud('category', 'CategoryCrudController');
     Route::crud('training', 'TrainingCrudController');
     Route::crud('request', 'RequestCrudController');
     Route::get('dashboard', 'DashboardController@dashboard');

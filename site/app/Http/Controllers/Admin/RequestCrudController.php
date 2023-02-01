@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\RequestRequest as StoreRequest;
 use App\Http\Requests\RequestRequest as UpdateRequest;
+use App\Models\Category;
 use App\Models\Request;
 use App\Models\Status;
-use App\Models\Type;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Controllers\Operations\CloneOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -70,10 +70,10 @@ class RequestCrudController extends CrudController
             CRUD::addColumn([
                 'label' => 'Catégorie',
                 'type' => 'select',
-                'name' => 'type_id',
-                'entity' => 'type',
+                'name' => 'category_id',
+                'entity' => 'category',
                 'attribute' => 'name',
-                'model' => "App\Models\Type",
+                'model' => "App\Models\Category",
             ]);
             CRUD::addColumn([
                 'name' => 'status_admin',
@@ -90,14 +90,14 @@ class RequestCrudController extends CrudController
 
             // Filters
             CRUD::addFilter([
-                'name' => 'type_id',
+                'name' => 'category_id',
                 'type' => 'select2_ajax',
                 'label' => 'Catégorie',
                 'placeholder' => 'Filtrer une catégorie',
             ],
-                url('admin/type/ajax-type-options'),
+                url('admin/category/ajax-category-options'),
                 function ($value) {
-                    CRUD::addClause('where', 'type_id', $value);
+                    CRUD::addClause('where', 'category_id', $value);
                 });
             CRUD::addFilter([
                 'name' => 'status_id',
@@ -242,9 +242,9 @@ class RequestCrudController extends CrudController
             CRUD::addField([
                 'label' => 'Catégorie',
                 'type' => 'relationship',
-                'name' => 'type_id',
+                'name' => 'category_id',
                 'attribute' => 'name',
-                'model' => "App\Models\Type",
+                'model' => "App\Models\Category",
                 'placeholder' => 'Sélectionner une catégorie',
                 'inline_create' => true,
                 'tab' => 'Champs d\'administration',
@@ -310,11 +310,11 @@ class RequestCrudController extends CrudController
         CRUD::setValidation(UpdateRequest::class);
     }
 
-    // Needed for type inline create route
-    protected function fetchType()
+    // Needed for category inline create route
+    protected function fetchCategory()
     {
         return $this->fetch([
-            'model' => Type::class,
+            'model' => Category::class,
             'query' => function ($model) {
                 return $model->orderBy('name', 'ASC');
             },

@@ -1,7 +1,7 @@
 <!-- This file is used to store sidebar items, starting with Backpack\Base 0.9.0 -->
 <li class='nav-item'><a class='nav-link' href="{{ backpack_url('dashboard') }}"><i class="nav-icon la la-dashboard"></i> <span>{{ trans('backpack::base.dashboard') }}</span></a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('status') }}'><i class='nav-icon la la-tasks'></i> <span>Décisions</span></a></li>
-<li class='nav-item'><a class='nav-link' href='{{ backpack_url('type') }}'><i class='nav-icon la la-th'></i> <span>Types</span></a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('category') }}'><i class='nav-icon la la-th'></i> <span>Catégories</span></a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('training') }}'><i class='nav-icon la la-certificate'></i> <span>Formations</span></a></li>
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('request') }}'><i class='nav-icon la la-bell'></i> <span>Demandes</span></a></li>
 <!-- Users, Roles Permissions -->

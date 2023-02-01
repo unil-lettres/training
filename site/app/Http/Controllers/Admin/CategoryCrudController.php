@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\TypeRequest as StoreRequest;
-use App\Http\Requests\TypeRequest as UpdateRequest;
-use App\Models\Type;
+use App\Http\Requests\CategoryRequest as StoreRequest;
+use App\Http\Requests\CategoryRequest as UpdateRequest;
+use App\Models\Category;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
 use Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
@@ -15,9 +15,9 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Http\Request;
 
 /**
- * Class TypeCrudController
+ * Class CategoryCrudController
  */
-class TypeCrudController extends CrudController
+class CategoryCrudController extends CrudController
 {
     use ListOperation;
     use CreateOperation;
@@ -32,9 +32,9 @@ class TypeCrudController extends CrudController
         | CrudPanel Basic Information
         |--------------------------------------------------------------------------
         */
-        CRUD::setModel('App\Models\Type');
-        CRUD::setRoute(config('backpack.base.route_prefix').'/type');
-        CRUD::setEntityNameStrings('type', 'types');
+        CRUD::setModel('App\Models\Category');
+        CRUD::setRoute(config('backpack.base.route_prefix').'/category');
+        CRUD::setEntityNameStrings('catégorie', 'catégories');
         if (! $this->crud->getRequest()->has('order')) {
             CRUD::orderBy('name', 'ASC');
         }
@@ -54,7 +54,7 @@ class TypeCrudController extends CrudController
             // Fields
             CRUD::addField(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
 
-            // add asterisk for fields that are required in TypeRequest
+            // add asterisk for fields that are required in CategoryRequest
             CRUD::setRequiredFields(StoreRequest::class, 'create');
             CRUD::setRequiredFields(UpdateRequest::class, 'edit');
         });
@@ -70,10 +70,10 @@ class TypeCrudController extends CrudController
         CRUD::setValidation(UpdateRequest::class);
     }
 
-    public function typeOptions(Request $request)
+    public function categoryOptions(Request $request)
     {
         $term = $request->input('term');
-        $options = Type::where('name', 'like', '%'.$term.'%')->get()->pluck('name', 'id');
+        $options = Category::where('name', 'like', '%'.$term.'%')->get()->pluck('name', 'id');
 
         return $options;
     }
