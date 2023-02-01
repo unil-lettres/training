@@ -140,8 +140,8 @@ class AdminTest extends DuskTestCase
                 ->loginAsUser('first-user@example.com', 'password');
 
             $browser->visit('/admin/category')
-                ->assertSee('Ajouter catégories')
-                ->clickLink('Ajouter catégories')
+                ->assertSee('Ajouter catégorie')
+                ->clickLink('Ajouter catégorie')
                 ->assertPathIs('/admin/category/create');
 
             $name = 'Test create category';
