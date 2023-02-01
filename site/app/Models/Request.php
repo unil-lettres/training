@@ -41,7 +41,7 @@ class Request extends Model
         'category_id',
         'status_id',
         'extras',
-        'type'
+        'type',
     ];
 
     protected $fakeColumns = ['extras'];
@@ -65,7 +65,7 @@ class Request extends Model
 
     public static $type = [
         'training' => 'Formation',
-        'analysis' => 'Analyse'
+        'analysis' => 'Analyse',
     ];
 
     /*
