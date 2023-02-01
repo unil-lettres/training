@@ -39,6 +39,10 @@ class RequestRequest extends FormRequest
                 'nullable',
                 Rule::in(['new', 'pending', 'resolved']),
             ],
+            'type' => [
+                'nullable',
+                Rule::in(['training', 'analysis']),
+            ],
             'decision_date' => 'nullable|date',
             'decision_comments' => 'nullable|min:1',
             'file' => 'nullable|file',
