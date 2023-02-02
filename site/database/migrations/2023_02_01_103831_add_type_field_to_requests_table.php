@@ -15,7 +15,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('requests', function (Blueprint $table) {
-            $table->string('type', 300)->nullable();
+            // This migration was modified to avoid a mysql "row size too large" error.
+            // Application state from commit ba32e8e to c34f43a should be avoided in production.
+            $table->text('type')->nullable();
         });
 
         // Set existing data to "training" type
