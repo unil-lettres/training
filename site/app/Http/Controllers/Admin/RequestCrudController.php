@@ -297,6 +297,31 @@ class RequestCrudController extends CrudController
                 'tab' => 'Champs d\'administration',
             ]);
             CRUD::addField([
+                'label' => 'Personnes ressources',
+                'name' => 'contacts',
+                'type' => 'repeatable',
+                'subfields' => [
+                    [
+                        'name' => 'contact',
+                        'type' => 'text',
+                        'label' => 'Contact',
+                        'wrapper' => ['class' => 'form-group col-md-6'],
+                    ],
+                    [
+                        'name' => 'notes',
+                        'type' => 'textarea',
+                        'label' => 'Notes',
+                        'wrapper' => ['class' => 'form-group col-md-6'],
+                    ],
+                ],
+                'new_item_label' => 'Ajouter',
+                'init_rows' => 1,
+                'min_rows' => 1,
+                'max_rows' => 10,
+                'reorder' => true,
+                'tab' => 'Champs d\'administration',
+            ]);
+            CRUD::addField([
                 'label' => 'Document',
                 'name' => 'file',
                 'type' => 'upload',

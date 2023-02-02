@@ -43,6 +43,8 @@ class RequestRequest extends FormRequest
                 'nullable',
                 Rule::in(['training', 'analysis']),
             ],
+            'contacts.*.contact' => 'nullable|max:200',
+            'contacts.*.notes' => 'nullable|max:500',
             'decision_date' => 'nullable|date',
             'decision_comments' => 'nullable|min:1',
             'file' => 'nullable|file',
@@ -81,6 +83,9 @@ class RequestRequest extends FormRequest
     {
         return [
             'name.required' => 'Le champ nom est requis.',
+            'type' => 'Le type sélectionné n\'est pas valide.',
+            'contacts.*.contact' => 'Le champ ne peut pas comporter plus de 200 caractères.',
+            'contacts.*.notes' => 'Le champ ne peut pas comporter plus de 500 caractères.',
         ];
     }
 }

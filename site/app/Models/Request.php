@@ -42,12 +42,14 @@ class Request extends Model
         'status_id',
         'extras',
         'type',
+        'contacts',
     ];
 
     protected $fakeColumns = ['extras'];
 
     protected $casts = [
         'extras' => 'array',
+        'contacts' => 'array',
     ];
 
     // protected $hidden = [];
