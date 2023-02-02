@@ -71,4 +71,14 @@ class Helpers
 
         return round(($requestsSolved * 100) / $requestsTotal, 2);
     }
+
+    /**
+     * Return the string representation of a checkbox value
+     *
+     * @return string
+     */
+    public static function checkboxToString($checkbox)
+    {
+        return $checkbox ? 'Oui' : 'Non';
+    }
 }

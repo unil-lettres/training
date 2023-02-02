@@ -41,6 +41,7 @@ class RequestCrudController extends CrudController
         if (! $this->crud->getRequest()->has('order')) {
             CRUD::orderBy('created_at', 'DESC');
         }
+        $this->crud->enableDetailsRow();
 
         /*
         |--------------------------------------------------------------------------
@@ -61,6 +62,9 @@ class RequestCrudController extends CrudController
                 'label' => 'Description',
                 'limit' => 60,
                 'function_name' => 'cleanDescription',
+                // Set priority to display action buttons before
+                // description field in the responsive table
+                'priority' => 2,
             ]);
             CRUD::addColumn([
                 'name' => 'filling_date',
