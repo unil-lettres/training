@@ -65,6 +65,7 @@ class AdminTest extends DuskTestCase
 
             $browser->assertSee('Gérer les utilisateurs')
                 ->clickLink('Gérer les utilisateurs')
+                ->waitForText('first-user@example.com')
                 ->assertSee('first-user@example.com')
                 ->assertSee('second-user@example.com');
         });
@@ -91,8 +92,9 @@ class AdminTest extends DuskTestCase
             $name = 'Test create request';
 
             $browser->type('name', $name)
-                ->press('Enregistrer et retour')
-                ->waitForText($name)
+                ->press('Enregistrer et retour');
+
+            $browser->waitForText($name)
                 ->assertSee($name)
                 ->assertDontSee('Aucune donnée à afficher')
                 ->assertPathIs('/admin/request');
@@ -120,11 +122,17 @@ class AdminTest extends DuskTestCase
             $name = 'Test create training';
 
             $browser->type('name', $name)
-                ->press('Enregistrer et retour')
-                ->waitForText($name)
+                ->hidden('visible', 1)
+                ->press('Enregistrer et retour');
+
+            $browser->waitForText($name)
                 ->assertSee($name)
                 ->assertDontSee('Aucune donnée à afficher')
                 ->assertPathIs('/admin/training');
+
+            $browser->visit('/')
+                ->assertSee('Pas de formation en groupe annoncée pour l\'instant')
+                ->assertDontSee($name);
         });
     }
 

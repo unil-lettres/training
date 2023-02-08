@@ -32,36 +32,60 @@ services:
     volumes_from:
       - train-app
     ports:
-      - "8686:80"
+      - "127.0.0.1:8686:80"
     networks:
       - training-net
     container_name: train-web
-  train-mariadb:
+  train-mysql:
     image: mariadb:10.4
     env_file:
       - ./dev/.env
     volumes:
-      - ./dev/dbdata:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
       - ./dev/config/my.cnf:/etc/mysql/my.cnf
     ports:
-      - "3302:3306"
+      - "127.0.0.1:3302:3306"
     networks:
       - training-net
     container_name: train-mysql
+  train-mysql-testing:
+    image: mariadb:10.4
+    env_file:
+      - ./dev/.env
+    volumes:
+      - dusk-data:/var/lib/mysql
+      - ./dev/config/my-testing.cnf:/etc/mysql/my.cnf
+    expose:
+      - "3307"
+    networks:
+      - training-net
+    container_name: train-mysql-testing
   train-myadmin:
     image: phpmyadmin/phpmyadmin:latest
     env_file:
       - ./dev/.env
     ports:
-      - "9999:80"
+      - "127.0.0.1:9999:80"
     networks:
       - training-net
     container_name: train-myadmin
   train-mailhog:
     image: mailhog/mailhog:latest
     ports:
-      - "1025:1025"
-      - "8025:8025"
+      - "127.0.0.1:1025:1025"
+      - "127.0.0.1:8025:8025"
     networks:
       - training-net
     container_name: train-mailhog
+  train-selenium:
+    image: selenium/standalone-chrome:latest
+    shm_size: 2gb
+    ports:
+      - "127.0.0.1:4444:4444"
+    networks:
+      - training-net
+    container_name: train-selenium
+
+volumes:
+  mysql-data:
+  dusk-data:

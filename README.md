@@ -72,7 +72,7 @@ To access the database please use the following link.
 
 [http://training.lan:9999](http://training.lan:9999)
 
-+ Server: train-mariadb
++ Server: train-mysql
 + Username: user
 + Password: password
 
@@ -101,6 +101,18 @@ All PHP files will be inspected during CI for code style issues. If you want to 
 And if you want to automatically fix the issues.
 
 ``docker exec train-app ./vendor/bin/pint``
+
+## Tests
+
+To Run the full suite:
+
+`docker exec -it train-app php artisan dusk --env=testing`
+
+To run a specific test class:
+
+`docker exec -it train-app php artisan dusk tests/Browser/MyTest.php --env=testing`
+
+To view the integration tests running in the browser, go to [http://training.lan:4444](http://training.lan:4444), click on Sessions, you should see a line corresponding to the running tests and a camera icon next to it, click on it to open a VNC viewer.
 
 # Error tracker
 
