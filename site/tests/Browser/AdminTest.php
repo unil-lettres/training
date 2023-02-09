@@ -108,6 +108,12 @@ class AdminTest extends DuskTestCase
      */
     public function testAdministrationCreateTraining()
     {
+        // Used to fill hidden inputs
+        Browser::macro('hidden', function ($name, $value) {
+            $this->script("document.getElementsByName('$name')[0].value = '$value'");
+            return $this;
+        });
+
         $this->browse(function (Browser $browser) {
             $browser->visit(new Login())
                 ->loginAsUser('first-user@example.com', 'password');
