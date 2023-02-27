@@ -39,6 +39,9 @@ abstract class DuskTestCase extends BaseTestCase
 
             // Setup & seed the database for docker environment
             Artisan::call('migrate:fresh --database=testing --seed');
+
+            // Install the version of ChromeDriver that matches the detected version of Chrome
+            Artisan::call('dusk:chrome-driver --detect');
         }
 
         $options = (new ChromeOptions)->addArguments([
