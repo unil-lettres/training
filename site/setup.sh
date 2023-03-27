@@ -10,7 +10,7 @@ else
   cp .env.dusk.ci .env
   # Remove the env file for local tests
   # to fallback to the main env file
-  #rm .env.dusk.testing
+  rm .env.dusk.testing
 fi
 
 # Install php dependencies
