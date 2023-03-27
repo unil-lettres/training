@@ -104,11 +104,19 @@ And if you want to automatically fix the issues.
 
 ## Tests
 
-To Run the full suite:
+### Unit/Feature tests
+
+To run the full suite:
+
+`docker exec -it train-app php artisan test`
+
+### Browser tests
+
+To run the full suite:
 
 `docker exec -it train-app php artisan dusk --env=testing`
 
-To run a specific test class:
+To run a specific class:
 
 `docker exec -it train-app php artisan dusk tests/Browser/MyTest.php --env=testing`
 
