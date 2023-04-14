@@ -19,7 +19,6 @@ class CreateRequest extends Page
     /**
      * Assert that the browser is on the page.
      *
-     * @param  Browser  $browser
      * @return void
      */
     public function assert(Browser $browser)
@@ -41,7 +40,6 @@ class CreateRequest extends Page
     /**
      * Select request type.
      *
-     * @param  \Laravel\Dusk\Browser  $browser
      * @param  string  $type
      * @return void
      */

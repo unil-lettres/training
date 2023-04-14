@@ -10,7 +10,7 @@ Development:
 
 Development of technical skills in the Faculty of Arts.
 
-A Laravel 9 app with a [Backpack](https://backpackforlaravel.com/) administration.
+A Laravel 10 app with a [Backpack](https://backpackforlaravel.com/) administration.
 
 Backpack is open-core, but we use features from ``backpack\pro`` which is a paid closed-source Backpack add-on. Which means in order to use this application and the ``backpack\pro`` features a [licence](https://backpackforlaravel.com/pricing) is needed.
 

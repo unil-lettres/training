@@ -39,8 +39,6 @@ class RequestController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  RequestRequest  $request
-     * @param  Users  $usersService
      * @return RedirectResponse
      */
     public function store(RequestRequest $request, Users $usersService)

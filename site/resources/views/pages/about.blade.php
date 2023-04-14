@@ -11,6 +11,12 @@
 
         <ul class="list-group">
             <li class="list-group-item">
+                <b>2.33</b><span class="badge">14/04/2023</span>
+                <ul>
+                    <li>Mise a jour de l'application (Laravel 10)</li>
+                </ul>
+            </li>
+            <li class="list-group-item">
                 <b>2.31</b><span class="badge">14/04/2022</span>
                 <ul>
                     <li>Mise a jour de l'application (Laravel 9)</li>

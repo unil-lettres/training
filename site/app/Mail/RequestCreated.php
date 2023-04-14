@@ -21,7 +21,6 @@ class RequestCreated extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param  Request  $request
      * @return void
      */
     public function __construct(Request $request)

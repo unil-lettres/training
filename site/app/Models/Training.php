@@ -32,10 +32,11 @@ class Training extends Model
 
     protected $casts = [
         'visible' => 'boolean',
+        'start' => 'datetime',
+        'end' => 'datetime',
     ];
 
     // protected $hidden = [];
-    protected $dates = ['start', 'end'];
 
     /*
     |--------------------------------------------------------------------------

@@ -50,14 +50,12 @@ class Request extends Model
     protected $casts = [
         'extras' => 'array',
         'contacts' => 'array',
+        'deadline' => 'datetime',
+        'filling_date' => 'datetime',
+        'decision_date' => 'datetime',
     ];
 
     // protected $hidden = [];
-    protected $dates = [
-        'deadline',
-        'filling_date',
-        'decision_date',
-    ];
 
     public static $status = [
         'new' => 'Nouveau',
