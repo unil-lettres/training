@@ -23,7 +23,7 @@ services:
       - training-net
     container_name: train-app
   train-web:
-    image: nginx:1.17
+    image: nginx:1.24
     env_file:
       - ./dev/.env
     working_dir: /var/www
@@ -37,7 +37,7 @@ services:
       - training-net
     container_name: train-web
   train-mysql:
-    image: mariadb:10.4
+    image: mariadb:10.6
     env_file:
       - ./dev/.env
     volumes:
@@ -49,7 +49,7 @@ services:
       - training-net
     container_name: train-mysql
   train-mysql-testing:
-    image: mariadb:10.4
+    image: mariadb:10.6
     env_file:
       - ./dev/.env
     volumes:
