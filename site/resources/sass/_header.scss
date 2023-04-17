@@ -10,6 +10,7 @@
         color: white;
         font-weight: bold;
         border: 1px solid;
+        padding: 0.5rem 1rem;
     }
 
     .navbar-brand {
@@ -26,6 +27,9 @@
         .nav-link {
             color: white;
             font-weight: bold;
+        }
+        .nav-link:hover {
+            color: hsla(0,0%,100%,.8);
         }
     }
 }

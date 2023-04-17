@@ -29,16 +29,20 @@
 }
 
 .trainings-content {
-  margin-top:40px;
-
-  .col-sm-4,
-  .col-lg-4 {
-    margin-left: -15px;
-  }
+    margin-top:10px;
 }
 
 .trainings-infos {
-  margin-top: 50px;
+    margin-top: 50px;
+}
+
+@media (min-width: 1200px)
+{
+    .trainings-content {
+        .col-sm-4 {
+            margin-left: -15px;
+        }
+    }
 }
 
 @media (max-width: 1200px)
@@ -53,7 +57,7 @@
 {
   .trainings-infos
   {
-    margin-top: 10px;
+    margin-top: 30px;
   }
 }
 
@@ -63,7 +67,8 @@
   border-color: #939498 !important;
 }
 
-.trainings {
+.trainings,
+.no-trainings {
   margin-bottom: 20px;
   margin-top:30px;
 

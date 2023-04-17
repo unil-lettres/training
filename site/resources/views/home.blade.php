@@ -28,7 +28,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                        <a class="legacy" data-bs-toggle="collapse" data-parent="#accordion" href="#collapse1">
                                             ...étudiant-e</a>
                                     </h4>
                                 </div>
@@ -45,7 +45,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                        <a class="legacy" data-bs-toggle="collapse" data-parent="#accordion" href="#collapse2">
                                             ...enseignant-e</a>
                                     </h4>
                                 </div>
@@ -68,7 +68,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                                        <a class="legacy" data-bs-toggle="collapse" data-parent="#accordion" href="#collapse3">
                                             ...chercheur/se,doctorant-e,etc.</a>
                                     </h4>
                                 </div>
@@ -143,58 +143,63 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="trainings-infos row">
-            <div class="col-sm-5 col-md-5 col-lg-5" style="margin-top:60px;"></div>
-            <div class="col-xs-11 col-sm-7 col-md-6 col-lg-6" style="font-size: 13px;">
-                Bien qu'organisées sur demande, certaines formations peuvent accueillir des participants
-                supplémentaires. Si vous souhaitez vous joindre à une offre listée ci-dessous, veuillez le
-                mentionner dans votre demande.
-            </div>
-        </div>
-
-        @if($trainings->count())
-            <div class="container trainings">
-                <div class="row">
-                    <div class="col-sm-12 title">
-                        Liste des formations à inscriptions ouvertes
+                    <div class="trainings-infos row">
+                        <div class="col-12" style="font-size: 13px;">
+                            Bien qu'organisées sur demande, certaines formations peuvent accueillir des participants
+                            supplémentaires. Si vous souhaitez vous joindre à une offre listée ci-dessous, veuillez le
+                            mentionner dans votre demande.
+                        </div>
                     </div>
+
+                    @if($trainings->count())
+                        <div class="container trainings">
+                            <div class="row">
+                                <div class="col-sm-12 title">
+                                    Liste des formations à inscriptions ouvertes
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Description</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($trainings as $training)
+                                <tr>
+                                    <td>{{ $training->name }}</td>
+                                    <td>{!! $training->description !!}</td>
+                                    <td>
+                                        @if($training->start)
+                                            {{ $training->start->format('d-m-Y H:i:s') }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($training->end)
+                                            {{ $training->end->format('d-m-Y H:i:s') }}
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    @else
+                        <div class="container no-trainings">
+                            <div class="row">
+                                <div class="col-sm-12 title">
+                                    Pas de formation en groupe annoncée pour l'instant.
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
-
-            <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Description</th>
-                    <th>Date de début</th>
-                    <th>Date de fin</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach ($trainings as $training)
-                        <tr>
-                            <td>{{ $training->name }}</td>
-                            <td>{!! $training->description !!}</td>
-                            <td>
-                                @if($training->start)
-                                    {{ $training->start->format('d-m-Y H:i:s') }}
-                                @endif
-                            </td>
-                            <td>
-                                @if($training->end)
-                                    {{ $training->end->format('d-m-Y H:i:s') }}
-                                @endif
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @else
-            <p>Pas de formation en groupe annoncée pour l'instant.</p>
-        @endif
+        </div>
     </div>
 @stop
