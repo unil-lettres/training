@@ -36,6 +36,6 @@ class RequestCreated extends Mailable
     public function build()
     {
         return $this->subject('[Formation] Nouvelle demande')
-          ->view('emails.requests.created');
+            ->view('emails.requests.created');
     }
 }

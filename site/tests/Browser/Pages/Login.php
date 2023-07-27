@@ -47,7 +47,7 @@ class Login extends Page
     public function loginAsUser(Browser $browser, $login, $password)
     {
         $browser->type('email', $login)
-          ->type('password', $password)
-          ->press('Connexion');
+            ->type('password', $password)
+            ->press('Connexion');
     }
 }

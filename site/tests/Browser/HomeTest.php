@@ -43,14 +43,14 @@ class HomeTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new Login())
-              ->loginAsUser('second-user@example.com', 'password');
+                ->loginAsUser('second-user@example.com', 'password');
 
             $browser->visit('/')
-              ->assertSee('Demandes de formation')
-              ->assertSee('Déconnexion')
-              ->assertSee('Mes demandes')
-              ->assertDontSee('Connexion')
-              ->assertDontSee('Administration');
+                ->assertSee('Demandes de formation')
+                ->assertSee('Déconnexion')
+                ->assertSee('Mes demandes')
+                ->assertDontSee('Connexion')
+                ->assertDontSee('Administration');
         });
     }
 

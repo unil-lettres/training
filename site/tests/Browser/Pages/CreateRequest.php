@@ -46,6 +46,6 @@ class CreateRequest extends Page
     public function selectRequestType(Browser $browser, $type)
     {
         $browser->click('@request-type')
-          ->clickLink($type);
+            ->clickLink($type);
     }
 }
