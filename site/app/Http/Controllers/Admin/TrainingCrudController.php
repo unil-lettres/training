@@ -34,29 +34,25 @@ class TrainingCrudController extends CrudController
         if (! $this->crud->getRequest()->has('order')) {
             CRUD::orderBy('created_at', 'DESC');
         }
+    }
 
-        /*
-        |--------------------------------------------------------------------------
-        | CrudPanel Configuration
-        |--------------------------------------------------------------------------
-        */
+    public function setupListOperation()
+    {
+        // Columns
+        CRUD::column(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
+        CRUD::column(['name' => 'start', 'type' => 'datetime', 'label' => 'Début']);
+        CRUD::column(['name' => 'end', 'type' => 'datetime', 'label' => 'Fin']);
+        CRUD::column(['name' => 'visible', 'type' => 'check', 'label' => 'Visible?']);
 
-        CRUD::operation('list', function () {
-            // Columns
-            CRUD::addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
-            CRUD::addColumn(['name' => 'start', 'type' => 'datetime', 'label' => 'Début']);
-            CRUD::addColumn(['name' => 'end', 'type' => 'datetime', 'label' => 'Fin']);
-            CRUD::addColumn(['name' => 'visible', 'type' => 'check', 'label' => 'Visible?']);
-
-            // Filters
-            CRUD::addFilter([
-                'name' => 'visible',
-                'type' => 'dropdown',
-                'label' => 'Visibilité',
-            ], [
+        // Filters
+        CRUD::filter('visible')
+            ->type('dropdown')
+            ->label('Visibilité')
+            ->values([
                 1 => 'Visible',
                 2 => 'Non-visible',
-            ], function ($value) {
+            ])
+            ->whenActive(function ($value) {
                 switch (intval($value)) {
                     case 1:
                         CRUD::addClause('where', 'visible', 1);
@@ -67,49 +63,48 @@ class TrainingCrudController extends CrudController
                 }
             });
 
-            // Enable exports
-            CRUD::enableExportButtons();
-        });
-
-        CRUD::operation(['create', 'update'], function () {
-            // Fields
-            CRUD::addField(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
-            CRUD::addField(['name' => 'description', 'type' => 'summernote', 'label' => 'Description']);
-            CRUD::addField([
-                'name' => 'start',
-                'type' => 'datetime_picker',
-                'datetime_picker_options' => [
-                    'format' => 'DD/MM/YYYY HH:mm',
-                    'language' => 'fr',
-                ],
-                'allows_null' => true,
-                'label' => 'Date début',
-            ]);
-            CRUD::addField([
-                'name' => 'end',
-                'type' => 'datetime_picker',
-                'datetime_picker_options' => [
-                    'format' => 'DD/MM/YYYY HH:mm',
-                    'language' => 'fr',
-                ],
-                'allows_null' => true,
-                'label' => 'Date fin',
-            ]);
-            CRUD::addField(['name' => 'visible', 'type' => 'checkbox', 'label' => 'Visible']);
-
-            // add asterisk for fields that are required in TrainingRequest
-            CRUD::setRequiredFields(StoreRequest::class, 'create');
-            CRUD::setRequiredFields(UpdateRequest::class, 'edit');
-        });
+        // Enable exports
+        CRUD::enableExportButtons();
     }
 
     protected function setupCreateOperation()
     {
         CRUD::setValidation(StoreRequest::class);
+
+        // Fields
+        CRUD::field(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
+        CRUD::field(['name' => 'description', 'type' => 'summernote', 'label' => 'Description']);
+        CRUD::field([
+            'name' => 'start',
+            'type' => 'datetime_picker',
+            'datetime_picker_options' => [
+                'format' => 'DD/MM/YYYY HH:mm',
+                'language' => 'fr',
+            ],
+            'allows_null' => true,
+            'label' => 'Date début',
+        ]);
+        CRUD::field([
+            'name' => 'end',
+            'type' => 'datetime_picker',
+            'datetime_picker_options' => [
+                'format' => 'DD/MM/YYYY HH:mm',
+                'language' => 'fr',
+            ],
+            'allows_null' => true,
+            'label' => 'Date fin',
+        ]);
+        CRUD::field(['name' => 'visible', 'type' => 'checkbox', 'label' => 'Visible']);
+
+        // add asterisk for fields that are required in TrainingRequest
+        CRUD::setRequiredFields(StoreRequest::class, 'create');
+        CRUD::setRequiredFields(UpdateRequest::class, 'edit');
     }
 
     protected function setupUpdateOperation()
     {
         CRUD::setValidation(UpdateRequest::class);
+
+        $this->setupCreateOperation();
     }
 }

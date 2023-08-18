@@ -4,155 +4,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Look & feel customizations
-    |--------------------------------------------------------------------------
-    |
-    | Make it yours.
-    |
-    */
-
-    // Date & Datetime Format Syntax: https://carbon.nesbot.com/docs/#api-localization
-    'default_date_format' => 'D MMM YYYY',
-    'default_datetime_format' => 'D MMM YYYY, HH:mm',
-
-    // Direction, according to language
-    // (left-to-right vs right-to-left)
-    'html_direction' => 'ltr',
-
-    // ----
-    // HEAD
-    // ----
-
-    // Project name. Shown in the window title.
-    'project_name' => 'FormationsLettres',
-
-    // When clicking on the admin panel's top-left logo/name,
-    // where should the user be redirected?
-    // The string below will be passed through the url() helper.
-    // - default: '' (project root)
-    // - alternative: 'admin' (the admin's dashboard)
-    'home_link' => '',
-
-    // Content of the HTML meta robots tag to prevent indexing and link following
-    'meta_robots_content' => 'noindex, nofollow',
-
-    // ------
-    // STYLES
-    // ------
-
-    // CSS files that are loaded in all pages, using Laravel's asset() helper
-    'styles' => [
-        'packages/backpack/base/css/blue-bundle.css',
-
-        // Here's what's inside the bundle:
-        // 'packages/@digitallyhappy/backstrap/css/style.min.css',
-        // 'packages/animate.css/animate.min.css',
-        // 'packages/noty/noty.css',
-
-        // Load the fonts separately (so that you can replace them at will):
-        'packages/source-sans-pro/source-sans-pro.css',
-        'packages/line-awesome/css/line-awesome.min.css',
-
-        // Example (the fonts above, loaded from CDN instead)
-        // 'https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css',
-        // 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic',
-
-        // Example (load font-awesome instead of line-awesome):
-        // 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css',
-    ],
-
-    // CSS files that are loaded in all pages, using Laravel's mix() helper
-    'mix_styles' => [ // file_path => manifest_directory_path
-        // 'css/app.css' => '',
-    ],
-
-    // ------
-    // HEADER
-    // ------
-
-    // Menu logo. You can replace this with an <img> tag if you have a logo.
-    'project_logo' => '<b>Formations</b>',
-
-    // Show / hide breadcrumbs on admin panel pages.
-    'breadcrumbs' => true,
-
-    // Horizontal navbar classes. Helps make the admin panel look similar to your project's design.
-    'header_class' => 'app-header bg-light border-0 navbar',
-    // For background colors use: bg-dark, bg-primary, bg-secondary, bg-danger, bg-warning, bg-success, bg-info, bg-blue, bg-light-blue, bg-indigo, bg-purple, bg-pink, bg-red, bg-orange, bg-yellow, bg-green, bg-teal, bg-cyan, bg-white
-    // For links to be visible on different background colors use: "navbar-dark", "navbar-light", "navbar-color"
-
-    // ----
-    // BODY
-    // ----
-
-    // Body element classes.
-    'body_class' => 'app aside-menu-fixed sidebar-lg-show',
-    // Try sidebar-hidden, sidebar-fixed, sidebar-compact, sidebar-lg-show
-
-    // Sidebar element classes.
-    'sidebar_class' => 'sidebar sidebar-pills bg-light',
-    // Remove "sidebar-transparent" for standard sidebar look
-    // Try "sidebar-light" or "sidebar-dark" for dark/light links
-    // You can also add a background class like bg-dark, bg-primary, bg-secondary, bg-danger, bg-warning, bg-success, bg-info, bg-blue, bg-light-blue, bg-indigo, bg-purple, bg-pink, bg-red, bg-orange, bg-yellow, bg-green, bg-teal, bg-cyan
-
-    // ------
-    // FOOTER
-    // ------
-
-    // Footer element classes.
-    'footer_class' => 'app-footer d-none',
-    // hide it with d-none
-    // change background color with bg-dark, bg-primary, bg-secondary, bg-danger, bg-warning, bg-success, bg-info, bg-blue, bg-light-blue, bg-indigo, bg-purple, bg-pink, bg-red, bg-orange, bg-yellow, bg-green, bg-teal, bg-cyan, bg-white
-
-    // Developer or company name. Shown in footer.
-    'developer_name' => 'Faculté des lettres',
-
-    // Developer website. Link in footer. Type false if you want to hide it.
-    'developer_link' => 'https://www.unil.ch/lettres/fr/home.html',
-
-    // Show powered by Laravel Backpack in the footer? true/false
-    'show_powered_by' => false,
-
-    // -------
-    // SCRIPTS
-    // -------
-
-    // JS files that are loaded in all pages, using Laravel's asset() helper
-    'scripts' => [
-        // Backstrap includes jQuery, Bootstrap, CoreUI, PNotify, Popper
-        'packages/backpack/base/js/bundle.js',
-
-        // examples (everything inside the bundle, loaded from CDN)
-        // 'https://code.jquery.com/jquery-3.4.1.min.js',
-        // 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js',
-        // 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js',
-        // 'https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js',
-        // 'https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
-        // 'https://unpkg.com/sweetalert/dist/sweetalert.min.js',
-        // 'https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js'
-
-        // examples (VueJS or React)
-        // 'https://unpkg.com/vue@2.4.4/dist/vue.min.js',
-        // 'https://unpkg.com/react@16/umd/react.production.min.js',
-        // 'https://unpkg.com/react-dom@16/umd/react-dom.production.min.js',
-    ],
-
-    // JS files that are loaded in all pages, using Laravel's mix() helper
-    'mix_scripts' => [// file_path => manifest_directory_path
-        // 'js/app.js' => '',
-    ],
-
-    // -------------
-    // CACHE-BUSTING
-    // -------------
-
-    // All JS and CSS assets defined above have this string appended as query string (?v=string).
-    // If you want to manually trigger cachebusting for all styles and scripts,
-    // append or prepent something to the string below, so that it's different.
-    'cachebusting_string' => \PackageVersions\Versions::getVersion('backpack/crud'),
-
-    /*
-    |--------------------------------------------------------------------------
     | Registration Open
     |--------------------------------------------------------------------------
     |
@@ -175,6 +26,19 @@ return [
     // You can make sure all your URLs use this prefix by using the backpack_url() helper instead of url()
     'route_prefix' => 'admin',
 
+    // The web middleware (group) used in all base & CRUD routes
+    // If you've modified your "web" middleware group (ex: removed sessions), you can use a different
+    // route group, that has all the the middleware listed below in the comments.
+    'web_middleware' => 'web',
+    // Or you can comment the above, and uncomment the complete list below.
+    // 'web_middleware' => [
+    //     \App\Http\Middleware\EncryptCookies::class,
+    //     \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+    //     \Illuminate\Session\Middleware\StartSession::class,
+    //     \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+    //     \App\Http\Middleware\VerifyCsrfToken::class,
+    // ],
+
     // Set this to false if you would like to use your own AuthController and PasswordController
     // (you then need to setup your auth routes manually in your routes.php file)
     'setup_auth_routes' => true,
@@ -187,6 +51,10 @@ return [
     // (you then need to manually define the routes in your web.php)
     'setup_my_account_routes' => true,
 
+    // Set this to false if you would like to skip adding the password recovery routes
+    // (you then need to manually define the routes in your web.php)
+    'setup_password_recovery_routes' => true,
+
     /*
     |--------------------------------------------------------------------------
     | Security
@@ -198,6 +66,10 @@ return [
     // How many seconds should a visitor wait, after they've requested a
     // password reset, before they can try again for the same email?
     'password_recovery_throttle_notifications' => 600, // time in seconds
+
+    // How much time should the token sent to the user email be considered valid?
+    // After this time expires, user needs to request a new reset token.
+    'password_recovery_token_expiration' => 60, // time in minutes
 
     // Backpack will prevent an IP from trying to reset the password too many times,
     // so that a malicious actor cannot try too many emails, too see if they have
@@ -216,7 +88,7 @@ return [
     */
 
     // Fully qualified namespace of the User model
-    'user_model_fqn' => App\User::class,
+    'user_model_fqn' => config('auth.providers.users.model'),
 
     // The classes for the middleware to check if the visitor is an admin
     // Can be a single class or an array of clases
@@ -246,27 +118,15 @@ return [
     'passwords' => 'backpack',
 
     // What kind of avatar will you like to show to the user?
-    // Default: gravatar (automatically use the gravatar for his email)
+    // Default: gravatar (automatically use the gravatar for their email)
     // Other options:
-    // - placehold (generic image with his first letter)
+    // - null (generic image with their first letter)
     // - example_method_name (specify the method on the User model that returns the URL)
     'avatar_type' => 'gravatar',
 
-    /*
-    |--------------------------------------------------------------------------
-    | Theme (User Interface)
-    |--------------------------------------------------------------------------
-    */
-    // Change the view namespace in order to load a different theme than the one Backpack provides.
-    // You can create child themes yourself, by creating a view folder anywhere in your resources/views
-    // and choosing that view_namespace instead of the default one. Backpack will load a file from there
-    // if it exists, otherwise it will load it from the default namespace ("backpack::").
-
-    'view_namespace' => 'backpack::',
-
-    // EXAMPLE: if you create a new folder in resources/views/vendor/myname/mypackage,
-    // your namespace would be the one below. IMPORTANT: in this case the namespace ends with a dot.
-    // 'view_namespace' => 'vendor.myname.mypackage.',
+    // Gravatar fallback options are 'identicon', 'monsterid', 'wavatar', 'retro', 'robohash', 'blank'
+    // 'blank' will keep the generic image with the user first letter
+    'gravatar_fallback' => 'blank',
 
     /*
     |--------------------------------------------------------------------------
@@ -283,17 +143,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | License Code
+    | Backpack Token Username
     |--------------------------------------------------------------------------
     |
-    | If you, your employer or your client make money by using Backpack, you need
-    | to purchase a license. A license code will be provided after purchase,
-    | which you can put here or in your ENV file in staging & production.
+    | If you have access to closed-source Backpack add-ons, please provide
+    | your token username here, if you're getting yellow alerts on your
+    | admin panel's pages. Normally this is not needed, it is
+    | preferred to add this as an environment variable
+    | (most likely in your .env file).
     |
     | More info and payment form on:
     | https://www.backpackforlaravel.com
     |
     */
 
-    'license_code' => env('BACKPACK_LICENSE', false),
+    'token_username' => env('BACKPACK_TOKEN_USERNAME', false),
 ];

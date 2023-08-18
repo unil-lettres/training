@@ -11,9 +11,7 @@ Route::group([
     'middleware' => ['web', config('backpack.base.middleware_key', 'admin')],
     'namespace' => 'App\Http\Controllers\Admin',
 ], function () { // custom admin routes
-    Route::get('status/ajax-status-options', 'StatusCrudController@statusOptions');
     Route::crud('status', 'StatusCrudController');
-    Route::get('category/ajax-category-options', 'CategoryCrudController@categoryOptions');
     Route::crud('category', 'CategoryCrudController');
     Route::crud('training', 'TrainingCrudController');
     Route::crud('request', 'RequestCrudController');

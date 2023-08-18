@@ -38,36 +38,31 @@ class StatusCrudController extends CrudController
         if (! $this->crud->getRequest()->has('order')) {
             CRUD::orderBy('name', 'ASC');
         }
+    }
 
-        /*
-        |--------------------------------------------------------------------------
-        | CrudPanel Configuration
-        |--------------------------------------------------------------------------
-        */
-
-        CRUD::operation('list', function () {
-            // Columns
-            CRUD::addColumn(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
-        });
-
-        CRUD::operation(['create', 'update'], function () {
-            // Fields
-            CRUD::addField(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
-
-            // add asterisk for fields that are required in StatusRequest
-            CRUD::setRequiredFields(StoreRequest::class, 'create');
-            CRUD::setRequiredFields(UpdateRequest::class, 'edit');
-        });
+    public function setupListOperation()
+    {
+        // Columns
+        CRUD::column(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
     }
 
     protected function setupCreateOperation()
     {
         CRUD::setValidation(StoreRequest::class);
+
+        // Fields
+        CRUD::field(['name' => 'name', 'type' => 'text', 'label' => 'Nom']);
+
+        // add asterisk for fields that are required in StatusRequest
+        CRUD::setRequiredFields(StoreRequest::class, 'create');
+        CRUD::setRequiredFields(UpdateRequest::class, 'edit');
     }
 
     protected function setupUpdateOperation()
     {
         CRUD::setValidation(UpdateRequest::class);
+
+        $this->setupCreateOperation();
     }
 
     public function statusOptions(Request $request)

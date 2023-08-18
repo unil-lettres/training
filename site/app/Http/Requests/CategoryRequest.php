@@ -49,7 +49,7 @@ class CategoryRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'name.required' => 'Le champ nom est requis.',
         ];
     }
 }

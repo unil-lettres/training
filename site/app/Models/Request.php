@@ -141,13 +141,4 @@ class Request extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
-
-    public function setFileAttribute($value)
-    {
-        $attribute_name = 'file';
-        $disk = 'uploads';
-        $destination_path = 'uploads';
-
-        $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
-    }
 }

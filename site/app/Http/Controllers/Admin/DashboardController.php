@@ -20,7 +20,7 @@ class DashboardController
         $requests = Request::all();
         $users = User::all();
 
-        return view('vendor.backpack.base.dashboard')
+        return view('vendor.backpack.ui.dashboard')
             ->with(
                 [
                     'trainings' => $trainings,
