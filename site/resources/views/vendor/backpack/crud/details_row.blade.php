@@ -1,10 +1,10 @@
 <div class="m-t-10 m-b-10 p-l-10 p-r-10 p-t-10 p-b-10" bp-section="crud-details-row">
     <div class="row">
-		<div class="col-md-12 m-4">
+		<div class="col-12 m-4">
             <div class="mb-2">
                 <b>Nom:</b> {{ $entry->name ?? '-' }}
             </div>
-            <div class="mb-2">
+            <div class="mb-2 details-row-description">
                 <b>Description:</b> {!! $entry->description ?? '-' !!}
             </div>
             <div class="mb-2">
@@ -19,7 +19,7 @@
             <div class="mb-2">
                 <b>Niveau requis:</b> {{ $entry->level ?? '-' }}
             </div>
-            <div class="mb-2">
+            <div class="mb-2 details-row-comments">
                 <b>Remarques:</b> {!! $entry->comments ?? '-' !!}
             </div>
             <div class="mb-2">
