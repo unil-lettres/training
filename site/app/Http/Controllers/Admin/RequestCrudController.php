@@ -330,7 +330,7 @@ class RequestCrudController extends CrudController
             'upload' => true,
             'tab' => 'Champs d\'administration',
         ])->withFiles([
-            'disk' => 'uploads',
+            'disk' => 'public',
             'path' => 'uploads',
         ]);
         CRUD::field([

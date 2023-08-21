@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 
 class RequestRequest extends FormRequest
 {
@@ -47,7 +48,12 @@ class RequestRequest extends FormRequest
             'contacts.*.notes' => 'nullable|max:500',
             'decision_date' => 'nullable|date',
             'decision_comments' => 'nullable|min:1',
-            'file' => 'nullable|file',
+            'file' => [
+                'nullable',
+                // Allow all types, but max upload size is 20MB
+                File::types([])
+                    ->max(20 * 1024),
+            ],
             'user_id' => 'nullable|integer',
             'category_id' => 'nullable|integer',
             'status_id' => 'nullable|integer',

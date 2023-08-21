@@ -27,3 +27,6 @@ fi
 
 # Run migrations & seed data
 php artisan migrate:fresh --seed
+
+# Create the symlink to make storage public
+php artisan storage:link
