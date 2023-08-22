@@ -29,6 +29,7 @@ class AdminTest extends DuskTestCase
                 ->loginAsUser('second-user@example.com', 'password');
 
             $browser->visit('/admin/dashboard')
+                ->waitForText('Access denied')
                 ->assertSee('Access denied')
                 ->assertDontSee('Gérer les utilisateurs');
         });
@@ -46,6 +47,7 @@ class AdminTest extends DuskTestCase
                 ->loginAsUser('first-user@example.com', 'password');
 
             $browser->visit('/admin/dashboard')
+                ->waitForText('Bonjour First user')
                 ->assertSee('Bonjour First user')
                 ->assertSee('Gérer les utilisateurs')
                 ->assertDontSee('Access denied');
