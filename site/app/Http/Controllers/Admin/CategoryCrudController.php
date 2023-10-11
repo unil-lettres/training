@@ -19,11 +19,11 @@ use Illuminate\Http\Request;
  */
 class CategoryCrudController extends CrudController
 {
-    use ListOperation;
     use CreateOperation;
-    use InlineCreateOperation;
-    use UpdateOperation;
     use DeleteOperation;
+    use InlineCreateOperation;
+    use ListOperation;
+    use UpdateOperation;
 
     public function setup()
     {

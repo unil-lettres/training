@@ -21,12 +21,12 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
  */
 class RequestCrudController extends CrudController
 {
-    use ListOperation;
+    use CloneOperation;
     use CreateOperation;
-    use UpdateOperation;
     use DeleteOperation;
     use FetchOperation;
-    use CloneOperation;
+    use ListOperation;
+    use UpdateOperation;
 
     public function setup()
     {

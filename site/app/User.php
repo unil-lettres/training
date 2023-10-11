@@ -9,9 +9,9 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
     use CrudTrait;
     use HasRoles;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.

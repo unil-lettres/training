@@ -16,10 +16,10 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
  */
 class TrainingCrudController extends CrudController
 {
-    use ListOperation;
     use CreateOperation;
-    use UpdateOperation;
     use DeleteOperation;
+    use ListOperation;
+    use UpdateOperation;
 
     public function setup()
     {
