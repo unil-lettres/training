@@ -30,7 +30,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./dev/config
-          file: app.dockerfile
+          file: ./dev/config/app.dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: unillett/training:latest
