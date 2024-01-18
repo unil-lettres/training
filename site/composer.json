@@ -17,7 +17,7 @@
         "php": "^8.1",
         "backpack/crud": "^6.0",
         "backpack/permissionmanager": "^7.0",
-        "backpack/pro": "^2.0",
+        "backpack/pro": "2.0.23",
         "backpack/theme-coreuiv2": "^1.1",
         "bugsnag/bugsnag-laravel": "^2.26",
         "guzzlehttp/guzzle": "^7.5",
@@ -25,8 +25,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^4.0",
         "spatie/laravel-ignition": "^2.0",
-        "symfony/http-client": "^6.0",
-        "symfony/postmark-mailer": "^6.0"
+        "symfony/http-client": "^7.0",
+        "symfony/postmark-mailer": "^7.0"
     },
     "require-dev": {
         "backpack/generators": "^4.0",
