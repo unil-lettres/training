@@ -101,7 +101,16 @@ jobs:
         working-directory: ./site
         run: php artisan test
 
-      - name: Expose failed tests
-        working-directory: ./site
-        run: php artisan email:failure
+      - name: Screenshots of failed tests
         if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-failed-tests
+          path: site/tests/Browser/screenshots
+
+      - name: Logs of failed tests
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-failed-tests
+          path: site/tests/Browser/console
