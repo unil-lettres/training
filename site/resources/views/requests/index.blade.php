@@ -19,8 +19,8 @@
             <tbody>
                 @foreach ($requests as $request)
                     <tr>
-                        <td>{{ $request->name }}</td>
-                        <td>{!! $request->description !!}</td>
+                        <td>{{ Str::limit($request->name, 40) }}</td>
+                        <td>{{ Str::limit(strip_tags($request->description), 75) }}</td>
                         <td>
                             @if($request->filling_date)
                                 {{ $request->filling_date->format('d-m-Y H:i:s') }}
