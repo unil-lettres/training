@@ -67,7 +67,7 @@ class AdminTest extends DuskTestCase
 
             $browser->assertSee('Gérer les utilisateurs')
                 ->clickLink('Gérer les utilisateurs')
-                ->waitForText('first-user@example.com')
+                ->waitForText('first-user@example.com@')
                 ->assertSee('first-user@example.com')
                 ->assertSee('second-user@example.com');
         });
