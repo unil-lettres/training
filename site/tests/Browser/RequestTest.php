@@ -70,7 +70,7 @@ class RequestTest extends DuskTestCase
 
             $browser->press('Envoyer');
 
-            $browser->assertPathIs('/request/createeee')
+            $browser->assertPathIs('/request/create')
                 ->assertSee('Le champ nom est requis.');
         });
     }
