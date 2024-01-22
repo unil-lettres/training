@@ -1,6 +1,7 @@
 name: ci
 on: [push, pull_request]
 env:
+  MAIL_HOST: ${{ secrets.MAIL_HOST }}
   MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
   MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
   CI: gha
