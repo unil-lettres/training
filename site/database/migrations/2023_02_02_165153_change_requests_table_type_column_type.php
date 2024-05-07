@@ -14,7 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('requests', function (Blueprint $table) {
-            $table->string('type', 300)->change();
+            $table->string('type', 300)
+                ->nullable()
+                ->change();
         });
     }
 
@@ -26,7 +28,9 @@ return new class extends Migration
     public function down()
     {
         Schema::table('requests', function (Blueprint $table) {
-            $table->text('type')->change();
+            $table->text('type')
+                ->nullable()
+                ->change();
         });
     }
 };
