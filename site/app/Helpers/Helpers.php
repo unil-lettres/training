@@ -9,7 +9,7 @@ class Helpers
     /**
      * Return a human readable status
      */
-    public static function requestStatus(string $status): string
+    public static function requestStatus(?string $status): string
     {
         $status = collect(Request::$status)->pull($status);
 
