@@ -11,7 +11,7 @@
 
         <ul class="list-group">
             <li class="list-group-item">
-                <b>2.34</b><span class="text-black-50 ms-2">10/05/2024</span>
+                <b>2.37</b><span class="text-black-50 ms-2">10/05/2024</span>
                 <ul>
                     <li>Mise a jour de l'application (Laravel 11)</li>
                     <li>Nouvelle structure <a href="https://laravel.com/docs/11.x/structure" target="_blank">https://laravel.com/docs/11.x/structure</a></li>
