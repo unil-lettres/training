@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\User;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Request extends Model
 {
@@ -22,6 +24,7 @@ class Request extends Model
     public $timestamps = true;
 
     // protected $guarded = ['id'];
+
     protected $fillable = [
         'name',
         'theme',
@@ -47,14 +50,6 @@ class Request extends Model
 
     protected $fakeColumns = ['extras'];
 
-    protected $casts = [
-        'extras' => 'array',
-        'contacts' => 'array',
-        'deadline' => 'datetime',
-        'filling_date' => 'datetime',
-        'decision_date' => 'datetime',
-    ];
-
     // protected $hidden = [];
 
     public static $status = [
@@ -73,6 +68,17 @@ class Request extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    protected function casts(): array
+    {
+        return [
+            'extras' => 'array',
+            'contacts' => 'array',
+            'deadline' => 'datetime',
+            'filling_date' => 'datetime',
+            'decision_date' => 'datetime',
+        ];
+    }
 
     /**
      * Return cleaned description
@@ -103,25 +109,25 @@ class Request extends Model
     /**
      * Get the category associated with the request.
      */
-    public function category()
+    public function category(): BelongsTo
     {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo(Category::class);
     }
 
     /**
      * Get the status associated with the request.
      */
-    public function status()
+    public function status(): BelongsTo
     {
-        return $this->belongsTo('App\Models\Status');
+        return $this->belongsTo(Status::class);
     }
 
     /**
      * Get the user associated with the request.
      */
-    public function user()
+    public function user(): BelongsTo
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     /*

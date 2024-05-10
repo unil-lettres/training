@@ -8,11 +8,9 @@ use Tests\TestCase;
 class HelpersTest extends TestCase
 {
     /**
-     * Request status helper should return the right human readable string
-     *
-     * @return void
+     * Request status helper should return the right human readable string.
      */
-    public function testRequestStatus()
+    public function testRequestStatus(): void
     {
         $status = 'new';
         $this->assertEquals('Nouveau', Helpers::requestStatus($status));

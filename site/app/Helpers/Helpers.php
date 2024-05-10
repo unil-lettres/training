@@ -8,11 +8,8 @@ class Helpers
 {
     /**
      * Return a human readable status
-     *
-     * @param  string  $status
-     * @return string $status
      */
-    public static function requestStatus($status)
+    public static function requestStatus(string $status): string
     {
         $status = collect(Request::$status)->pull($status);
 
@@ -25,40 +22,32 @@ class Helpers
 
     /**
      * Return the number of requests with the status equal to "new"
-     *
-     * @return int
      */
-    public static function newRequestCount()
+    public static function newRequestCount(): int
     {
         return Request::where('status_admin', 'new')->count();
     }
 
     /**
      * Return the number of requests with the status equal to "pending"
-     *
-     * @return int
      */
-    public static function pendingRequestCount()
+    public static function pendingRequestCount(): int
     {
         return Request::where('status_admin', 'pending')->count();
     }
 
     /**
      * Return the number of requests with the status different from "resolved"
-     *
-     * @return int
      */
-    public static function unsolvedRequestCount()
+    public static function unsolvedRequestCount(): int
     {
         return Request::where('status_admin', '!=', 'resolved')->count();
     }
 
     /**
      * Return the percentage of solved requests
-     *
-     * @return float|null
      */
-    public static function solvedRequestPercentage()
+    public static function solvedRequestPercentage(): ?float
     {
         $requests = Request::all();
 
@@ -74,10 +63,8 @@ class Helpers
 
     /**
      * Return the string representation of a checkbox value
-     *
-     * @return string
      */
-    public static function checkboxToString($checkbox)
+    public static function checkboxToString($checkbox): string
     {
         return $checkbox ? 'Oui' : 'Non';
     }

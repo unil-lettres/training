@@ -4,19 +4,18 @@ namespace App\Http\Middleware;
 
 use App\User;
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Request as RequestFacade;
+use Symfony\Component\HttpFoundation\Response;
 
 class CheckAai
 {
     /**
      * Handle an incoming request.
-     *
-     * @param  Request  $request
-     * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next): Response
     {
         // Check if user is authenticated
         if (Auth::user()) {
@@ -47,8 +46,6 @@ class CheckAai
 
     /**
      * Create a new aai user.
-     *
-     * @return User $user
      */
     private function createAaiUser(): User
     {
@@ -62,19 +59,9 @@ class CheckAai
 
     /**
      * Wrapper function to be able to retrieve server variables.
-     *
-     * @return string|null
      */
-    private function getServerVariable(string $variableName)
+    private function getServerVariable(string $variableName): ?string
     {
-        $variable = null;
-
-        if (Request::server($variableName)) {
-            $variable = Request::server($variableName);
-        } elseif (Request::server('REDIRECT_'.$variableName)) {
-            $variable = Request::server('REDIRECT_'.$variableName);
-        }
-
-        return $variable;
+        return RequestFacade::server($variableName) ?? RequestFacade::server('REDIRECT_'.$variableName);
     }
 }

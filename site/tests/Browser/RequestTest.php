@@ -12,7 +12,7 @@ class RequestTest extends DuskTestCase
 {
     use ProvidesBrowser;
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         parent::tearDown();
         static::closeAll();

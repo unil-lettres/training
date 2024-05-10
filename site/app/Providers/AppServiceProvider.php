@@ -9,21 +9,28 @@ use Illuminate\Support\ServiceProvider;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * The path to your application's "home" route.
      *
-     * @return void
+     * Typically, users are redirected here after authentication.
+     *
+     * @var string
      */
-    public function register()
+    public const HOME = '/home';
+
+    /**
+     * Register any application services.
+     */
+    public function register(): void
     {
-        //
+        if ($this->app->isLocal()) {
+            $this->app->register(TelescopeServiceProvider::class);
+        }
     }
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         // Fix migration error
         Schema::defaultStringLength(191);

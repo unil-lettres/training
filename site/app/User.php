@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Models\Request;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -31,20 +33,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+        ];
+    }
 
     /**
      * Get the requests for the user.
      */
-    public function requests()
+    public function requests(): HasMany
     {
-        return $this->hasMany('App\Models\Request');
+        return $this->hasMany(Request::class);
     }
 }

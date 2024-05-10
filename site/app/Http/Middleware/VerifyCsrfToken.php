@@ -21,4 +21,12 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
     ];
+
+    // Override the default runningUnitTests method because the application
+    // environment is not set to "testing" (default) when running tests, but
+    // instead it is set to "dusk.testing".
+    protected function runningUnitTests(): bool
+    {
+        return parent::runningUnitTests() || $this->app->environment('dusk.testing');
+    }
 }

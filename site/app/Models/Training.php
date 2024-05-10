@@ -22,18 +22,13 @@ class Training extends Model
     public $timestamps = true;
 
     // protected $guarded = ['id'];
+
     protected $fillable = [
         'name',
         'description',
         'start',
         'end',
         'visible',
-    ];
-
-    protected $casts = [
-        'visible' => 'boolean',
-        'start' => 'datetime',
-        'end' => 'datetime',
     ];
 
     // protected $hidden = [];
@@ -43,6 +38,15 @@ class Training extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    protected function casts(): array
+    {
+        return [
+            'visible' => 'boolean',
+            'start' => 'datetime',
+            'end' => 'datetime',
+        ];
+    }
 
     /*
     |--------------------------------------------------------------------------

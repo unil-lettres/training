@@ -8,10 +8,8 @@ class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         // only allow updates if the user is logged in
         return auth()->check();
@@ -19,10 +17,8 @@ class CategoryRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => 'required|min:1|max:100|unique:categories,name',
@@ -31,10 +27,8 @@ class CategoryRequest extends FormRequest
 
     /**
      * Get the validation attributes that apply to the request.
-     *
-     * @return array
      */
-    public function attributes()
+    public function attributes(): array
     {
         return [
             //
@@ -43,10 +37,8 @@ class CategoryRequest extends FormRequest
 
     /**
      * Get the validation messages that apply to the request.
-     *
-     * @return array
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'name.required' => 'Le champ nom est requis.',
