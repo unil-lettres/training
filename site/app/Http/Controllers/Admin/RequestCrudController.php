@@ -149,8 +149,12 @@ class RequestCrudController extends CrudController
         CRUD::setValidation(StoreRequest::class);
 
         // Fields
-        CRUD::field(['name' => 'name', 'type' => 'text', 'label' => 'Libellé', 'tab' => 'Champs communs']);
-        CRUD::field(['name' => 'description', 'type' => 'summernote', 'label' => 'Description', 'tab' => 'Champs communs']);
+        CRUD::field(
+            ['name' => 'name', 'type' => 'text', 'label' => 'Libellé']
+        )->tab('Champs communs');
+        CRUD::field(
+            ['name' => 'description', 'type' => 'summernote', 'label' => 'Description']
+        )->tab('Champs communs');
         CRUD::field([
             'name' => 'filling_date',
             'type' => 'datetime_picker',
@@ -161,10 +165,13 @@ class RequestCrudController extends CrudController
             'allows_null' => true,
             'label' => 'Date dépot',
             'default' => now(),
-            'tab' => 'Champs communs',
-        ]);
-        CRUD::field(['name' => 'applicants', 'type' => 'text', 'label' => 'Demandeur(s)', 'tab' => 'Champs communs']);
-        CRUD::field(['name' => 'theme', 'type' => 'text', 'label' => 'Thème', 'tab' => 'Champs communs']);
+        ])->tab('Champs communs');
+        CRUD::field(
+            ['name' => 'applicants', 'type' => 'text', 'label' => 'Demandeur(s)']
+        )->tab('Champs communs');
+        CRUD::field(
+            ['name' => 'theme', 'type' => 'text', 'label' => 'Thème']
+        )->tab('Champs communs');
         CRUD::field([
             'name' => 'deadline',
             'type' => 'date_picker',
@@ -173,11 +180,16 @@ class RequestCrudController extends CrudController
             ],
             'allows_null' => true,
             'label' => 'Délai production',
-            'tab' => 'Champs communs',
-        ]);
-        CRUD::field(['name' => 'level', 'type' => 'text', 'label' => 'Niveau requis', 'tab' => 'Champs communs']);
-        CRUD::field(['name' => 'comments', 'type' => 'summernote', 'label' => 'Remarques', 'tab' => 'Champs communs']);
-        CRUD::field(['name' => 'contact', 'type' => 'email', 'label' => 'Mail contact', 'tab' => 'Champs communs']);
+        ])->tab('Champs communs');
+        CRUD::field(
+            ['name' => 'level', 'type' => 'text', 'label' => 'Niveau requis']
+        )->tab('Champs communs');
+        CRUD::field(
+            ['name' => 'comments', 'type' => 'summernote', 'label' => 'Remarques']
+        )->tab('Champs communs');
+        CRUD::field(
+            ['name' => 'contact', 'type' => 'email', 'label' => 'Mail contact']
+        )->tab('Champs communs');
 
         CRUD::field([
             'name' => 'doctoral_school',
@@ -185,41 +197,35 @@ class RequestCrudController extends CrudController
             'type' => 'text',
             'fake' => true,
             'store_in' => 'extras',
-            'tab' => 'Champs chercheur/doctorant',
-        ]);
-
+        ])->tab('Chercheur/doctorant');
         CRUD::field([
             'name' => 'fns',
             'label' => 'Fns',
             'type' => 'checkbox',
             'fake' => true,
             'store_in' => 'extras',
-            'tab' => 'Champs chercheur/doctorant',
-        ]);
+        ])->tab('Chercheur/doctorant');
         CRUD::field([
             'name' => 'doctoral_status',
             'label' => 'Doctorat statut',
             'type' => 'text',
             'fake' => true,
             'store_in' => 'extras',
-            'tab' => 'Champs chercheur/doctorant',
-        ]);
+        ])->tab('Chercheur/doctorant');
         CRUD::field([
             'name' => 'doctoral_level',
             'label' => 'Niveau actuel',
             'type' => 'text',
             'fake' => true,
             'store_in' => 'extras',
-            'tab' => 'Champs chercheur/doctorant',
-        ]);
+        ])->tab('Chercheur/doctorant');
         CRUD::field([
             'name' => 'tested_products',
             'label' => 'Produits testés',
             'type' => 'text',
             'fake' => true,
             'store_in' => 'extras',
-            'tab' => 'Champs chercheur/doctorant',
-        ]);
+        ])->tab('Chercheur/doctorant');
 
         CRUD::field([
             'name' => 'teachers_nbr',
@@ -227,24 +233,21 @@ class RequestCrudController extends CrudController
             'type' => 'checkbox',
             'fake' => true,
             'store_in' => 'extras',
-            'tab' => 'Champs enseignant',
-        ]);
+        ])->tab('Enseignant');
         CRUD::field([
             'name' => 'students_nbr',
             'label' => 'Avec un ou des étudiants',
             'type' => 'checkbox',
             'fake' => true,
             'store_in' => 'extras',
-            'tab' => 'Champs enseignant',
-        ]);
+        ])->tab('Enseignant');
         CRUD::field([
             'name' => 'action_type',
             'label' => 'Intervention pour toute une classe, pendant les cours',
             'type' => 'checkbox',
             'fake' => true,
             'store_in' => 'extras',
-            'tab' => 'Champs enseignant',
-        ]);
+        ])->tab('Enseignant');
 
         // Administration fields
         CRUD::field([
@@ -252,15 +255,13 @@ class RequestCrudController extends CrudController
             'type' => 'select_from_array',
             'name' => 'status_admin',
             'options' => Request::$status,
-            'tab' => 'Champs d\'administration',
-        ]);
+        ])->tab('Administration');
         CRUD::field([
             'label' => 'Type',
             'type' => 'select_from_array',
             'name' => 'type',
             'options' => Request::$type,
-            'tab' => 'Champs d\'administration',
-        ]);
+        ])->tab('Administration');
         CRUD::field([
             'label' => 'Catégorie',
             'type' => 'relationship',
@@ -269,8 +270,7 @@ class RequestCrudController extends CrudController
             'model' => "App\Models\Category",
             'placeholder' => 'Sélectionner une catégorie',
             'inline_create' => true,
-            'tab' => 'Champs d\'administration',
-        ]);
+        ])->tab('Administration');
         CRUD::field([
             'label' => 'Décisions',
             'type' => 'relationship',
@@ -279,8 +279,7 @@ class RequestCrudController extends CrudController
             'model' => "App\Models\Status",
             'placeholder' => 'Sélectionner une décision',
             'inline_create' => true,
-            'tab' => 'Champs d\'administration',
-        ]);
+        ])->tab('Administration');
         CRUD::field([
             'label' => 'Date de décision',
             'name' => 'decision_date',
@@ -290,14 +289,12 @@ class RequestCrudController extends CrudController
                 'language' => 'fr',
             ],
             'allows_null' => true,
-            'tab' => 'Champs d\'administration',
-        ]);
+        ])->tab('Administration');
         CRUD::field([
             'label' => 'Commentaire relatif à la décision',
             'name' => 'decision_comments',
             'type' => 'summernote',
-            'tab' => 'Champs d\'administration',
-        ]);
+        ])->tab('Administration');
         CRUD::field([
             'label' => 'Personnes ressources',
             'name' => 'contacts',
@@ -321,15 +318,13 @@ class RequestCrudController extends CrudController
             'min_rows' => 1,
             'max_rows' => 10,
             'reorder' => true,
-            'tab' => 'Champs d\'administration',
-        ]);
+        ])->tab('Administration');
         CRUD::field([
             'label' => 'Document',
             'name' => 'file',
             'type' => 'upload',
             'upload' => true,
-            'tab' => 'Champs d\'administration',
-        ])->withFiles([
+        ])->tab('Administration')->withFiles([
             'disk' => 'public',
             'path' => 'uploads',
         ]);
@@ -341,8 +336,7 @@ class RequestCrudController extends CrudController
             'attribute' => 'name',
             'model' => "App\User",
             'default' => auth()->user()->id,
-            'tab' => 'Champs d\'administration',
-        ]);
+        ])->tab('Administration');
 
         // add asterisk for fields that are required in RequestRequest
         CRUD::setRequiredFields(StoreRequest::class, 'create');
