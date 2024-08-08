@@ -23,7 +23,7 @@
  */
 
 /*!
- * jQuery UI Datepicker 1.13.3
+ * jQuery UI Datepicker 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -32,7 +32,7 @@
  */
 
 /*!
- * jQuery UI Keycode 1.13.3
+ * jQuery UI Keycode 1.14.0
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
