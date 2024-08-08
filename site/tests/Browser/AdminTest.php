@@ -25,7 +25,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationAsUser()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login())
+            $browser->visit(new Login)
                 ->loginAsUser('second-user@example.com', 'password');
 
             $browser->visit('/admin/dashboard')
@@ -43,7 +43,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationAsAdmin()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login())
+            $browser->visit(new Login)
                 ->loginAsUser('first-user@example.com', 'password');
 
             $browser->visit('/admin/dashboard')
@@ -62,7 +62,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationUsers()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login())
+            $browser->visit(new Login)
                 ->loginAsUser('first-user@example.com', 'password');
 
             $browser->assertSee('Gérer les utilisateurs')
@@ -81,7 +81,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationCreateRequest()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login())
+            $browser->visit(new Login)
                 ->loginAsUser('first-user@example.com', 'password');
 
             $browser->assertSee('Demandes')
@@ -118,7 +118,7 @@ class AdminTest extends DuskTestCase
         });
 
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login())
+            $browser->visit(new Login)
                 ->loginAsUser('first-user@example.com', 'password');
 
             $browser->assertSee('Formations')
@@ -153,7 +153,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationCreateCategory()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login())
+            $browser->visit(new Login)
                 ->loginAsUser('first-user@example.com', 'password');
 
             $browser->visit('/admin/category')
@@ -180,7 +180,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationCreateStatus()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login())
+            $browser->visit(new Login)
                 ->loginAsUser('first-user@example.com', 'password');
 
             $browser->visit('/admin/status')

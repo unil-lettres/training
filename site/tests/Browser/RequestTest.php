@@ -26,10 +26,10 @@ class RequestTest extends DuskTestCase
     public function testCreateStudentRequest()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login())
+            $browser->visit(new Login)
                 ->loginAsUser('second-user@example.com', 'password');
 
-            $browser->visit(new CreateRequest())
+            $browser->visit(new CreateRequest)
                 ->selectRequestType('Étudiant');
 
             $browser->assertSee('Formation demandée')
@@ -62,10 +62,10 @@ class RequestTest extends DuskTestCase
     public function testInvalidRequest()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login())
+            $browser->visit(new Login)
                 ->loginAsUser('second-user@example.com', 'password');
 
-            $browser->visit(new CreateRequest())
+            $browser->visit(new CreateRequest)
                 ->selectRequestType('Étudiant');
 
             $browser->press('Envoyer');

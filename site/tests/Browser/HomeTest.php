@@ -42,7 +42,7 @@ class HomeTest extends DuskTestCase
     public function testHomepageAsUser()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login())
+            $browser->visit(new Login)
                 ->loginAsUser('second-user@example.com', 'password');
 
             $browser->visit('/')
@@ -62,7 +62,7 @@ class HomeTest extends DuskTestCase
     public function testHomepageAsAdmin()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login())
+            $browser->visit(new Login)
                 ->loginAsUser('first-user@example.com', 'password');
 
             $browser->visit('/')
