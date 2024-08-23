@@ -1,8 +1,7 @@
 .idea
 .DS_Store
-dev/.env
-dev/dbdata/*
-!dev/dbdata/.gitkeep
-site/auth.json
+/docker/.env
+/site/auth.json
 /site/.env.backup
 /site/phpunit.dusk.xml
+docker-compose.override.yml

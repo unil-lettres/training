@@ -1,0 +1,24 @@
+# The following configuration is used for development in conjunction with the
+# main docker-compose.yml. Please follow the instructions in the README.md
+# file to deploy the application.
+
+services:
+  train-app:
+    image: unillett/training:latest
+    build:
+      context: ./
+      dockerfile: ./docker/app.dockerfile
+      target: prod
+    restart: unless-stopped
+    deploy:
+      mode: global
+      resources:
+        limits:
+          memory: 1000M
+  train-mysql:
+    restart: unless-stopped
+    deploy:
+      mode: global
+      resources:
+        limits:
+          memory: 500M

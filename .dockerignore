@@ -1,0 +1,16 @@
+.git
+.idea
+.DS_Store
+
+/site/vendor
+/site/node_modules
+
+/site/.env
+/site/.phpunit.result.cache
+/site/storage/framework/cache/*
+/site/storage/framework/sessions/*
+/site/storage/framework/views/*
+/site/storage/logs/*
+/site/storage/app/tmp
+/site/public/hot/*
+/site/public/storage/*
