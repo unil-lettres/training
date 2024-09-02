@@ -5,6 +5,9 @@ ENV DOCKER_RUNNING=true
 ENV NODE_VERSION=20
 ENV COMPOSER_VERSION=2.6
 
+ARG BACKPACK_USERNAME
+ARG BACKPACK_PASSWORD
+
 # Update packages
 RUN apt-get update
 
@@ -66,7 +69,10 @@ RUN chmod +x /bin/docker-entrypoint.sh
 # Copy the application, except data listed in .dockerignore
 COPY site/ /var/www/training
 
-# Install php & js dependencies
+# Create the auth.json file for composer
+RUN composer config http-basic.backpackforlaravel.com $BACKPACK_USERNAME $BACKPACK_PASSWORD
+
+# Install php dependencies, install & compile js dependencies
 RUN cd /var/www/training && \
     composer install --no-interaction && \
     npm install && \

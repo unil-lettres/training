@@ -6,11 +6,20 @@
 /site/node_modules
 
 /site/.env
+/site/auth.json
+
+/site/.phpunit.cache
 /site/.phpunit.result.cache
+
 /site/storage/framework/cache/*
 /site/storage/framework/sessions/*
 /site/storage/framework/views/*
 /site/storage/logs/*
-/site/storage/app/tmp
+/site/storage/app/public/basset/*
+/site/storage/app/public/uploads/*
+/site/storage/app/tmp/*
+
 /site/public/hot/*
 /site/public/storage/*
+
+/site/bootstrap/cache/*
