@@ -9,7 +9,7 @@ rm .env.dusk.testing
 # Install php dependencies
 composer install --no-interaction
 
-# Install & compile js dependencies
+# Install js dependencies & compile
 npm install
 npm run prod
 

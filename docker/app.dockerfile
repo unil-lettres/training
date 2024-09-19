@@ -77,11 +77,9 @@ RUN composer config http-basic.backpackforlaravel.com $BACKPACK_USERNAME $BACKPA
 
 # Install php dependencies
 RUN cd /var/www/training && \
-    composer install --optimize-autoloader --no-dev --no-interaction && \
-    npm install && \
-    npm run prod
+    composer install --optimize-autoloader --no-dev --no-interaction
 
-# Install & compile js dependencies
+# Install js dependencies & compile
 RUN cd /var/www/training && \
     npm install && \
     npm run prod

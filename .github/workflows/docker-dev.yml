@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - "development"
-      - "master"
 env:
   DOCKERHUB_REPOSITORY: unillett/training
 
@@ -30,7 +29,6 @@ jobs:
 
       - name: Build and push latest dev version
         uses: docker/build-push-action@v6
-        if: github.ref == 'refs/heads/development'
         with:
           context: ./
           file: ./docker/app.dockerfile
@@ -41,7 +39,7 @@ jobs:
           cache-from: type=registry,ref=${{ env.DOCKERHUB_REPOSITORY }}:latest-dev
           cache-to: type=inline
 
-      - name: Build and push latest prod/stage version
+      - name: Build and push latest stage version
         uses: docker/build-push-action@v6
         with:
           context: ./
@@ -52,31 +50,8 @@ jobs:
             BACKPACK_PASSWORD=${{ secrets.BACKPACK_PASSWORD }}
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.DOCKERHUB_REPOSITORY }}:${{ github.ref == 'refs/heads/master' && 'latest' || 'latest-stage' }}
-          cache-from: type=registry,ref=${{ env.DOCKERHUB_REPOSITORY }}:${{ github.ref == 'refs/heads/master' && 'latest' || 'latest-stage' }}
-          cache-to: type=inline
-
-      - name: Retrieve latest tag
-        if: github.ref == 'refs/heads/master'
-        run: |
-          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
-          echo "Latest Tag: $latest_tag"
-          echo "::set-output name=latest_tag::$latest_tag"
-
-      - name: Build and push tagged version
-        uses: docker/build-push-action@v6
-        if: github.ref == 'refs/heads/master'
-        with:
-          context: ./
-          file: ./docker/app.dockerfile
-          target: prod
-          build-args: |
-            BACKPACK_USERNAME=${{ secrets.BACKPACK_USERNAME }}
-            BACKPACK_PASSWORD=${{ secrets.BACKPACK_PASSWORD }}
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ env.DOCKERHUB_REPOSITORY }}:${{ steps.get_tag.outputs.latest_tag }}
-          cache-from: type=registry,ref=${{ env.DOCKERHUB_REPOSITORY }}:latest
+          tags: ${{ env.DOCKERHUB_REPOSITORY }}:latest-stage
+          cache-from: type=registry,ref=${{ env.DOCKERHUB_REPOSITORY }}:latest-stage
           cache-to: type=inline
 
   description:

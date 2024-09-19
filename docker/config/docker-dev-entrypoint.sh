@@ -34,7 +34,7 @@ check_vars_exist \
 echo "Install php dependencies..."
 composer install --no-interaction
 
-echo "Install js dependencies for local dev..."
+echo "Install js dependencies & compile for local dev..."
 npm install
 npm run dev
 
