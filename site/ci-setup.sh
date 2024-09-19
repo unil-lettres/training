@@ -9,6 +9,10 @@ rm .env.dusk.testing
 # Install php dependencies
 composer install --no-interaction
 
+# Install & compile js dependencies
+npm install
+npm run prod
+
 # Run migrations & seed data
 php artisan migrate:fresh --seed
 
