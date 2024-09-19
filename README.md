@@ -14,7 +14,7 @@ A Laravel 11 app with a [Backpack](https://backpackforlaravel.com/) administrati
 
 Backpack is open-core, but we use features from ``backpack\pro`` which is a paid closed-source Backpack add-on. Which means in order to use this application and the ``backpack\pro`` features a [licence](https://backpackforlaravel.com/pricing) is needed.
 
-# Development
+# Development with Docker
 
 ## Docker installation
 
@@ -24,9 +24,15 @@ A working [Docker](https://docs.docker.com/engine/install/) installation is mand
 
 Please make sure to copy & rename the **example.env** file to **.env**.
 
-``cp dev/example.env dev/.env``
+``cp docker/example.env docker/.env``
 
-You can replace the values if needed, but the default ones should work.
+You can replace the values if needed, but the default ones should work for local development.
+
+Please also make sure to copy & rename the docker-compose.override.yml.dev file to docker-compose.override.yml.
+
+``cp docker-compose.override.yml.dev docker-compose.override.yml``
+
+You can replace the values if needed, but the default ones should work for local development.
 
 ## Edit hosts file
 
@@ -34,19 +40,11 @@ Edit hosts file to point **training.lan** to your docker host.
 
 ## Environment installation & configuration
 
-Run the following docker commands from the project root directory.
+At this point you'll need a ``backpack\pro`` licence and an ``site/auth.json`` file for your [credentials](https://getcomposer.org/doc/articles/authentication-for-private-packages.md#http-basic) to be able to install the dependencies.
 
-Build & run all the containers for this project
+Build & run all the containers for this project.
 
-``docker-compose up``
-
-Run the setup script. At this point you'll need a ``backpack\pro`` licence and an ``site/auth.json`` file for your [credentials](https://getcomposer.org/doc/articles/authentication-for-private-packages.md#http-basic) to be able to run the setup script.
-
-``docker exec train-app ./setup.sh``
-
-This is only needed when you launch the project for the first time. After that you can simply use the following command from the project root directory.
-
-``docker-compose up -d``
+``docker-compose up`` (add -d if you want to run in the background and silence the logs)
 
 ## Frontends
 
@@ -85,12 +83,6 @@ To access mails please use the following link.
 Or to get the messages in JSON format.
 
 [http://training.lan:8025/api/v2/messages](http://training.lan:8025/api/v2/messages)
-
-## Assets compiling
-
-In this project the assets are pre-compiled before deployment.
-
-During development ``docker exec train-app npm run dev`` or ``docker exec train-app npm run watch`` should be used. When everything is ready to be pushed to the repository ``docker exec train-app npm run prod`` should be used to compile assets for production.
 
 ## PHP code style
 

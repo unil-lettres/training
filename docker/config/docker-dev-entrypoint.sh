@@ -31,13 +31,18 @@ check_vars_exist \
   DB_PORT \
   DB_USERNAME
 
+echo "Install php dependencies..."
+composer install --no-interaction
+
+echo "Install js dependencies for local dev..."
+npm install
+npm run dev
+
 echo "Starting Migration..."
 php artisan migrate --force
 
-echo "Clearing caches..."
-php artisan cache:clear --no-interaction
-php artisan config:clear --no-interaction
-php artisan view:clear --no-interaction
+echo "Create the symlink to make storage public..."
+php artisan storage:link
 
 trap "echo Catching SIGWINCH apache error and perventing it." SIGWINCH
 exec apache2-foreground

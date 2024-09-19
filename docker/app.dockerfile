@@ -59,11 +59,14 @@ WORKDIR /var/www/training
 
 FROM base AS dev
 
-CMD ["apache2-foreground"]
+COPY docker/config/docker-dev-entrypoint.sh /bin/docker-entrypoint.sh
+RUN chmod +x /bin/docker-entrypoint.sh
+
+ENTRYPOINT ["/bin/docker-entrypoint.sh"]
 
 FROM base AS prod
 
-COPY docker/config/docker-entrypoint.sh /bin/docker-entrypoint.sh
+COPY docker/config/docker-prod-entrypoint.sh /bin/docker-entrypoint.sh
 RUN chmod +x /bin/docker-entrypoint.sh
 
 # Copy the application, except data listed in .dockerignore
@@ -72,9 +75,14 @@ COPY site/ /var/www/training
 # Create the auth.json file for composer
 RUN composer config http-basic.backpackforlaravel.com $BACKPACK_USERNAME $BACKPACK_PASSWORD
 
-# Install php dependencies, install & compile js dependencies
+# Install php dependencies
 RUN cd /var/www/training && \
-    composer install --no-interaction && \
+    composer install --optimize-autoloader --no-dev --no-interaction && \
+    npm install && \
+    npm run prod
+
+# Install & compile js dependencies
+RUN cd /var/www/training && \
     npm install && \
     npm run prod
 

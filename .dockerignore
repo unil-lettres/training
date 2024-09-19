@@ -6,6 +6,8 @@
 /site/node_modules
 
 /site/.env
+/site/.env.backup
+/site/.env.bak
 /site/auth.json
 
 /site/.phpunit.cache
@@ -21,5 +23,8 @@
 
 /site/public/hot/*
 /site/public/storage/*
+/site/public/css/*
+/site/public/js/*
+/site/public/mix-manifest.json
 
 /site/bootstrap/cache/*
