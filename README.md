@@ -46,6 +46,16 @@ Build & run all the containers for this project.
 
 ``docker-compose up`` (add -d if you want to run in the background and silence the logs)
 
+## Populate the database
+
+The first time you run the application you'll need to populate your database with initial data.
+
+``docker exec train-app php artisan db:seed``
+
+If you want completely wipe your database and populate it with fresh data, you can use the following command.
+
+``docker exec train-app php artisan migrate:fresh --seed``
+
 ## Frontends
 
 To access the main application please use the following link.
@@ -113,6 +123,26 @@ To run a specific class:
 `docker exec -it train-app php artisan dusk tests/Browser/MyTest.php --env=testing`
 
 To view the integration tests running in the browser, go to [http://training.lan:4444](http://training.lan:4444), click on Sessions, you should see a line corresponding to the running tests and a camera icon next to it, click on it to open a VNC viewer.
+
+# Deployment with Docker
+
+Copy and rename the environment file.
+
+``cp docker/example.env docker/.env``
+
+You should replace the values since the default ones are not ready for production.
+
+Please also make sure to copy & rename the **docker-compose.override.yml.prod** file to **docker-compose.override.yml**.
+
+`cp docker-compose.override.yml.prod docker-compose.override.yml`
+
+You can replace the values if needed, but the default ones should work for production.
+
+Build & run all the containers for this project:
+
+`docker-compose up -d`
+
+Use a reverse proxy configuration to map the url to port `8686`.
 
 # Error tracker
 
