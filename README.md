@@ -128,9 +128,10 @@ To view the integration tests running in the browser, go to [http://training.lan
 
 Copy and rename the following environment files.
 
-``cp docker/example.env docker/.env``
-
-``cp site/.env.example site/.env``
+```
+cp docker/example.env docker/.env
+cp site/.env.example site/.env
+```
 
 You should replace the values since the default ones are not ready for production.
 
