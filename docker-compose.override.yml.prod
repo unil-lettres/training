@@ -1,4 +1,4 @@
-# The following configuration is used for development in conjunction with the
+# The following configuration is used for production in conjunction with the
 # main docker-compose.yml. Please follow the instructions in the README.md
 # file to deploy the application.
 
