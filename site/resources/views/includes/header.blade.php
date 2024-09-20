@@ -8,11 +8,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" dusk="create-request" href="{{ route('request.create') }}">Nouvelle demande</a>
+                    <a class="nav-link" dusk="create-request" href="{{ route('front.request.create') }}">Nouvelle demande</a>
                 </li>
                 @if (auth()->check())
                     <li class="nav-item">
-                        <a class="nav-link" dusk="my-requests" href="{{ route('request.index') }}">Mes demandes</a>
+                        <a class="nav-link" dusk="my-requests" href="{{ route('front.request.index') }}">Mes demandes</a>
                     </li>
                 @endif
                 <li class="nav-item dropdown">
@@ -30,7 +30,7 @@
                     <span class="username">
                         {{{ isset(auth()->user()->name) ? auth()->user()->name : auth()->user()->email }}}
                     </span>
-                    <a href="{{ route('logout') }}">
+                    <a href="{{ route('front.logout') }}">
                         <button type="button" dusk="logout" class="btn btn-outline-dark">Déconnexion</button>
                     </a>
                     @if (auth()->check() && auth()->user()->hasRole('Admin'))

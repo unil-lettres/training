@@ -9,6 +9,11 @@ services:
       context: ./
       dockerfile: ./docker/app.dockerfile
       target: prod
+    env_file:
+      - ./site/.env
+    volumes:
+      - uploads-data:/var/www/training/storage/app/public/uploads
+      - logs-data:/var/www/training/storage/logs
     restart: unless-stopped
     deploy:
       mode: global
@@ -22,3 +27,7 @@ services:
       resources:
         limits:
           memory: 500M
+
+volumes:
+  uploads-data:
+  logs-data:

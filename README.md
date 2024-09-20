@@ -44,7 +44,7 @@ At this point you'll need a ``backpack\pro`` licence and an ``site/auth.json`` f
 
 Build & run all the containers for this project.
 
-``docker-compose up`` (add -d if you want to run in the background and silence the logs)
+``docker compose up`` (add -d if you want to run in the background and silence the logs)
 
 ## Populate the database
 
@@ -126,9 +126,11 @@ To view the integration tests running in the browser, go to [http://training.lan
 
 # Deployment with Docker
 
-Copy and rename the environment file.
+Copy and rename the following environment files.
 
 ``cp docker/example.env docker/.env``
+
+``cp site/.env.example site/.env``
 
 You should replace the values since the default ones are not ready for production.
 
@@ -140,9 +142,27 @@ You can replace the values if needed, but the default ones should work for produ
 
 Build & run all the containers for this project:
 
-`docker-compose up -d`
+`docker compose up -d`
 
 Use a reverse proxy configuration to map the url to port `8686`.
+
+# Docker images
+
+## Build for development
+
+To build locally the image for development, you can use the following command. Don't forget to use the **dev** docker compose override file.
+
+`docker compose build`
+
+## Build for production
+
+To build locally the image for production, you can use the following command. The build arguments are mandatory. Don't forget to use the **prod** docker compose override file.
+
+`docker compose build --build-arg BACKPACK_USERNAME=username --build-arg BACKPACK_PASSWORD=password`
+
+## Automated builds
+
+Changes in the `development` branch will create new images tagged `latest-dev` & `latest-stage`, while changes in the `master` branch will create new images tagged `latest` & another one with the most recent tag available.
 
 # Error tracker
 

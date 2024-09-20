@@ -6,10 +6,11 @@ name: training
 
 services:
   train-app:
-    env_file:
-      - ./docker/.env
     ports:
       - "127.0.0.1:8686:80"
+    depends_on:
+      train-mysql:
+        condition: service_healthy
     networks:
       - training-net
     container_name: train-app
@@ -22,6 +23,11 @@ services:
       - ./docker/config/my.cnf:/etc/mysql/my.cnf
     ports:
       - "127.0.0.1:3302:3306"
+    healthcheck:
+      # The container is not considered healthy until the MYSQL_DATABASE database is available
+      test: [ "CMD-SHELL", "mysql $${MYSQL_DATABASE} -u$${MYSQL_USER} -p$${MYSQL_PASSWORD} -e 'SELECT 1;'  || exit 1" ]
+      interval: 2s
+      retries: 5
     networks:
       - training-net
     container_name: train-mysql
