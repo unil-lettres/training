@@ -69,12 +69,10 @@ RUN chmod +x /bin/docker-entrypoint.sh
 # Copy the application, except data listed in .dockerignore
 COPY site/ /var/www/training
 
-# Mount the secrets as environment variables
-RUN --mount=type=secret,id=backpack_user,env=BACKPACK_USERNAME \
-    echo "------- Using secret backpack_user: $BACKPACK_USERNAME"
-
 # Create the auth.json file for composer
-RUN composer config http-basic.backpackforlaravel.com $BACKPACK_USERNAME $BACKPACK_PASSWORD
+RUN --mount=type=secret,id=backpack_user,env=BACKPACK_USERNAME \
+    --mount=type=secret,id=backpack_pass,env=BACKPACK_PASSWORD && \
+    composer config http-basic.backpackforlaravel.com $BACKPACK_USERNAME $BACKPACK_PASSWORD
 
 # Install php dependencies
 RUN cd /var/www/training && \
