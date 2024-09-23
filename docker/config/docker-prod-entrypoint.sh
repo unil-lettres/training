@@ -34,9 +34,8 @@ check_vars_exist \
 echo "Starting Migration..."
 php artisan migrate --force
 
-echo "Clearing & recreating caches..."
+echo "Clearing caches..."
 php artisan optimize:clear --no-interaction
-php artisan optimize --no-interaction
 
 echo "Create the symlink to make storage public..."
 php artisan storage:link
