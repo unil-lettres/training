@@ -71,7 +71,7 @@ COPY site/ /var/www/training
 
 # Create the auth.json file for composer
 RUN --mount=type=secret,id=backpack_user,env=BACKPACK_USERNAME \
-    --mount=type=secret,id=backpack_pass,env=BACKPACK_PASSWORD && \
+    --mount=type=secret,id=backpack_pass,env=BACKPACK_PASSWORD \
     composer config http-basic.backpackforlaravel.com $BACKPACK_USERNAME $BACKPACK_PASSWORD
 
 # Install php dependencies
