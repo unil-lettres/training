@@ -33,9 +33,9 @@ jobs:
           context: ./
           file: ./docker/app.dockerfile
           target: prod
-          build-args: |
-            BACKPACK_USERNAME=${{ secrets.BACKPACK_USERNAME }}
-            BACKPACK_PASSWORD=${{ secrets.BACKPACK_PASSWORD }}
+          secrets: |
+            "backpack_username=${{ secrets.BACKPACK_USERNAME }}"
+            "backpack_password=${{ secrets.BACKPACK_PASSWORD }}"
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ env.DOCKERHUB_REPOSITORY }}:latest
@@ -54,9 +54,9 @@ jobs:
           context: ./
           file: ./docker/app.dockerfile
           target: prod
-          build-args: |
-            BACKPACK_USERNAME=${{ secrets.BACKPACK_USERNAME }}
-            BACKPACK_PASSWORD=${{ secrets.BACKPACK_PASSWORD }}
+          secrets: |
+            "backpack_username=${{ secrets.BACKPACK_USERNAME }}"
+            "backpack_password=${{ secrets.BACKPACK_PASSWORD }}"
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ env.DOCKERHUB_REPOSITORY }}:${{ steps.get_tag.outputs.latest_tag }}
