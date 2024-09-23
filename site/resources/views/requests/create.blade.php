@@ -27,7 +27,7 @@
                     </ul>
                 </div><br />
             @endif
-            <form method="post" action="{{ route('request.store') }}">
+            <form method="post" action="{{ route('front.request.store') }}">
                 @csrf
                 <div id="request-student">
                     <div class="col-12 mb-3">

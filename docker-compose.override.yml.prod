@@ -1,0 +1,33 @@
+# The following configuration is used for production in conjunction with the
+# main docker-compose.yml. Please follow the instructions in the README.md
+# file to deploy the application.
+
+services:
+  train-app:
+    image: unillett/training:latest
+    build:
+      context: ./
+      dockerfile: ./docker/app.dockerfile
+      target: prod
+    env_file:
+      - ./site/.env
+    volumes:
+      - uploads-data:/var/www/training/storage/app/public/uploads
+      - logs-data:/var/www/training/storage/logs
+    restart: unless-stopped
+    deploy:
+      mode: global
+      resources:
+        limits:
+          memory: 1000M
+  train-mysql:
+    restart: unless-stopped
+    deploy:
+      mode: global
+      resources:
+        limits:
+          memory: 500M
+
+volumes:
+  uploads-data:
+  logs-data:

@@ -26,12 +26,17 @@ Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
 
-Route::get('/logout', [LoginController::class, 'logout'])
-    ->name('logout');
+Route::group([
+    'middleware' => ['auth'],
+    'as' => 'front.',
+], function () {
+    Route::get('/logout', [LoginController::class, 'logout'])
+        ->name('logout');
 
-Route::resource('request', RequestController::class)->only([
-    'index', 'create', 'store',
-])->middleware(['auth']);
+    Route::resource('request', RequestController::class)->only([
+        'index', 'create', 'store',
+    ]);
+});
 
 Route::get('/login')
     ->name('login')
