@@ -70,8 +70,10 @@ RUN chmod +x /bin/docker-entrypoint.sh
 COPY site/ /var/www/training
 
 # Mount the secrets as environment variables
-RUN --mount=type=secret,id=backpack_username,env=BACKPACK_USERNAME
-RUN --mount=type=secret,id=backpack_password,env=BACKPACK_PASSWORD
+RUN --mount=type=secret,id=backpack_user,env=BACKPACK_USERNAME
+RUN --mount=type=secret,id=backpack_pass,env=BACKPACK_PASSWORD
+
+RUN echo "------- Using secret BACKPACK_USERNAME: $BACKPACK_USERNAME"
 
 # Create the auth.json file for composer
 RUN composer config http-basic.backpackforlaravel.com $BACKPACK_USERNAME $BACKPACK_PASSWORD
