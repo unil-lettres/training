@@ -70,7 +70,7 @@ RUN chmod +x /bin/docker-entrypoint.sh
 COPY site/ /var/www/training
 
 # Mount the secrets as environment variables
-RUN --mount=type=secret,id=backpack_user,env=BACKPACK_USERNAME && \
+RUN --mount=type=secret,id=backpack_user,env=BACKPACK_USERNAME \
     echo "------- Using secret backpack_user: $BACKPACK_USERNAME"
 
 # Create the auth.json file for composer
