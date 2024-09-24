@@ -46,8 +46,8 @@ jobs:
           file: ./docker/app.dockerfile
           target: prod
           secrets: |
-            "backpack_user=${{ secrets.BACKPACK_USERNAME }}"
-            "backpack_pass=${{ secrets.BACKPACK_PASSWORD }}"
+            "backpack_username=${{ secrets.BACKPACK_USERNAME }}"
+            "backpack_password=${{ secrets.BACKPACK_PASSWORD }}"
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ env.DOCKERHUB_REPOSITORY }}:latest-stage
