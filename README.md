@@ -145,7 +145,7 @@ You can replace the values if needed, but the default ones should work for produ
 
 ## Installation & configuration
 
-At this point you'll need to add the following files in the `/docker/secrets` folder. They must contain your backpack credentials, which are needed to be able to build the production image locally.
+At this point you'll need a `backpack\pro` licence & the following files in the `/docker/secrets` folder. They must contain your backpack credentials, which are needed to install the dependencies & to be able to build the production image locally.
 
 ```
 backpack_username.txt
