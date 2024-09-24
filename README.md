@@ -20,7 +20,7 @@ Backpack is open-core, but we use features from ``backpack\pro`` which is a paid
 
 A working [Docker](https://docs.docker.com/engine/install/) installation is mandatory.
 
-## Docker environment file
+## Environment files
 
 Please make sure to copy & rename the **example.env** file to **.env**.
 
@@ -38,7 +38,7 @@ You can replace the values if needed, but the default ones should work for local
 
 Edit hosts file to point **training.lan** to your docker host.
 
-## Environment installation & configuration
+## Installation & configuration
 
 At this point you'll need a ``backpack\pro`` licence and an ``site/auth.json`` file for your [credentials](https://getcomposer.org/doc/articles/authentication-for-private-packages.md#http-basic) to be able to install the dependencies.
 
@@ -126,6 +126,8 @@ To view the integration tests running in the browser, go to [http://training.lan
 
 # Deployment with Docker
 
+## Environment files
+
 Copy and rename the following environment files.
 
 ```
@@ -141,27 +143,24 @@ Please also make sure to copy & rename the **docker-compose.override.yml.prod** 
 
 You can replace the values if needed, but the default ones should work for production.
 
-Build & run all the containers for this project:
+## Installation & configuration
+
+At this point you'll need to add the following files in the `/docker/secrets` folder. They must contain your backpack credentials, which are needed to be able to build the production image locally.
+
+```
+backpack_username.txt
+backpack_password.txt
+```
+
+Build & run all the containers for this project.
 
 `docker compose up -d`
+
+## Reverse proxy
 
 Use a reverse proxy configuration to map the url to port `8686`.
 
 # Docker images
-
-## Build for development
-
-To build locally the image for development, you can use the following command. Don't forget to use the **dev** docker compose override file.
-
-`docker compose build`
-
-## Build for production
-
-To build locally the image for production, you can use the following command. The build arguments are mandatory. Don't forget to use the **prod** docker compose override file.
-
-`docker compose build --build-arg BACKPACK_USERNAME=username --build-arg BACKPACK_PASSWORD=password`
-
-## Automated builds
 
 Changes in the `development` branch will create new images tagged `latest-dev` & `latest-stage`, while changes in the `master` branch will create new images tagged `latest` & another one with the most recent tag available.
 

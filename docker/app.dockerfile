@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 FROM php:8.3-apache-bullseye AS base
 
 ENV DOCKER_RUNNING=true
@@ -76,7 +77,7 @@ RUN --mount=type=secret,id=backpack_username,env=BACKPACK_USERNAME \
 
 # Install php dependencies
 RUN cd /var/www/training && \
-    composer install --optimize-autoloader --no-dev --no-interaction
+    composer install --optimize-autoloader --no-interaction
 
 # Install js dependencies & compile
 RUN cd /var/www/training && \

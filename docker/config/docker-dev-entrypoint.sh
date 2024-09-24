@@ -4,7 +4,13 @@ set -e
 # Ensure there is a local .env file
 if [ ! -f ".env" ]; then
   cp .env.example .env
-  echo "No .env file detected - copied .env.example to .env"
+  echo "No .env file detected! The .env.example file has been copied to .env."
+fi
+
+# Ensure there is a local auth.json file
+if [ ! -f "auth.json" ]; then
+  echo "No auth.json file detected! This is required for composer to install private packages."
+  exit 1
 fi
 
 echo "Install php dependencies..."

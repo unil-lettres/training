@@ -9,6 +9,9 @@ services:
       context: ./
       dockerfile: ./docker/app.dockerfile
       target: prod
+      secrets:
+        - backpack_username
+        - backpack_password
     env_file:
       - ./site/.env
     volumes:
@@ -27,6 +30,12 @@ services:
       resources:
         limits:
           memory: 500M
+
+secrets:
+  backpack_username:
+    file: ./docker/secrets/backpack_username.txt
+  backpack_password:
+    file: ./docker/secrets/backpack_password.txt
 
 volumes:
   uploads-data:

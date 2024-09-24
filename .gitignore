@@ -1,7 +1,10 @@
 .idea
 .DS_Store
-/docker/.env
 docker-compose.override.yml
+
+/docker/.env
+/docker/secrets/*
+!/docker/secrets/.keep
 
 /site/.env
 /site/.env.backup
