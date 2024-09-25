@@ -20,11 +20,12 @@ RUN apt-get install -y \
     zlib1g-dev \
     libpng-dev \
     libzip-dev \
+    libicu-dev \
     ca-certificates \
     gnupg
 
 # Install needed extensions
-RUN apt-get clean; docker-php-ext-install pdo_mysql zip gd bcmath pcntl
+RUN apt-get clean; docker-php-ext-install pdo_mysql zip gd bcmath pcntl intl
 
 # Install specific version of Composer
 RUN curl --silent --show-error https://getcomposer.org/installer | php -- \
