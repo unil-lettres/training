@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\RequestExporter;
 use App\Filament\Resources\RequestResource\Pages;
 use App\Filament\Resources\RequestResource\Pages\CreateRequest;
 use App\Filament\Resources\RequestResource\Pages\EditRequest;
@@ -27,6 +28,8 @@ use Filament\Tables;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ExportAction;
+use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -110,6 +113,7 @@ class RequestResource extends Resource
                             ->maxLength(300)
                             ->default(null),
                     ]),
+
                     Tab::make('Chercheur/doctorant')->schema([
                         TextInput::make('extras.doctoral_school')
                             ->label('École doctorale')
@@ -130,6 +134,7 @@ class RequestResource extends Resource
                             ->maxLength(300)
                             ->default(null),
                     ]),
+
                     Tab::make('Enseignant')->schema([
                         Toggle::make('extras.teachers_nbr')
                             ->label('Seul ou avec d\'autres enseignants'),
@@ -138,6 +143,7 @@ class RequestResource extends Resource
                         Toggle::make('extras.action_type')
                             ->label('Intervention pour toute une classe, pendant les cours'),
                     ]),
+
                     Tab::make('Administration')->schema([
                         Select::make('status_admin')
                             ->label('Statut')
@@ -224,7 +230,7 @@ class RequestResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label('Nom')
+                    ->label('Libellé')
                     ->limit(40)
                     ->searchable(),
                 TextColumn::make('description')
@@ -279,6 +285,8 @@ class RequestResource extends Resource
             ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->exporter(RequestExporter::class),
                 ]),
             ])->defaultPaginationPageOption(25);
     }

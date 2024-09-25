@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\TrainingExporter;
 use App\Filament\Resources\TrainingResource\Pages;
 use App\Filament\Resources\TrainingResource\Pages\CreateTraining;
 use App\Filament\Resources\TrainingResource\Pages\EditTraining;
@@ -20,6 +21,7 @@ use Filament\Tables;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -116,6 +118,8 @@ class TrainingResource extends Resource
             ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->exporter(TrainingExporter::class),
                 ]),
             ])->defaultPaginationPageOption(25);
     }

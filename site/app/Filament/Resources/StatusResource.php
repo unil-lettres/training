@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\StatusExporter;
 use App\Filament\Resources\StatusResource\Pages;
 use App\Filament\Resources\StatusResource\Pages\CreateStatus;
 use App\Filament\Resources\StatusResource\Pages\EditStatus;
@@ -17,6 +18,7 @@ use Filament\Tables;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -73,6 +75,8 @@ class StatusResource extends Resource
             ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
+                    ExportBulkAction::make()
+                        ->exporter(StatusExporter::class),
                 ]),
             ])->defaultPaginationPageOption(25);
     }
