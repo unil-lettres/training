@@ -194,11 +194,11 @@ class RequestResource extends Resource
                         Repeater::make('contacts')
                             ->label('Personnes ressources')
                             ->schema([
-                                TextInput::make('contacts.contact')
+                                TextInput::make('contact')
                                     ->label('Contact')
                                     ->maxLength(191)
                                     ->default(null),
-                                Textarea::make('contacts.notes')
+                                Textarea::make('notes')
                                     ->label('Notes')
                                     ->maxLength(300)
                                     ->default(null),
@@ -239,14 +239,18 @@ class RequestResource extends Resource
                     ->sortable(),
                 TextColumn::make('category.name')
                     ->label('Catégorie')
-                    ->numeric()
                     ->sortable(),
                 TextColumn::make('status.name')
                     ->label('Statut')
-                    ->numeric()
                     ->sortable(),
                 TextColumn::make('type')
                     ->label('Type')
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'training' => 'Formation',
+                        'analysis' => 'Analyse',
+                        default => '-',
+                    })
+                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('comments')
                     ->label('Remarques')
