@@ -13,6 +13,7 @@ use App\Models\Training;
 use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -44,38 +45,43 @@ class TrainingResource extends Resource
 
     protected static ?string $modelLabel = 'formation';
 
+    protected static ?string $navigationGroup = 'Administration';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->label('Nom')
-                    ->required()
-                    ->maxLength(191),
-                RichEditor::make('description')
-                    ->label('Description')
-                    ->toolbarButtons([
-                        'attachFiles',
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'codeBlock',
-                        'h2',
-                        'h3',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'underline',
-                        'undo',
-                    ])->columnSpanFull(),
-                DateTimePicker::make('start')
-                    ->label('Début'),
-                DateTimePicker::make('end')
-                    ->label('Fin'),
-                Toggle::make('visible')
-                    ->label('Visible'),
+                Section::make()
+                    ->schema([
+                        TextInput::make('name')
+                            ->label('Nom')
+                            ->required()
+                            ->maxLength(191),
+                        RichEditor::make('description')
+                            ->label('Description')
+                            ->toolbarButtons([
+                                'attachFiles',
+                                'blockquote',
+                                'bold',
+                                'bulletList',
+                                'codeBlock',
+                                'h2',
+                                'h3',
+                                'italic',
+                                'link',
+                                'orderedList',
+                                'redo',
+                                'strike',
+                                'underline',
+                                'undo',
+                            ])->columnSpanFull(),
+                        DateTimePicker::make('start')
+                            ->label('Début'),
+                        DateTimePicker::make('end')
+                            ->label('Fin'),
+                        Toggle::make('visible')
+                            ->label('Visible'),
+                ])
             ]);
     }
 

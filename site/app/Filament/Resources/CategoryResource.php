@@ -11,6 +11,7 @@ use App\Filament\Resources\CategoryResource\Pages\ViewCategory;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -36,14 +37,19 @@ class CategoryResource extends Resource
 
     protected static ?string $modelLabel = 'catégorie';
 
+    protected static ?string $navigationGroup = 'Administration';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->label('Nom')
-                    ->required()
-                    ->maxLength(191),
+                Section::make()
+                    ->schema([
+                        TextInput::make('name')
+                            ->label('Nom')
+                            ->required()
+                            ->maxLength(191),
+                ])
             ]);
     }
 

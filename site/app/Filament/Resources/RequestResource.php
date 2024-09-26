@@ -51,6 +51,8 @@ class RequestResource extends Resource
 
     protected static ?string $modelLabel = 'demande';
 
+    protected static ?string $navigationGroup = 'Administration';
+
     public static function form(Form $form): Form
     {
         return $form

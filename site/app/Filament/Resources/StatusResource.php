@@ -11,6 +11,7 @@ use App\Filament\Resources\StatusResource\Pages\ViewStatus;
 use App\Filament\Resources\StatusResource\RelationManagers;
 use App\Models\Status;
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -36,14 +37,19 @@ class StatusResource extends Resource
 
     protected static ?string $modelLabel = 'décision';
 
+    protected static ?string $navigationGroup = 'Administration';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->label('Nom')
-                    ->required()
-                    ->maxLength(191),
+                Section::make()
+                    ->schema([
+                        TextInput::make('name')
+                            ->label('Nom')
+                            ->required()
+                            ->maxLength(191),
+                ])
             ]);
     }
 
