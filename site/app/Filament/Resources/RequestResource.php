@@ -34,9 +34,12 @@ use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 
 class RequestResource extends Resource
 {
@@ -278,7 +281,24 @@ class RequestResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                SelectFilter::make('category')
+                    ->label('Catégorie')
+                    ->searchable()
+                    ->preload()
+                    ->relationship('category', 'name'),
+                SelectFilter::make('status')
+                    ->label('Décision')
+                    ->searchable()
+                    ->preload()
+                    ->relationship('status', 'name'),
+                SelectFilter::make('status_admin')
+                    ->label('Statut')
+                    ->options(Request::$status),
+                SelectFilter::make('type')
+                    ->label('Type')
+                    ->options(Request::$type),
+                DateRangeFilter::make('deadline')
+                    ->label('Délai de production'),
             ])
             ->actions([
                 ViewAction::make()

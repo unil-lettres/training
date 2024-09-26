@@ -28,6 +28,8 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -108,10 +110,16 @@ class TrainingResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])->defaultSort('created_at', 'desc')
             ->filters([
-                Filter::make('is_visible')
-                    ->label('Visibles uniquement')
-                    ->toggle()
-                    ->query(fn (Builder $query): Builder => $query->where('visible', true))
+                TernaryFilter::make('visible')
+                    ->label('Visibilité')
+                    ->placeholder('-')
+                    ->trueLabel('Visible')
+                    ->falseLabel('Non-visible')
+                    ->queries(
+                        true: fn (Builder $query) => $query->where('visible', true),
+                        false: fn (Builder $query) => $query->where('visible', false),
+                        blank: fn (Builder $query) => $query,
+                    )
             ])
             ->actions([
                 ViewAction::make()
