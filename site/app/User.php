@@ -55,7 +55,9 @@ class User extends Authenticatable
         return $this->hasMany(Request::class);
     }
 
-    // Set the user's password
+    /**
+     * Set the user's password.
+     */
     public function setPasswordAttribute(?string $value): void
     {
         if (!empty($value)) {
@@ -64,7 +66,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if the user has a certain role
+     * Check if the user has a certain role.
      */
     public function hasRole(string|array $roles): bool
     {
@@ -73,37 +75,5 @@ class User extends Authenticatable
         }
 
         return in_array($roles, $this->roles ?? []);
-    }
-
-    /**
-     * Assign roles to the user
-     */
-    public function assignRoles(array|string $roles): void
-    {
-        // Merge new roles with existing ones
-        $existingRoles = $this->roles ?? [];
-
-        // Convert roles to array if it's a string
-        if (is_string($roles)) {
-            $roles = explode(',', $roles);
-        }
-
-        $this->roles = array_unique(array_merge($existingRoles, $roles));
-        $this->save();
-    }
-
-    /**
-     * Remove roles from the user
-     */
-    public function removeRoles(array|string $roles): void
-    {
-        $existingRoles = $this->roles ?? [];
-
-        if (is_string($roles)) {
-            $roles = explode(',', $roles);
-        }
-
-        $this->roles = array_diff($existingRoles, $roles);
-        $this->save();
     }
 }

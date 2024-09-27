@@ -300,7 +300,8 @@ class RequestResource extends Resource
                     ->label('Type')
                     ->options(Request::$type),
                 DateRangeFilter::make('deadline')
-                    ->label('Délai de production'),
+                    ->label('Délai de production')
+                    ->disableClear(),
             ])
             ->actions([
                 ViewAction::make()

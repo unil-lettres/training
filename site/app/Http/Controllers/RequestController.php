@@ -13,11 +13,9 @@ use Illuminate\View\View;
 class RequestController extends Controller
 {
     /**
-     * Index requests
-     *
-     * @return View
+     * Index requests.
      */
-    public function index()
+    public function index(): View
     {
         $requests = auth()->user()->requests()
             ->orderBy('created_at', 'desc')
@@ -28,20 +26,16 @@ class RequestController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return View
      */
-    public function create()
+    public function create(): View
     {
         return view('requests.create');
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @return RedirectResponse
      */
-    public function store(RequestRequest $request, Users $usersService)
+    public function store(RequestRequest $request, Users $usersService): RedirectResponse
     {
         $requestObj = new Request([
             'name' => $request->get('name'),
@@ -67,9 +61,13 @@ class RequestController extends Controller
         ]);
         $requestObj->save();
 
-        // Send request created notification to all the users with the Notification role
-        $usersService->mailUsersWithRole('Notification', new RequestCreated($requestObj));
+        $usersService
+            ->mailUsersWithRole('notification', new RequestCreated($requestObj));
+        $usersService
+            ->notifyUsersWithRole('notification', 'Nouvelle demande reçue', 'Libellé: ' . $requestObj->name);
 
-        return redirect()->route('home')->with('success', 'Demande de formation enregistrée.');
+        return redirect()
+            ->route('home')
+            ->with('success', 'Demande de formation enregistrée.');
     }
 }

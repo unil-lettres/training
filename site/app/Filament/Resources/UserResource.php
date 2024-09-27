@@ -64,6 +64,7 @@ class UserResource extends Resource
                         TextInput::make('password')
                             ->label('Mot de passe')
                             ->password()
+                            ->required(fn(string $operation) => $operation == 'create')
                             ->revealable()
                             ->rules([
                                 Password::min(8)
