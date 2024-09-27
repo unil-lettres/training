@@ -53,14 +53,12 @@ class UserResource extends Resource
                         TextInput::make('name')
                             ->label('Nom')
                             ->required()
-                            ->maxLength(191)
-                            ->columnSpanFull(),
+                            ->maxLength(191),
                         TextInput::make('email')
                             ->label('Email')
                             ->email()
                             ->required()
-                            ->maxLength(191)
-                            ->columnSpanFull(),
+                            ->maxLength(191),
                         TextInput::make('password')
                             ->label('Mot de passe')
                             ->password()
@@ -70,8 +68,7 @@ class UserResource extends Resource
                                 Password::min(8)
                                     ->letters()
                                     ->numbers()
-                            ])
-                            ->columnSpanFull(),
+                            ]),
                     ]),
 
                 Section::make()

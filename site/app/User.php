@@ -4,16 +4,16 @@ namespace App;
 
 use App\Models\Request;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     use CrudTrait;
-    use HasRoles;
     use Notifiable;
 
     /**
@@ -35,6 +35,7 @@ class User extends Authenticatable
     ];
 
     public static $role = [
+        'editor' => 'Editor',
         'admin' => 'Admin',
         'notification' => 'Notification',
     ];
@@ -56,12 +57,20 @@ class User extends Authenticatable
     }
 
     /**
+     * Check if the user can access the Filament panel.
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->hasRole(['admin', 'editor']);
+    }
+
+    /**
      * Set the user's password.
      */
     public function setPasswordAttribute(?string $value): void
     {
         if (!empty($value)) {
-            $this->attributes['password'] = Hash::make($value);
+            $this->attributes['password'] = Hash::isHashed($value) ? $value : Hash::make($value);
         }
     }
 

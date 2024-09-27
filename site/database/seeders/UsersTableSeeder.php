@@ -17,28 +17,14 @@ class UsersTableSeeder extends Seeder
     {
         $now = Carbon::now();
 
-        $firstUserId = DB::table('users')->insertGetId([
+        DB::table('users')->insertGetId([
             'name' => 'First user',
             'email' => 'first-user@example.com',
             'password' => bcrypt('password'),
+            'roles' => json_encode(['admin', 'notification']),
             'remember_token' => Str::random(10),
             'created_at' => $now,
             'updated_at' => $now,
-        ]);
-
-        $adminRole = Role::findOrCreate('Admin', 'backpack');
-        $notificationRole = Role::findOrCreate('Notification', 'backpack');
-
-        DB::table('model_has_roles')->insert([
-            'role_id' => $adminRole->id,
-            'model_type' => 'App\User',
-            'model_id' => $firstUserId,
-        ]);
-
-        DB::table('model_has_roles')->insert([
-            'role_id' => $notificationRole->id,
-            'model_type' => 'App\User',
-            'model_id' => $firstUserId,
         ]);
 
         DB::table('users')->insert([
