@@ -12,7 +12,7 @@ class StatusPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['admin', 'editor']);
+        return $user->hasRole(['admin', 'super-editor']);
     }
 
     /**
@@ -20,7 +20,7 @@ class StatusPolicy
      */
     public function view(User $user, Status $status): bool
     {
-        return $user->hasRole(['admin', 'editor']);
+        return $user->hasRole(['admin', 'super-editor']);
     }
 
     /**
@@ -28,7 +28,7 @@ class StatusPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['admin', 'editor']);
+        return $user->hasRole(['admin', 'super-editor']);
     }
 
     /**
@@ -36,7 +36,7 @@ class StatusPolicy
      */
     public function update(User $user, Status $status): bool
     {
-        return $user->hasRole(['admin', 'editor']);
+        return $user->hasRole(['admin', 'super-editor']);
     }
 
     /**
@@ -44,7 +44,7 @@ class StatusPolicy
      */
     public function delete(User $user, Status $status): bool
     {
-        return $user->hasRole(['admin', 'editor']);
+        return $user->hasRole(['admin', 'super-editor']);
     }
 
     /**
@@ -52,7 +52,7 @@ class StatusPolicy
      */
     public function restore(User $user, Status $status): bool
     {
-        return $user->hasRole(['admin', 'editor']);
+        return $user->hasRole(['admin', 'super-editor']);
     }
 
     /**
@@ -60,6 +60,6 @@ class StatusPolicy
      */
     public function forceDelete(User $user, Status $status): bool
     {
-        return $user->hasRole(['admin', 'editor']);
+        return $user->hasRole(['admin', 'super-editor']);
     }
 }

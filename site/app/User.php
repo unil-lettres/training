@@ -35,9 +35,9 @@ class User extends Authenticatable implements FilamentUser
     ];
 
     public static $role = [
-        'editor' => 'Editor',
-        'admin' => 'Admin',
         'notification' => 'Notification',
+        'super-editor' => 'Super Editor',
+        'admin' => 'Admin',
     ];
 
     protected function casts(): array
@@ -61,7 +61,7 @@ class User extends Authenticatable implements FilamentUser
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasRole(['admin', 'editor']);
+        return $this->hasRole(['admin', 'super-editor']);
     }
 
     /**
