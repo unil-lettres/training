@@ -36,7 +36,7 @@ class User extends Authenticatable implements FilamentUser
 
     public static $role = [
         'notification' => 'Notification',
-        'super-editor' => 'Super Editor',
+        'super-editor' => 'Super Éditeur',
         'admin' => 'Admin',
     ];
 

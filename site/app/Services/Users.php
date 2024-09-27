@@ -13,9 +13,21 @@ class Users
     /**
      * Return all the users with a specific role.
      */
-    public function usersWithRole(string $role): Collection
+    public function usersWithRole(string|array $roles): Collection
     {
-        return User::whereJsonContains('roles', $role)->get();
+        return User::where(function ($query) use ($roles) {
+            foreach ((array) $roles as $role) {
+                $query->orWhereJsonContains('roles', $role);
+            }
+        })->get();
+    }
+
+    /**
+     * Return all the users with the notification role.
+     */
+    public function notifications(): Collection
+    {
+        return $this->usersWithRole('notification');
     }
 
     /**
@@ -27,11 +39,11 @@ class Users
     }
 
     /**
-     * Return all the users with the notification role.
+     * Return all the users with the super-editor role.
      */
-    public function notifications(): Collection
+    public function superEditors(): Collection
     {
-        return $this->usersWithRole('notification');
+        return $this->usersWithRole('super-editor');
     }
 
     /**
