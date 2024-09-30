@@ -221,6 +221,8 @@ class RequestResource extends Resource
                             ->label('Document')
                             ->disk('public')
                             ->directory('uploads')
+                            ->maxSize(10000)
+                            ->previewable(false)
                             ->openable()
                             ->downloadable(),
                         Select::make('user_id')
