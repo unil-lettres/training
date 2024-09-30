@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 class Users
 {
     /**
-     * Return all the users with a specific role.
+     * Return all the users with a certain role.
      */
     public function usersWithRole(string|array $roles): Collection
     {
@@ -49,7 +49,7 @@ class Users
     /**
      * Send mail to users with a specific role.
      */
-    public function mailUsersWithRole(string $role, Mailable $mail): void
+    public function mailUsersWithRole(string|array $role, Mailable $mail): void
     {
         $users = $this->usersWithRole($role);
 
@@ -61,7 +61,7 @@ class Users
     /**
      * Notify users with a specific role.
      */
-    public function notifyUsersWithRole(string $role, string $title, string $content): void
+    public function notifyUsersWithRole(string|array $role, string $title, string $content): void
     {
         $users = $this->usersWithRole($role);
 

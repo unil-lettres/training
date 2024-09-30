@@ -3,7 +3,6 @@
 namespace App;
 
 use App\Models\Request;
-use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,7 +12,6 @@ use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable implements FilamentUser
 {
-    use CrudTrait;
     use Notifiable;
 
     /**
