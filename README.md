@@ -10,9 +10,7 @@ Development:
 
 Development of technical skills in the Faculty of Arts.
 
-A Laravel 11 app with a [Backpack](https://backpackforlaravel.com/) administration.
-
-Backpack is open-core, but we use features from ``backpack\pro`` which is a paid closed-source Backpack add-on. Which means in order to use this application and the ``backpack\pro`` features a [licence](https://backpackforlaravel.com/pricing) is needed.
+A Laravel 11 app with a [Filament](https://filamentphp.com/) administration.
 
 # Development with Docker
 
@@ -39,8 +37,6 @@ You can replace the values if needed, but the default ones should work for local
 Edit hosts file to point **training.lan** to your docker host.
 
 ## Installation & configuration
-
-At this point you'll need a ``backpack\pro`` licence and an ``site/auth.json`` file for your [credentials](https://getcomposer.org/doc/articles/authentication-for-private-packages.md#http-basic) to be able to install the dependencies.
 
 Build & run all the containers for this project.
 
@@ -144,13 +140,6 @@ Please also make sure to copy & rename the **docker-compose.override.yml.prod** 
 You can replace the values if needed, but the default ones should work for production.
 
 ## Installation & configuration
-
-At this point you'll need a `backpack\pro` licence & the following files in the `/docker/secrets` folder. They must contain your backpack credentials, which are needed to install the dependencies & to be able to build the production image locally.
-
-```
-backpack_username.txt
-backpack_password.txt
-```
 
 Build & run all the containers for this project.
 

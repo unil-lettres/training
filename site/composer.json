@@ -4,12 +4,6 @@
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://repo.backpackforlaravel.com/"
-        }
-    ],
     "require": {
         "php": "^8.2",
         "ext-ctype": "*",
@@ -25,10 +19,6 @@
         "ext-session": "*",
         "ext-tokenizer": "*",
         "ext-xml": "*",
-        "backpack/crud": "^6.0",
-        "backpack/permissionmanager": "^7.0",
-        "backpack/pro": "^2.0",
-        "backpack/theme-coreuiv2": "^1.1",
         "bugsnag/bugsnag-laravel": "^2.26",
         "filament/filament": "^3.2",
         "guzzlehttp/guzzle": "^7.5",
@@ -41,7 +31,6 @@
         "symfony/postmark-mailer": "^7.0"
     },
     "require-dev": {
-        "backpack/generators": "^4.0",
         "fakerphp/faker": "^1.13",
         "filp/whoops": "^2.0",
         "laravel/dusk": "^8.0",
