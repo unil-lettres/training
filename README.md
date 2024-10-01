@@ -10,7 +10,7 @@ Development:
 
 Development of technical skills in the Faculty of Arts.
 
-A Laravel 11 app with a [Filament](https://filamentphp.com/) administration.
+A Laravel 11 app with a [Filament](https://filamentphp.com/) administration panel.
 
 # Development with Docker
 
@@ -118,7 +118,7 @@ To run a specific class:
 
 `docker exec -it train-app php artisan dusk tests/Browser/MyTest.php --env=testing`
 
-To view the integration tests running in the browser, go to [http://training.lan:4444](http://training.lan:4444), click on Sessions, you should see a line corresponding to the running tests and a camera icon next to it, click on it to open a VNC viewer.
+To view the browser tests running in the browser, go to [http://training.lan:4444](http://training.lan:4444), click on Sessions, you should see a line corresponding to the running tests and a camera icon next to it, click on it to open a VNC viewer with ("secret" as password).
 
 # Deployment with Docker
 

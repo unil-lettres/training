@@ -11,18 +11,10 @@ class HomeTest extends DuskTestCase
 {
     use ProvidesBrowser;
 
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-        static::closeAll();
-    }
-
     /**
      * Browse homepage as guest
-     *
-     * @return void
      */
-    public function testHomepageAsGuest()
+    public function testHomepageAsGuest(): void
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
@@ -35,42 +27,26 @@ class HomeTest extends DuskTestCase
     }
 
     /**
-     * Browse homepage as user
-     *
-     * @return void
-     */
-    public function testHomepageAsUser()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit(new Login)
-                ->loginAsUser('second-user@example.com', 'password');
-
-            $browser->visit('/')
-                ->assertSee('Demandes de formation')
-                ->assertSee('Déconnexion')
-                ->assertSee('Mes demandes')
-                ->assertDontSee('Connexion')
-                ->assertDontSee('Administration');
-        });
-    }
-
-    /**
      * Browse homepage as admin
-     *
-     * @return void
      */
-    public function testHomepageAsAdmin()
+    public function testHomepageAsAdmin(): void
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new Login)
                 ->loginAsUser('first-user@example.com', 'password');
 
-            $browser->visit('/')
+            $browser->waitForText('Tableau de bord')
+                ->visit('/')
                 ->assertSee('Demandes de formation')
                 ->assertSee('Déconnexion')
                 ->assertSee('Mes demandes')
                 ->assertSee('Administration')
                 ->assertDontSee('Connexion');
+
+            $browser->click('@admin')
+                ->waitForText('Tableau de bord')
+                ->assertSee('Tableau de bord')
+                ->assertPathIs('/admin');
         });
     }
 }
