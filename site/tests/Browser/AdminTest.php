@@ -33,7 +33,7 @@ class AdminTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new Login)
-                ->loginAsUser('first-user@example.com', 'password');
+                ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord')
                 ->assertSee('Tableau de bord')
@@ -53,8 +53,8 @@ class AdminTest extends DuskTestCase
 
             $browser->waitForText('Tableau de bord')
                 ->visit('/admin/users')
-                ->waitForText('first-user@example.com')
-                ->assertSee('first-user@example.com')
+                ->waitForText('admin-user@example.com')
+                ->assertSee('admin-user@example.com')
                 ->assertSee('second-user@example.com');
         });
     }

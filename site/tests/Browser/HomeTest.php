@@ -33,7 +33,7 @@ class HomeTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new Login)
-                ->loginAsUser('first-user@example.com', 'password');
+                ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord')
                 ->visit('/')

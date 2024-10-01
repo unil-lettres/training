@@ -62,7 +62,7 @@ To access the administration please use the following link.
 
 [http://training.lan:8686/admin](http://training.lan:8686/admin)
 
-+ first-user@example.com / password
++ admin-user@example.com / password
 
 ### Telescope
 
