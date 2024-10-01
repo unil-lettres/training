@@ -2,34 +2,25 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\Pages\ListUsers;
 use App\Filament\Resources\UserResource\Pages\ViewUser;
-use App\Filament\Resources\UserResource\RelationManagers;
 use App\User;
-use Filament\Forms;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Split;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
 class UserResource extends Resource
@@ -62,12 +53,12 @@ class UserResource extends Resource
                         TextInput::make('password')
                             ->label('Mot de passe')
                             ->password()
-                            ->required(fn(string $operation) => $operation == 'create')
+                            ->required(fn (string $operation) => $operation == 'create')
                             ->revealable()
                             ->rules([
                                 Password::min(8)
                                     ->letters()
-                                    ->numbers()
+                                    ->numbers(),
                             ]),
                     ]),
 
@@ -112,9 +103,10 @@ class UserResource extends Resource
                     ->label('Rôles')
                     ->options(User::$role)
                     ->query(function (Builder $query, array $data): Builder {
-                        if (!empty($data['value'])) {
+                        if (! empty($data['value'])) {
                             $query->whereJsonContains('roles', $data['value']);
                         }
+
                         return $query;
                     }),
             ])

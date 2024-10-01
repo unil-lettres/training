@@ -64,7 +64,7 @@ class RequestController extends Controller
         $usersService
             ->mailUsersWithRole('notification', new RequestCreated($requestObj));
         $usersService
-            ->notifyUsersWithRole('notification', 'Nouvelle demande reçue', 'Libellé: ' . $requestObj->name);
+            ->notifyUsersWithRole('notification', 'Nouvelle demande reçue', 'Libellé: '.$requestObj->name);
 
         return redirect()
             ->route('home')

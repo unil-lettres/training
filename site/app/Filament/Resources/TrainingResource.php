@@ -3,14 +3,11 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Exports\TrainingExporter;
-use App\Filament\Resources\TrainingResource\Pages;
 use App\Filament\Resources\TrainingResource\Pages\CreateTraining;
 use App\Filament\Resources\TrainingResource\Pages\EditTraining;
 use App\Filament\Resources\TrainingResource\Pages\ListTrainings;
 use App\Filament\Resources\TrainingResource\Pages\ViewTraining;
-use App\Filament\Resources\TrainingResource\RelationManagers;
 use App\Models\Training;
-use Filament\Forms;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
@@ -18,7 +15,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
@@ -28,12 +24,9 @@ use Filament\Tables\Actions\ReplicateAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\Filter;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TrainingResource extends Resource
 {
@@ -81,7 +74,7 @@ class TrainingResource extends Resource
                             ->label('Fin'),
                         Toggle::make('visible')
                             ->label('Visible'),
-                ])
+                    ]),
             ]);
     }
 
@@ -125,7 +118,7 @@ class TrainingResource extends Resource
                         true: fn (Builder $query) => $query->where('visible', true),
                         false: fn (Builder $query) => $query->where('visible', false),
                         blank: fn (Builder $query) => $query,
-                    )
+                    ),
             ])
             ->actions([
                 ViewAction::make()

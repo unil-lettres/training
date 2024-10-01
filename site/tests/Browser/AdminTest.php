@@ -47,7 +47,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationUsers(): void
     {
         $this->browse(function (Browser $browser) {
-            # Already logged in as Admin from previous test
+            // Already logged in as Admin from previous test
 
             $browser->visit('admin');
 
@@ -65,7 +65,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationCreateRequest(): void
     {
         $this->browse(function (Browser $browser) {
-            # Already logged in as Admin from previous test
+            // Already logged in as Admin from previous test
 
             $browser->visit('admin');
 
@@ -102,7 +102,7 @@ class AdminTest extends DuskTestCase
         });
 
         $this->browse(function (Browser $browser) {
-            # Already logged in as Admin from previous test
+            // Already logged in as Admin from previous test
 
             $browser->visit('admin');
 
@@ -137,7 +137,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationCreateCategory(): void
     {
         $this->browse(function (Browser $browser) {
-            # Already logged in as Admin from previous test
+            // Already logged in as Admin from previous test
 
             $browser->visit('admin');
 
@@ -167,7 +167,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationCreateStatus(): void
     {
         $this->browse(function (Browser $browser) {
-            # Already logged in as Admin from previous test
+            // Already logged in as Admin from previous test
 
             $browser->visit('admin');
 

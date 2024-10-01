@@ -90,7 +90,7 @@ class RequestExporter extends Exporter
             ExportColumn::make('contacts')
                 ->label('Personnes ressources')
                 ->formatStateUsing(function (?array $state): string {
-                    return $state ? implode(" ", $state) : '';
+                    return $state ? implode(' ', $state) : '';
                 }),
             ExportColumn::make('file')
                 ->label('Document'),
@@ -105,10 +105,10 @@ class RequestExporter extends Exporter
 
     public static function getCompletedNotificationBody(Export $export): string
     {
-        $body = 'L\'exportation de vos demandes est terminée (' . number_format($export->successful_rows) . ').';
+        $body = 'L\'exportation de vos demandes est terminée ('.number_format($export->successful_rows).').';
 
         if ($failedRowsCount = $export->getFailedRowsCount()) {
-            $body .= ' ' . number_format($failedRowsCount) . ' enregistrement(s) non exporté(s).';
+            $body .= ' '.number_format($failedRowsCount).' enregistrement(s) non exporté(s).';
         }
 
         return $body;

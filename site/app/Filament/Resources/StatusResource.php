@@ -3,19 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Exports\StatusExporter;
-use App\Filament\Resources\StatusResource\Pages;
 use App\Filament\Resources\StatusResource\Pages\CreateStatus;
 use App\Filament\Resources\StatusResource\Pages\EditStatus;
 use App\Filament\Resources\StatusResource\Pages\ListStatuses;
 use App\Filament\Resources\StatusResource\Pages\ViewStatus;
-use App\Filament\Resources\StatusResource\RelationManagers;
 use App\Models\Status;
-use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
@@ -24,8 +20,6 @@ use Filament\Tables\Actions\ExportBulkAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class StatusResource extends Resource
 {
@@ -49,7 +43,7 @@ class StatusResource extends Resource
                             ->label('Nom')
                             ->required()
                             ->maxLength(191),
-                ])
+                    ]),
             ]);
     }
 

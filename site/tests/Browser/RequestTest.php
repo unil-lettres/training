@@ -69,7 +69,7 @@ class RequestTest extends DuskTestCase
     public function testCreateTeacherRequest(): void
     {
         $this->browse(function (Browser $browser) {
-            # Already logged in as Admin from previous test
+            // Already logged in as Admin from previous test
 
             $browser->visit('/request/create')
                 ->click('@request-type')
@@ -104,7 +104,7 @@ class RequestTest extends DuskTestCase
     public function testInvalidRequest(): void
     {
         $this->browse(function (Browser $browser) {
-            # Already logged in as Admin from previous test
+            // Already logged in as Admin from previous test
 
             $browser->visit('/request/create');
 

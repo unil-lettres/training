@@ -69,7 +69,7 @@ class User extends Authenticatable implements FilamentUser
      */
     public function setPasswordAttribute(?string $value): void
     {
-        if (!empty($value)) {
+        if (! empty($value)) {
             $this->attributes['password'] = Hash::isHashed($value) ? $value : Hash::make($value);
         }
     }
@@ -80,7 +80,7 @@ class User extends Authenticatable implements FilamentUser
     public function hasRole(string|array $roles): bool
     {
         if (is_array($roles)) {
-            return !empty(array_intersect($roles, $this->roles ?? []));
+            return ! empty(array_intersect($roles, $this->roles ?? []));
         }
 
         return in_array($roles, $this->roles ?? []);
