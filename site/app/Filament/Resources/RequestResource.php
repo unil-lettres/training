@@ -54,7 +54,7 @@ class RequestResource extends Resource
                         TextInput::make('name')
                             ->label('Libellé')
                             ->required()
-                            ->maxLength(191),
+                            ->maxLength(150),
                         RichEditor::make('description')
                             ->label('Description')
                             ->toolbarButtons([
@@ -159,7 +159,7 @@ class RequestResource extends Resource
                                 TextInput::make('name')
                                     ->label('Nom')
                                     ->required()
-                                    ->maxLength(191),
+                                    ->maxLength(150),
                             ])
                             ->searchable()
                             ->preload()
@@ -171,7 +171,7 @@ class RequestResource extends Resource
                                 TextInput::make('name')
                                     ->label('Nom')
                                     ->required()
-                                    ->maxLength(191),
+                                    ->maxLength(150),
                             ])
                             ->searchable()
                             ->preload()
@@ -201,7 +201,7 @@ class RequestResource extends Resource
                             ->schema([
                                 TextInput::make('contact')
                                     ->label('Contact')
-                                    ->maxLength(191)
+                                    ->maxLength(150)
                                     ->default(null),
                                 Textarea::make('notes')
                                     ->label('Notes')

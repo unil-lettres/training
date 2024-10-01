@@ -49,7 +49,7 @@ class TrainingResource extends Resource
                         TextInput::make('name')
                             ->label('Nom')
                             ->required()
-                            ->maxLength(191),
+                            ->maxLength(150),
                         RichEditor::make('description')
                             ->label('Description')
                             ->toolbarButtons([
