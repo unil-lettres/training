@@ -1,5 +1,7 @@
 <?php
 
+// Not used anymore, but kept because some old migrations still reference it
+
 return [
 
     'models' => [
