@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Request;
+use App\Observers\RequestObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -32,6 +34,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Register the observers
+        Request::observe(RequestObserver::class);
+
         // Fix migration error
         Schema::defaultStringLength(191);
 

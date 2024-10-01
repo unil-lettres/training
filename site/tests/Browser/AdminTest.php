@@ -11,104 +11,88 @@ class AdminTest extends DuskTestCase
 {
     use ProvidesBrowser;
 
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-        static::closeAll();
-    }
-
     /**
      * Browse administration as user
-     *
-     * @return void
      */
-    public function testAdministrationAsUser()
+    public function testAdministrationAsUser(): void
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new Login)
                 ->loginAsUser('second-user@example.com', 'password');
 
-            $browser->visit('/admin/dashboard')
-                ->waitForText('Access denied')
-                ->assertSee('Access denied')
-                ->assertDontSee('Gérer les utilisateurs');
+            $browser->waitForText('Ces identifiants ne correspondent pas à nos enregistrements')
+                ->assertSee('Ces identifiants ne correspondent pas à nos enregistrements')
+                ->assertDontSee('Tableau de bord');
         });
     }
 
     /**
      * Browse administration as admin
-     *
-     * @return void
      */
-    public function testAdministrationAsAdmin()
+    public function testAdministrationAsAdmin(): void
     {
         $this->browse(function (Browser $browser) {
             $browser->visit(new Login)
-                ->loginAsUser('first-user@example.com', 'password');
+                ->loginAsUser('admin-user@example.com', 'password');
 
-            $browser->visit('/admin/dashboard')
-                ->waitForText('Bonjour First user')
-                ->assertSee('Bonjour First user')
-                ->assertSee('Gérer les utilisateurs')
-                ->assertDontSee('Access denied');
+            $browser->waitForText('Tableau de bord')
+                ->assertSee('Tableau de bord')
+                ->assertDontSee('Ces identifiants ne correspondent pas à nos enregistrements');
         });
     }
 
     /**
      * Browse administration users as admin
-     *
-     * @return void
      */
-    public function testAdministrationUsers()
+    public function testAdministrationUsers(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login)
-                ->loginAsUser('first-user@example.com', 'password');
+            // Already logged in as Admin from previous test
 
-            $browser->assertSee('Gérer les utilisateurs')
-                ->clickLink('Gérer les utilisateurs')
-                ->waitForText('first-user@example.com')
-                ->assertSee('first-user@example.com')
+            $browser->visit('admin');
+
+            $browser->waitForText('Tableau de bord')
+                ->visit('/admin/users')
+                ->waitForText('admin-user@example.com')
+                ->assertSee('admin-user@example.com')
                 ->assertSee('second-user@example.com');
         });
     }
 
     /**
      * Create a request in the administration as an admin
-     *
-     * @return void
      */
-    public function testAdministrationCreateRequest()
+    public function testAdministrationCreateRequest(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login)
-                ->loginAsUser('first-user@example.com', 'password');
+            // Already logged in as Admin from previous test
 
-            $browser->assertSee('Demandes')
-                ->click('@requests-link')
-                ->waitForText('Aucune donnée à afficher')
-                ->assertSee('Aucune donnée à afficher')
-                ->clickLink('Ajouter demande')
-                ->assertPathIs('/admin/request/create');
+            $browser->visit('admin');
+
+            $browser->waitForText('Tableau de bord')
+                ->visit('/admin/requests')
+                ->waitForText('Aucun élément trouvé')
+                ->assertSee('Aucun élément trouvé')
+                ->visit('/admin/requests/create');
 
             $name = 'Test create request';
 
-            $browser->type('name', $name)
-                ->press('Enregistrer et retour');
+            $browser->waitForText('Créer Demande')
+                ->type('input#data\.name', $name)
+                ->clickLink('Créer', 'span.fi-btn-label');
 
             $browser->waitForText($name)
+                ->visit('/admin/requests')
+                ->waitForText($name)
                 ->assertSee($name)
-                ->assertDontSee('Aucune donnée à afficher')
-                ->assertPathIs('/admin/request');
+                ->assertDontSee('Aucun élément trouvé');
         });
     }
 
     /**
      * Create a training in the administration as an admin
-     *
-     * @return void
      */
-    public function testAdministrationCreateTraining()
+    public function testAdministrationCreateTraining(): void
     {
         // Used to fill hidden inputs
         Browser::macro('hidden', function ($name, $value) {
@@ -118,27 +102,29 @@ class AdminTest extends DuskTestCase
         });
 
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login)
-                ->loginAsUser('first-user@example.com', 'password');
+            // Already logged in as Admin from previous test
 
-            $browser->assertSee('Formations')
-                ->click('@trainings-link')
-                ->waitForText('Aucune donnée à afficher')
-                ->assertSee('Aucune donnée à afficher')
-                ->clickLink('Ajouter formation')
-                ->assertPathIs('/admin/training/create');
+            $browser->visit('admin');
+
+            $browser->waitForText('Tableau de bord')
+                ->visit('/admin/trainings')
+                ->waitForText('Aucun élément trouvé')
+                ->assertSee('Aucun élément trouvé')
+                ->visit('/admin/trainings/create');
 
             $name = 'Test create training';
 
-            $browser->type('name', $name)
-                ->hidden('visible', 1)
-                ->press('Enregistrer et retour');
+            $browser->waitForText('Créer Formation')
+                ->type('input#data\.name', $name)
+                ->clickLink('Créer', 'span.fi-btn-label');
 
             $browser->waitForText($name)
+                ->visit('/admin/trainings')
+                ->waitForText($name)
                 ->assertSee($name)
-                ->assertDontSee('Aucune donnée à afficher')
-                ->assertPathIs('/admin/training');
+                ->assertDontSee('Aucun élément trouvé');
 
+            // By default, should not be visible on the homepage
             $browser->visit('/')
                 ->assertSee('Pas de formation en groupe annoncée pour l\'instant')
                 ->assertDontSee($name);
@@ -147,55 +133,61 @@ class AdminTest extends DuskTestCase
 
     /**
      * Create a category in the administration as an admin
-     *
-     * @return void
      */
-    public function testAdministrationCreateCategory()
+    public function testAdministrationCreateCategory(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login)
-                ->loginAsUser('first-user@example.com', 'password');
+            // Already logged in as Admin from previous test
 
-            $browser->visit('/admin/category')
-                ->assertSee('Ajouter catégorie')
-                ->clickLink('Ajouter catégorie')
-                ->assertPathIs('/admin/category/create');
+            $browser->visit('admin');
+
+            $browser->waitForText('Tableau de bord')
+                ->visit('/admin/categories')
+                ->waitForText('Aucun élément trouvé')
+                ->assertSee('Aucun élément trouvé')
+                ->visit('/admin/categories/create');
 
             $name = 'Test create category';
 
-            $browser->type('name', $name)
-                ->press('Enregistrer et retour')
+            $browser->waitForText('Créer Catégorie')
+                ->type('input#data\.name', $name)
+                ->clickLink('Créer', 'span.fi-btn-label');
+
+            $browser->waitForText($name)
+                ->visit('/admin/categories')
                 ->waitForText($name)
                 ->assertSee($name)
-                ->assertDontSee('Aucune donnée à afficher')
-                ->assertPathIs('/admin/category');
+                ->assertDontSee('Aucun élément trouvé');
         });
     }
 
     /**
      * Create a status in the administration as an admin
-     *
-     * @return void
      */
-    public function testAdministrationCreateStatus()
+    public function testAdministrationCreateStatus(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login)
-                ->loginAsUser('first-user@example.com', 'password');
+            // Already logged in as Admin from previous test
 
-            $browser->visit('/admin/status')
-                ->assertSee('Ajouter décision')
-                ->clickLink('Ajouter décision')
-                ->assertPathIs('/admin/status/create');
+            $browser->visit('admin');
+
+            $browser->waitForText('Tableau de bord')
+                ->visit('/admin/statuses')
+                ->waitForText('Aucun élément trouvé')
+                ->assertSee('Aucun élément trouvé')
+                ->visit('/admin/statuses/create');
 
             $name = 'Test create status';
 
-            $browser->type('name', $name)
-                ->press('Enregistrer et retour')
+            $browser->waitForText('Créer Décision')
+                ->type('input#data\.name', $name)
+                ->clickLink('Créer', 'span.fi-btn-label');
+
+            $browser->waitForText($name)
+                ->visit('/admin/statuses')
                 ->waitForText($name)
                 ->assertSee($name)
-                ->assertDontSee('Aucune donnée à afficher')
-                ->assertPathIs('/admin/status');
+                ->assertDontSee('Aucun élément trouvé');
         });
     }
 }

@@ -19,7 +19,7 @@ class RequireAdminRole
             return $next($request);
         }
 
-        if (! $user->hasRole('Admin')) {
+        if (! $user->hasRole('admin')) {
             abort(403, 'Access denied');
         }
 

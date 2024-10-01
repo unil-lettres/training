@@ -92,7 +92,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12" style="margin-top: 40px;">
-                        <a href="{{ route('request.create') }}" class="btn btn-success btn-lg btn-request" role="button" style="width:80%;">Je dépose une demande</a>
+                        <a href="{{ route('front.request.create') }}" class="btn btn-success btn-lg btn-request" role="button" style="width:80%;">Je dépose une demande</a>
                     </div>
                 </div>
             </div>

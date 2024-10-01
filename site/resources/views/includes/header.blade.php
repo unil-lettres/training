@@ -33,7 +33,7 @@
                     <a href="{{ route('front.logout') }}">
                         <button type="button" dusk="logout" class="btn btn-outline-dark">Déconnexion</button>
                     </a>
-                    @if (auth()->check() && auth()->user()->hasRole('Admin'))
+                    @if (auth()->check() && auth()->user()->hasRole('admin'))
                         <a href="/admin">
                             <button type="button" dusk="admin" class="btn btn-outline-dark">Administration</button>
                         </a>

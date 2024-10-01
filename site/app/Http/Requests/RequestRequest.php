@@ -40,15 +40,15 @@ class RequestRequest extends FormRequest
                 'nullable',
                 Rule::in(['training', 'analysis']),
             ],
-            'contacts.*.contact' => 'nullable|max:200',
-            'contacts.*.notes' => 'nullable|max:500',
+            'contacts.*.contact' => 'nullable|max:150',
+            'contacts.*.notes' => 'nullable|max:300',
             'decision_date' => 'nullable|date',
             'decision_comments' => 'nullable|min:1',
             'file' => [
                 'nullable',
-                // Allow all types, but max upload size is 20MB
+                // Allow all types, but max upload size is 10MB
                 File::types([])
-                    ->max(20 * 1024),
+                    ->max(10 * 1024),
             ],
             'user_id' => 'nullable|integer',
             'category_id' => 'nullable|integer',
@@ -82,8 +82,8 @@ class RequestRequest extends FormRequest
         return [
             'name.required' => 'Le champ nom est requis.',
             'type' => 'Le type sélectionné n\'est pas valide.',
-            'contacts.*.contact' => 'Le champ ne peut pas comporter plus de 200 caractères.',
-            'contacts.*.notes' => 'Le champ ne peut pas comporter plus de 500 caractères.',
+            'contacts.*.contact' => 'Le champ ne peut pas comporter plus de 150 caractères.',
+            'contacts.*.notes' => 'Le champ ne peut pas comporter plus de 300 caractères.',
         ];
     }
 }

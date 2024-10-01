@@ -1,9 +1,0 @@
-.details-row-description,
-.details-row-comments {
-    white-space: initial;
-    width: 95%;
-
-    .elementToProof {
-        background-color: transparent !important;
-    }
-}

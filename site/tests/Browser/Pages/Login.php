@@ -44,8 +44,8 @@ class Login extends Page
      */
     public function loginAsUser(Browser $browser, $login, $password)
     {
-        $browser->type('email', $login)
-            ->type('password', $password)
-            ->press('Connexion');
+        $browser->type('input[type=email]', $login)
+            ->type('input[type=password]', $password)
+            ->clickLink('Connexion', 'span.fi-btn-label');
     }
 }
