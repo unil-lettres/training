@@ -6,6 +6,7 @@ use App\Models\Request;
 use App\Observers\RequestObserver;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -42,5 +43,15 @@ class AppServiceProvider extends ServiceProvider
 
         // Use bootstrap as default css framework for paginator
         Paginator::useBootstrap();
+
+        /**
+         * This is a workaround for proxies/reverse proxies that don't always pass the proper headers.
+         *
+         * Here, we check if the APP_URL starts with https://, which we should always honor,
+         * regardless of how well the proxy or network is configured.
+         */
+        if ((str_starts_with(env('APP_URL'), 'https://'))) {
+            URL::forceScheme('https');
+        }
     }
 }
