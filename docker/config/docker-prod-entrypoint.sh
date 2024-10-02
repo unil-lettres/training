@@ -30,24 +30,22 @@ check_vars_exist \
   DB_PASSWORD \
   DB_PORT \
   DB_USERNAME \
-  MAIL_FROM_ADDRESS
-
-# Hostname is extracted from APP_URL (https://myhost.com -> myhost.com)
-hostname=$(echo "$APP_URL" | awk -F[/:] '{print $4}')
+  SHIB_HOSTNAME \
+  SHIB_CONTACT
 
 # Replace the Shibboleth configuration DNS placeholder by the actual DNS
 if grep -q "myhost.com" "/etc/shibboleth/shibboleth2.xml"; then
-  sed -i "s|myhost.com|$hostname|g" "/etc/shibboleth/shibboleth2.xml"
-  sed -i "s|aai@$hostname|$MAIL_FROM_ADDRESS|g" "/etc/shibboleth/shibboleth2.xml"
-  echo "Replaced all occurrences of DNS placeholder with $hostname in Shibboleth configuration."
+  sed -i "s|myhost.com|$SHIB_HOSTNAME|g" "/etc/shibboleth/shibboleth2.xml"
+  sed -i "s|aai@$SHIB_HOSTNAME|$SHIB_CONTACT|g" "/etc/shibboleth/shibboleth2.xml"
+  echo "Replaced all occurrences of DNS placeholder with $SHIB_HOSTNAME in Shibboleth configuration."
 else
   echo "Shibboleth configuration DNS placeholder not found. No action needed."
 fi
 
 # Check if Shibboleth key or certificate file exists, if not generate them
 if [[ ! -f /etc/shibboleth/sp-key.pem && ! -f /etc/shibboleth/sp-cert.pem ]]; then
-  echo "Shibboleth key and certificate files missing. Generated new key and certificate for $hostname hostname"
-  shib-keygen -f -u _shibd -h $hostname -y 10 -o /etc/shibboleth/
+  echo "Shibboleth key and certificate files missing. Generated new key and certificate for $SHIB_HOSTNAME hostname"
+  shib-keygen -f -u _shibd -h $SHIB_HOSTNAME -y 10 -o /etc/shibboleth/
 else
   echo "Shibboleth key and certificate files already exist. No action needed."
 fi
