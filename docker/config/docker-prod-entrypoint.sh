@@ -29,7 +29,28 @@ check_vars_exist \
   DB_HOST \
   DB_PASSWORD \
   DB_PORT \
-  DB_USERNAME
+  DB_USERNAME \
+  MAIL_FROM_ADDRESS
+
+# Hostname is extracted from APP_URL (https://myhost.com -> myhost.com)
+hostname=$(echo "$APP_URL" | awk -F[/:] '{print $4}')
+
+# Replace the Shibboleth configuration DNS placeholder by the actual DNS
+if grep -q "myhost.com" "/etc/shibboleth/shibboleth2.xml"; then
+  sed -i "s|myhost.com|$hostname|g" "/etc/shibboleth/shibboleth2.xml"
+  sed -i "s|aai@$hostname|$MAIL_FROM_ADDRESS|g" "/etc/shibboleth/shibboleth2.xml"
+  echo "Replaced all occurrences of DNS placeholder with $hostname in Shibboleth configuration."
+else
+  echo "Shibboleth configuration DNS placeholder not found. No action needed."
+fi
+
+# Check if Shibboleth key or certificate file exists, if not generate them
+if [[ ! -f /etc/shibboleth/sp-key.pem && ! -f /etc/shibboleth/sp-cert.pem ]]; then
+  echo "Shibboleth key and certificate files missing. Generated new key and certificate for $hostname hostname"
+  shib-keygen -f -u _shibd -h $hostname -y 10 -o /etc/shibboleth/
+else
+  echo "Shibboleth key and certificate files already exist. No action needed."
+fi
 
 echo "Starting Migration..."
 php artisan migrate --force
@@ -40,5 +61,5 @@ php artisan optimize:clear --no-interaction
 echo "Create the symlink to make storage public..."
 php artisan storage:link
 
-trap "echo Catching SIGWINCH apache error and preventing it." SIGWINCH
-exec apache2-foreground
+# run commands from dockerfile
+"${@}"

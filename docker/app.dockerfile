@@ -1,5 +1,4 @@
-# syntax=docker/dockerfile:1
-FROM php:8.3-apache-bullseye AS base
+FROM php:8.3-apache-bookworm AS base
 
 ENV DOCKER_RUNNING=true
 
@@ -50,14 +49,18 @@ RUN a2enmod rewrite remoteip; \
     } > /etc/apache2/conf-available/remoteip.conf; \
     a2enconf remoteip
 
+# Copy PHP configuration file
 COPY docker/config/php.ini /usr/local/etc/php/php.ini
-COPY docker/config/vhost.conf /etc/apache2/sites-available/000-default.conf
 
 RUN mkdir -p /var/www/training
 WORKDIR /var/www/training
 
 FROM base AS dev
 
+# Copy Apache configuration file
+COPY docker/config/vhost-dev.conf /etc/apache2/sites-available/000-default.conf
+
+# Copy the entrypoint script
 COPY docker/config/docker-dev-entrypoint.sh /bin/docker-entrypoint.sh
 RUN chmod +x /bin/docker-entrypoint.sh
 
@@ -65,8 +68,29 @@ ENTRYPOINT ["/bin/docker-entrypoint.sh"]
 
 FROM base AS prod
 
-COPY docker/config/docker-prod-entrypoint.sh /bin/docker-entrypoint.sh
-RUN chmod +x /bin/docker-entrypoint.sh
+# Copy Apache configuration file
+COPY docker/config/vhost-prod.conf /etc/apache2/sites-available/000-default.conf
+
+# Install additional packages needed for production
+RUN apt-get install -y \
+    ntp \
+    supervisor \
+    libapache2-mod-shib \
+    shibboleth-sp-common \
+    shibboleth-sp-utils
+
+# Enable needed Apache modules
+RUN a2enmod rewrite ssl shib
+
+# Generate Shibboleth configurations files
+RUN curl --output /etc/shibboleth/shibboleth2.xml \
+    'https://help.switch.ch/aai/docs/shibboleth/SWITCH/3.4/sp/deployment/download/customize.php/shibboleth2.xml?osType=nonwindows&hostname=myhost.com&targetURL=https%3A%2F%2Fmyhost.com%2FShibboleth.sso%2FSession&keyPath=%2Fetc%2Fshibboleth%2Fsp-key.pem&certPath=%2Fetc%2Fshibboleth%2Fsp-cert.pem&federation=SWITCHaai&supportEmail=aai%40myhost.com&wayfURL=https%3A%2F%2Fwayf.switch.ch%2FSWITCHaai%2FWAYF&metadataURL=http%3A%2F%2Fmetadata.aai.switch.ch%2Fmetadata.switchaai%2Bidp.xml&metadataFile=metadata.switchaai%2Bidp.xml&eduIDEntityID=https%3A%2F%2Feduid.ch%2Fidp%2Fshibboleth&hide=windows-only,metadataattributespart1,metadataattributespart2,eduid-only,interfederation,'
+RUN curl --output /etc/shibboleth/attribute-map.xml \
+    'https://help.switch.ch/aai/docs/shibboleth/SWITCH/3.4/sp/deployment/download/customize.php/attribute-map.xml?osType=nonwindows&hide=eduid-only,'
+RUN curl --output /etc/shibboleth/attribute-policy.xml \
+    'https://help.switch.ch/aai/docs/shibboleth/SWITCH/3.4/sp/deployment/download/customize.php/attribute-policy.xml?osType=nonwindows&hide='
+RUN curl --output /etc/shibboleth/SWITCHaaiRootCA.crt.pem \
+    http://ca.aai.switch.ch/SWITCHaaiRootCA.crt.pem
 
 # Copy the application, except data listed in .dockerignore
 COPY site/ /var/www/training
@@ -86,10 +110,16 @@ RUN rm -rf /var/www/training/node_modules
 # Change ownership of the application to www-data
 RUN chown -R www-data:www-data /var/www/training
 
-# Run as www-data
-USER 33
+# Copy supervisor configuration file
+#
+# docker exec <container-id> supervisorctl status
+# docker exec <container-id> supervisorctl tail -f <service>
+# docker exec <container-id> supervisorctl restart <service>
+COPY docker/config/docker-prod-supervisor.conf /etc/supervisor/conf.d/supervisord.conf
 
-ENV RUN_APACHE_USER=www-data \
-    RUN_APACHE_GROUP=www-data
+# Copy the entrypoint script
+COPY docker/config/docker-prod-entrypoint.sh /bin/docker-entrypoint.sh
+RUN chmod +x /bin/docker-entrypoint.sh
 
 ENTRYPOINT ["/bin/docker-entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

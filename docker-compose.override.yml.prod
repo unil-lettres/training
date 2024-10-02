@@ -14,6 +14,7 @@ services:
     volumes:
       - uploads-data:/var/www/training/storage/app/public/uploads
       - logs-data:/var/www/training/storage/logs
+      - shibboleth-data:/etc/shibboleth
     restart: unless-stopped
     deploy:
       mode: global
@@ -31,3 +32,4 @@ services:
 volumes:
   uploads-data:
   logs-data:
+  shibboleth-data:
