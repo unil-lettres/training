@@ -22,7 +22,7 @@ services:
       - mysql-data:/var/lib/mysql
       - ./docker/config/my.cnf:/etc/mysql/my.cnf
     ports:
-      - "127.0.0.1:3302:3306"
+      - "127.0.0.1:3309:3306"
     healthcheck:
       # The container is not considered healthy until the MYSQL_DATABASE database is available
       test: [ "CMD-SHELL", "mysql $${MYSQL_DATABASE} -u$${MYSQL_USER} -p$${MYSQL_PASSWORD} -e 'SELECT 1;'  || exit 1" ]
