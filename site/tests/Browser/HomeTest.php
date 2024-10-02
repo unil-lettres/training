@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use Illuminate\Support\Facades\Artisan;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Concerns\ProvidesBrowser;
 use Tests\Browser\Pages\Login;
@@ -10,6 +11,18 @@ use Tests\DuskTestCase;
 class HomeTest extends DuskTestCase
 {
     use ProvidesBrowser;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Artisan::call('cache:clear');
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        static::closeAll();
+    }
 
     /**
      * Browse homepage as guest

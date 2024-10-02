@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use Illuminate\Support\Facades\Artisan;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Concerns\ProvidesBrowser;
 use Tests\Browser\Pages\Login;
@@ -10,6 +11,18 @@ use Tests\DuskTestCase;
 class AdminTest extends DuskTestCase
 {
     use ProvidesBrowser;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Artisan::call('cache:clear');
+    }
+
+    protected function tearDown(): void
+    {
+        static::closeAll();
+        parent::tearDown();
+    }
 
     /**
      * Browse administration as user
@@ -47,9 +60,8 @@ class AdminTest extends DuskTestCase
     public function testAdministrationUsers(): void
     {
         $this->browse(function (Browser $browser) {
-            // Already logged in as Admin from previous test
-
-            $browser->visit('admin');
+            $browser->visit(new Login)
+                ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord')
                 ->visit('/admin/users')
@@ -65,9 +77,8 @@ class AdminTest extends DuskTestCase
     public function testAdministrationCreateRequest(): void
     {
         $this->browse(function (Browser $browser) {
-            // Already logged in as Admin from previous test
-
-            $browser->visit('admin');
+            $browser->visit(new Login)
+                ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord')
                 ->visit('/admin/requests')
@@ -79,6 +90,7 @@ class AdminTest extends DuskTestCase
 
             $browser->waitForText('Créer Demande')
                 ->type('input#data\.name', $name)
+                ->pause(2000) // Avoid issue with clickLink
                 ->clickLink('Créer', 'span.fi-btn-label');
 
             $browser->waitForText($name)
@@ -94,17 +106,9 @@ class AdminTest extends DuskTestCase
      */
     public function testAdministrationCreateTraining(): void
     {
-        // Used to fill hidden inputs
-        Browser::macro('hidden', function ($name, $value) {
-            $this->script("document.getElementsByName('$name')[0].value = '$value'");
-
-            return $this;
-        });
-
         $this->browse(function (Browser $browser) {
-            // Already logged in as Admin from previous test
-
-            $browser->visit('admin');
+            $browser->visit(new Login)
+                ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord')
                 ->visit('/admin/trainings')
@@ -116,6 +120,7 @@ class AdminTest extends DuskTestCase
 
             $browser->waitForText('Créer Formation')
                 ->type('input#data\.name', $name)
+                ->pause(2000) // Avoid issue with clickLink
                 ->clickLink('Créer', 'span.fi-btn-label');
 
             $browser->waitForText($name)
@@ -137,9 +142,8 @@ class AdminTest extends DuskTestCase
     public function testAdministrationCreateCategory(): void
     {
         $this->browse(function (Browser $browser) {
-            // Already logged in as Admin from previous test
-
-            $browser->visit('admin');
+            $browser->visit(new Login)
+                ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord')
                 ->visit('/admin/categories')
@@ -151,6 +155,7 @@ class AdminTest extends DuskTestCase
 
             $browser->waitForText('Créer Catégorie')
                 ->type('input#data\.name', $name)
+                ->pause(2000) // Avoid issue with clickLink
                 ->clickLink('Créer', 'span.fi-btn-label');
 
             $browser->waitForText($name)
@@ -167,9 +172,8 @@ class AdminTest extends DuskTestCase
     public function testAdministrationCreateStatus(): void
     {
         $this->browse(function (Browser $browser) {
-            // Already logged in as Admin from previous test
-
-            $browser->visit('admin');
+            $browser->visit(new Login)
+                ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord')
                 ->visit('/admin/statuses')
@@ -181,6 +185,7 @@ class AdminTest extends DuskTestCase
 
             $browser->waitForText('Créer Décision')
                 ->type('input#data\.name', $name)
+                ->pause(2000) // Avoid issue with clickLink
                 ->clickLink('Créer', 'span.fi-btn-label');
 
             $browser->waitForText($name)

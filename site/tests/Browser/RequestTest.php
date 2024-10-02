@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use Illuminate\Support\Facades\Artisan;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Concerns\ProvidesBrowser;
 use Tests\Browser\Pages\Login;
@@ -10,6 +11,18 @@ use Tests\DuskTestCase;
 class RequestTest extends DuskTestCase
 {
     use ProvidesBrowser;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Artisan::call('cache:clear');
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        static::closeAll();
+    }
 
     /**
      * Cannot create a new request as guest.
@@ -24,6 +37,28 @@ class RequestTest extends DuskTestCase
             $browser->assertPathIsNot('/request/create')
                 ->assertDontSee('Déposer votre demande en tant que')
                 ->assertPathIs('/');
+        });
+    }
+
+    /**
+     * Create a new invalid request.
+     */
+    public function testInvalidRequest(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit(new Login)
+                ->loginAsUser('admin-user@example.com', 'password');
+
+            $browser->waitForText('Tableau de bord')
+                ->visit('/request/create');
+
+            $browser->click('@request-type')
+                ->clickLink('Étudiant');
+
+            $browser->press('Envoyer');
+
+            $browser->assertPathIs('/request/create')
+                ->assertSee('Le champ nom est requis.');
         });
     }
 
@@ -69,9 +104,11 @@ class RequestTest extends DuskTestCase
     public function testCreateTeacherRequest(): void
     {
         $this->browse(function (Browser $browser) {
-            // Already logged in as Admin from previous test
+            $browser->visit(new Login)
+                ->loginAsUser('admin-user@example.com', 'password');
 
-            $browser->visit('/request/create')
+            $browser->waitForText('Tableau de bord')
+                ->visit('/request/create')
                 ->click('@request-type')
                 ->clickLink('Enseignant');
 
@@ -95,26 +132,6 @@ class RequestTest extends DuskTestCase
                 ->assertSee('Liste des demandes envoyées')
                 ->assertSee($name)
                 ->assertSee($description);
-        });
-    }
-
-    /**
-     * Create a new invalid request.
-     */
-    public function testInvalidRequest(): void
-    {
-        $this->browse(function (Browser $browser) {
-            // Already logged in as Admin from previous test
-
-            $browser->visit('/request/create');
-
-            $browser->click('@request-type')
-                ->clickLink('Étudiant');
-
-            $browser->press('Envoyer');
-
-            $browser->assertPathIs('/request/create')
-                ->assertSee('Le champ nom est requis.');
         });
     }
 }
