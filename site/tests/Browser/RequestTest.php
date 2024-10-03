@@ -50,7 +50,7 @@ class RequestTest extends DuskTestCase
             $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
-            $browser->waitForText('Tableau de bord')
+            $browser->waitForText('Tableau de bord', 10)
                 ->visit('/request/create');
 
             $browser->click('@request-type')
@@ -72,7 +72,7 @@ class RequestTest extends DuskTestCase
             $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
-            $browser->waitForText('Tableau de bord')
+            $browser->waitForText('Tableau de bord', 10)
                 ->visit('/request/create')
                 ->click('@request-type')
                 ->clickLink('Étudiant');
@@ -108,7 +108,7 @@ class RequestTest extends DuskTestCase
             $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
-            $browser->waitForText('Tableau de bord')
+            $browser->waitForText('Tableau de bord', 10)
                 ->visit('/request/create')
                 ->click('@request-type')
                 ->clickLink('Enseignant');

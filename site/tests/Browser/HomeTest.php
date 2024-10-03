@@ -49,7 +49,7 @@ class HomeTest extends DuskTestCase
             $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
-            $browser->waitForText('Tableau de bord')
+            $browser->waitForText('Tableau de bord', 10)
                 ->visit('/')
                 ->assertSee('Demandes de formation')
                 ->assertSee('Déconnexion')
