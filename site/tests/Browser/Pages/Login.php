@@ -37,6 +37,6 @@ class Login extends Page
         $browser->type('input[type=email]', $login)
             ->type('input[type=password]', $password)
             //->pause(2000) // Avoid issues on GitHub Actions
-            ->clickAndWaitForReload('button[type=submit]'); // Connexion button
+            ->clickAndWaitForReload('button[type=submit]', 10); // Connexion button
     }
 }
