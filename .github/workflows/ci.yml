@@ -78,7 +78,7 @@ jobs:
 
       - name: Upgrade Chrome driver
         working-directory: ./site
-        run: php artisan dusk:chrome-driver 119
+        run: php artisan dusk:chrome-driver --detect
 
       - name: Start Chrome driver
         working-directory: ./site
