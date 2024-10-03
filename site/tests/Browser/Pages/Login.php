@@ -46,6 +46,7 @@ class Login extends Page
     {
         $browser->type('input[type=email]', $login)
             ->type('input[type=password]', $password)
+            ->pause(2000)
             ->clickLink('Connexion', 'span.fi-btn-label');
     }
 }
