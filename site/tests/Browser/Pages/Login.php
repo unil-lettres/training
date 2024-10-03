@@ -8,27 +8,21 @@ class Login extends Page
 {
     /**
      * Get the URL for the page.
-     *
-     * @return string
      */
-    public function url()
+    public function url(): string
     {
         return '/admin';
     }
 
     /**
      * Assert that the browser is on the page.
-     *
-     * @return void
      */
-    public function assert(Browser $browser) {}
+    public function assert(Browser $browser): void {}
 
     /**
      * Get the element shortcuts for the page.
-     *
-     * @return array
      */
-    public function elements()
+    public function elements(): array
     {
         return [
             '@element' => '#selector',
@@ -37,16 +31,12 @@ class Login extends Page
 
     /**
      * Login as a specific user.
-     *
-     * @param  string  $login
-     * @param  string  $password
-     * @return void
      */
-    public function loginAsUser(Browser $browser, $login, $password)
+    public function loginAsUser(Browser $browser, string $login, string $password): void
     {
         $browser->type('input[type=email]', $login)
             ->type('input[type=password]', $password)
             ->pause(2000) // Avoid issues on GitHub Actions
-            ->clickLink('Connexion', 'span.fi-btn-label');
+            ->click('button[type=submit]'); // Connexion button
     }
 }

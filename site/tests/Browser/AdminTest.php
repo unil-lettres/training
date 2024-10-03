@@ -91,8 +91,8 @@ class AdminTest extends DuskTestCase
 
             $browser->waitForText('Créer Demande')
                 ->type('input#data\.name', $name)
-                ->pause(2000) // Avoid issue with clickLink
-                ->clickLink('Créer', 'span.fi-btn-label');
+                ->pause(2000) // Avoid issue with click
+                ->click('button[type=submit]#key-bindings-1'); // Create button
 
             $browser->waitForText($name)
                 ->visit('/admin/requests')
@@ -121,8 +121,8 @@ class AdminTest extends DuskTestCase
 
             $browser->waitForText('Créer Formation')
                 ->type('input#data\.name', $name)
-                ->pause(2000) // Avoid issue with clickLink
-                ->clickLink('Créer', 'span.fi-btn-label');
+                ->pause(2000) // Avoid issue with click
+                ->click('button[type=submit]#key-bindings-1'); // Create button
 
             $browser->waitForText($name)
                 ->visit('/admin/trainings')
@@ -156,8 +156,8 @@ class AdminTest extends DuskTestCase
 
             $browser->waitForText('Créer Catégorie')
                 ->type('input#data\.name', $name)
-                ->pause(2000) // Avoid issue with clickLink
-                ->clickLink('Créer', 'span.fi-btn-label');
+                ->pause(2000) // Avoid issue with click
+                ->click('button[type=submit]#key-bindings-1'); // Create button
 
             $browser->waitForText($name)
                 ->visit('/admin/categories')
@@ -186,8 +186,8 @@ class AdminTest extends DuskTestCase
 
             $browser->waitForText('Créer Décision')
                 ->type('input#data\.name', $name)
-                ->pause(2000) // Avoid issue with clickLink
-                ->clickLink('Créer', 'span.fi-btn-label');
+                ->pause(2000) // Avoid issue with click
+                ->click('button[type=submit]#key-bindings-1'); // Create button
 
             $browser->waitForText($name)
                 ->visit('/admin/statuses')
