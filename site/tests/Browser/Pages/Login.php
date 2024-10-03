@@ -46,7 +46,7 @@ class Login extends Page
     {
         $browser->type('input[type=email]', $login)
             ->type('input[type=password]', $password)
-            ->pause(3000)
+            ->pause(2000) // Avoid issues during with GitHub Actions
             ->clickLink('Connexion', 'span.fi-btn-label');
     }
 }
