@@ -48,7 +48,7 @@ class AdminTest extends DuskTestCase
             $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
-            $browser->waitForText('Tableau de bord', 15)
+            $browser->waitForText('Tableau de bord')
                 ->assertSee('Tableau de bord')
                 ->assertDontSee('Ces identifiants ne correspondent pas à nos enregistrements');
         });
@@ -63,7 +63,7 @@ class AdminTest extends DuskTestCase
             $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
-            $browser->waitForText('Tableau de bord', 15)
+            $browser->waitForText('Tableau de bord')
                 ->visit('/admin/users')
                 ->waitForText('admin-user@example.com')
                 ->assertSee('admin-user@example.com')
@@ -80,7 +80,7 @@ class AdminTest extends DuskTestCase
             $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
-            $browser->waitForText('Tableau de bord', 15)
+            $browser->waitForText('Tableau de bord')
                 ->visit('/admin/requests')
                 ->waitForText('Aucun élément trouvé')
                 ->assertSee('Aucun élément trouvé')
@@ -110,7 +110,7 @@ class AdminTest extends DuskTestCase
             $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
-            $browser->waitForText('Tableau de bord', 15)
+            $browser->waitForText('Tableau de bord')
                 ->visit('/admin/trainings')
                 ->waitForText('Aucun élément trouvé')
                 ->assertSee('Aucun élément trouvé')
@@ -145,7 +145,7 @@ class AdminTest extends DuskTestCase
             $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
-            $browser->waitForText('Tableau de bord', 15)
+            $browser->waitForText('Tableau de bord')
                 ->visit('/admin/categories')
                 ->waitForText('Aucun élément trouvé')
                 ->assertSee('Aucun élément trouvé')
@@ -175,7 +175,7 @@ class AdminTest extends DuskTestCase
             $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
-            $browser->waitForText('Tableau de bord', 15)
+            $browser->waitForText('Tableau de bord')
                 ->visit('/admin/statuses')
                 ->waitForText('Aucun élément trouvé')
                 ->assertSee('Aucun élément trouvé')

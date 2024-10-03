@@ -48,7 +48,7 @@ class HomeTest extends DuskTestCase
             $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
-            $browser->waitForText('Tableau de bord', 15)
+            $browser->waitForText('Tableau de bord')
                 ->visit('/')
                 ->assertSee('Demandes de formation')
                 ->assertSee('Déconnexion')
@@ -57,7 +57,7 @@ class HomeTest extends DuskTestCase
                 ->assertDontSee('Connexion');
 
             $browser->click('@admin')
-                ->waitForText('Tableau de bord', 15)
+                ->waitForText('Tableau de bord')
                 ->assertSee('Tableau de bord')
                 ->assertPathIs('/admin');
         });
