@@ -16,7 +16,6 @@ class HomeTest extends DuskTestCase
     {
         parent::setUp();
         Artisan::call('cache:clear'); // Avoid rate limiting issue
-        //Artisan::call('migrate:fresh --seed');
     }
 
     protected function tearDown(): void
@@ -46,7 +45,8 @@ class HomeTest extends DuskTestCase
     public function testHomepageAsAdmin(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit(new Login)
+            $browser->pause(2000)
+                ->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord', 15)
