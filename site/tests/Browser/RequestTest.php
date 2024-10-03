@@ -46,8 +46,7 @@ class RequestTest extends DuskTestCase
     public function testInvalidRequest(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->pause(2000)
-                ->visit(new Login)
+            $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord', 15)
@@ -69,8 +68,7 @@ class RequestTest extends DuskTestCase
     public function testCreateStudentRequest(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->pause(2000)
-                ->visit(new Login)
+            $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord', 15)
@@ -106,8 +104,7 @@ class RequestTest extends DuskTestCase
     public function testCreateTeacherRequest(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->pause(2000)
-                ->visit(new Login)
+            $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord', 15)

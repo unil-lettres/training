@@ -30,8 +30,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationAsUser(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->pause(2000)
-                ->visit(new Login)
+            $browser->visit(new Login)
                 ->loginAsUser('second-user@example.com', 'password');
 
             $browser->waitForText('Ces identifiants ne correspondent pas à nos enregistrements')
@@ -46,8 +45,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationAsAdmin(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->pause(2000)
-                ->visit(new Login)
+            $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord', 15)
@@ -62,8 +60,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationUsers(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->pause(2000)
-                ->visit(new Login)
+            $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord', 15)
@@ -80,8 +77,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationCreateRequest(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->pause(2000)
-                ->visit(new Login)
+            $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord', 15)
@@ -111,8 +107,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationCreateTraining(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->pause(2000)
-                ->visit(new Login)
+            $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord', 15)
@@ -147,8 +142,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationCreateCategory(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->pause(2000)
-                ->visit(new Login)
+            $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord', 15)
@@ -178,8 +172,7 @@ class AdminTest extends DuskTestCase
     public function testAdministrationCreateStatus(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->pause(2000)
-                ->visit(new Login)
+            $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord', 15)

@@ -45,8 +45,7 @@ class HomeTest extends DuskTestCase
     public function testHomepageAsAdmin(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->pause(2000)
-                ->visit(new Login)
+            $browser->visit(new Login)
                 ->loginAsUser('admin-user@example.com', 'password');
 
             $browser->waitForText('Tableau de bord', 15)

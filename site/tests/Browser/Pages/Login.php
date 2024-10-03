@@ -36,6 +36,7 @@ class Login extends Page
     {
         $browser->type('input[type=email]', $login)
             ->type('input[type=password]', $password)
+            ->pause(5000)
             ->click('button[type=submit]'); // Connexion button
     }
 }
