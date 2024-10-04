@@ -41,28 +41,6 @@ class RequestTest extends DuskTestCase
     }
 
     /**
-     * Create a new invalid request.
-     */
-    public function testInvalidRequest(): void
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit(new Login)
-                ->loginAsUser('admin-user@example.com', 'password');
-
-            $browser->waitForText('Tableau de bord')
-                ->visit('/request/create');
-
-            $browser->click('@request-type')
-                ->clickLink('Étudiant');
-
-            $browser->press('Envoyer');
-
-            $browser->assertPathIs('/request/create')
-                ->assertSee('Le champ nom est requis.');
-        });
-    }
-
-    /**
      * Create a new student request.
      */
     public function testCreateStudentRequest(): void

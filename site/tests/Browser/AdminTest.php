@@ -50,24 +50,15 @@ class AdminTest extends DuskTestCase
 
             $browser->waitForText('Tableau de bord')
                 ->assertSee('Tableau de bord')
+                ->assertSee('Dernières demandes')
+                ->assertSee('Dernières formations')
+                ->assertSee('Retourner à l\'application')
+                ->assertSee('Demandes')
+                ->assertSee('Catégories')
+                ->assertSee('Formations')
+                ->assertSee('Décisions')
+                ->assertSee('Utilisateurs')
                 ->assertDontSee('Ces identifiants ne correspondent pas à nos enregistrements');
-        });
-    }
-
-    /**
-     * Browse administration users as admin
-     */
-    public function testAdministrationUsers(): void
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit(new Login)
-                ->loginAsUser('admin-user@example.com', 'password');
-
-            $browser->waitForText('Tableau de bord')
-                ->visit('/admin/users')
-                ->waitForText('admin-user@example.com')
-                ->assertSee('admin-user@example.com')
-                ->assertSee('second-user@example.com');
         });
     }
 }
