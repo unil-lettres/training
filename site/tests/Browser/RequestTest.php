@@ -5,6 +5,7 @@ namespace Tests\Browser;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Dusk\Browser;
 use Laravel\Dusk\Concerns\ProvidesBrowser;
+use Tests\Browser\Pages\Login;
 use Tests\DuskTestCase;
 
 class RequestTest extends DuskTestCase
