@@ -7,11 +7,14 @@ cp .env.dusk.ci .env
 rm .env.dusk.testing
 
 # Install php dependencies
-composer install --no-interaction
+composer install --no-progress --prefer-dist --optimize-autoloader
 
 # Install js dependencies & compile
 npm install
 npm run prod
+
+# Generate the app key
+php artisan key:generate
 
 # Run migrations & seed data
 php artisan migrate:fresh --seed
