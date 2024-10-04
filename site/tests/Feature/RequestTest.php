@@ -7,7 +7,6 @@ use App\Models\Request;
 use App\Models\Status;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class RequestTest extends TestCase
