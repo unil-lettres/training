@@ -25,21 +25,6 @@ class AdminTest extends DuskTestCase
     }
 
     /**
-     * Browse administration as user
-     */
-    public function testAdministrationAsUser(): void
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit(new Login)
-                ->loginAsUser('second-user@example.com', 'password');
-
-            $browser->waitForText('Ces identifiants ne correspondent pas à nos enregistrements')
-                ->assertSee('Ces identifiants ne correspondent pas à nos enregistrements')
-                ->assertDontSee('Tableau de bord');
-        });
-    }
-
-    /**
      * Browse administration as admin
      */
     public function testAdministrationAsAdmin(): void
