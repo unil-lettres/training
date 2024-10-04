@@ -40,6 +40,9 @@ Route::group([
 
 Route::get('/login')
     ->name('login')
+    ->middleware('auth_method');
+
+Route::get('/login/aai')
     ->middleware('check_aai');
 
 Auth::routes([

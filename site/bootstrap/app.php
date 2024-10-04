@@ -30,6 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
             'check_aai' => \App\Http\Middleware\CheckAai::class,
+            'auth_method' => \App\Http\Middleware\AuthMethod::class,
         ]);
 
         $middleware->priority([

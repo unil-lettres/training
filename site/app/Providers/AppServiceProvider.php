@@ -50,7 +50,7 @@ class AppServiceProvider extends ServiceProvider
          * Here, we check if the APP_URL starts with https://, which we should always honor,
          * regardless of how well the proxy or network is configured.
          */
-        if ((str_starts_with(env('APP_URL'), 'https://'))) {
+        if ((str_starts_with(config('const.app_url'), 'https://'))) {
             URL::forceScheme('https');
         }
     }
