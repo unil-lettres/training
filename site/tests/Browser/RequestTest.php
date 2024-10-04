@@ -14,7 +14,7 @@ class RequestTest extends DuskTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        Artisan::call('cache:clear'); // Avoid rate limiting issue
+        Artisan::call('migrate:fresh --seed');
     }
 
     protected function tearDown(): void
