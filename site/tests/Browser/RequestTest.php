@@ -24,7 +24,7 @@ class RequestTest extends DuskTestCase
     }
 
     /**
-     * Cannot create a new request as guest.
+     * Cannot create a new request as guest. Redirect to Filament login page.
      */
     public function testGuestCannotCreateRequest(): void
     {
@@ -33,9 +33,9 @@ class RequestTest extends DuskTestCase
 
             $browser->clickLink('Nouvelle demande');
 
-            $browser->assertPathIsNot('/request/create')
-                ->assertDontSee('Déposer votre demande en tant que')
-                ->assertPathIs('/');
+            $browser->assertSee('Connectez-vous à votre compte')
+                ->assertPathIsNot('/request/create')
+                ->assertPathIs('/admin/login');
         });
     }
 }
