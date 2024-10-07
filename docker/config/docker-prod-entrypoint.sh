@@ -29,25 +29,28 @@ check_vars_exist \
   DB_HOST \
   DB_PASSWORD \
   DB_PORT \
-  DB_USERNAME \
-  SHIB_HOSTNAME \
-  SHIB_CONTACT
+  DB_USERNAME
 
-# Replace the Shibboleth configuration DNS placeholder by the actual DNS
-if grep -q "myhost.com" "/etc/shibboleth/shibboleth2.xml"; then
-  sed -i "s|myhost.com|$SHIB_HOSTNAME|g" "/etc/shibboleth/shibboleth2.xml"
-  sed -i "s|aai@$SHIB_HOSTNAME|$SHIB_CONTACT|g" "/etc/shibboleth/shibboleth2.xml"
-  echo "Replaced all occurrences of DNS placeholder with $SHIB_HOSTNAME in Shibboleth configuration."
-else
-  echo "Shibboleth configuration DNS placeholder not found. No action needed."
-fi
+# Check if SHIB_HOSTNAME and SHIB_CONTACT are set
+if [ -n "$SHIB_HOSTNAME" ] && [ -n "$SHIB_CONTACT" ]; then
+  # Replace the Shibboleth configuration DNS placeholder by the actual DNS
+  if grep -q "myhost.com" "/etc/shibboleth/shibboleth2.xml"; then
+    sed -i "s|myhost.com|$SHIB_HOSTNAME|g" "/etc/shibboleth/shibboleth2.xml"
+    sed -i "s|aai@$SHIB_HOSTNAME|$SHIB_CONTACT|g" "/etc/shibboleth/shibboleth2.xml"
+    echo "Replaced all occurrences of DNS placeholder with $SHIB_HOSTNAME in Shibboleth configuration."
+  else
+    echo "Shibboleth configuration DNS placeholder not found. No action needed."
+  fi
 
-# Check if Shibboleth key or certificate file exists, if not generate them
-if [[ ! -f /etc/shibboleth/sp-key.pem && ! -f /etc/shibboleth/sp-cert.pem ]]; then
-  echo "Shibboleth key and certificate files missing. Generated new key and certificate for $SHIB_HOSTNAME hostname"
-  shib-keygen -f -u _shibd -h $SHIB_HOSTNAME -y 10 -o /etc/shibboleth/
+  # Check if Shibboleth key or certificate file exists, if not generate them
+  if [[ ! -f /etc/shibboleth/sp-key.pem && ! -f /etc/shibboleth/sp-cert.pem ]]; then
+    echo "Shibboleth key and certificate files missing. Generated new key and certificate for $SHIB_HOSTNAME hostname"
+    shib-keygen -f -u _shibd -h $SHIB_HOSTNAME -y 10 -o /etc/shibboleth/
+  else
+    echo "Shibboleth key and certificate files already exist. No action needed."
+  fi
 else
-  echo "Shibboleth key and certificate files already exist. No action needed."
+  echo "Shibboleth environment variables are not set. Skipping Shibboleth configuration."
 fi
 
 echo "Starting Migration..."
