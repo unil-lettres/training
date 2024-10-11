@@ -133,6 +133,8 @@ cp site/.env.example site/.env
 
 You should replace the values since the default ones are not ready for production.
 
+To authenticate with Shibboleth, don't forget to uncomment and set the `SHIB_HOSTNAME` and `SHIB_CONTACT` variables in `site/.env`, otherwise you only be abel to use the Filament authentication.
+
 Please also make sure to copy & rename the **docker-compose.override.yml.prod** file to **docker-compose.override.yml**.
 
 `cp docker-compose.override.yml.prod docker-compose.override.yml`
