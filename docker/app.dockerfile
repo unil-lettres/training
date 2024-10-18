@@ -90,7 +90,7 @@ RUN curl --output /etc/shibboleth/attribute-map.xml \
 RUN curl --output /etc/shibboleth/attribute-policy.xml \
     'https://help.switch.ch/aai/docs/shibboleth/SWITCH/3.4/sp/deployment/download/customize.php/attribute-policy.xml?osType=nonwindows&hide='
 RUN curl --output /etc/shibboleth/SWITCHaaiRootCA.crt.pem \
-    http://ca.aai.switch.ch/SWITCHaaiRootCA.crt.pem
+    https://ca.aai.switch.ch/SWITCHaaiRootCA.crt.pem
 
 # Copy the application, except data listed in .dockerignore
 COPY site/ /var/www/training
