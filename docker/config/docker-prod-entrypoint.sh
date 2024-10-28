@@ -33,18 +33,24 @@ check_vars_exist \
 
 # Check if SHIB_HOSTNAME and SHIB_CONTACT are set
 if [ -n "$SHIB_HOSTNAME" ] && [ -n "$SHIB_CONTACT" ]; then
-  # Check if Kubernetes environment variable is set & /etc/shibboleth/shibboleth2.xml is not present
+  # Copy Shibboleth configuration files from backup if the files do not exist
   if [ -n "$KUBERNETES_RUNNING" ] && [ ! -f /etc/shibboleth/shibboleth2.xml ]; then
     echo "Copying Shibboleth config files from backup."
     cp -af /etc/shibboleth-backup/. /etc/shibboleth/
     echo "Files copied successfully."
   fi
 
-  # Replace the Shibboleth configuration DNS placeholder by the actual DNS
+  # Replace the Shibboleth configuration DNS placeholder by the actual DNS &
+  # set the Shibboleth configuration handlerSSL to false
   if grep -q "myhost.com" "/etc/shibboleth/shibboleth2.xml"; then
     sed -i "s|myhost.com|$SHIB_HOSTNAME|g" "/etc/shibboleth/shibboleth2.xml"
-    sed -i "s|aai@$SHIB_HOSTNAME|$SHIB_CONTACT|g" "/etc/shibboleth/shibboleth2.xml"
     echo "Replaced all occurrences of DNS placeholder with $SHIB_HOSTNAME in Shibboleth configuration."
+
+    sed -i "s|aai@$SHIB_HOSTNAME|$SHIB_CONTACT|g" "/etc/shibboleth/shibboleth2.xml"
+    echo "Replaced contact email address in Shibboleth configuration."
+
+    sed -i "s|handlerSSL=\"true\"|handlerSSL=\"false\"|g" "/etc/shibboleth/shibboleth2.xml"
+    echo "Set handlerSSL to false in Shibboleth configuration."
   else
     echo "Shibboleth configuration DNS placeholder not found. No action needed."
   fi
