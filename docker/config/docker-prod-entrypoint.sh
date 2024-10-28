@@ -33,6 +33,13 @@ check_vars_exist \
 
 # Check if SHIB_HOSTNAME and SHIB_CONTACT are set
 if [ -n "$SHIB_HOSTNAME" ] && [ -n "$SHIB_CONTACT" ]; then
+  # Check if Kubernetes environment variable is set & /etc/shibboleth/shibboleth2.xml is not present
+  if [ -n "$KUBERNETES_RUNNING" ] && [ ! -f /etc/shibboleth/shibboleth2.xml ]; then
+    echo "Copying Shibboleth config files from backup."
+    cp -af /etc/shibboleth-backup/. /etc/shibboleth/
+    echo "Files copied successfully."
+  fi
+
   # Replace the Shibboleth configuration DNS placeholder by the actual DNS
   if grep -q "myhost.com" "/etc/shibboleth/shibboleth2.xml"; then
     sed -i "s|myhost.com|$SHIB_HOSTNAME|g" "/etc/shibboleth/shibboleth2.xml"

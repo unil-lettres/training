@@ -92,6 +92,10 @@ RUN curl --output /etc/shibboleth/attribute-policy.xml \
 RUN curl --output /etc/shibboleth/SWITCHaaiRootCA.crt.pem \
     https://ca.aai.switch.ch/SWITCHaaiRootCA.crt.pem
 
+# Create a backup directory & copy all files from /etc/shibboleth/ to the backup directory
+RUN mkdir -p /etc/shibboleth-backup
+RUN cp -a /etc/shibboleth/. /etc/shibboleth-backup/
+
 # Copy the application, except data listed in .dockerignore
 COPY site/ /var/www/training
 
