@@ -60,6 +60,7 @@ if [ -n "$SHIB_HOSTNAME" ] && [ -n "$SHIB_CONTACT" ]; then
   fi
 
   # Update Apache configuration file (000-default.conf)
+  # https://shibboleth.atlassian.net/wiki/spaces/SHIB2/pages/2577072242/SPReverseProxy
   if grep -q "ServerName training" "/etc/apache2/sites-available/000-default.conf"; then
     sed -i "s|ServerName training|ServerName https://$SHIB_HOSTNAME:443|g" "/etc/apache2/sites-available/000-default.conf"
     echo "Replaced ServerName by $SHIB_HOSTNAME in Apache configuration."

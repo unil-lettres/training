@@ -93,6 +93,7 @@ RUN curl --output /etc/shibboleth/SWITCHaaiRootCA.crt.pem \
     https://ca.aai.switch.ch/SWITCHaaiRootCA.crt.pem
 
 # Set handlerSSL to false in Shibboleth configuration file
+# https://shibboleth.atlassian.net/wiki/spaces/SHIB2/pages/2577072242/SPReverseProxy
 RUN sed -i "s|handlerSSL=\"true\"|handlerSSL=\"false\"|g" "/etc/shibboleth/shibboleth2.xml"
 
 # Create a backup directory & copy all files from /etc/shibboleth/ to the backup directory
