@@ -40,19 +40,15 @@ if [ -n "$SHIB_HOSTNAME" ] && [ -n "$SHIB_CONTACT" ]; then
     echo "Files copied successfully."
   fi
 
-  # Replace the Shibboleth configuration DNS placeholder by the actual DNS &
-  # set the Shibboleth configuration handlerSSL to false
+  # Update Shibboleth main configuration file (shibboleth2.xml)
   if grep -q "myhost.com" "/etc/shibboleth/shibboleth2.xml"; then
     sed -i "s|myhost.com|$SHIB_HOSTNAME|g" "/etc/shibboleth/shibboleth2.xml"
-    echo "Replaced all occurrences of DNS placeholder with $SHIB_HOSTNAME in Shibboleth configuration."
+    echo "Replaced all occurrences of DNS placeholder by $SHIB_HOSTNAME in Shibboleth configuration."
 
     sed -i "s|aai@$SHIB_HOSTNAME|$SHIB_CONTACT|g" "/etc/shibboleth/shibboleth2.xml"
     echo "Replaced contact email address in Shibboleth configuration."
-
-    sed -i "s|handlerSSL=\"true\"|handlerSSL=\"false\"|g" "/etc/shibboleth/shibboleth2.xml"
-    echo "Set handlerSSL to false in Shibboleth configuration."
   else
-    echo "Shibboleth configuration DNS placeholder not found. No action needed."
+    echo "Shibboleth already configured. No action needed."
   fi
 
   # Check if Shibboleth key or certificate file exists, if not generate them
@@ -61,6 +57,14 @@ if [ -n "$SHIB_HOSTNAME" ] && [ -n "$SHIB_CONTACT" ]; then
     shib-keygen -f -u _shibd -h $SHIB_HOSTNAME -y 10 -o /etc/shibboleth/
   else
     echo "Shibboleth key and certificate files already exist. No action needed."
+  fi
+
+  # Update Apache configuration file (000-default.conf)
+  if grep -q "ServerName training" "/etc/apache2/sites-available/000-default.conf"; then
+    sed -i "s|ServerName training|ServerName https://$SHIB_HOSTNAME:443|g" "/etc/apache2/sites-available/000-default.conf"
+    echo "Replaced ServerName by $SHIB_HOSTNAME in Apache configuration."
+  else
+    echo "Apache already configured. No action needed."
   fi
 else
   echo "Shibboleth environment variables are not set. Skipping Shibboleth configuration."

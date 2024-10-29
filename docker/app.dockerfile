@@ -92,6 +92,9 @@ RUN curl --output /etc/shibboleth/attribute-policy.xml \
 RUN curl --output /etc/shibboleth/SWITCHaaiRootCA.crt.pem \
     https://ca.aai.switch.ch/SWITCHaaiRootCA.crt.pem
 
+# Set handlerSSL to false in Shibboleth configuration file
+RUN sed -i "s|handlerSSL=\"true\"|handlerSSL=\"false\"|g" "/etc/shibboleth/shibboleth2.xml"
+
 # Create a backup directory & copy all files from /etc/shibboleth/ to the backup directory
 RUN mkdir -p /etc/shibboleth-backup
 RUN cp -a /etc/shibboleth/. /etc/shibboleth-backup/
