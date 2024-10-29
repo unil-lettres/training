@@ -6,7 +6,9 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
-    ->withProviders([])
+    ->withProviders([
+        \Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+    ])
     ->withCommands([
         \Bugsnag\BugsnagLaravel\Commands\DeployCommand::class,
     ])
