@@ -100,7 +100,7 @@ RUN sed -i "s|handlerSSL=\"true\"|handlerSSL=\"false\"|g" "/etc/shibboleth/shibb
 RUN mkdir -p /etc/shibboleth-backup
 RUN cp -a /etc/shibboleth/. /etc/shibboleth-backup/
 
-# Copy the application, except data listed in .dockerignore
+# Copy the application, except data listed in dockerignore
 COPY site/ /var/www/training
 
 # Install php dependencies
