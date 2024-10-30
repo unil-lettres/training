@@ -74,8 +74,10 @@ fi
 echo "Starting Migration..."
 php artisan migrate --force
 
-echo "Clearing caches..."
-php artisan optimize:clear --no-interaction
+echo "Creating caches..."
+php artisan route:cache
+php artisan config:cache
+php artisan view:cache
 
 echo "Create the symlink to make storage public..."
 php artisan storage:link
