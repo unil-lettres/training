@@ -43,6 +43,8 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Auth\Middleware\Authorize::class,
         ]);
 
+        // Needed to avoid livewire/filament unauthorized errors with uploads
+        // when behind a reverse proxy
         $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions) {
