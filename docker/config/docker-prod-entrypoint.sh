@@ -34,7 +34,7 @@ check_vars_exist \
 # Check if SHIB_HOSTNAME and SHIB_CONTACT are set
 if [ -n "$SHIB_HOSTNAME" ] && [ -n "$SHIB_CONTACT" ]; then
   # Copy Shibboleth configuration files from backup if the files do not exist
-  if [ -n "$KUBERNETES_RUNNING" ] && [ ! -f /etc/shibboleth/shibboleth2.xml ]; then
+  if [ ! -f /etc/shibboleth/shibboleth2.xml ]; then
     echo "Copying Shibboleth config files from backup."
     cp -af /etc/shibboleth-backup/. /etc/shibboleth/
     echo "Files copied successfully."
