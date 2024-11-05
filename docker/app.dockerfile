@@ -112,6 +112,9 @@ RUN cd /var/www/training && \
     npm install && \
     npm run prod
 
+# Copy Kubernetes poststart script
+COPY docker/config/k8s-poststart.sh /var/www/training/k8s-poststart.sh
+
 # Remove node_modules folder since it's not needed anymore
 RUN rm -rf /var/www/training/node_modules
 
