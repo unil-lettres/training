@@ -11,6 +11,13 @@
 
         <ul class="list-group">
             <li class="list-group-item">
+                <b>3.0</b><span class="text-black-50 ms-2">7/11/2024</span>
+                <ul>
+                    <li>Migration de Backpack à Filament (admin panel)</li>
+                    <li>Mise en conformité du projet pour Docker et Kubernetes</li>
+                </ul>
+            </li>
+            <li class="list-group-item">
                 <b>2.37</b><span class="text-black-50 ms-2">10/05/2024</span>
                 <ul>
                     <li>Mise a jour de l'application (Laravel 11)</li>
