@@ -40,11 +40,8 @@ jobs:
           cache-to: type=inline
 
       - name: Retrieve latest tag
-        id: retrieve_latest_tag
-        run: |
-          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
-          echo "Latest Tag: $latest_tag"
-          echo "::set-output name=latest_tag::$latest_tag"
+        id: tag
+        uses: JinoArch/get-latest-tag@latest
 
       - name: Build and push tagged version
         uses: docker/build-push-action@v6
@@ -54,7 +51,7 @@ jobs:
           target: prod
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.DOCKERHUB_REPOSITORY }}:${{ steps.retrieve_latest_tag.outputs.latest_tag }}
+          tags: ${{ env.DOCKERHUB_REPOSITORY }}:${{ steps.jinos.outputs.latestTag }}
           cache-from: type=registry,ref=${{ env.DOCKERHUB_REPOSITORY }}:latest
           cache-to: type=inline
 
