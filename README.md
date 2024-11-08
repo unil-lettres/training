@@ -153,7 +153,7 @@ Use a reverse proxy configuration to map the url to port `8686`.
 
 # Docker images
 
-Changes in the `development` branch will create new images tagged `latest-dev` & `latest-stage`, while changes in the `master` branch will create new images tagged `latest` & another one with the most recent tag available.
+Changes in the `development` branch will create new images tagged `latest-dev` & `latest-stage`, while changes in the `master` branch will create an image tagged `latest`. When a new tag is created, an image with the same tag will be generated.
 
 # Error tracker
 
