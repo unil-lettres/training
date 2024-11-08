@@ -40,6 +40,7 @@ jobs:
           cache-to: type=inline
 
       - name: Retrieve latest tag
+        id: retrieve_latest_tag
         run: |
           latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
           echo "Latest Tag: $latest_tag"
@@ -53,7 +54,7 @@ jobs:
           target: prod
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ${{ env.DOCKERHUB_REPOSITORY }}:${{ steps.get_tag.outputs.latest_tag }}
+          tags: ${{ env.DOCKERHUB_REPOSITORY }}:${{ steps.retrieve_latest_tag.outputs.latest_tag }}
           cache-from: type=registry,ref=${{ env.DOCKERHUB_REPOSITORY }}:latest
           cache-to: type=inline
 
