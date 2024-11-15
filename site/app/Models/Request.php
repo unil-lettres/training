@@ -52,17 +52,6 @@ class Request extends Model
 
     // protected $hidden = [];
 
-    public static $status = [
-        'new' => 'Nouveau',
-        'pending' => 'En attente',
-        'resolved' => 'Résolue',
-    ];
-
-    public static $type = [
-        'training' => 'Formation',
-        'analysis' => 'Analyse',
-    ];
-
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS

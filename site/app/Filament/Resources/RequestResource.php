@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\RequestStatusAdmin;
+use App\Enums\RequestType;
 use App\Filament\Exports\RequestExporter;
 use App\Filament\Resources\RequestResource\Pages\CreateRequest;
 use App\Filament\Resources\RequestResource\Pages\EditRequest;
@@ -146,11 +148,11 @@ class RequestResource extends Resource
                     Tab::make('Administration')->schema([
                         Select::make('status_admin')
                             ->label('Statut')
-                            ->options(Request::$status)
+                            ->options(RequestStatusAdmin::toArray())
                             ->default(null),
                         Select::make('type')
                             ->label('Type')
-                            ->options(Request::$type)
+                            ->options(RequestType::toArray())
                             ->default(null),
                         Select::make('category_id')
                             ->label('Catégorie')
@@ -253,8 +255,8 @@ class RequestResource extends Resource
                 TextColumn::make('type')
                     ->label('Type')
                     ->formatStateUsing(fn (string $state): string => match ($state) {
-                        'training' => 'Formation',
-                        'analysis' => 'Analyse',
+                        strtolower(RequestType::TRAINING->name) => RequestType::TRAINING->value,
+                        strtolower(RequestType::ANALYSIS->name) => RequestType::ANALYSIS->value,
                         default => '-',
                     })
                     ->sortable()
@@ -289,10 +291,10 @@ class RequestResource extends Resource
                     ->relationship('status', 'name'),
                 SelectFilter::make('status_admin')
                     ->label('Statut')
-                    ->options(Request::$status),
+                    ->options(RequestStatusAdmin::toArray()),
                 SelectFilter::make('type')
                     ->label('Type')
-                    ->options(Request::$type),
+                    ->options(RequestType::toArray()),
                 DateRangeFilter::make('deadline')
                     ->label('Délai de production')
                     ->disableClear(),

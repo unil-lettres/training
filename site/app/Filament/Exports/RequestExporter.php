@@ -2,6 +2,8 @@
 
 namespace App\Filament\Exports;
 
+use App\Enums\RequestStatusAdmin;
+use App\Enums\RequestType;
 use App\Models\Request;
 use Filament\Actions\Exports\ExportColumn;
 use Filament\Actions\Exports\Exporter;
@@ -67,16 +69,16 @@ class RequestExporter extends Exporter
             ExportColumn::make('status_admin')
                 ->label('Statut')
                 ->formatStateUsing(fn (?string $state): string => match ($state) {
-                    'new' => 'Nouveau',
-                    'pending' => 'En attente',
-                    'resolved' => 'Résolue',
+                    strtolower(RequestStatusAdmin::NEW->name) => RequestStatusAdmin::NEW->value,
+                    strtolower(RequestStatusAdmin::PENDING->name) => RequestStatusAdmin::PENDING->value,
+                    strtolower(RequestStatusAdmin::RESOLVED->name) => RequestStatusAdmin::RESOLVED->value,
                     default => '',
                 }),
             ExportColumn::make('type')
                 ->label('Type')
                 ->formatStateUsing(fn (?string $state): string => match ($state) {
-                    'training' => 'Formation',
-                    'analysis' => 'Analyse',
+                    strtolower(RequestType::TRAINING->name) => RequestType::TRAINING->value,
+                    strtolower(RequestType::ANALYSIS->name) => RequestType::ANALYSIS->value,
                     default => '',
                 }),
             ExportColumn::make('category.name')

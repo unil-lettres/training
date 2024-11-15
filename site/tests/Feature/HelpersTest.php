@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Enums\RequestStatusAdmin;
 use App\Helpers\Helpers;
 use Tests\TestCase;
 
@@ -12,16 +13,24 @@ class HelpersTest extends TestCase
      */
     public function testRequestStatus(): void
     {
-        $status = 'new';
-        $this->assertEquals('Nouveau', Helpers::requestStatus($status));
+        $this->assertEquals(
+            RequestStatusAdmin::NEW->value,
+            Helpers::requestStatus(strtolower(RequestStatusAdmin::NEW->name))
+        );
 
-        $status = 'pending';
-        $this->assertEquals('En attente', Helpers::requestStatus($status));
+        $this->assertEquals(
+            RequestStatusAdmin::PENDING->value,
+            Helpers::requestStatus(strtolower(RequestStatusAdmin::PENDING->name))
+        );
 
-        $status = 'resolved';
-        $this->assertEquals('Résolue', Helpers::requestStatus($status));
+        $this->assertEquals(
+            RequestStatusAdmin::RESOLVED->value,
+            Helpers::requestStatus(strtolower(RequestStatusAdmin::RESOLVED->name))
+        );
 
-        $status = 'xxxxx';
-        $this->assertEquals('-', Helpers::requestStatus($status));
+        $this->assertEquals(
+            '-',
+            Helpers::requestStatus('xxxxx')
+        );
     }
 }

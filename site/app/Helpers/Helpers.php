@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-use App\Models\Request;
+use App\Enums\RequestStatusAdmin;
 
 class Helpers
 {
@@ -11,7 +11,7 @@ class Helpers
      */
     public static function requestStatus(?string $status): string
     {
-        $status = collect(Request::$status)->pull($status);
+        $status = collect(RequestStatusAdmin::toArray())->pull($status);
 
         if (is_string($status)) {
             return $status;
