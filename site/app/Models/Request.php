@@ -11,19 +11,11 @@ class Request extends Model
 {
     use HasFactory;
 
-    /*
-    |--------------------------------------------------------------------------
-    | GLOBAL VARIABLES
-    |--------------------------------------------------------------------------
-    */
-
     protected $table = 'requests';
 
     protected $primaryKey = 'id';
 
     public $timestamps = true;
-
-    // protected $guarded = ['id'];
 
     protected $fillable = [
         'name',
@@ -48,16 +40,6 @@ class Request extends Model
         'contacts',
     ];
 
-    protected $fakeColumns = ['extras'];
-
-    // protected $hidden = [];
-
-    /*
-    |--------------------------------------------------------------------------
-    | FUNCTIONS
-    |--------------------------------------------------------------------------
-    */
-
     protected function casts(): array
     {
         return [
@@ -71,29 +53,19 @@ class Request extends Model
 
     /**
      * Return cleaned description
-     *
-     * @return string
      */
-    public function cleanDescription()
+    public function cleanDescription(): string
     {
         return strip_tags($this->description);
     }
 
     /**
      * Return cleaned comments
-     *
-     * @return string
      */
-    public function cleanComments()
+    public function cleanComments(): string
     {
         return strip_tags($this->comments);
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | RELATIONS
-    |--------------------------------------------------------------------------
-    */
 
     /**
      * Get the category associated with the request.
@@ -118,22 +90,4 @@ class Request extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | SCOPES
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
-    | ACCESORS
-    |--------------------------------------------------------------------------
-    */
-
-    /*
-    |--------------------------------------------------------------------------
-    | MUTATORS
-    |--------------------------------------------------------------------------
-    */
 }
