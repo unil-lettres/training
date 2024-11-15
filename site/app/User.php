@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\UserRole;
 use App\Models\Request;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
@@ -34,12 +35,6 @@ class User extends Authenticatable implements FilamentUser
         'password', 'remember_token',
     ];
 
-    public static $role = [
-        'notification' => 'Notification',
-        'super-editor' => 'Super Éditeur',
-        'admin' => 'Admin',
-    ];
-
     protected function casts(): array
     {
         return [
@@ -61,7 +56,9 @@ class User extends Authenticatable implements FilamentUser
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasRole(['admin', 'super-editor']);
+        return $this->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\UserRole;
 use App\Models\Training;
 use App\User;
 
@@ -12,7 +13,9 @@ class TrainingPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['admin', 'super-editor']);
+        return $user->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 
     /**
@@ -20,7 +23,9 @@ class TrainingPolicy
      */
     public function view(User $user, Training $training): bool
     {
-        return $user->hasRole(['admin', 'super-editor']);
+        return $user->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 
     /**
@@ -28,7 +33,9 @@ class TrainingPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['admin', 'super-editor']);
+        return $user->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 
     /**
@@ -36,7 +43,9 @@ class TrainingPolicy
      */
     public function update(User $user, Training $training): bool
     {
-        return $user->hasRole(['admin', 'super-editor']);
+        return $user->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 
     /**
@@ -44,7 +53,9 @@ class TrainingPolicy
      */
     public function delete(User $user, Training $training): bool
     {
-        return $user->hasRole(['admin', 'super-editor']);
+        return $user->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 
     /**
@@ -52,7 +63,9 @@ class TrainingPolicy
      */
     public function restore(User $user, Training $training): bool
     {
-        return $user->hasRole(['admin', 'super-editor']);
+        return $user->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 
     /**
@@ -60,6 +73,8 @@ class TrainingPolicy
      */
     public function forceDelete(User $user, Training $training): bool
     {
-        return $user->hasRole(['admin', 'super-editor']);
+        return $user->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 }

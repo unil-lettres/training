@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\UserRole;
 use App\Models\Request;
 use App\User;
 
@@ -12,7 +13,9 @@ class RequestPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole(['admin', 'super-editor']);
+        return $user->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 
     /**
@@ -20,7 +23,9 @@ class RequestPolicy
      */
     public function view(User $user, Request $request): bool
     {
-        return $user->hasRole(['admin', 'super-editor']);
+        return $user->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 
     /**
@@ -28,7 +33,9 @@ class RequestPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasRole(['admin', 'super-editor']);
+        return $user->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 
     /**
@@ -36,7 +43,9 @@ class RequestPolicy
      */
     public function update(User $user, Request $request): bool
     {
-        return $user->hasRole(['admin', 'super-editor']);
+        return $user->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 
     /**
@@ -44,7 +53,9 @@ class RequestPolicy
      */
     public function delete(User $user, Request $request): bool
     {
-        return $user->hasRole(['admin', 'super-editor']);
+        return $user->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 
     /**
@@ -52,7 +63,9 @@ class RequestPolicy
      */
     public function restore(User $user, Request $request): bool
     {
-        return $user->hasRole(['admin', 'super-editor']);
+        return $user->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 
     /**
@@ -60,6 +73,8 @@ class RequestPolicy
      */
     public function forceDelete(User $user, Request $request): bool
     {
-        return $user->hasRole(['admin', 'super-editor']);
+        return $user->hasRole(
+            [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
+        );
     }
 }

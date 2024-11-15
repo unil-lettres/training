@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\UserRole;
 use App\Filament\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\Pages\ListUsers;
@@ -68,7 +69,7 @@ class UserResource extends Resource
                             ->label('Rôles')
                             ->multiple()
                             ->searchable()
-                            ->options(User::$role),
+                            ->options(UserRole::toArray()),
                     ]),
             ]);
     }
@@ -101,7 +102,7 @@ class UserResource extends Resource
             ->filters([
                 SelectFilter::make('roles')
                     ->label('Rôles')
-                    ->options(User::$role)
+                    ->options(UserRole::toArray())
                     ->query(function (Builder $query, array $data): Builder {
                         if (! empty($data['value'])) {
                             $query->whereJsonContains('roles', $data['value']);
