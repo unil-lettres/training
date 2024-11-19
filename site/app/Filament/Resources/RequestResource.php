@@ -15,6 +15,7 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
@@ -113,116 +114,137 @@ class RequestResource extends Resource
                             ->label('Mail contact')
                             ->maxLength(300)
                             ->default(null),
-                    ]),
 
-                    Tab::make('Chercheur/doctorant')->schema([
-                        TextInput::make('extras.doctoral_school')
-                            ->label('École doctorale')
-                            ->maxLength(300)
-                            ->default(null),
-                        Toggle::make('extras.fns')
-                            ->label('Fns'),
-                        TextInput::make('extras.doctoral_status')
-                            ->label('Doctorat statut')
-                            ->maxLength(300)
-                            ->default(null),
-                        TextInput::make('extras.doctoral_level')
-                            ->label('Niveau actuel')
-                            ->maxLength(300)
-                            ->default(null),
-                        TextInput::make('extras.tested_products')
-                            ->label('Produits testés')
-                            ->maxLength(300)
-                            ->default(null),
-                    ]),
-
-                    Tab::make('Enseignant')->schema([
-                        Toggle::make('extras.teachers_nbr')
-                            ->label('Seul ou avec d\'autres enseignants'),
-                        Toggle::make('extras.students_nbr')
-                            ->label('Avec un ou des étudiants'),
-                        Toggle::make('extras.action_type')
-                            ->label('Intervention pour toute une classe, pendant les cours'),
-                    ]),
-
-                    Tab::make('Administration')->schema([
-                        Select::make('status_admin')
-                            ->label('Statut')
-                            ->options(RequestStatusAdmin::toArray())
-                            ->default(null),
-                        Select::make('type')
-                            ->label('Type')
-                            ->options(RequestType::toArray())
-                            ->default(null),
-                        Select::make('category_id')
-                            ->label('Catégorie')
-                            ->relationship('category', 'name')
-                            ->createOptionForm([
-                                TextInput::make('name')
-                                    ->label('Nom')
-                                    ->required()
-                                    ->maxLength(150),
-                            ])
-                            ->searchable()
-                            ->preload()
-                            ->default(null),
-                        Select::make('status_id')
-                            ->label('Décision')
-                            ->relationship('status', 'name')
-                            ->createOptionForm([
-                                TextInput::make('name')
-                                    ->label('Nom')
-                                    ->required()
-                                    ->maxLength(150),
-                            ])
-                            ->searchable()
-                            ->preload()
-                            ->default(null),
-                        DateTimePicker::make('decision_date')
-                            ->label('Date de décision'),
-                        RichEditor::make('decision_comments')
-                            ->label('Commentaire relatif à la décision')
-                            ->toolbarButtons([
-                                'attachFiles',
-                                'blockquote',
-                                'bold',
-                                'bulletList',
-                                'codeBlock',
-                                'h2',
-                                'h3',
-                                'italic',
-                                'link',
-                                'orderedList',
-                                'redo',
-                                'strike',
-                                'underline',
-                                'undo',
-                            ]),
-                        Repeater::make('contacts')
-                            ->label('Personnes ressources')
+                        Section::make('Chercheur/doctorant')
+                            ->description('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+                            ->collapsed()
                             ->schema([
-                                TextInput::make('contact')
-                                    ->label('Contact')
-                                    ->maxLength(150)
-                                    ->default(null),
-                                Textarea::make('notes')
-                                    ->label('Notes')
+                                TextInput::make('extras.doctoral_school')
+                                    ->label('École doctorale')
                                     ->maxLength(300)
                                     ->default(null),
-                            ])
-                            ->columns(2),
-                        FileUpload::make('file')
-                            ->label('Document')
-                            ->disk('public')
-                            ->directory('uploads')
-                            ->maxSize(10000)
-                            ->previewable(false)
-                            ->openable()
-                            ->downloadable(),
-                        Select::make('user_id')
-                            ->label('Utilisateur')
-                            ->relationship('user', 'name')
-                            ->default(null),
+                                Toggle::make('extras.fns')
+                                    ->label('Fns'),
+                                TextInput::make('extras.doctoral_status')
+                                    ->label('Doctorat statut')
+                                    ->maxLength(300)
+                                    ->default(null),
+                                TextInput::make('extras.doctoral_level')
+                                    ->label('Niveau actuel')
+                                    ->maxLength(300)
+                                    ->default(null),
+                                TextInput::make('extras.tested_products')
+                                    ->label('Produits testés')
+                                    ->maxLength(300)
+                                    ->default(null),
+                            ]),
+
+                        Section::make('Enseignant')
+                            ->description('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+                            ->collapsed()
+                            ->schema([
+                                Toggle::make('extras.teachers_nbr')
+                                    ->label('Seul ou avec d\'autres enseignants'),
+                                Toggle::make('extras.students_nbr')
+                                    ->label('Avec un ou des étudiants'),
+                                Toggle::make('extras.action_type')
+                                    ->label('Intervention pour toute une classe, pendant les cours'),
+                            ]),
+
+                        Section::make('Administration')
+                            ->description('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+                            ->collapsed()
+                            ->schema([
+                                Select::make('status_admin')
+                                    ->label('Statut')
+                                    ->options(RequestStatusAdmin::toArray())
+                                    ->default(null),
+                                Select::make('type')
+                                    ->label('Type')
+                                    ->options(RequestType::toArray())
+                                    ->default(null),
+                                Select::make('category_id')
+                                    ->label('Catégorie')
+                                    ->relationship('category', 'name')
+                                    ->createOptionForm([
+                                        TextInput::make('name')
+                                            ->label('Nom')
+                                            ->required()
+                                            ->maxLength(150),
+                                    ])
+                                    ->searchable()
+                                    ->preload()
+                                    ->default(null),
+                                Select::make('status_id')
+                                    ->label('Décision')
+                                    ->relationship('status', 'name')
+                                    ->createOptionForm([
+                                        TextInput::make('name')
+                                            ->label('Nom')
+                                            ->required()
+                                            ->maxLength(150),
+                                    ])
+                                    ->searchable()
+                                    ->preload()
+                                    ->default(null),
+                                DateTimePicker::make('decision_date')
+                                    ->label('Date de décision'),
+                                RichEditor::make('decision_comments')
+                                    ->label('Commentaire relatif à la décision')
+                                    ->toolbarButtons([
+                                        'attachFiles',
+                                        'blockquote',
+                                        'bold',
+                                        'bulletList',
+                                        'codeBlock',
+                                        'h2',
+                                        'h3',
+                                        'italic',
+                                        'link',
+                                        'orderedList',
+                                        'redo',
+                                        'strike',
+                                        'underline',
+                                        'undo',
+                                    ]),
+                                Repeater::make('contacts')
+                                    ->label('Personnes ressources')
+                                    ->schema([
+                                        TextInput::make('contact')
+                                            ->label('Contact')
+                                            ->maxLength(150)
+                                            ->default(null),
+                                        Textarea::make('notes')
+                                            ->label('Notes')
+                                            ->maxLength(300)
+                                            ->default(null),
+                                    ])
+                                    ->columns(2),
+                                FileUpload::make('file')
+                                    ->label('Document')
+                                    ->disk('public')
+                                    ->directory('uploads')
+                                    ->maxSize(10000)
+                                    ->previewable(false)
+                                    ->openable()
+                                    ->downloadable(),
+                                Select::make('user_id')
+                                    ->label('Utilisateur')
+                                    ->relationship('user', 'name')
+                                    ->default(null),
+                            ]),
+                    ]),
+
+                    Tab::make('Formation')->schema([
+                        // TODO: Add new fields
+                    ]),
+
+                    Tab::make('Analyse')->schema([
+                        // TODO: Add new fields
+                    ]),
+
+                    Tab::make('Action technique')->schema([
+                        // TODO: Add new fields
                     ]),
                 ])->columnSpanFull(),
             ]);
