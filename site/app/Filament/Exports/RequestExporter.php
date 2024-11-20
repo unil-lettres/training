@@ -74,13 +74,6 @@ class RequestExporter extends Exporter
                     strtolower(RequestStatusAdmin::RESOLVED->name) => RequestStatusAdmin::RESOLVED->value,
                     default => '',
                 }),
-            ExportColumn::make('type')
-                ->label('Type')
-                ->formatStateUsing(fn (?string $state): string => match ($state) {
-                    strtolower(RequestType::TRAINING->name) => RequestType::TRAINING->value,
-                    strtolower(RequestType::ANALYSIS->name) => RequestType::ANALYSIS->value,
-                    default => '',
-                }),
             ExportColumn::make('status.name')
                 ->label('Décision'),
             ExportColumn::make('decision_date')
@@ -96,6 +89,14 @@ class RequestExporter extends Exporter
                 ->label('Document'),
             ExportColumn::make('user.name')
                 ->label('Utilisateur'),
+            ExportColumn::make('type')
+                ->label('Type')
+                ->formatStateUsing(fn (?string $state): string => implode(', ', array_map(fn ($word) => match (strtolower($word)) {
+                    strtolower(RequestType::TRAINING->name) => RequestType::TRAINING->value,
+                    strtolower(RequestType::ANALYSIS->name) => RequestType::ANALYSIS->value,
+                    strtolower(RequestType::TECHNICAL_ACTION->name) => RequestType::TECHNICAL_ACTION->value,
+                    default => '-',
+                }, explode(', ', $state)))),
             ExportColumn::make('trainingObjectives.name')
                 ->label('Objectifs (formation)'),
             ExportColumn::make('analysisObjectives.name')

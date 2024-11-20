@@ -48,6 +48,7 @@ class Request extends Model
             'deadline' => 'datetime',
             'filling_date' => 'datetime',
             'decision_date' => 'datetime',
+            'type' => 'array',
         ];
     }
 

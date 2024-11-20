@@ -34,6 +34,8 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\HtmlString;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 
 class RequestResource extends Resource
@@ -161,10 +163,6 @@ class RequestResource extends Resource
                                     ->label('Statut')
                                     ->options(RequestStatusAdmin::toArray())
                                     ->default(null),
-                                Select::make('type')
-                                    ->label('Type')
-                                    ->options(RequestType::toArray())
-                                    ->default(null),
                                 Select::make('status_id')
                                     ->label('Décision')
                                     ->relationship('status', 'name')
@@ -222,6 +220,11 @@ class RequestResource extends Resource
                                     ->label('Utilisateur')
                                     ->relationship('user', 'name')
                                     ->default(null),
+                                Select::make('type')
+                                    ->label('Type')
+                                    ->multiple()
+                                    ->options(RequestType::toArray())
+                                    ->default(null),
                             ]),
                     ]),
 
@@ -276,27 +279,43 @@ class RequestResource extends Resource
                     ->label('Libellé')
                     ->limit(40)
                     ->searchable(),
+                TextColumn::make('filling_date')
+                    ->label('Date dépot')
+                    ->dateTime('j M Y, H:i')
+                    ->sortable(),
+                TextColumn::make('status.name')
+                    ->label('Décision')
+                    ->sortable(),
+                TextColumn::make('type')
+                    ->label('Type')
+                    ->formatStateUsing(fn (?string $state): string => implode(', ', array_map(fn ($word) => match (strtolower($word)) {
+                        strtolower(RequestType::TRAINING->name) => RequestType::TRAINING->value,
+                        strtolower(RequestType::ANALYSIS->name) => RequestType::ANALYSIS->value,
+                        strtolower(RequestType::TECHNICAL_ACTION->name) => RequestType::TECHNICAL_ACTION->value,
+                        default => '-',
+                    }, explode(', ', $state))))
+                    ->sortable(),
                 TextColumn::make('description')
                     ->label('Description')
                     ->limit(80)
                     ->html()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('filling_date')
-                    ->label('Date dépot')
-                    ->dateTime('j M Y, H:i')
-                    ->sortable(),
-                TextColumn::make('status.name')
+                TextColumn::make('comments')
+                    ->label('Remarques')
+                    ->limit(80)
+                    ->html()
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('status_admin')
                     ->label('Statut')
-                    ->sortable(),
-                TextColumn::make('type')
-                    ->label('Type')
-                    ->formatStateUsing(fn (string $state): string => match ($state) {
-                        strtolower(RequestType::TRAINING->name) => RequestType::TRAINING->value,
-                        strtolower(RequestType::ANALYSIS->name) => RequestType::ANALYSIS->value,
-                        default => '-',
+                    ->formatStateUsing(fn (?string $state): string => match ($state) {
+                        strtolower(RequestStatusAdmin::NEW->name) => RequestStatusAdmin::NEW->value,
+                        strtolower(RequestStatusAdmin::PENDING->name) => RequestStatusAdmin::PENDING->value,
+                        strtolower(RequestStatusAdmin::RESOLVED->name) => RequestStatusAdmin::RESOLVED->value,
+                        default => '',
                     })
-                    ->sortable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('trainingObjectives.name')
                     ->label('Objectifs (formation)')
                     ->sortable()
@@ -304,12 +323,6 @@ class RequestResource extends Resource
                 TextColumn::make('analysisObjectives.name')
                     ->label('Objectifs (analyse)')
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('comments')
-                    ->label('Remarques')
-                    ->limit(80)
-                    ->html()
-                    ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Date de création')
@@ -323,17 +336,28 @@ class RequestResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])->defaultSort('created_at', 'desc')
             ->filters([
+                DateRangeFilter::make('deadline')
+                    ->label('Délai de production')
+                    ->disableClear(),
+                SelectFilter::make('status_admin')
+                    ->label('Statut')
+                    ->options(RequestStatusAdmin::toArray()),
                 SelectFilter::make('status')
                     ->label('Décision')
                     ->searchable()
                     ->preload()
                     ->relationship('status', 'name'),
-                SelectFilter::make('status_admin')
-                    ->label('Statut')
-                    ->options(RequestStatusAdmin::toArray()),
                 SelectFilter::make('type')
                     ->label('Type')
-                    ->options(RequestType::toArray()),
+                    ->options(RequestType::toArray())
+                    ->query(function (Builder $query, $state) {
+                        if (!empty($state['value'])) {
+                            return $query->where(
+                                'type', 'LIKE', '%"' . $state['value'] . '"%'
+                            );
+                        }
+                        return $query;
+                    }),
                 SelectFilter::make('request_training_objective')
                     ->label('Objectifs (formation)')
                     ->searchable()
@@ -344,9 +368,6 @@ class RequestResource extends Resource
                     ->searchable()
                     ->preload()
                     ->relationship('analysisObjectives', 'name'),
-                DateRangeFilter::make('deadline')
-                    ->label('Délai de production')
-                    ->disableClear(),
             ])
             ->actions([
                 ViewAction::make()
