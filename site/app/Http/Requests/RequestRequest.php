@@ -51,7 +51,6 @@ class RequestRequest extends FormRequest
                     ->max(10 * 1024),
             ],
             'user_id' => 'nullable|integer',
-            'category_id' => 'nullable|integer',
             'status_id' => 'nullable|integer',
             'doctoral_school' => 'nullable|min:1|max:300',
             'fns' => 'nullable|boolean',

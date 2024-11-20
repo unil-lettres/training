@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Request extends Model
 {
@@ -33,7 +34,6 @@ class Request extends Model
         'file',
         'extras',
         'user_id',
-        'category_id',
         'status_id',
         'extras',
         'type',
@@ -68,14 +68,6 @@ class Request extends Model
     }
 
     /**
-     * Get the category associated with the request.
-     */
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    /**
      * Get the status associated with the request.
      */
     public function status(): BelongsTo
@@ -89,5 +81,21 @@ class Request extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * The training objectives that belong to the request.
+     */
+    public function trainingObjectives(): BelongsToMany
+    {
+        return $this->belongsToMany(TrainingObjective::class, 'request_training_objective', 'request_id', 'training_objective_id');
+    }
+
+    /**
+     * The analysis objectives that belong to the request.
+     */
+    public function analysisObjectives(): BelongsToMany
+    {
+        return $this->belongsToMany(AnalysisObjective::class, 'request_analysis_objective', 'request_id', 'analysis_objective_id');
     }
 }

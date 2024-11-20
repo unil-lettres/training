@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\CategoryResource\Pages;
+namespace App\Filament\Resources\TrainingObjectiveResource\Pages;
 
-use App\Filament\Resources\CategoryResource;
+use App\Filament\Resources\TrainingObjectiveResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditCategory extends EditRecord
+class EditTrainingObjective extends EditRecord
 {
-    protected static string $resource = CategoryResource::class;
+    protected static string $resource = TrainingObjectiveResource::class;
 
     protected function getHeaderActions(): array
     {

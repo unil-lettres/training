@@ -2,12 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Exports\StatusExporter;
-use App\Filament\Resources\StatusResource\Pages\CreateStatus;
-use App\Filament\Resources\StatusResource\Pages\EditStatus;
-use App\Filament\Resources\StatusResource\Pages\ListStatuses;
-use App\Filament\Resources\StatusResource\Pages\ViewStatus;
-use App\Models\Status;
+use App\Filament\Exports\TrainingObjectiveExporter;
+use App\Filament\Resources\TrainingObjectiveResource\Pages;
+use App\Models\TrainingObjective;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -21,19 +18,19 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class StatusResource extends Resource
+class TrainingObjectiveResource extends Resource
 {
-    protected static ?string $model = Status::class;
+    protected static ?string $model = TrainingObjective::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-queue-list';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $modelLabel = 'décision';
+    protected static ?string $modelLabel = 'objectifs (formation)';
 
     protected static ?string $navigationGroup = 'Administration';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
@@ -83,7 +80,7 @@ class StatusResource extends Resource
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                     ExportBulkAction::make()
-                        ->exporter(StatusExporter::class),
+                        ->exporter(TrainingObjectiveExporter::class),
                 ]),
             ])->defaultPaginationPageOption(25);
     }
@@ -98,10 +95,10 @@ class StatusResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListStatuses::route('/'),
-            'create' => CreateStatus::route('/create'),
-            'view' => ViewStatus::route('/{record}'),
-            'edit' => EditStatus::route('/{record}/edit'),
+            'index' => Pages\ListTrainingObjectives::route('/'),
+            'create' => Pages\CreateTrainingObjective::route('/create'),
+            'view' => Pages\ViewTrainingObjective::route('/{record}'),
+            'edit' => Pages\EditTrainingObjective::route('/{record}/edit'),
         ];
     }
 }

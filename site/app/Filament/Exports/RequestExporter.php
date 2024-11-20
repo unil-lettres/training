@@ -81,8 +81,6 @@ class RequestExporter extends Exporter
                     strtolower(RequestType::ANALYSIS->name) => RequestType::ANALYSIS->value,
                     default => '',
                 }),
-            ExportColumn::make('category.name')
-                ->label('Catégorie'),
             ExportColumn::make('status.name')
                 ->label('Décision'),
             ExportColumn::make('decision_date')
@@ -98,6 +96,10 @@ class RequestExporter extends Exporter
                 ->label('Document'),
             ExportColumn::make('user.name')
                 ->label('Utilisateur'),
+            ExportColumn::make('trainingObjectives.name')
+                ->label('Objectifs (formation)'),
+            ExportColumn::make('analysisObjectives.name')
+                ->label('Objectifs (analyse)'),
             ExportColumn::make('created_at')
                 ->label('Date de création'),
             ExportColumn::make('updated_at')

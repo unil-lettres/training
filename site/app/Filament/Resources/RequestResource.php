@@ -48,6 +48,8 @@ class RequestResource extends Resource
 
     protected static ?string $navigationGroup = 'Administration';
 
+    protected static ?int $navigationSort = 1;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -163,18 +165,6 @@ class RequestResource extends Resource
                                     ->label('Type')
                                     ->options(RequestType::toArray())
                                     ->default(null),
-                                Select::make('category_id')
-                                    ->label('Catégorie')
-                                    ->relationship('category', 'name')
-                                    ->createOptionForm([
-                                        TextInput::make('name')
-                                            ->label('Nom')
-                                            ->required()
-                                            ->maxLength(150),
-                                    ])
-                                    ->searchable()
-                                    ->preload()
-                                    ->default(null),
                                 Select::make('status_id')
                                     ->label('Décision')
                                     ->relationship('status', 'name')
@@ -236,10 +226,38 @@ class RequestResource extends Resource
                     ]),
 
                     Tab::make('Formation')->schema([
+                        Select::make('request_training_objective')
+                            ->label('Objectif(s)')
+                            ->multiple()
+                            ->relationship(name: 'trainingObjectives', titleAttribute: 'name')
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->label('Nom')
+                                    ->required()
+                                    ->maxLength(150),
+                            ])
+                            ->searchable()
+                            ->preload()
+                            ->default(null),
+
                         // TODO: Add new fields
                     ]),
 
                     Tab::make('Analyse')->schema([
+                        Select::make('request_analysis_objective')
+                            ->label('Objectif(s)')
+                            ->multiple()
+                            ->relationship(name: 'analysisObjectives', titleAttribute: 'name')
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->label('Nom')
+                                    ->required()
+                                    ->maxLength(150),
+                            ])
+                            ->searchable()
+                            ->preload()
+                            ->default(null),
+
                         // TODO: Add new fields
                     ]),
 
@@ -268,9 +286,6 @@ class RequestResource extends Resource
                     ->label('Date dépot')
                     ->dateTime('j M Y, H:i')
                     ->sortable(),
-                TextColumn::make('category.name')
-                    ->label('Catégorie')
-                    ->sortable(),
                 TextColumn::make('status.name')
                     ->label('Statut')
                     ->sortable(),
@@ -281,6 +296,13 @@ class RequestResource extends Resource
                         strtolower(RequestType::ANALYSIS->name) => RequestType::ANALYSIS->value,
                         default => '-',
                     })
+                    ->sortable(),
+                TextColumn::make('trainingObjectives.name')
+                    ->label('Objectifs (formation)')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('analysisObjectives.name')
+                    ->label('Objectifs (analyse)')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('comments')
@@ -301,11 +323,6 @@ class RequestResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])->defaultSort('created_at', 'desc')
             ->filters([
-                SelectFilter::make('category')
-                    ->label('Catégorie')
-                    ->searchable()
-                    ->preload()
-                    ->relationship('category', 'name'),
                 SelectFilter::make('status')
                     ->label('Décision')
                     ->searchable()
@@ -317,6 +334,16 @@ class RequestResource extends Resource
                 SelectFilter::make('type')
                     ->label('Type')
                     ->options(RequestType::toArray()),
+                SelectFilter::make('request_training_objective')
+                    ->label('Objectifs (formation)')
+                    ->searchable()
+                    ->preload()
+                    ->relationship('trainingObjectives', 'name'),
+                SelectFilter::make('request_analysis_objective')
+                    ->label('Objectifs (analyse)')
+                    ->searchable()
+                    ->preload()
+                    ->relationship('analysisObjectives', 'name'),
                 DateRangeFilter::make('deadline')
                     ->label('Délai de production')
                     ->disableClear(),

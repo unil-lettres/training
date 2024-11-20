@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Enums\UserRole;
-use App\Models\Category;
+use App\Models\TrainingObjective;
 use App\User;
 
-class CategoryPolicy
+class TrainingObjectivePolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -21,7 +21,7 @@ class CategoryPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Category $category): bool
+    public function view(User $user, TrainingObjective $objective): bool
     {
         return $user->hasRole(
             [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
@@ -41,7 +41,7 @@ class CategoryPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Category $category): bool
+    public function update(User $user, TrainingObjective $objective): bool
     {
         return $user->hasRole(
             [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
@@ -51,7 +51,7 @@ class CategoryPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Category $category): bool
+    public function delete(User $user, TrainingObjective $objective): bool
     {
         return $user->hasRole(
             [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
@@ -61,7 +61,7 @@ class CategoryPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Category $category): bool
+    public function restore(User $user, TrainingObjective $objective): bool
     {
         return $user->hasRole(
             [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]
@@ -71,7 +71,7 @@ class CategoryPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Category $category): bool
+    public function forceDelete(User $user, TrainingObjective $objective): bool
     {
         return $user->hasRole(
             [strtolower(UserRole::ADMIN->name), strtolower(UserRole::SUPER_EDITOR->name)]

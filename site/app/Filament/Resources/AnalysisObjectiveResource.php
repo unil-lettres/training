@@ -2,12 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Exports\CategoryExporter;
-use App\Filament\Resources\CategoryResource\Pages\CreateCategory;
-use App\Filament\Resources\CategoryResource\Pages\EditCategory;
-use App\Filament\Resources\CategoryResource\Pages\ListCategories;
-use App\Filament\Resources\CategoryResource\Pages\ViewCategory;
-use App\Models\Category;
+use App\Filament\Exports\AnalysisObjectiveExporter;
+use App\Filament\Resources\AnalysisObjectiveResource\Pages;
+use App\Models\AnalysisObjective;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -21,17 +18,19 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class CategoryResource extends Resource
+class AnalysisObjectiveResource extends Resource
 {
-    protected static ?string $model = Category::class;
+    protected static ?string $model = AnalysisObjective::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $modelLabel = 'catégorie';
+    protected static ?string $modelLabel = 'objectifs (analyse)';
 
     protected static ?string $navigationGroup = 'Administration';
+
+    protected static ?int $navigationSort = 6;
 
     public static function form(Form $form): Form
     {
@@ -81,7 +80,7 @@ class CategoryResource extends Resource
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                     ExportBulkAction::make()
-                        ->exporter(CategoryExporter::class),
+                        ->exporter(AnalysisObjectiveExporter::class),
                 ]),
             ])->defaultPaginationPageOption(25);
     }
@@ -96,10 +95,10 @@ class CategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListCategories::route('/'),
-            'create' => CreateCategory::route('/create'),
-            'view' => ViewCategory::route('/{record}'),
-            'edit' => EditCategory::route('/{record}/edit'),
+            'index' => Pages\ListAnalysisObjectives::route('/'),
+            'create' => Pages\CreateAnalysisObjective::route('/create'),
+            'view' => Pages\ViewAnalysisObjective::route('/{record}'),
+            'edit' => Pages\EditAnalysisObjective::route('/{record}/edit'),
         ];
     }
 }
