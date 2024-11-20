@@ -12,11 +12,11 @@ return new class extends Migration
     {
         // Update existing data
         DB::table('requests')->get()->each(function ($record) {
-            if (!is_array(json_decode($record->type, true))) {
+            if (! is_array(json_decode($record->type, true))) {
                 DB::table('requests')
                     ->where('id', $record->id)
                     ->update([
-                        'type' => json_encode([$record->type])
+                        'type' => json_encode([$record->type]),
                     ]);
             }
         });

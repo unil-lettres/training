@@ -25,7 +25,7 @@ return new class extends Migration
                     // Insert into training_objectives
                     $trainingObjective = DB::table('training_objectives')->where('name', $category->name)->first();
 
-                    if (!$trainingObjective) {
+                    if (! $trainingObjective) {
                         $trainingObjectiveId = DB::table('training_objectives')->insertGetId([
                             'name' => $category->name,
                             'created_at' => now(),
@@ -41,7 +41,7 @@ return new class extends Migration
                         ->where('training_objective_id', $trainingObjectiveId)
                         ->exists();
 
-                    if (!$exists) {
+                    if (! $exists) {
                         // Insert into pivot table
                         DB::table('request_training_objective')->insert([
                             'request_id' => $request->id,
@@ -52,7 +52,7 @@ return new class extends Migration
                     // Insert into analysis_objectives
                     $analysisObjective = DB::table('analysis_objectives')->where('name', $category->name)->first();
 
-                    if (!$analysisObjective) {
+                    if (! $analysisObjective) {
                         $analysisObjectiveId = DB::table('analysis_objectives')->insertGetId([
                             'name' => $category->name,
                             'created_at' => now(),
@@ -68,7 +68,7 @@ return new class extends Migration
                         ->where('analysis_objective_id', $analysisObjectiveId)
                         ->exists();
 
-                    if (!$exists) {
+                    if (! $exists) {
                         // Insert into pivot table
                         DB::table('request_analysis_objective')->insert([
                             'request_id' => $request->id,

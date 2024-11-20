@@ -35,7 +35,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\HtmlString;
 use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 
 class RequestResource extends Resource
@@ -351,11 +350,12 @@ class RequestResource extends Resource
                     ->label('Type')
                     ->options(RequestType::toArray())
                     ->query(function (Builder $query, $state) {
-                        if (!empty($state['value'])) {
+                        if (! empty($state['value'])) {
                             return $query->where(
-                                'type', 'LIKE', '%"' . $state['value'] . '"%'
+                                'type', 'LIKE', '%"'.$state['value'].'"%'
                             );
                         }
+
                         return $query;
                     }),
                 SelectFilter::make('request_training_objective')

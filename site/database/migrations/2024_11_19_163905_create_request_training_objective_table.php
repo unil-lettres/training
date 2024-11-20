@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('training_objective_id');
             $table->primary([
                 'request_id',
-                'training_objective_id'
+                'training_objective_id',
             ]);
         });
     }
