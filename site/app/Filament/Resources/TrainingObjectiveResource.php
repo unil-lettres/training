@@ -22,7 +22,7 @@ class TrainingObjectiveResource extends Resource
 {
     protected static ?string $model = TrainingObjective::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static ?string $navigationIcon = 'heroicon-o-flag';
 
     protected static ?string $recordTitleAttribute = 'name';
 
