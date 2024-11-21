@@ -194,6 +194,18 @@ class RequestResource extends Resource
                                         'underline',
                                         'undo',
                                     ]),
+                                Select::make('orientation_id')
+                                    ->label('Orientation')
+                                    ->relationship('orientation', 'name')
+                                    ->createOptionForm([
+                                        TextInput::make('name')
+                                            ->label('Nom')
+                                            ->required()
+                                            ->maxLength(150),
+                                    ])
+                                    ->searchable()
+                                    ->preload()
+                                    ->default(null),
                                 Repeater::make('contacts')
                                     ->label('Personnes ressources')
                                     ->schema([
@@ -315,6 +327,10 @@ class RequestResource extends Resource
                         default => '',
                     })
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('orientation.name')
+                    ->label('Orientation')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('trainingObjectives.name')
                     ->label('Objectifs (formation)')
                     ->sortable()
@@ -346,6 +362,11 @@ class RequestResource extends Resource
                     ->searchable()
                     ->preload()
                     ->relationship('status', 'name'),
+                SelectFilter::make('orientation')
+                    ->label('Orientation')
+                    ->searchable()
+                    ->preload()
+                    ->relationship('orientation', 'name'),
                 SelectFilter::make('type')
                     ->label('Type')
                     ->options(RequestType::toArray())

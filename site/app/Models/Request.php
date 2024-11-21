@@ -99,4 +99,12 @@ class Request extends Model
     {
         return $this->belongsToMany(AnalysisObjective::class, 'request_analysis_objective', 'request_id', 'analysis_objective_id');
     }
+
+    /**
+     * Get the orientation associated with the request.
+     */
+    public function orientation(): BelongsTo
+    {
+        return $this->belongsTo(Orientation::class);
+    }
 }

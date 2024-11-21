@@ -80,6 +80,8 @@ class RequestExporter extends Exporter
                 ->label('Date de décision'),
             ExportColumn::make('decision_comments')
                 ->label('Commentaire relatif à la décision'),
+            ExportColumn::make('orientation.name')
+                ->label('Orientation'),
             ExportColumn::make('contacts')
                 ->label('Personnes ressources')
                 ->formatStateUsing(function (?array $state): string {
