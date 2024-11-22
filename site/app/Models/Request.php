@@ -107,4 +107,20 @@ class Request extends Model
     {
         return $this->belongsTo(Orientation::class);
     }
+
+    /**
+     * The training tools that belong to the request.
+     */
+    public function trainingTools(): BelongsToMany
+    {
+        return $this->belongsToMany(Tool::class, 'request_training_tool', 'request_id', 'training_tool_id');
+    }
+
+    /**
+     * The technical action tools that belong to the request.
+     */
+    public function technicalActionTools(): BelongsToMany
+    {
+        return $this->belongsToMany(Tool::class, 'request_technical_action_tool', 'request_id', 'technical_action_tool_id');
+    }
 }

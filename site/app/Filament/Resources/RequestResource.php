@@ -232,7 +232,7 @@ class RequestResource extends Resource
                                     ->relationship('user', 'name')
                                     ->default(null),
                                 Select::make('type')
-                                    ->label('Type')
+                                    ->label('Type(s)')
                                     ->multiple()
                                     ->options(RequestType::toArray())
                                     ->default(null),
@@ -254,7 +254,19 @@ class RequestResource extends Resource
                             ->preload()
                             ->default(null),
 
-                        // TODO: Add new fields
+                        Select::make('request_training_tool')
+                            ->label('Outil(s)')
+                            ->multiple()
+                            ->relationship(name: 'trainingTools', titleAttribute: 'name')
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->label('Nom')
+                                    ->required()
+                                    ->maxLength(150),
+                            ])
+                            ->searchable()
+                            ->preload()
+                            ->default(null),
                     ]),
 
                     Tab::make('Analyse')->schema([
@@ -276,6 +288,20 @@ class RequestResource extends Resource
                     ]),
 
                     Tab::make('Action technique')->schema([
+                        Select::make('request_technical_action_tool')
+                            ->label('Outil(s)')
+                            ->multiple()
+                            ->relationship(name: 'technicalActionTools', titleAttribute: 'name')
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->label('Nom')
+                                    ->required()
+                                    ->maxLength(150),
+                            ])
+                            ->searchable()
+                            ->preload()
+                            ->default(null),
+
                         // TODO: Add new fields
                     ]),
                 ])->columnSpanFull(),
@@ -298,7 +324,7 @@ class RequestResource extends Resource
                     ->label('Décision')
                     ->sortable(),
                 TextColumn::make('type')
-                    ->label('Type')
+                    ->label('Type(s)')
                     ->formatStateUsing(fn (?string $state): string => implode(', ', array_map(fn ($word) => match (strtolower($word)) {
                         strtolower(RequestType::TRAINING->name) => RequestType::TRAINING->value,
                         strtolower(RequestType::ANALYSIS->name) => RequestType::ANALYSIS->value,
@@ -327,16 +353,12 @@ class RequestResource extends Resource
                         default => '',
                     })
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('orientation.name')
-                    ->label('Orientation')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('trainingObjectives.name')
-                    ->label('Objectifs (formation)')
+                    ->label('Objectif(s) (formation)')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('analysisObjectives.name')
-                    ->label('Objectifs (analyse)')
+                    ->label('Objectif(s) (analyse)')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
@@ -362,13 +384,8 @@ class RequestResource extends Resource
                     ->searchable()
                     ->preload()
                     ->relationship('status', 'name'),
-                SelectFilter::make('orientation')
-                    ->label('Orientation')
-                    ->searchable()
-                    ->preload()
-                    ->relationship('orientation', 'name'),
                 SelectFilter::make('type')
-                    ->label('Type')
+                    ->label('Type(s)')
                     ->options(RequestType::toArray())
                     ->query(function (Builder $query, $state) {
                         if (! empty($state['value'])) {
@@ -380,12 +397,12 @@ class RequestResource extends Resource
                         return $query;
                     }),
                 SelectFilter::make('request_training_objective')
-                    ->label('Objectifs (formation)')
+                    ->label('Objectif(s) (formation)')
                     ->searchable()
                     ->preload()
                     ->relationship('trainingObjectives', 'name'),
                 SelectFilter::make('request_analysis_objective')
-                    ->label('Objectifs (analyse)')
+                    ->label('Objectif(s) (analyse)')
                     ->searchable()
                     ->preload()
                     ->relationship('analysisObjectives', 'name'),

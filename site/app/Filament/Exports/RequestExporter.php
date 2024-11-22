@@ -92,7 +92,7 @@ class RequestExporter extends Exporter
             ExportColumn::make('user.name')
                 ->label('Utilisateur'),
             ExportColumn::make('type')
-                ->label('Type')
+                ->label('Type(s)')
                 ->formatStateUsing(fn (?string $state): string => implode(', ', array_map(fn ($word) => match (strtolower($word)) {
                     strtolower(RequestType::TRAINING->name) => RequestType::TRAINING->value,
                     strtolower(RequestType::ANALYSIS->name) => RequestType::ANALYSIS->value,
@@ -100,9 +100,13 @@ class RequestExporter extends Exporter
                     default => '-',
                 }, explode(', ', $state)))),
             ExportColumn::make('trainingObjectives.name')
-                ->label('Objectifs (formation)'),
+                ->label('Objectif(s) (formation)'),
             ExportColumn::make('analysisObjectives.name')
-                ->label('Objectifs (analyse)'),
+                ->label('Objectif(s) (analyse)'),
+            ExportColumn::make('trainingTools.name')
+                ->label('Outil(s) (formation)'),
+            ExportColumn::make('technicalActionTools.name')
+                ->label('Outil(s) (action technique)'),
             ExportColumn::make('created_at')
                 ->label('Date de création'),
             ExportColumn::make('updated_at')
