@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\RequestStatusAdmin;
 use App\Http\Requests\RequestRequest;
 use App\Mail\RequestCreated;
 use App\Models\Request;
@@ -57,6 +58,7 @@ class RequestController extends Controller
                 'action_type' => $request->get('action_type'),
             ],
             'filling_date' => Date::now(),
+            'status_admin' => strtolower(RequestStatusAdmin::NEW->name),
             'user_id' => auth()->user()->id,
         ]);
         $requestObj->save();

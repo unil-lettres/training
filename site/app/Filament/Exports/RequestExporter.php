@@ -71,6 +71,8 @@ class RequestExporter extends Exporter
                 ->formatStateUsing(fn (?string $state): string => match ($state) {
                     strtolower(RequestStatusAdmin::NEW->name) => RequestStatusAdmin::NEW->value,
                     strtolower(RequestStatusAdmin::PENDING->name) => RequestStatusAdmin::PENDING->value,
+                    strtolower(RequestStatusAdmin::PLANNED->name) => RequestStatusAdmin::PLANNED->value,
+                    strtolower(RequestStatusAdmin::IN_PROGRESS->name) => RequestStatusAdmin::IN_PROGRESS->value,
                     strtolower(RequestStatusAdmin::RESOLVED->name) => RequestStatusAdmin::RESOLVED->value,
                     default => '',
                 }),
