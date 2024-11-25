@@ -28,7 +28,7 @@ class OrientationResource extends Resource
 
     protected static ?string $modelLabel = 'Orientation';
 
-    protected static ?string $navigationGroup = 'Administration';
+    protected static ?string $navigationGroup = 'Thésaurus';
 
     protected static ?int $navigationSort = 7;
 

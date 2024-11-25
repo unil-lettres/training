@@ -123,4 +123,12 @@ class Request extends Model
     {
         return $this->belongsToMany(Tool::class, 'request_technical_action_tool', 'request_id', 'technical_action_tool_id');
     }
+
+    /**
+     * The fundings that belong to the request.
+     */
+    public function fundings(): BelongsToMany
+    {
+        return $this->belongsToMany(Funding::class, 'request_funding', 'request_id', 'funding_id');
+    }
 }

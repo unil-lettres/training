@@ -41,7 +41,7 @@ class RequestResource extends Resource
 {
     protected static ?string $model = Request::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-bell-alert';
+    protected static ?string $navigationIcon = 'heroicon-o-megaphone';
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -284,7 +284,19 @@ class RequestResource extends Resource
                             ->preload()
                             ->default(null),
 
-                        // TODO: Add new fields
+                        Select::make('request_funding')
+                            ->label('Financement(s)')
+                            ->multiple()
+                            ->relationship(name: 'fundings', titleAttribute: 'name')
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->label('Nom')
+                                    ->required()
+                                    ->maxLength(150),
+                            ])
+                            ->searchable()
+                            ->preload()
+                            ->default(null),
                     ]),
 
                     Tab::make('Action technique')->schema([

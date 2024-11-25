@@ -28,7 +28,7 @@ class AnalysisObjectiveResource extends Resource
 
     protected static ?string $modelLabel = 'objectifs (analyse)';
 
-    protected static ?string $navigationGroup = 'Administration';
+    protected static ?string $navigationGroup = 'Thésaurus';
 
     protected static ?int $navigationSort = 6;
 

@@ -15,7 +15,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $trainings = Training::where('visible', '=', true)->where('end', '>=', Date::now())->get();
+        $trainings = Training::where('visible', '=', true)
+            ->where('end', '>=', Date::now())->get();
 
         return view('home')->with('trainings', $trainings);
     }
