@@ -131,4 +131,12 @@ class Request extends Model
     {
         return $this->belongsToMany(Funding::class, 'request_funding', 'request_id', 'funding_id');
     }
+
+    /**
+     * The interventions that belong to the request.
+     */
+    public function interventions(): BelongsToMany
+    {
+        return $this->belongsToMany(Intervention::class, 'request_intervention', 'request_id', 'intervention_id');
+    }
 }

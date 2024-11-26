@@ -300,6 +300,20 @@ class RequestResource extends Resource
                     ]),
 
                     Tab::make('Action technique')->schema([
+                        Select::make('request_intervention')
+                            ->label('Intervention(s)')
+                            ->multiple()
+                            ->relationship(name: 'interventions', titleAttribute: 'name')
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->label('Nom')
+                                    ->required()
+                                    ->maxLength(150),
+                            ])
+                            ->searchable()
+                            ->preload()
+                            ->default(null),
+
                         Select::make('request_technical_action_tool')
                             ->label('Outil(s)')
                             ->multiple()

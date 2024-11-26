@@ -2,12 +2,12 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Exports\StatusExporter;
-use App\Filament\Resources\StatusResource\Pages\CreateStatus;
-use App\Filament\Resources\StatusResource\Pages\EditStatus;
-use App\Filament\Resources\StatusResource\Pages\ListStatuses;
-use App\Filament\Resources\StatusResource\Pages\ViewStatus;
-use App\Models\Status;
+use App\Filament\Exports\InterventionExporter;
+use App\Filament\Resources\InterventionResource\Pages\CreateIntervention;
+use App\Filament\Resources\InterventionResource\Pages\EditIntervention;
+use App\Filament\Resources\InterventionResource\Pages\ListInterventions;
+use App\Filament\Resources\InterventionResource\Pages\ViewIntervention;
+use App\Models\Intervention;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -21,19 +21,19 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class StatusResource extends Resource
+class InterventionResource extends Resource
 {
-    protected static ?string $model = Status::class;
+    protected static ?string $model = Intervention::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-check-circle';
+    protected static ?string $navigationIcon = 'heroicon-o-hand-raised';
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $modelLabel = 'décision';
+    protected static ?string $modelLabel = 'intervention';
 
     protected static ?string $navigationGroup = 'Thésaurus';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 9;
 
     public static function form(Form $form): Form
     {
@@ -83,9 +83,9 @@ class StatusResource extends Resource
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                     ExportBulkAction::make()
-                        ->exporter(StatusExporter::class),
+                        ->exporter(InterventionExporter::class),
                 ]),
-            ])->defaultPaginationPageOption(25);
+            ]);
     }
 
     public static function getRelations(): array
@@ -98,10 +98,10 @@ class StatusResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListStatuses::route('/'),
-            'create' => CreateStatus::route('/create'),
-            'view' => ViewStatus::route('/{record}'),
-            'edit' => EditStatus::route('/{record}/edit'),
+            'index' => ListInterventions::route('/'),
+            'create' => CreateIntervention::route('/create'),
+            'view' => ViewIntervention::route('/{record}'),
+            'edit' => EditIntervention::route('/{record}/edit'),
         ];
     }
 }

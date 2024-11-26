@@ -111,6 +111,8 @@ class RequestExporter extends Exporter
                 ->label('Outil(s) (action technique)'),
             ExportColumn::make('fundings.name')
                 ->label('Financements(s)'),
+            ExportColumn::make('interventions.name')
+                ->label('Intervention(s)'),
             ExportColumn::make('created_at')
                 ->label('Date de création'),
             ExportColumn::make('updated_at')
