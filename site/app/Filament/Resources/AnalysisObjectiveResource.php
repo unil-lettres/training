@@ -3,7 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Exports\AnalysisObjectiveExporter;
-use App\Filament\Resources\AnalysisObjectiveResource\Pages;
+use App\Filament\Resources\AnalysisObjectiveResource\Pages\CreateAnalysisObjective;
+use App\Filament\Resources\AnalysisObjectiveResource\Pages\EditAnalysisObjective;
+use App\Filament\Resources\AnalysisObjectiveResource\Pages\ListAnalysisObjectives;
+use App\Filament\Resources\AnalysisObjectiveResource\Pages\ViewAnalysisObjective;
 use App\Models\AnalysisObjective;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -95,10 +98,10 @@ class AnalysisObjectiveResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAnalysisObjectives::route('/'),
-            'create' => Pages\CreateAnalysisObjective::route('/create'),
-            'view' => Pages\ViewAnalysisObjective::route('/{record}'),
-            'edit' => Pages\EditAnalysisObjective::route('/{record}/edit'),
+            'index' => ListAnalysisObjectives::route('/'),
+            'create' => CreateAnalysisObjective::route('/create'),
+            'view' => ViewAnalysisObjective::route('/{record}'),
+            'edit' => EditAnalysisObjective::route('/{record}/edit'),
         ];
     }
 }

@@ -3,7 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Exports\FundingExporter;
-use App\Filament\Resources\FundingResource\Pages;
+use App\Filament\Resources\FundingResource\Pages\CreateFunding;
+use App\Filament\Resources\FundingResource\Pages\EditFunding;
+use App\Filament\Resources\FundingResource\Pages\ListFundings;
+use App\Filament\Resources\FundingResource\Pages\ViewFunding;
 use App\Models\Funding;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -95,10 +98,10 @@ class FundingResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListFundings::route('/'),
-            'create' => Pages\CreateFunding::route('/create'),
-            'view' => Pages\ViewFunding::route('/{record}'),
-            'edit' => Pages\EditFunding::route('/{record}/edit'),
+            'index' => ListFundings::route('/'),
+            'create' => CreateFunding::route('/create'),
+            'view' => ViewFunding::route('/{record}'),
+            'edit' => EditFunding::route('/{record}/edit'),
         ];
     }
 }

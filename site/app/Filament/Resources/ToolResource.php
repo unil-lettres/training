@@ -3,7 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Exports\ToolExporter;
-use App\Filament\Resources\ToolResource\Pages;
+use App\Filament\Resources\ToolResource\Pages\CreateTool;
+use App\Filament\Resources\ToolResource\Pages\EditTool;
+use App\Filament\Resources\ToolResource\Pages\ListTools;
+use App\Filament\Resources\ToolResource\Pages\ViewTool;
 use App\Models\Tool;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -95,10 +98,10 @@ class ToolResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTools::route('/'),
-            'create' => Pages\CreateTool::route('/create'),
-            'view' => Pages\ViewTool::route('/{record}'),
-            'edit' => Pages\EditTool::route('/{record}/edit'),
+            'index' => ListTools::route('/'),
+            'create' => CreateTool::route('/create'),
+            'view' => ViewTool::route('/{record}'),
+            'edit' => EditTool::route('/{record}/edit'),
         ];
     }
 }

@@ -3,7 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Exports\TrainingObjectiveExporter;
-use App\Filament\Resources\TrainingObjectiveResource\Pages;
+use App\Filament\Resources\TrainingObjectiveResource\Pages\CreateTrainingObjective;
+use App\Filament\Resources\TrainingObjectiveResource\Pages\EditTrainingObjective;
+use App\Filament\Resources\TrainingObjectiveResource\Pages\ListTrainingObjectives;
+use App\Filament\Resources\TrainingObjectiveResource\Pages\ViewTrainingObjective;
 use App\Models\TrainingObjective;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -95,10 +98,10 @@ class TrainingObjectiveResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTrainingObjectives::route('/'),
-            'create' => Pages\CreateTrainingObjective::route('/create'),
-            'view' => Pages\ViewTrainingObjective::route('/{record}'),
-            'edit' => Pages\EditTrainingObjective::route('/{record}/edit'),
+            'index' => ListTrainingObjectives::route('/'),
+            'create' => CreateTrainingObjective::route('/create'),
+            'view' => ViewTrainingObjective::route('/{record}'),
+            'edit' => EditTrainingObjective::route('/{record}/edit'),
         ];
     }
 }

@@ -3,7 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Exports\OrientationExporter;
-use App\Filament\Resources\OrientationResource\Pages;
+use App\Filament\Resources\OrientationResource\Pages\CreateOrientation;
+use App\Filament\Resources\OrientationResource\Pages\EditOrientation;
+use App\Filament\Resources\OrientationResource\Pages\ListOrientations;
+use App\Filament\Resources\OrientationResource\Pages\ViewOrientation;
 use App\Models\Orientation;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -95,10 +98,10 @@ class OrientationResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOrientations::route('/'),
-            'create' => Pages\CreateOrientation::route('/create'),
-            'view' => Pages\ViewOrientation::route('/{record}'),
-            'edit' => Pages\EditOrientation::route('/{record}/edit'),
+            'index' => ListOrientations::route('/'),
+            'create' => CreateOrientation::route('/create'),
+            'view' => ViewOrientation::route('/{record}'),
+            'edit' => EditOrientation::route('/{record}/edit'),
         ];
     }
 }
