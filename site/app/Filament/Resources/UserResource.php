@@ -100,7 +100,7 @@ class UserResource extends Resource
                     ->dateTime('j M Y, H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ])->defaultSort('created_at', 'desc')
             ->filters([
                 SelectFilter::make('roles')
                     ->label('Rôles')
