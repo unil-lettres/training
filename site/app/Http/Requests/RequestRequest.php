@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\File;
 
 class RequestRequest extends FormRequest
 {
@@ -31,28 +29,6 @@ class RequestRequest extends FormRequest
             'applicants' => 'nullable|min:1|max:300',
             'contact' => 'nullable|email',
             'comments' => 'nullable|min:1',
-            'filling_date' => 'nullable|date',
-            'status_admin' => [
-                'nullable',
-                Rule::in(['new', 'pending', 'resolved']),
-            ],
-            'type' => [
-                'nullable',
-                Rule::in(['training', 'analysis']),
-            ],
-            'contacts.*.contact' => 'nullable|max:150',
-            'contacts.*.notes' => 'nullable|max:300',
-            'decision_date' => 'nullable|date',
-            'decision_comments' => 'nullable|min:1',
-            'file' => [
-                'nullable',
-                // Allow all types, but max upload size is 10MB
-                File::types([])
-                    ->max(10 * 1024),
-            ],
-            'user_id' => 'nullable|integer',
-            'category_id' => 'nullable|integer',
-            'status_id' => 'nullable|integer',
             'doctoral_school' => 'nullable|min:1|max:300',
             'fns' => 'nullable|boolean',
             'doctoral_status' => 'nullable|min:1|max:300',
@@ -81,9 +57,6 @@ class RequestRequest extends FormRequest
     {
         return [
             'name.required' => 'Le champ nom est requis.',
-            'type' => 'Le type sélectionné n\'est pas valide.',
-            'contacts.*.contact' => 'Le champ ne peut pas comporter plus de 150 caractères.',
-            'contacts.*.notes' => 'Le champ ne peut pas comporter plus de 300 caractères.',
         ];
     }
 }

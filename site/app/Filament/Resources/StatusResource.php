@@ -25,13 +25,15 @@ class StatusResource extends Resource
 {
     protected static ?string $model = Status::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-queue-list';
+    protected static ?string $navigationIcon = 'heroicon-o-check-circle';
 
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $modelLabel = 'décision';
 
-    protected static ?string $navigationGroup = 'Administration';
+    protected static ?string $navigationGroup = 'Thésaurus';
+
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {

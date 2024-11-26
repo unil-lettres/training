@@ -71,24 +71,19 @@ class RequestExporter extends Exporter
                 ->formatStateUsing(fn (?string $state): string => match ($state) {
                     strtolower(RequestStatusAdmin::NEW->name) => RequestStatusAdmin::NEW->value,
                     strtolower(RequestStatusAdmin::PENDING->name) => RequestStatusAdmin::PENDING->value,
+                    strtolower(RequestStatusAdmin::PLANNED->name) => RequestStatusAdmin::PLANNED->value,
+                    strtolower(RequestStatusAdmin::IN_PROGRESS->name) => RequestStatusAdmin::IN_PROGRESS->value,
                     strtolower(RequestStatusAdmin::RESOLVED->name) => RequestStatusAdmin::RESOLVED->value,
                     default => '',
                 }),
-            ExportColumn::make('type')
-                ->label('Type')
-                ->formatStateUsing(fn (?string $state): string => match ($state) {
-                    strtolower(RequestType::TRAINING->name) => RequestType::TRAINING->value,
-                    strtolower(RequestType::ANALYSIS->name) => RequestType::ANALYSIS->value,
-                    default => '',
-                }),
-            ExportColumn::make('category.name')
-                ->label('Catégorie'),
             ExportColumn::make('status.name')
                 ->label('Décision'),
             ExportColumn::make('decision_date')
                 ->label('Date de décision'),
             ExportColumn::make('decision_comments')
                 ->label('Commentaire relatif à la décision'),
+            ExportColumn::make('orientation.name')
+                ->label('Orientation'),
             ExportColumn::make('contacts')
                 ->label('Personnes ressources')
                 ->formatStateUsing(function (?array $state): string {
@@ -98,6 +93,26 @@ class RequestExporter extends Exporter
                 ->label('Document'),
             ExportColumn::make('user.name')
                 ->label('Utilisateur'),
+            ExportColumn::make('type')
+                ->label('Type(s)')
+                ->formatStateUsing(fn (?string $state): string => implode(', ', array_map(fn ($word) => match (strtolower($word)) {
+                    strtolower(RequestType::TRAINING->name) => RequestType::TRAINING->value,
+                    strtolower(RequestType::ANALYSIS->name) => RequestType::ANALYSIS->value,
+                    strtolower(RequestType::TECHNICAL_ACTION->name) => RequestType::TECHNICAL_ACTION->value,
+                    default => '-',
+                }, explode(', ', $state)))),
+            ExportColumn::make('trainingObjectives.name')
+                ->label('Objectif(s) (formation)'),
+            ExportColumn::make('analysisObjectives.name')
+                ->label('Objectif(s) (analyse)'),
+            ExportColumn::make('trainingTools.name')
+                ->label('Outil(s) (formation)'),
+            ExportColumn::make('technicalActionTools.name')
+                ->label('Outil(s) (action technique)'),
+            ExportColumn::make('fundings.name')
+                ->label('Financements(s)'),
+            ExportColumn::make('interventions.name')
+                ->label('Intervention(s)'),
             ExportColumn::make('created_at')
                 ->label('Date de création'),
             ExportColumn::make('updated_at')

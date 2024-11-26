@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Models\Category;
 use App\Models\Request;
 use App\Models\Status;
 use App\User;
@@ -21,10 +20,6 @@ class RequestTest extends TestCase
             'id' => $request->id,
         ]);
 
-        $this->assertDatabaseHas('categories', [
-            'id' => $request->category_id,
-        ]);
-
         $this->assertDatabaseHas('statuses', [
             'id' => $request->status_id,
         ]);
@@ -38,13 +33,11 @@ class RequestTest extends TestCase
     {
         $request = Request::factory()->create();
 
-        $category = Category::factory()->create();
         $status = Status::factory()->create();
         $user = User::factory()->create();
 
         $request->update([
             'name' => 'updated',
-            'category_id' => $category->id,
             'status_id' => $status->id,
             'user_id' => $user->id,
         ]);
@@ -52,7 +45,6 @@ class RequestTest extends TestCase
         $this->assertDatabaseHas('requests', [
             'id' => $request->id,
             'name' => 'updated',
-            'category_id' => $category->id,
             'status_id' => $status->id,
             'user_id' => $user->id,
         ]);

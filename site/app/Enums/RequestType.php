@@ -6,6 +6,7 @@ enum RequestType: string
 {
     case TRAINING = 'Formation';
     case ANALYSIS = 'Analyse';
+    case TECHNICAL_ACTION = 'Action technique';
 
     public static function toArray(): array
     {
