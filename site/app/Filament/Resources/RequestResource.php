@@ -119,7 +119,6 @@ class RequestResource extends Resource
                             ->default(null),
 
                         Section::make('Chercheur/doctorant')
-                            ->description('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
                             ->collapsed()
                             ->schema([
                                 TextInput::make('extras.doctoral_school')
@@ -143,7 +142,6 @@ class RequestResource extends Resource
                             ]),
 
                         Section::make('Enseignant')
-                            ->description('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
                             ->collapsed()
                             ->schema([
                                 Toggle::make('extras.teachers_nbr')
@@ -155,7 +153,6 @@ class RequestResource extends Resource
                             ]),
 
                         Section::make('Administration')
-                            ->description('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
                             ->collapsed()
                             ->schema([
                                 Select::make('status_admin')
