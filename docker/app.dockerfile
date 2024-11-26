@@ -106,7 +106,7 @@ COPY site/ /var/www/training
 
 # Install php dependencies
 RUN cd /var/www/training && \
-    composer install --optimize-autoloader --no-interaction
+    composer install --optimize-autoloader --no-interaction --no-dev
 
 # Install js dependencies & compile
 RUN cd /var/www/training && \
