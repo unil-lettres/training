@@ -327,8 +327,6 @@ class RequestResource extends Resource
                             ->searchable()
                             ->preload()
                             ->default(null),
-
-                        // TODO: Add new fields
                     ]),
                 ])->columnSpanFull(),
             ]);
