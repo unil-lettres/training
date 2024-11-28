@@ -58,4 +58,42 @@ class UserTest extends TestCase
             'user_id' => null,
         ]);
     }
+
+    public function testUserAccess(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get('/request');
+        $response->assertStatus(200);
+
+        $response = $this->actingAs($user)->get('/request/create');
+        $response->assertStatus(200);
+
+        $this->expectException('Symfony\Component\HttpKernel\Exception\HttpException');
+        $response = $this->actingAs($user)->get('/admin');
+        $response->assertStatus(403);
+    }
+
+    public function testAdminUserAccess(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        $response = $this->actingAs($admin)->get('/admin');
+        $response->assertStatus(200);
+
+        $response = $this->actingAs($admin)->get('/admin/users');
+        $response->assertStatus(200);
+    }
+
+    public function testSuperEditorUserAccess(): void
+    {
+        $superEditor = User::factory()->superEditor()->create();
+
+        $response = $this->actingAs($superEditor)->get('/admin');
+        $response->assertStatus(200);
+
+        $this->expectException('Symfony\Component\HttpKernel\Exception\HttpException');
+        $response = $this->actingAs($superEditor)->get('/admin/users');
+        $response->assertStatus(403);
+    }
 }
