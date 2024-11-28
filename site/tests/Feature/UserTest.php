@@ -61,13 +61,25 @@ class UserTest extends TestCase
 
     public function testGuestAccess(): void
     {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+
+        $this->expectException('Illuminate\Auth\AuthenticationException');
+        $this->get('/request');
+
         $this->expectException('Illuminate\Auth\AuthenticationException');
         $this->get('/request/create');
+
+        $this->expectException('Symfony\Component\HttpKernel\Exception\HttpException');
+        $this->get('/admin');
     }
 
     public function testUserAccess(): void
     {
         $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get('/');
+        $response->assertStatus(200);
 
         $response = $this->actingAs($user)->get('/request');
         $response->assertStatus(200);
@@ -79,25 +91,43 @@ class UserTest extends TestCase
         $this->actingAs($user)->get('/admin');
     }
 
-    public function testAdminUserAccess(): void
-    {
-        $admin = User::factory()->admin()->create();
-
-        $response = $this->actingAs($admin)->get('/admin');
-        $response->assertStatus(200);
-
-        $response = $this->actingAs($admin)->get('/admin/users');
-        $response->assertStatus(200);
-    }
-
     public function testSuperEditorUserAccess(): void
     {
         $superEditor = User::factory()->superEditor()->create();
+
+        $response = $this->actingAs($superEditor)->get('/');
+        $response->assertStatus(200);
+
+        $response = $this->actingAs($superEditor)->get('/request');
+        $response->assertStatus(200);
+
+        $response = $this->actingAs($superEditor)->get('/request/create');
+        $response->assertStatus(200);
 
         $response = $this->actingAs($superEditor)->get('/admin');
         $response->assertStatus(200);
 
         $this->expectException('Symfony\Component\HttpKernel\Exception\HttpException');
         $this->actingAs($superEditor)->get('/admin/users');
+    }
+
+    public function testAdminUserAccess(): void
+    {
+        $admin = User::factory()->admin()->create();
+
+        $response = $this->actingAs($admin)->get('/');
+        $response->assertStatus(200);
+
+        $response = $this->actingAs($admin)->get('/request');
+        $response->assertStatus(200);
+
+        $response = $this->actingAs($admin)->get('/request/create');
+        $response->assertStatus(200);
+
+        $response = $this->actingAs($admin)->get('/admin');
+        $response->assertStatus(200);
+
+        $response = $this->actingAs($admin)->get('/admin/users');
+        $response->assertStatus(200);
     }
 }
