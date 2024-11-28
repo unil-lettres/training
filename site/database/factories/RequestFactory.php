@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\RequestStatusAdmin;
 use App\Enums\RequestType;
+use App\Models\Orientation;
 use App\Models\Status;
 use App\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -27,6 +28,7 @@ class RequestFactory extends Factory
             'type' => $this->faker->randomElement(RequestType::toArray()),
             'status_id' => Status::factory(),
             'user_id' => User::factory(),
+            'orientation_id' => Orientation::factory(),
         ];
     }
 }
