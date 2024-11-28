@@ -30,17 +30,17 @@
                     <span class="username">
                         {{{ isset(auth()->user()->name) ? auth()->user()->name : auth()->user()->email }}}
                     </span>
-                    <a href="{{ route('front.logout') }}">
-                        <button type="button" dusk="logout" class="btn btn-outline-dark">Déconnexion</button>
+                    <a class="btn btn-outline-dark" href="{{ route('front.logout') }}" dusk="logout" role="button">
+                        Déconnexion
                     </a>
                     @if (auth()->check() && auth()->user()->hasRole('admin'))
-                        <a href="/admin">
-                            <button type="button" dusk="admin" class="btn btn-outline-dark">Administration</button>
+                        <a class="btn btn-outline-dark" href="/admin" dusk="admin" role="button">
+                            Administration
                         </a>
                     @endif
                 @else
-                    <a href="{{ route('login') }}">
-                        <button type="button" dusk="login" class="btn btn-outline-dark">Connexion</button>
+                    <a class="btn btn-outline-dark" href="{{ route('login') }}" dusk="login" role="button">
+                        Connexion
                     </a>
                 @endif
             </div>
