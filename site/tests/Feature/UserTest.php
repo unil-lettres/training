@@ -59,6 +59,12 @@ class UserTest extends TestCase
         ]);
     }
 
+    public function testGuestAccess(): void
+    {
+        $this->expectException('Illuminate\Auth\AuthenticationException');
+        $this->get('/request/create');
+    }
+
     public function testUserAccess(): void
     {
         $user = User::factory()->create();
@@ -70,8 +76,7 @@ class UserTest extends TestCase
         $response->assertStatus(200);
 
         $this->expectException('Symfony\Component\HttpKernel\Exception\HttpException');
-        $response = $this->actingAs($user)->get('/admin');
-        $response->assertStatus(403);
+        $this->actingAs($user)->get('/admin');
     }
 
     public function testAdminUserAccess(): void
@@ -93,7 +98,6 @@ class UserTest extends TestCase
         $response->assertStatus(200);
 
         $this->expectException('Symfony\Component\HttpKernel\Exception\HttpException');
-        $response = $this->actingAs($superEditor)->get('/admin/users');
-        $response->assertStatus(403);
+        $this->actingAs($superEditor)->get('/admin/users');
     }
 }
