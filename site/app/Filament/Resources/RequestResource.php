@@ -51,6 +51,23 @@ class RequestResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    private static array $toolbarButtons = [
+        'attachFiles',
+        'blockquote',
+        'bold',
+        'bulletList',
+        'codeBlock',
+        'h2',
+        'h3',
+        'italic',
+        'link',
+        'orderedList',
+        'redo',
+        'strike',
+        'underline',
+        'undo',
+    ];
+
     public static function form(Form $form): Form
     {
         return $form
@@ -63,22 +80,7 @@ class RequestResource extends Resource
                             ->maxLength(150),
                         RichEditor::make('description')
                             ->label('Description')
-                            ->toolbarButtons([
-                                'attachFiles',
-                                'blockquote',
-                                'bold',
-                                'bulletList',
-                                'codeBlock',
-                                'h2',
-                                'h3',
-                                'italic',
-                                'link',
-                                'orderedList',
-                                'redo',
-                                'strike',
-                                'underline',
-                                'undo',
-                            ]),
+                            ->toolbarButtons(RequestResource::$toolbarButtons),
                         DateTimePicker::make('filling_date')
                             ->label('Date dépot'),
                         TextInput::make('applicants')
@@ -97,22 +99,7 @@ class RequestResource extends Resource
                             ->default(null),
                         RichEditor::make('comments')
                             ->label('Remarques')
-                            ->toolbarButtons([
-                                'attachFiles',
-                                'blockquote',
-                                'bold',
-                                'bulletList',
-                                'codeBlock',
-                                'h2',
-                                'h3',
-                                'italic',
-                                'link',
-                                'orderedList',
-                                'redo',
-                                'strike',
-                                'underline',
-                                'undo',
-                            ]),
+                            ->toolbarButtons(RequestResource::$toolbarButtons),
                         TextInput::make('contact')
                             ->label('Mail contact')
                             ->maxLength(300)
@@ -175,22 +162,7 @@ class RequestResource extends Resource
                                     ->label('Date de décision'),
                                 RichEditor::make('decision_comments')
                                     ->label('Commentaire relatif à la décision')
-                                    ->toolbarButtons([
-                                        'attachFiles',
-                                        'blockquote',
-                                        'bold',
-                                        'bulletList',
-                                        'codeBlock',
-                                        'h2',
-                                        'h3',
-                                        'italic',
-                                        'link',
-                                        'orderedList',
-                                        'redo',
-                                        'strike',
-                                        'underline',
-                                        'undo',
-                                    ]),
+                                    ->toolbarButtons(RequestResource::$toolbarButtons),
                                 Select::make('orientation_id')
                                     ->label('Orientation')
                                     ->relationship('orientation', 'name')
