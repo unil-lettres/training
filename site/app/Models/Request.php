@@ -35,9 +35,9 @@ class Request extends Model
         'extras',
         'user_id',
         'status_id',
-        'extras',
         'type',
         'contacts',
+        'orientation_id',
     ];
 
     protected function casts(): array
