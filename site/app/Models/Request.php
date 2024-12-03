@@ -53,22 +53,6 @@ class Request extends Model
     }
 
     /**
-     * Return cleaned description
-     */
-    public function cleanDescription(): string
-    {
-        return strip_tags($this->description);
-    }
-
-    /**
-     * Return cleaned comments
-     */
-    public function cleanComments(): string
-    {
-        return strip_tags($this->comments);
-    }
-
-    /**
      * Get the status associated with the request.
      */
     public function status(): BelongsTo
