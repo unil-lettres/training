@@ -52,6 +52,16 @@ If you want completely wipe your database and populate it with fresh data, you c
 
 ``docker exec train-app php artisan migrate:fresh --seed``
 
+## Assets
+
+Assets are compiled when the container is built, but if you want to recompile them, you can use the following command.
+
+``docker exec train-app npm run dev``
+
+or if you want to watch for changes.
+
+``docker exec train-app npm run watch``
+
 ## Frontends
 
 To access the main application please use the following link.

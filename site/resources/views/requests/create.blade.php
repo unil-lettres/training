@@ -122,7 +122,7 @@
 @stop
 
 @section('scripts')
-    <script type="text/javascript">
+    <script type="module">
         $.datepicker.setDefaults({
             altField: "#datepicker",
             closeText: 'Fermer',
