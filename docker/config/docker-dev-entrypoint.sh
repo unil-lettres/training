@@ -17,7 +17,7 @@ npm run dev
 echo "Starting Migration..."
 php artisan migrate --force
 
-echo "Create the symlink to make storage public..."
+echo "If needed, create the symlink to make storage public..."
 php artisan storage:link
 
 trap "echo Catching SIGWINCH apache error and preventing it." SIGWINCH

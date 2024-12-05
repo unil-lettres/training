@@ -7,7 +7,7 @@ cp .env.dusk.ci .env
 rm .env.dusk.testing
 
 # Install php dependencies
-composer install --no-progress --prefer-dist --optimize-autoloader
+composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader
 
 # Install js dependencies & compile
 npm install

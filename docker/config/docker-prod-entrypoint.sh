@@ -71,15 +71,19 @@ else
   echo "Shibboleth environment variables are not set. Skipping Shibboleth configuration."
 fi
 
+echo "Optimize filament components and blade icons"
+php artisan filament:optimize
+
+echo "Optimize view, routes, events, configs..."
+php artisan optimize
+
+echo "Clear expired password reset tokens"
+php artisan auth:clear-resets
+
 echo "Starting Migration..."
 php artisan migrate --force
 
-echo "Creating caches..."
-php artisan route:cache
-php artisan config:cache
-php artisan view:cache
-
-echo "Create the symlink to make storage public..."
+echo "If needed, create the symlink to make storage public..."
 php artisan storage:link
 
 # run commands from dockerfile
