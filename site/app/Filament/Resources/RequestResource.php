@@ -11,7 +11,6 @@ use App\Filament\Resources\RequestResource\Pages\ListRequests;
 use App\Filament\Resources\RequestResource\Pages\ViewRequest;
 use App\Models\Request;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
@@ -81,8 +80,10 @@ class RequestResource extends Resource
                         RichEditor::make('description')
                             ->label('Description')
                             ->toolbarButtons(RequestResource::$toolbarButtons),
-                        DateTimePicker::make('filling_date')
-                            ->label('Date dépot'),
+                        DatePicker::make('filling_date')
+                            ->label('Date dépot')
+                            ->displayFormat('j M Y')
+                            ->native(false),
                         TextInput::make('applicants')
                             ->label('Demandeur(s)')
                             ->maxLength(300)
@@ -92,7 +93,9 @@ class RequestResource extends Resource
                             ->maxLength(300)
                             ->default(null),
                         DatePicker::make('deadline')
-                            ->label('Délai production'),
+                            ->label('Délai production')
+                            ->displayFormat('j M Y')
+                            ->native(false),
                         TextInput::make('level')
                             ->label('Niveau requis')
                             ->maxLength(300)
@@ -158,8 +161,10 @@ class RequestResource extends Resource
                                     ->searchable()
                                     ->preload()
                                     ->default(null),
-                                DateTimePicker::make('decision_date')
-                                    ->label('Date de décision'),
+                                DatePicker::make('decision_date')
+                                    ->label('Date de décision')
+                                    ->displayFormat('j M Y')
+                                    ->native(false),
                                 RichEditor::make('decision_comments')
                                     ->label('Commentaire relatif à la décision')
                                     ->toolbarButtons(RequestResource::$toolbarButtons),
@@ -311,7 +316,7 @@ class RequestResource extends Resource
                     ->searchable(),
                 TextColumn::make('filling_date')
                     ->label('Date dépot')
-                    ->dateTime('j M Y, H:i')
+                    ->dateTime('j M Y')
                     ->sortable(),
                 TextColumn::make('status.name')
                     ->label('Décision')
@@ -323,8 +328,7 @@ class RequestResource extends Resource
                         strtolower(RequestType::ANALYSIS->name) => RequestType::ANALYSIS->value,
                         strtolower(RequestType::TECHNICAL_ACTION->name) => RequestType::TECHNICAL_ACTION->value,
                         default => '-',
-                    }, explode(', ', $state))))
-                    ->sortable(),
+                    }, explode(', ', $state)))),
                 TextColumn::make('description')
                     ->label('Description')
                     ->limit(80)
@@ -347,14 +351,13 @@ class RequestResource extends Resource
                         strtolower(RequestStatusAdmin::RESOLVED->name) => RequestStatusAdmin::RESOLVED->value,
                         default => '',
                     })
+                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('trainingObjectives.name')
                     ->label('Objectif(s) (formation)')
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('analysisObjectives.name')
                     ->label('Objectif(s) (analyse)')
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
                     ->label('Date de création')

@@ -71,9 +71,13 @@ class TrainingResource extends Resource
                                 'undo',
                             ])->columnSpanFull(),
                         DateTimePicker::make('start')
-                            ->label('Début'),
+                            ->label('Début')
+                            ->displayFormat('j M Y, H:i')
+                            ->native(false),
                         DateTimePicker::make('end')
-                            ->label('Fin'),
+                            ->label('Fin')
+                            ->displayFormat('j M Y, H:i')
+                            ->native(false),
                         Toggle::make('visible')
                             ->label('Visible'),
                     ]),
