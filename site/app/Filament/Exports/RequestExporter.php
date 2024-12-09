@@ -21,7 +21,9 @@ class RequestExporter extends Exporter
             ExportColumn::make('name')
                 ->label('Libellé'),
             ExportColumn::make('description')
-                ->label('Description'),
+                ->label('Description')
+                ->formatStateUsing(fn (?string $state): string => strip_tags($state))
+                ->limit(32000),
             ExportColumn::make('filling_date')
                 ->label('Date dépot'),
             ExportColumn::make('applicants')
@@ -33,7 +35,9 @@ class RequestExporter extends Exporter
             ExportColumn::make('level')
                 ->label('Niveau requis'),
             ExportColumn::make('comments')
-                ->label('Remarques'),
+                ->label('Remarques')
+                ->formatStateUsing(fn (?string $state): string => strip_tags($state))
+                ->limit(32000),
             ExportColumn::make('contact')
                 ->label('Mail contact'),
 
@@ -81,7 +85,9 @@ class RequestExporter extends Exporter
             ExportColumn::make('decision_date')
                 ->label('Date de décision'),
             ExportColumn::make('decision_comments')
-                ->label('Commentaire relatif à la décision'),
+                ->label('Commentaire relatif à la décision')
+                ->formatStateUsing(fn (?string $state): string => strip_tags($state))
+                ->limit(32000),
             ExportColumn::make('orientation.name')
                 ->label('Orientation'),
             ExportColumn::make('contacts')

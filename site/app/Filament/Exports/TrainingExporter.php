@@ -19,7 +19,9 @@ class TrainingExporter extends Exporter
             ExportColumn::make('name')
                 ->label('Nom'),
             ExportColumn::make('description')
-                ->label('Description'),
+                ->label('Description')
+                ->formatStateUsing(fn (?string $state): string => strip_tags($state))
+                ->limit(32000),
             ExportColumn::make('start')
                 ->label('Début'),
             ExportColumn::make('end')
