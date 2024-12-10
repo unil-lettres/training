@@ -44,7 +44,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         // Needed to avoid livewire/filament unauthorized errors
-        // (upload fields) when behind a reverse proxy
+        // when using upload fields when behind a reverse proxy
         $middleware->trustProxies(at: '*');
     })
     ->withExceptions(function (Exceptions $exceptions) {
