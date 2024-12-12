@@ -11,7 +11,7 @@ class OrientationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testOrientationCreation(): void
+    public function test_orientation_creation(): void
     {
         $orientation = Orientation::factory()->create();
 
@@ -20,7 +20,7 @@ class OrientationTest extends TestCase
         ]);
     }
 
-    public function testOrientationUpdate(): void
+    public function test_orientation_update(): void
     {
         $orientation = Orientation::factory()->create();
         $orientation->update(['name' => 'updated']);
@@ -31,7 +31,7 @@ class OrientationTest extends TestCase
         ]);
     }
 
-    public function testOrientationDeletion(): void
+    public function test_orientation_deletion(): void
     {
         $orientation = Orientation::factory()->create();
         $orientation->delete();
@@ -41,7 +41,7 @@ class OrientationTest extends TestCase
         ]);
     }
 
-    public function testOrientationWithRelationshipDeletion(): void
+    public function test_orientation_with_relationship_deletion(): void
     {
         $request = Request::factory()->create();
         $orientation = $request->orientation;

@@ -14,7 +14,7 @@ class RequestTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testRequestCreation(): void
+    public function test_request_creation(): void
     {
         $request = Request::factory()->create();
 
@@ -35,7 +35,7 @@ class RequestTest extends TestCase
         ]);
     }
 
-    public function testRequestUpdate(): void
+    public function test_request_update(): void
     {
         $request = Request::factory()->create();
 
@@ -59,7 +59,7 @@ class RequestTest extends TestCase
         ]);
     }
 
-    public function testRequestDeletion(): void
+    public function test_request_deletion(): void
     {
         $request = Request::factory()->create();
         $request->delete();
@@ -69,7 +69,7 @@ class RequestTest extends TestCase
         ]);
     }
 
-    public function testRequestCreatedEmailContent(): void
+    public function test_request_created_email_content(): void
     {
         $request = Request::factory()->create();
 

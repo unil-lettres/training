@@ -11,7 +11,7 @@ class HelpersTest extends TestCase
     /**
      * Request status helper should return the right human readable string.
      */
-    public function testRequestStatus(): void
+    public function test_request_status(): void
     {
         $this->assertEquals(
             RequestStatusAdmin::NEW->value,

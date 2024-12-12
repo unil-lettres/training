@@ -11,7 +11,7 @@ class StatusTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testStatusCreation(): void
+    public function test_status_creation(): void
     {
         $status = Status::factory()->create();
 
@@ -20,7 +20,7 @@ class StatusTest extends TestCase
         ]);
     }
 
-    public function testStatusUpdate(): void
+    public function test_status_update(): void
     {
         $status = Status::factory()->create();
         $status->update(['name' => 'updated']);
@@ -31,7 +31,7 @@ class StatusTest extends TestCase
         ]);
     }
 
-    public function testStatusDeletion(): void
+    public function test_status_deletion(): void
     {
         $status = Status::factory()->create();
         $status->delete();
@@ -41,7 +41,7 @@ class StatusTest extends TestCase
         ]);
     }
 
-    public function testStatusWithRelationshipDeletion(): void
+    public function test_status_with_relationship_deletion(): void
     {
         $request = Request::factory()->create();
         $status = $request->status;

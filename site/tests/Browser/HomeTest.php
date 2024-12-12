@@ -26,7 +26,7 @@ class HomeTest extends DuskTestCase
     /**
      * Browse homepage as guest
      */
-    public function testHomepageAsGuest(): void
+    public function test_homepage_as_guest(): void
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')

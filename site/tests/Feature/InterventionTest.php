@@ -10,7 +10,7 @@ class InterventionTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testInterventionCreation(): void
+    public function test_intervention_creation(): void
     {
         $intervention = Intervention::factory()->create();
 
@@ -19,7 +19,7 @@ class InterventionTest extends TestCase
         ]);
     }
 
-    public function testInterventionUpdate(): void
+    public function test_intervention_update(): void
     {
         $intervention = Intervention::factory()->create();
         $intervention->update(['name' => 'updated']);
@@ -30,7 +30,7 @@ class InterventionTest extends TestCase
         ]);
     }
 
-    public function testInterventionDeletion(): void
+    public function test_intervention_deletion(): void
     {
         $intervention = Intervention::factory()->create();
         $intervention->delete();

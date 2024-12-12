@@ -26,7 +26,7 @@ class RequestTest extends DuskTestCase
     /**
      * Cannot create a new request as guest. Redirect to Filament login page.
      */
-    public function testGuestCannotCreateRequest(): void
+    public function test_guest_cannot_create_request(): void
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/');

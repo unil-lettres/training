@@ -10,7 +10,7 @@ class ToolTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testToolCreation(): void
+    public function test_tool_creation(): void
     {
         $tool = Tool::factory()->create();
 
@@ -19,7 +19,7 @@ class ToolTest extends TestCase
         ]);
     }
 
-    public function testToolUpdate(): void
+    public function test_tool_update(): void
     {
         $tool = Tool::factory()->create();
         $tool->update(['name' => 'updated']);
@@ -30,7 +30,7 @@ class ToolTest extends TestCase
         ]);
     }
 
-    public function testToolDeletion(): void
+    public function test_tool_deletion(): void
     {
         $tool = Tool::factory()->create();
         $tool->delete();

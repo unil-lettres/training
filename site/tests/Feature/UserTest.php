@@ -11,7 +11,7 @@ class UserTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testUserCreation(): void
+    public function test_user_creation(): void
     {
         $user = User::factory()->create();
 
@@ -20,7 +20,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function testUserUpdate(): void
+    public function test_user_update(): void
     {
         $user = User::factory()->create();
         $user->update(['name' => 'updated']);
@@ -31,7 +31,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function testUserDeletion(): void
+    public function test_user_deletion(): void
     {
         $user = User::factory()->create();
         $user->delete();
@@ -41,7 +41,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function testUserWithRelationshipDeletion(): void
+    public function test_user_with_relationship_deletion(): void
     {
         $request = Request::factory()->create();
         $user = $request->user;
@@ -59,7 +59,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function testGuestAccess(): void
+    public function test_guest_access(): void
     {
         $response = $this->get('/');
         $response->assertStatus(200);
@@ -74,7 +74,7 @@ class UserTest extends TestCase
         $this->get('/admin');
     }
 
-    public function testUserAccess(): void
+    public function test_user_access(): void
     {
         $user = User::factory()->create();
 
@@ -91,7 +91,7 @@ class UserTest extends TestCase
         $this->actingAs($user)->get('/admin');
     }
 
-    public function testSuperEditorUserAccess(): void
+    public function test_super_editor_user_access(): void
     {
         $superEditor = User::factory()->superEditor()->create();
 
@@ -111,7 +111,7 @@ class UserTest extends TestCase
         $this->actingAs($superEditor)->get('/admin/users');
     }
 
-    public function testAdminUserAccess(): void
+    public function test_admin_user_access(): void
     {
         $admin = User::factory()->admin()->create();
 

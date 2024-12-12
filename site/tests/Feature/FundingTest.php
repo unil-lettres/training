@@ -10,7 +10,7 @@ class FundingTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testFundingCreation(): void
+    public function test_funding_creation(): void
     {
         $funding = Funding::factory()->create();
 
@@ -19,7 +19,7 @@ class FundingTest extends TestCase
         ]);
     }
 
-    public function testFundingUpdate(): void
+    public function test_funding_update(): void
     {
         $funding = Funding::factory()->create();
         $funding->update(['name' => 'updated']);
@@ -30,7 +30,7 @@ class FundingTest extends TestCase
         ]);
     }
 
-    public function testFundingDeletion(): void
+    public function test_funding_deletion(): void
     {
         $funding = Funding::factory()->create();
         $funding->delete();

@@ -10,7 +10,7 @@ class AnalysisObjectiveTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testAnalysisObjectiveCreation(): void
+    public function test_analysis_objective_creation(): void
     {
         $analysisObjective = AnalysisObjective::factory()->create();
 
@@ -19,7 +19,7 @@ class AnalysisObjectiveTest extends TestCase
         ]);
     }
 
-    public function testAnalysisObjectiveUpdate(): void
+    public function test_analysis_objective_update(): void
     {
         $analysisObjective = AnalysisObjective::factory()->create();
         $analysisObjective->update(['name' => 'updated']);
@@ -30,7 +30,7 @@ class AnalysisObjectiveTest extends TestCase
         ]);
     }
 
-    public function testAnalysisObjectiveDeletion(): void
+    public function test_analysis_objective_deletion(): void
     {
         $analysisObjective = AnalysisObjective::factory()->create();
         $analysisObjective->delete();

@@ -10,7 +10,7 @@ class TrainingTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testTrainingCreation(): void
+    public function test_training_creation(): void
     {
         $training = Training::factory()->create();
 
@@ -19,7 +19,7 @@ class TrainingTest extends TestCase
         ]);
     }
 
-    public function testTrainingUpdate(): void
+    public function test_training_update(): void
     {
         $training = Training::factory()->create();
         $training->update(['name' => 'updated']);
@@ -30,7 +30,7 @@ class TrainingTest extends TestCase
         ]);
     }
 
-    public function testTrainingDeletion(): void
+    public function test_training_deletion(): void
     {
         $training = Training::factory()->create();
         $training->delete();

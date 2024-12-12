@@ -9,7 +9,7 @@ class BasicTest extends TestCase
     /**
      * A basic test.
      */
-    public function testBasicTest(): void
+    public function test_basic_test(): void
     {
         $response = $this->get('/');
 
