@@ -8,7 +8,6 @@
 /site/.env
 /site/.env.backup
 /site/.env.bak
-/site/auth.json
 
 /site/.phpunit.cache
 /site/.phpunit.result.cache

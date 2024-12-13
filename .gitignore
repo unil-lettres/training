@@ -9,7 +9,6 @@ docker-compose.override.yml
 /site/.env
 /site/.env.backup
 /site/.env.bak
-/site/auth.json
 /site/phpunit.dusk.xml
 
 /site/public/css/*
