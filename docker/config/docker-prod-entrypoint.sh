@@ -54,7 +54,7 @@ if [ -n "$SHIB_HOSTNAME" ] && [ -n "$SHIB_CONTACT" ]; then
   # Check if Shibboleth key or certificate file exists, if not generate them
   if [[ ! -f /etc/shibboleth/sp-key.pem && ! -f /etc/shibboleth/sp-cert.pem ]]; then
     echo "Shibboleth key and certificate files missing. Generated new key and certificate for $SHIB_HOSTNAME hostname"
-    shib-keygen -f -u _shibd -h $SHIB_HOSTNAME -y 10 -o /etc/shibboleth/
+    shib-keygen -f -u _shibd -h $SHIB_HOSTNAME -y 10 -o /etc/shibboleth
   else
     echo "Shibboleth key and certificate files already exist. No action needed."
   fi
@@ -77,11 +77,11 @@ php artisan filament:optimize
 echo "Optimize view, routes, events, configs..."
 php artisan optimize
 
-echo "Clear expired password reset tokens"
-php artisan auth:clear-resets
-
 echo "Starting Migration..."
 php artisan migrate --force
+
+echo "Clear expired password reset tokens"
+php artisan auth:clear-resets
 
 echo "If needed, create the symlink to make storage public..."
 php artisan storage:link
