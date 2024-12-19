@@ -101,6 +101,10 @@ RUN sed -i "s|handlerSSL=\"true\"|handlerSSL=\"false\"|g" "/etc/shibboleth/shibb
 RUN mkdir -p /etc/shibboleth-backup
 RUN cp -a /etc/shibboleth/. /etc/shibboleth-backup/
 
+# Create a directory for the Shibboleth Unix domain socket
+# Avoid "failed to bind to socket" issue
+RUN mkdir /var/run/shibboleth/
+
 # Copy the application, except data listed in dockerignore
 COPY site/ /var/www/training
 
