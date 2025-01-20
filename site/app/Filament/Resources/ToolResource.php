@@ -31,7 +31,7 @@ class ToolResource extends Resource
 
     protected static ?string $modelLabel = 'outil';
 
-    protected static ?string $navigationGroup = 'Thésaurus';
+    protected static ?string $navigationGroup = 'Listes';
 
     protected static ?int $navigationSort = 7;
 

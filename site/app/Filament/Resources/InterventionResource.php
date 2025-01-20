@@ -31,7 +31,7 @@ class InterventionResource extends Resource
 
     protected static ?string $modelLabel = 'intervention';
 
-    protected static ?string $navigationGroup = 'Thésaurus';
+    protected static ?string $navigationGroup = 'Listes';
 
     protected static ?int $navigationSort = 9;
 

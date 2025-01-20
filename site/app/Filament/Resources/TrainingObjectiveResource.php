@@ -31,7 +31,7 @@ class TrainingObjectiveResource extends Resource
 
     protected static ?string $modelLabel = 'objectifs (formation)';
 
-    protected static ?string $navigationGroup = 'Thésaurus';
+    protected static ?string $navigationGroup = 'Listes';
 
     protected static ?int $navigationSort = 5;
 
