@@ -11,6 +11,12 @@
 
         <ul class="list-group">
             <li class="list-group-item">
+                <b>4.0</b><span class="text-black-50 ms-2">21/01/2025</span>
+                <ul>
+                    <li>Refonte de l'administration</li>
+                </ul>
+            </li>
+            <li class="list-group-item">
                 <b>3.0</b><span class="text-black-50 ms-2">7/11/2024</span>
                 <ul>
                     <li>Migration de Backpack à Filament (admin panel)</li>
