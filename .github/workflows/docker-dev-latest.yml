@@ -48,7 +48,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ env.DOCKERHUB_REPOSITORY }}:latest-stage
-          cache-from: type=registry,ref=${{ env.DOCKERHUB_REPOSITORY }}:latest-stage
+          cache-from: type=registry,ref=${{ env.DOCKERHUB_REPOSITORY }}:latest-stage3
           cache-to: type=inline
 
   description:
