@@ -114,17 +114,17 @@ COPY site/ /var/www/training
 RUN cd /var/www/training && \
     composer install --optimize-autoloader --no-interaction --no-dev
 
-# Install js dependencies & compile
+# Install js dependencies, compile & remove node_modules
 RUN cd /var/www/training && \
     npm install && \
-    npm run prod
+    npm run prod && \
+    npm cache clean --force && \
+    rm -rf /root/.npm && \
+    rm -rf /var/www/training/node_modules
 
 # Copy Kubernetes poststart script
 COPY docker/config/k8s-poststart.sh /var/www/training/k8s-poststart.sh
 RUN chmod +x /var/www/training/k8s-poststart.sh
-
-# Remove node_modules folder since it's not needed anymore
-RUN rm -rf /var/www/training/node_modules
 
 # Change ownership of the application to www-data
 RUN chown -R www-data:www-data /var/www/training
