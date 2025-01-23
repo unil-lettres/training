@@ -33,7 +33,7 @@
                     <a class="btn btn-outline-dark" href="{{ route('front.logout') }}" dusk="logout" role="button">
                         Déconnexion
                     </a>
-                    @if (auth()->check() && auth()->user()->hasRole('admin'))
+                    @if (auth()->check() && auth()->user()->hasRole(['admin', 'super_editor']))
                         <a class="btn btn-outline-dark" href="/admin" dusk="admin" role="button">
                             Administration
                         </a>
