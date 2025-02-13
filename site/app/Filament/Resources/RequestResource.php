@@ -329,6 +329,17 @@ class RequestResource extends Resource
                         strtolower(RequestType::TECHNICAL_ACTION->name) => RequestType::TECHNICAL_ACTION->value,
                         default => '-',
                     }, explode(', ', $state)))),
+                TextColumn::make('status_admin')
+                    ->label('Statut')
+                    ->formatStateUsing(fn (?string $state): string => match ($state) {
+                        strtolower(RequestStatusAdmin::NEW->name) => RequestStatusAdmin::NEW->value,
+                        strtolower(RequestStatusAdmin::PENDING->name) => RequestStatusAdmin::PENDING->value,
+                        strtolower(RequestStatusAdmin::PLANNED->name) => RequestStatusAdmin::PLANNED->value,
+                        strtolower(RequestStatusAdmin::IN_PROGRESS->name) => RequestStatusAdmin::IN_PROGRESS->value,
+                        strtolower(RequestStatusAdmin::RESOLVED->name) => RequestStatusAdmin::RESOLVED->value,
+                        default => '',
+                    })
+                    ->sortable(),
                 TextColumn::make('description')
                     ->label('Description')
                     ->limit(80)
@@ -340,18 +351,6 @@ class RequestResource extends Resource
                     ->limit(80)
                     ->html()
                     ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('status_admin')
-                    ->label('Statut')
-                    ->formatStateUsing(fn (?string $state): string => match ($state) {
-                        strtolower(RequestStatusAdmin::NEW->name) => RequestStatusAdmin::NEW->value,
-                        strtolower(RequestStatusAdmin::PENDING->name) => RequestStatusAdmin::PENDING->value,
-                        strtolower(RequestStatusAdmin::PLANNED->name) => RequestStatusAdmin::PLANNED->value,
-                        strtolower(RequestStatusAdmin::IN_PROGRESS->name) => RequestStatusAdmin::IN_PROGRESS->value,
-                        strtolower(RequestStatusAdmin::RESOLVED->name) => RequestStatusAdmin::RESOLVED->value,
-                        default => '',
-                    })
-                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('trainingObjectives.name')
                     ->label('Objectif(s) (formation)')
