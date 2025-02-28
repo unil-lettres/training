@@ -10,7 +10,7 @@ Development:
 
 Development of technical skills in the Faculty of Arts.
 
-A Laravel 11 app with a [Filament](https://filamentphp.com/) administration panel.
+A Laravel 12 app with a [Filament](https://filamentphp.com/) administration panel.
 
 # Development with Docker
 

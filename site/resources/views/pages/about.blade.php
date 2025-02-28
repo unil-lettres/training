@@ -11,6 +11,12 @@
 
         <ul class="list-group">
             <li class="list-group-item">
+                <b>4.1</b><span class="text-black-50 ms-2">28/02/2025</span>
+                <ul>
+                    <li>Mise a jour de l'application (Laravel 12)</li>
+                </ul>
+            </li>
+            <li class="list-group-item">
                 <b>4.0</b><span class="text-black-50 ms-2">21/01/2025</span>
                 <ul>
                     <li>Refonte de l'administration</li>
