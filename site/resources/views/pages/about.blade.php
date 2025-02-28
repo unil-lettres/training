@@ -11,7 +11,7 @@
 
         <ul class="list-group">
             <li class="list-group-item">
-                <b>4.1</b><span class="text-black-50 ms-2">28/02/2025</span>
+                <b>4.3</b><span class="text-black-50 ms-2">28/02/2025</span>
                 <ul>
                     <li>Mise a jour de l'application (Laravel 12)</li>
                 </ul>
