@@ -3,7 +3,7 @@ FROM php:8.4-apache-bookworm AS base
 ENV DOCKER_RUNNING=true
 
 ENV NODE_VERSION=22
-ENV COMPOSER_VERSION=2.6
+ENV COMPOSER_VERSION=2.8
 
 # Update packages
 RUN apt-get update
