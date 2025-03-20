@@ -41,7 +41,7 @@ services:
       - training-net
     container_name: train-mailhog
   train-selenium:
-    image: selenium/standalone-chrome:latest
+    image: selenium/standalone-chromium:latest
     shm_size: 2gb
     ports:
       - "127.0.0.1:4444:4444"
