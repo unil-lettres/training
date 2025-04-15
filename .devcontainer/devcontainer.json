@@ -15,7 +15,7 @@
         },
         "ghcr.io/guiyomh/features/vim": {}
     },
-    // forward ports for the main application (8787), phpmyadmin (9898), and mailhog (8025)
+    // forward ports for the main application (8686), phpmyadmin (9999), and mailhog (8025)
     "forwardPorts": [8686, 9999, 8025],
     "initializeCommand": "cp docker/example.env docker/.env",
     "postCreateCommand": "/bin/bash .devcontainer/post-create.sh",
