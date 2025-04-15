@@ -21,7 +21,6 @@ done
 
 echo "Checking if the database is ready..."
 # This is needed to seed the database
-cd ./site
 until php ./site/artisan migrate:status > /dev/null 2>&1; do
     sleep 1
 done
