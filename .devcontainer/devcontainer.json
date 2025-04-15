@@ -1,0 +1,41 @@
+
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-docker-compose
+{
+    "name": "Training devcontainer",
+    "dockerComposeFile": [
+        "../docker-compose.yml",
+        "../docker-compose.override.yml.dev"
+    ],
+    "service": "train-app",
+    "workspaceFolder": "/workspaces/training",
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {
+            "version": "2.39.2"
+        },
+        "ghcr.io/guiyomh/features/vim": {}
+    },
+    // forward ports for the main application (8787), phpmyadmin (9898), and mailhog (8025)
+    "forwardPorts": [8686, 9999, 8025],
+    "initializeCommand": "cp docker/example.env docker/.env",
+    "postCreateCommand": "/bin/bash .devcontainer/post-create.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "dbaeumer.vscode-eslint",
+                "eamodio.gitlens",
+                "EditorConfig.EditorConfig",
+                "MehediDracula.php-namespace-resolver",
+                "mikestead.dotenv",
+                "PKief.material-icon-theme",
+                "redhat.vscode-yaml",
+                "ryu1kn.partial-diff",
+                "zobo.php-intellisense",
+                "GitHub.copilot",
+                "GitHub.copilot-chat",
+                "laravel.vscode-laravel"
+            ]
+        }
+    }
+}
