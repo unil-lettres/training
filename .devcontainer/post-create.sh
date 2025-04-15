@@ -14,10 +14,17 @@ if [ -n "$CODESPACE_NAME" ]; then
 fi
 
 echo "Waiting for composer dependencies to be installed..."
+# This is needed to use the artisan commands
 while [ ! -f ./site/vendor/autoload.php ]; do
     sleep 1
 done
 
-echo "Seed the database..."
+echo "Checking if the database is ready..."
+# This is needed to seed the database
 cd ./site
-php artisan db:seed
+until php ./site/artisan migrate:status > /dev/null 2>&1; do
+    sleep 1
+done
+
+echo "Seed the database..."
+php ./site/artisan db:seed
