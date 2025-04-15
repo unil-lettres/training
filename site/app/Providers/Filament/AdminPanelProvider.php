@@ -43,7 +43,7 @@ class AdminPanelProvider extends PanelProvider
             ->navigationItems([
                 NavigationItem::make('Retourner à l\'application')
                     ->icon('heroicon-o-arrow-uturn-left')
-                    ->url(url('/')),
+                    ->url(config('const.app_url')),
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
