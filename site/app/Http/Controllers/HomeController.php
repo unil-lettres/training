@@ -10,10 +10,8 @@ class HomeController extends Controller
 {
     /**
      * Show the application dashboard.
-     *
-     * @return View
      */
-    public function index()
+    public function index(): View
     {
         $trainings = Training::where('visible', '=', true)
             ->where('end', '>=', Date::now())->get();
