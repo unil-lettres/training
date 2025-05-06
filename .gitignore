@@ -1,11 +1,14 @@
+# IDE files
 .idea
-.DS_Store
-docker-compose.override.yml
+.vscode
 
+# Docker files
+docker-compose.override.yml
 /docker/.env
 /docker/secrets/*
 !/docker/secrets/.keep
 
+# Laravel files
 /site/.env
 /site/.env.backup
 /site/.env.bak
@@ -16,3 +19,6 @@ docker-compose.override.yml
 /site/public/js/*
 !/site/public/js/.keep
 /site/public/build
+
+# System files
+.DS_Store
