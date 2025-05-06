@@ -54,7 +54,6 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-
         /**
          * This is a workaround for GitHub Codespaces. This is needed because Codespaces uses a
          * reverse proxy with a dynamic public URL, and Laravel would otherwise generate incorrect
