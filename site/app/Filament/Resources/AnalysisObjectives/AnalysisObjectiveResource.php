@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Filament\Resources\Fundings\Fundings\Fundings;
+namespace App\Filament\Resources\AnalysisObjectives;
 
-use App\Filament\Exports\FundingExporter;
-use App\Filament\Resources\Fundings\Pages\CreateFunding;
-use App\Filament\Resources\Fundings\Pages\EditFunding;
-use App\Filament\Resources\Fundings\Pages\ListFundings;
-use App\Filament\Resources\Fundings\Pages\ViewFunding;
-use App\Models\Funding;
+use App\Filament\Exports\AnalysisObjectiveExporter;
+use App\Filament\Resources\AnalysisObjectives\Pages\CreateAnalysisObjective;
+use App\Filament\Resources\AnalysisObjectives\Pages\EditAnalysisObjective;
+use App\Filament\Resources\AnalysisObjectives\Pages\ListAnalysisObjectives;
+use App\Filament\Resources\AnalysisObjectives\Pages\ViewAnalysisObjective;
+use App\Models\AnalysisObjective;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -21,19 +21,19 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class FundingResource extends Resource
+class AnalysisObjectiveResource extends Resource
 {
-    protected static ?string $model = Funding::class;
+    protected static ?string $model = AnalysisObjective::class;
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-currency-dollar';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-flag';
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $modelLabel = 'financement';
+    protected static ?string $modelLabel = 'objectifs (analyse)';
 
     protected static string|\UnitEnum|null $navigationGroup = 'Listes';
 
-    protected static ?int $navigationSort = 8;
+    protected static ?int $navigationSort = 6;
 
     public static function form(Schema $schema): Schema
     {
@@ -84,9 +84,9 @@ class FundingResource extends Resource
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                     ExportBulkAction::make()
-                        ->exporter(FundingExporter::class),
+                        ->exporter(AnalysisObjectiveExporter::class),
                 ]),
-            ]);
+            ])->defaultPaginationPageOption(25);
     }
 
     public static function getRelations(): array
@@ -99,10 +99,10 @@ class FundingResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListFundings::route('/'),
-            'create' => CreateFunding::route('/create'),
-            'view' => ViewFunding::route('/{record}'),
-            'edit' => EditFunding::route('/{record}/edit'),
+            'index' => ListAnalysisObjectives::route('/'),
+            'create' => CreateAnalysisObjective::route('/create'),
+            'view' => ViewAnalysisObjective::route('/{record}'),
+            'edit' => EditAnalysisObjective::route('/{record}/edit'),
         ];
     }
 }

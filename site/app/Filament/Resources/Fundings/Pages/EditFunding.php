@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Fundings\Pages;
 
-use App\Filament\Resources\Fundings\Fundings\Fundings\FundingResource;
+use App\Filament\Resources\Fundings\FundingResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;

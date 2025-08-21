@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Orientations\Pages;
 
-use App\Filament\Resources\Orientations\Orientations\Orientations\OrientationResource;
+use App\Filament\Resources\Orientations\OrientationResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 

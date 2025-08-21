@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Statuses\Pages;
 
-use App\Filament\Resources\Statuses\Statuses\Statuses\StatusResource;
+use App\Filament\Resources\Statuses\StatusResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 

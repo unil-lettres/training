@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Requests\Widgets;
 
-use App\Filament\Resources\Requests\Requests\Requests\RequestResource;
+use App\Filament\Resources\Requests\RequestResource;
 use App\Models\Request;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;

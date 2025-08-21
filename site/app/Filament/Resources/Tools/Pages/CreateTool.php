@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Tools\Pages;
 
-use App\Filament\Resources\Tools\Tools\Tools\ToolResource;
+use App\Filament\Resources\Tools\ToolResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateTool extends CreateRecord

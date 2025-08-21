@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Interventions\Pages;
 
-use App\Filament\Resources\Interventions\Interventions\Interventions\InterventionResource;
+use App\Filament\Resources\Interventions\InterventionResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 

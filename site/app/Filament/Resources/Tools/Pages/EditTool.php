@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Tools\Pages;
 
-use App\Filament\Resources\Tools\Tools\Tools\ToolResource;
+use App\Filament\Resources\Tools\ToolResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;

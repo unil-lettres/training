@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Trainings\Trainings\Trainings;
+namespace App\Filament\Resources\Trainings;
 
 use App\Filament\Exports\TrainingExporter;
 use App\Filament\Resources\Trainings\Pages\CreateTraining;

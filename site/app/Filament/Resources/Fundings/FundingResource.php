@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Filament\Resources\Statuses\Statuses\Statuses;
+namespace App\Filament\Resources\Fundings;
 
-use App\Filament\Exports\StatusExporter;
-use App\Filament\Resources\Statuses\Pages\CreateStatus;
-use App\Filament\Resources\Statuses\Pages\EditStatus;
-use App\Filament\Resources\Statuses\Pages\ListStatuses;
-use App\Filament\Resources\Statuses\Pages\ViewStatus;
-use App\Models\Status;
+use App\Filament\Exports\FundingExporter;
+use App\Filament\Resources\Fundings\Pages\CreateFunding;
+use App\Filament\Resources\Fundings\Pages\EditFunding;
+use App\Filament\Resources\Fundings\Pages\ListFundings;
+use App\Filament\Resources\Fundings\Pages\ViewFunding;
+use App\Models\Funding;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -21,19 +21,19 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class StatusResource extends Resource
+class FundingResource extends Resource
 {
-    protected static ?string $model = Status::class;
+    protected static ?string $model = Funding::class;
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-check-circle';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-currency-dollar';
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $modelLabel = 'décision';
+    protected static ?string $modelLabel = 'financement';
 
     protected static string|\UnitEnum|null $navigationGroup = 'Listes';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 8;
 
     public static function form(Schema $schema): Schema
     {
@@ -84,9 +84,9 @@ class StatusResource extends Resource
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                     ExportBulkAction::make()
-                        ->exporter(StatusExporter::class),
+                        ->exporter(FundingExporter::class),
                 ]),
-            ])->defaultPaginationPageOption(25);
+            ]);
     }
 
     public static function getRelations(): array
@@ -99,10 +99,10 @@ class StatusResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListStatuses::route('/'),
-            'create' => CreateStatus::route('/create'),
-            'view' => ViewStatus::route('/{record}'),
-            'edit' => EditStatus::route('/{record}/edit'),
+            'index' => ListFundings::route('/'),
+            'create' => CreateFunding::route('/create'),
+            'view' => ViewFunding::route('/{record}'),
+            'edit' => EditFunding::route('/{record}/edit'),
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Interventions\Interventions\Interventions;
+namespace App\Filament\Resources\Interventions;
 
 use App\Filament\Exports\InterventionExporter;
 use App\Filament\Resources\Interventions\Pages\CreateIntervention;

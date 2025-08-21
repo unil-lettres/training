@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\TrainingObjectives\TrainingObjectives\TrainingObjectives;
+namespace App\Filament\Resources\TrainingObjectives;
 
 use App\Filament\Exports\TrainingObjectiveExporter;
 use App\Filament\Resources\TrainingObjectives\Pages\CreateTrainingObjective;

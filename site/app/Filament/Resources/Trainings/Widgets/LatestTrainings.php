@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Trainings\Widgets;
 
-use App\Filament\Resources\Trainings\Trainings\Trainings\TrainingResource;
+use App\Filament\Resources\Trainings\TrainingResource;
 use App\Models\Training;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;

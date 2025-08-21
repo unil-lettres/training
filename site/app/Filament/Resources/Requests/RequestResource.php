@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Requests\Requests\Requests;
+namespace App\Filament\Resources\Requests;
 
 use App\Enums\RequestStatusAdmin;
 use App\Enums\RequestType;

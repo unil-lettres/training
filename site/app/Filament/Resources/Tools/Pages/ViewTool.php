@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Tools\Pages;
 
-use App\Filament\Resources\Tools\Tools\Tools\ToolResource;
+use App\Filament\Resources\Tools\ToolResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 

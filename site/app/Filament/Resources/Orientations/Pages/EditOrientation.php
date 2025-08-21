@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Orientations\Pages;
 
-use App\Filament\Resources\Orientations\Orientations\Orientations\OrientationResource;
+use App\Filament\Resources\Orientations\OrientationResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;

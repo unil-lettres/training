@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Trainings\Pages;
 
-use App\Filament\Resources\Trainings\Trainings\Trainings\TrainingResource;
+use App\Filament\Resources\Trainings\TrainingResource;
 use Filament\Actions\EditAction;
 use Filament\Resources\Pages\ViewRecord;
 

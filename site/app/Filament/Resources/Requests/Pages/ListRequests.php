@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Requests\Pages;
 
-use App\Filament\Resources\Requests\Requests\Requests\RequestResource;
+use App\Filament\Resources\Requests\RequestResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 

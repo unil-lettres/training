@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Filament\Resources\AnalysisObjectives\AnalysisObjectives\AnalysisObjectives;
+namespace App\Filament\Resources\Statuses;
 
-use App\Filament\Exports\AnalysisObjectiveExporter;
-use App\Filament\Resources\AnalysisObjectives\Pages\CreateAnalysisObjective;
-use App\Filament\Resources\AnalysisObjectives\Pages\EditAnalysisObjective;
-use App\Filament\Resources\AnalysisObjectives\Pages\ListAnalysisObjectives;
-use App\Filament\Resources\AnalysisObjectives\Pages\ViewAnalysisObjective;
-use App\Models\AnalysisObjective;
+use App\Filament\Exports\StatusExporter;
+use App\Filament\Resources\Statuses\Pages\CreateStatus;
+use App\Filament\Resources\Statuses\Pages\EditStatus;
+use App\Filament\Resources\Statuses\Pages\ListStatuses;
+use App\Filament\Resources\Statuses\Pages\ViewStatus;
+use App\Models\Status;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -21,19 +21,19 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class AnalysisObjectiveResource extends Resource
+class StatusResource extends Resource
 {
-    protected static ?string $model = AnalysisObjective::class;
+    protected static ?string $model = Status::class;
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-flag';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-check-circle';
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $modelLabel = 'objectifs (analyse)';
+    protected static ?string $modelLabel = 'décision';
 
     protected static string|\UnitEnum|null $navigationGroup = 'Listes';
 
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Schema $schema): Schema
     {
@@ -84,7 +84,7 @@ class AnalysisObjectiveResource extends Resource
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                     ExportBulkAction::make()
-                        ->exporter(AnalysisObjectiveExporter::class),
+                        ->exporter(StatusExporter::class),
                 ]),
             ])->defaultPaginationPageOption(25);
     }
@@ -99,10 +99,10 @@ class AnalysisObjectiveResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ListAnalysisObjectives::route('/'),
-            'create' => CreateAnalysisObjective::route('/create'),
-            'view' => ViewAnalysisObjective::route('/{record}'),
-            'edit' => EditAnalysisObjective::route('/{record}/edit'),
+            'index' => ListStatuses::route('/'),
+            'create' => CreateStatus::route('/create'),
+            'view' => ViewStatus::route('/{record}'),
+            'edit' => EditStatus::route('/{record}/edit'),
         ];
     }
 }

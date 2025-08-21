@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Tools\Tools\Tools;
+namespace App\Filament\Resources\Tools;
 
 use App\Filament\Exports\ToolExporter;
 use App\Filament\Resources\Tools\Pages\CreateTool;

@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Requests\Pages;
 
-use App\Filament\Resources\Requests\Requests\Requests\RequestResource;
+use App\Filament\Resources\Requests\RequestResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;

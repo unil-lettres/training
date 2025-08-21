@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Orientations\Orientations\Orientations;
+namespace App\Filament\Resources\Orientations;
 
 use App\Filament\Exports\OrientationExporter;
 use App\Filament\Resources\Orientations\Pages\CreateOrientation;

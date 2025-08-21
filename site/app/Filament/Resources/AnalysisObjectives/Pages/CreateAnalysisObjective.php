@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\AnalysisObjectives\Pages;
 
-use App\Filament\Resources\AnalysisObjectives\AnalysisObjectives\AnalysisObjectives\AnalysisObjectiveResource;
+use App\Filament\Resources\AnalysisObjectives\AnalysisObjectiveResource;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateAnalysisObjective extends CreateRecord
