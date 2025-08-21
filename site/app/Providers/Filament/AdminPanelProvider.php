@@ -2,8 +2,8 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Resources\RequestResource\Widgets\LatestRequests;
-use App\Filament\Resources\TrainingResource\Widgets\LatestTrainings;
+use App\Filament\Resources\Requests\Widgets\LatestRequests;
+use App\Filament\Resources\Trainings\Widgets\LatestTrainings;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;

@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use App\Models\Request;
 use App\Observers\RequestObserver;
+use Filament\Forms\Components\FileUpload;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
@@ -43,6 +46,15 @@ class AppServiceProvider extends ServiceProvider
 
         // Use bootstrap as default css framework for paginator
         Paginator::useBootstrap();
+
+        FileUpload::configureUsing(fn (FileUpload $fileUpload) => $fileUpload
+            ->visibility('public'));
+
+        ImageColumn::configureUsing(fn (ImageColumn $imageColumn) => $imageColumn
+            ->visibility('public'));
+
+        ImageEntry::configureUsing(fn (ImageEntry $imageEntry) => $imageEntry
+            ->visibility('public'));
 
         /**
          * This is a workaround for proxies/reverse proxies that don't always pass the proper headers.

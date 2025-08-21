@@ -1,0 +1,147 @@
+<?php
+
+namespace App\Filament\Resources\Users\Users\Users;
+
+use App\Enums\UserRole;
+use App\Filament\Resources\Users\Pages\CreateUser;
+use App\Filament\Resources\Users\Pages\EditUser;
+use App\Filament\Resources\Users\Pages\ListUsers;
+use App\Filament\Resources\Users\Pages\ViewUser;
+use App\User;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Validation\Rules\Password;
+
+class UserResource extends Resource
+{
+    protected static ?string $model = User::class;
+
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-users';
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    protected static ?string $modelLabel = 'utilisateur';
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Paramètres';
+
+    protected static ?int $navigationSort = 20;
+
+    public static function form(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                Section::make()
+                    ->schema([
+                        TextInput::make('name')
+                            ->label('Nom')
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('email')
+                            ->label('Email')
+                            ->email()
+                            ->required()
+                            ->maxLength(191),
+                        TextInput::make('password')
+                            ->label('Mot de passe')
+                            ->password()
+                            ->required(fn (string $operation) => $operation == 'create')
+                            ->revealable()
+                            ->rules([
+                                Password::min(8)
+                                    ->letters()
+                                    ->numbers(),
+                            ]),
+                    ]),
+
+                Section::make()
+                    ->schema([
+                        Select::make('roles')
+                            ->label('Rôles')
+                            ->multiple()
+                            ->searchable()
+                            ->options(UserRole::toArray()),
+                    ]),
+            ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('name')
+                    ->label('Nom')
+                    ->searchable(),
+                TextColumn::make('email')
+                    ->label('Email')
+                    ->searchable()
+                    ->icon('heroicon-m-envelope'),
+                TextColumn::make('roles')
+                    ->label('Rôles')
+                    ->badge(),
+                TextColumn::make('created_at')
+                    ->label('Date de création')
+                    ->dateTime('j M Y, H:i')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')
+                    ->label('Date de modification')
+                    ->dateTime('j M Y, H:i')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+            ])->defaultSort('created_at', 'desc')
+            ->filters([
+                SelectFilter::make('roles')
+                    ->label('Rôles')
+                    ->options(UserRole::toArray())
+                    ->query(function (Builder $query, array $data): Builder {
+                        if (! empty($data['value'])) {
+                            $query->whereJsonContains('roles', $data['value']);
+                        }
+
+                        return $query;
+                    }),
+            ])
+            ->recordActions([
+                ViewAction::make()
+                    ->label(''),
+                EditAction::make()
+                    ->label(''),
+                DeleteAction::make()
+                    ->label(''),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => ListUsers::route('/'),
+            'create' => CreateUser::route('/create'),
+            'view' => ViewUser::route('/{record}'),
+            'edit' => EditUser::route('/{record}/edit'),
+        ];
+    }
+}
