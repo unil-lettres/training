@@ -8,20 +8,20 @@ use App\Filament\Resources\TrainingResource\Pages\EditTraining;
 use App\Filament\Resources\TrainingResource\Pages\ListTrainings;
 use App\Filament\Resources\TrainingResource\Pages\ViewTraining;
 use App\Models\Training;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ExportBulkAction;
+use Filament\Actions\ReplicateAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ExportBulkAction;
-use Filament\Tables\Actions\ReplicateAction;
-use Filament\Tables\Actions\ViewAction;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TernaryFilter;
@@ -32,20 +32,20 @@ class TrainingResource extends Resource
 {
     protected static ?string $model = Training::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-academic-cap';
 
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $modelLabel = 'formation';
 
-    protected static ?string $navigationGroup = 'Administration';
+    protected static string|\UnitEnum|null $navigationGroup = 'Administration';
 
     protected static ?int $navigationSort = 2;
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Section::make()
                     ->schema([
                         TextInput::make('name')
@@ -126,7 +126,7 @@ class TrainingResource extends Resource
                         blank: fn (Builder $query) => $query,
                     ),
             ])
-            ->actions([
+            ->recordActions([
                 ViewAction::make()
                     ->label(''),
                 EditAction::make()
@@ -136,7 +136,7 @@ class TrainingResource extends Resource
                 DeleteAction::make()
                     ->label(''),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                     ExportBulkAction::make()

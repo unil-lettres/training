@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\AnalysisObjectiveResource\Pages;
 
 use App\Filament\Resources\AnalysisObjectiveResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListAnalysisObjectives extends ListRecords
@@ -13,7 +13,7 @@ class ListAnalysisObjectives extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

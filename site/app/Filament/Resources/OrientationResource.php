@@ -8,16 +8,16 @@ use App\Filament\Resources\OrientationResource\Pages\EditOrientation;
 use App\Filament\Resources\OrientationResource\Pages\ListOrientations;
 use App\Filament\Resources\OrientationResource\Pages\ViewOrientation;
 use App\Models\Orientation;
-use Filament\Forms\Components\Section;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ExportBulkAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ExportBulkAction;
-use Filament\Tables\Actions\ViewAction;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -25,20 +25,20 @@ class OrientationResource extends Resource
 {
     protected static ?string $model = Orientation::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-viewfinder-circle';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-viewfinder-circle';
 
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $modelLabel = 'Orientation';
 
-    protected static ?string $navigationGroup = 'Listes';
+    protected static string|\UnitEnum|null $navigationGroup = 'Listes';
 
     protected static ?int $navigationSort = 7;
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Section::make()
                     ->schema([
                         TextInput::make('name')
@@ -71,7 +71,7 @@ class OrientationResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
+            ->recordActions([
                 ViewAction::make()
                     ->label(''),
                 EditAction::make()
@@ -79,7 +79,7 @@ class OrientationResource extends Resource
                 DeleteAction::make()
                     ->label(''),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                     ExportBulkAction::make()

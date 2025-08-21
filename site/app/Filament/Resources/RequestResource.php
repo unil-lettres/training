@@ -10,26 +10,26 @@ use App\Filament\Resources\RequestResource\Pages\EditRequest;
 use App\Filament\Resources\RequestResource\Pages\ListRequests;
 use App\Filament\Resources\RequestResource\Pages\ViewRequest;
 use App\Models\Request;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ExportBulkAction;
+use Filament\Actions\ReplicateAction;
+use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Tabs;
-use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ExportBulkAction;
-use Filament\Tables\Actions\ReplicateAction;
-use Filament\Tables\Actions\ViewAction;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -40,13 +40,13 @@ class RequestResource extends Resource
 {
     protected static ?string $model = Request::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-megaphone';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-megaphone';
 
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $modelLabel = 'demande';
 
-    protected static ?string $navigationGroup = 'Administration';
+    protected static string|\UnitEnum|null $navigationGroup = 'Administration';
 
     protected static ?int $navigationSort = 1;
 
@@ -67,10 +67,10 @@ class RequestResource extends Resource
         'undo',
     ];
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Tabs::make('Tabs')->tabs([
                     Tab::make('Champs communs')->schema([
                         TextInput::make('name')
@@ -404,7 +404,7 @@ class RequestResource extends Resource
                     ->preload()
                     ->relationship('analysisObjectives', 'name'),
             ])
-            ->actions([
+            ->recordActions([
                 ViewAction::make()
                     ->label(''),
                 EditAction::make()
@@ -414,7 +414,7 @@ class RequestResource extends Resource
                 DeleteAction::make()
                     ->label(''),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                     ExportBulkAction::make()

@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\ToolResource\Pages;
 
 use App\Filament\Resources\ToolResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListTools extends ListRecords
@@ -13,7 +13,7 @@ class ListTools extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }
