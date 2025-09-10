@@ -11,14 +11,14 @@
         "cross-env": "^7.0.3",
         "jquery": "^3.6.0",
         "jquery-ui": "^1.13.2",
-        "laravel-vite-plugin": "^1.1.1",
+        "laravel-vite-plugin": "^2.0.1",
         "lodash": "^4.17.21",
         "popper.js": "^1.12",
         "postcss": "^8.4.31",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.54.0",
         "sass-loader": "^16.0.0",
-        "vite": "^6.3.4"
+        "vite": "^7.1.5"
     },
     "type": "module"
 }
