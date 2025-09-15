@@ -10,14 +10,18 @@ permissions: read-all
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        arch: [ linux/amd64, linux/arm64 ]
+        include:
+          - os: ubuntu-latest
+            arch: linux/amd64
+          - os: ubuntu-24.04-arm
+            arch: linux/arm64
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Build image
         uses: ./.github/actions/docker-build
         with:
@@ -35,7 +39,7 @@ jobs:
     needs: [build]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Download digests
         uses: actions/download-artifact@v4
         with:
@@ -60,7 +64,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Update description
         uses: peter-evans/dockerhub-description@v4

@@ -8,10 +8,14 @@ permissions: read-all
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        arch: [ linux/amd64, linux/arm64 ]
+        include:
+          - os: ubuntu-latest
+            arch: linux/amd64
+          - os: ubuntu-24.04-arm
+            arch: linux/arm64
 
     steps:
       - name: Checkout
