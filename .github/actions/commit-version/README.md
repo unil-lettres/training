@@ -116,6 +116,6 @@ permissions:
 ```
 
 ### External Repository
-- Create a PAT with `content` scope
+- Create a PAT with `repo` scope
 - Add it as `PAT_TOKEN` repository secret
 - The action automatically uses `secrets.PAT_TOKEN`
