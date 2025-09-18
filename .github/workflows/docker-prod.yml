@@ -106,7 +106,7 @@ jobs:
           dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
 
   commit:
-    name: Commit image tag
+    name: Commit Image Tag
     if: github.event_name == 'schedule' || github.ref_type == 'tag'
     runs-on: ubuntu-latest
     needs: [merge]
@@ -122,6 +122,7 @@ jobs:
         with:
           file_path: training/values.yaml
           version: ${{ needs.merge.outputs.additional_tag }}
+          token: ${{ secrets.PAT_TOKEN || github.token }}
           repository: unil-lettres/k8s
           branch: main
 

@@ -7,6 +7,9 @@ inputs:
   version:
     description: "New version to set"
     required: true
+  token:
+    description: "GitHub token"
+    required: true
   repository:
     description: "Target repository (owner/repo format)"
     required: false
@@ -59,7 +62,7 @@ runs:
       with:
         repository: ${{ env.TARGET_REPO }}
         ref: ${{ inputs.branch }}
-        token: ${{ secrets.PAT_TOKEN || github.token }}
+        token: ${{ inputs.token }}
         path: target-repo
 
     - id: update
