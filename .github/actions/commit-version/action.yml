@@ -1,0 +1,137 @@
+name: "Commit Version"
+description: "Updates a version number in a specified file and commits the change to a repository"
+inputs:
+  file_path:
+    description: "Path to the file containing the version"
+    required: true
+  version:
+    description: "New version to set"
+    required: true
+  repository:
+    description: "Target repository (owner/repo format)"
+    required: false
+    default: ""
+  branch:
+    description: "Target branch"
+    required: false
+    default: "development"
+  commit_message:
+    description: "Commit message"
+    required: false
+    default: "chore: update {version_key} to {version} in {file_path}"
+  version_pattern:
+    description: "Regex pattern to find version (use {key} placeholder)"
+    required: false
+    default: '{key}:\s*\S+'
+  version_replacement:
+    description: "Replacement pattern (use {key} and {version} placeholders)"
+    required: false
+    default: '{key}: {version}'
+  version_key:
+    description: "Key name to extract old version from (for YAML/properties files)"
+    required: false
+    default: "app_image_tag"
+outputs:
+  success:
+    description: "Whether the version was successfully updated"
+    value: ${{ steps.update.outputs.success }}
+  old_version:
+    description: "Previous version found in file"
+    value: ${{ steps.update.outputs.old_version }}
+  new_version:
+    description: "New version that was set"
+    value: ${{ steps.update.outputs.new_version }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup variables
+      shell: bash
+      run: |
+        if [ -n "${{ inputs.repository }}" ]; then
+          echo "TARGET_REPO=${{ inputs.repository }}" >> $GITHUB_ENV
+        else
+          echo "TARGET_REPO=${{ github.repository }}" >> $GITHUB_ENV
+        fi
+
+    - name: Checkout target repository
+      uses: actions/checkout@v5
+      with:
+        repository: ${{ env.TARGET_REPO }}
+        ref: ${{ inputs.branch }}
+        token: ${{ secrets.GITHUB_TOKEN || github.token }}
+        path: target-repo
+
+    - id: update
+      name: Update version in file
+      shell: bash
+      working-directory: target-repo
+      run: |
+        FILE="${{ inputs.file_path }}"
+        NEW_VERSION="${{ inputs.version }}"
+        PATTERN="${{ inputs.version_pattern }}"
+        REPLACEMENT="${{ inputs.version_replacement }}"
+        VERSION_KEY="${{ inputs.version_key }}"
+
+        # Replace placeholders in pattern and replacement
+        PATTERN=${PATTERN//\{key\}/$VERSION_KEY}
+        REPLACEMENT=${REPLACEMENT//\{key\}/$VERSION_KEY}
+        REPLACEMENT=${REPLACEMENT//\{version\}/$NEW_VERSION}
+
+        if [ ! -f "$FILE" ]; then
+          echo "Error: File $FILE not found"
+          echo "success=false" >> $GITHUB_OUTPUT
+          exit 1
+        fi
+
+        # Extract old version - handle JSON, YAML and ENV formats
+        if [[ "$FILE" == *.json ]]; then
+          OLD_VERSION=$(grep -oP "(?<=\"$VERSION_KEY\":\s\")[^\"]*" "$FILE" 2>/dev/null || echo "unknown")
+          echo "Updating $VERSION_KEY from '$OLD_VERSION' to '$NEW_VERSION' in $FILE"
+        elif [[ "$FILE" == *.yml ]] || [[ "$FILE" == *.yaml ]]; then
+          OLD_VERSION=$(grep -oP "(?<=^$VERSION_KEY:\s).*$" "$FILE" 2>/dev/null | sed 's/[[:space:]]*$//' || echo "unknown")
+          echo "Updating $VERSION_KEY from '$OLD_VERSION' to '$NEW_VERSION' in $FILE"
+        else
+          # Environment file format: KEY=value (fallback for .env, .properties, etc.)
+          OLD_VERSION=$(grep -oP "(?<=^$VERSION_KEY=).*$" "$FILE" 2>/dev/null | sed 's/[[:space:]]*$//' || echo "unknown")
+          echo "Updating $VERSION_KEY from '$OLD_VERSION' to '$NEW_VERSION' in $FILE"
+        fi
+        
+        echo "old_version=$OLD_VERSION" >> $GITHUB_OUTPUT
+        echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+        # Update version using sed
+        if sed -i.bak -E "s|$PATTERN|$REPLACEMENT|g" "$FILE"; then
+          rm -f "$FILE.bak"
+          echo "success=true" >> $GITHUB_OUTPUT
+          echo "Version updated successfully"
+        else
+          echo "Error: Failed to update version in $FILE"
+          echo "success=false" >> $GITHUB_OUTPUT
+          exit 1
+        fi
+
+    - name: Commit and push changes
+      shell: bash
+      working-directory: target-repo
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+        if git diff --quiet; then
+          echo "No changes to commit"
+          exit 0
+        fi
+
+        git add "${{ inputs.file_path }}"
+
+        # Replace {version}, {file_path} and {version_key} in commit message
+        COMMIT_MSG="${{ inputs.commit_message }}"
+        COMMIT_MSG=${COMMIT_MSG//\{version\}/${{ inputs.version }}}
+        COMMIT_MSG=${COMMIT_MSG//\{file_path\}/${{ inputs.file_path }}}
+        COMMIT_MSG=${COMMIT_MSG//\{version_key\}/${{ inputs.version_key }}}
+
+        git commit -m "$COMMIT_MSG"
+        git push origin ${{ inputs.branch }}
+
+        echo "Changes committed and pushed successfully"

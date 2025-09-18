@@ -1,5 +1,7 @@
 name: docker-stage
 on:
+  schedule:
+    - cron: '0 1 * * 1'  # Every Monday at 1am UTC
   push:
     branches:
       - "development"
@@ -19,7 +21,9 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+        with:
+          ref: development
 
       - name: Build image
         uses: ./.github/actions/docker-build
@@ -36,9 +40,13 @@ jobs:
     name: Merge
     runs-on: ubuntu-latest
     needs: [build]
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+        with:
+          ref: development
+
       - name: Download digests
         uses: actions/download-artifact@v4
         with:
@@ -46,24 +54,52 @@ jobs:
           pattern: digests-*
           merge-multiple: true
 
+      - name: Get branch SHA
+        run: echo "BRANCH_SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
+
+      - name: Set additional tag for cron runs
+        id: cron-tag
+        shell: bash
+        run: |
+          SHORT_SHA=$(echo $BRANCH_SHA | cut -c1-7)
+          TIMESTAMP=$(date -u +"%Y%m%d%H%M%S")
+          ADDITIONAL_TAG="stage-${SHORT_SHA}-${TIMESTAMP}"
+          echo "ADDITIONAL_TAG=$ADDITIONAL_TAG" >> $GITHUB_ENV
+          echo "additional_tag=$ADDITIONAL_TAG" >> $GITHUB_OUTPUT
+
       - name: Merge digests
         uses: ./.github/actions/docker-merge
         with:
           image_repository: ${{ vars.DOCKERHUB_REPOSITORY }}
-          tag: latest-stage
+          tag: stage-latest
+          additional_tag: ${{ steps.cron-tag.outputs.additional_tag }}
           dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
           dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  commit:
+    name: Commit
+    runs-on: ubuntu-latest
+    needs: [merge]
+
+    steps:
+      - name: Update image
+        uses: ./.github/actions/commit-version
+        with:
+          file_path: training/values.yaml
+          version: ${{ needs.merge.outputs.additional_tag }}
+          repository: unil-lettres/k8s
+          branch: development
 
   update-description:
     name: Update Description
     runs-on: ubuntu-latest
     needs: [merge]
-    if: success()
-    continue-on-error: false
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+        with:
+          ref: development
 
       - name: Update description
         uses: peter-evans/dockerhub-description@v4

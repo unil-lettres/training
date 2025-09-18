@@ -1,5 +1,7 @@
 name: docker-prod
 on:
+  schedule:
+    - cron: '0 1 * * 1'  # Every Monday at 1am UTC
   push:
     branches:
       - "master"
@@ -22,6 +24,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          ref: master
+
       - name: Build image
         uses: ./.github/actions/docker-build
         with:
@@ -40,31 +45,91 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          ref: master
+
       - name: Download digests
         uses: actions/download-artifact@v4
         with:
           path: ${{ runner.temp }}/digests
           pattern: digests-*
           merge-multiple: true
-      - name: Merge digests and tag
-        uses: ./.github/actions/docker-merge-with-latest-tag
+
+      - name: Get tags
+        id: get_tags
+        uses: JinoArch/get-latest-tag@latest
+
+      - name: Compute tag for push runs
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF}" == "refs/heads/master" ]]; then
+            echo "PUBLISH_TAG=latest" >> $GITHUB_ENV
+          elif [[ "${GITHUB_REF}" =~ ^refs/tags/.*$ ]]; then
+            echo "PUBLISH_TAG=${{ steps.get_tags.outputs.latestTag }}" >> $GITHUB_ENV
+          else
+            echo "PUBLISH_TAG=latest" >> $GITHUB_ENV
+          fi
+
+      - name: Merge digests and tag (push)
+        if: github.event_name == 'push'
+        uses: ./.github/actions/docker-merge
         with:
           image_repository: ${{ vars.DOCKERHUB_REPOSITORY }}
-          tag_latest: latest
-          tag_from_git: ''
+          tag: ${{ env.PUBLISH_TAG }}
           dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
           dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Get branch SHA
+        if: inputs.event_name == 'schedule'
+        run: echo "BRANCH_SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
+
+      - name: Set additional tag for cron runs
+        if: inputs.event_name == 'schedule'
+        id: cron-tag
+        run: |
+          LATEST_TAG=${{ steps.get_tags.outputs.latestTag }}
+          SHORT_SHA=$(echo $BRANCH_SHA | cut -c1-7)
+          TIMESTAMP=$(date -u +"%Y%m%d%H%M%S")
+          ADDITIONAL_TAG="stage-${SHORT_SHA}-${TIMESTAMP}"
+          echo "ADDITIONAL_TAG=$ADDITIONAL_TAG" >> $GITHUB_ENV
+          echo "additional_tag=$ADDITIONAL_TAG" >> $GITHUB_OUTPUT
+
+      - name: Merge digests and tag (cron)
+        if: github.event_name == 'schedule'
+        uses: ./.github/actions/docker-merge
+        with:
+          image_repository: ${{ vars.DOCKERHUB_REPOSITORY }}
+          tag: latest
+          additional_tag: ${{ steps.cron-tag.outputs.additional_tag }}
+          dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+          dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  commit:
+    name: Commit
+    if: github.event_name == 'schedule' || github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    needs: [merge]
+
+    steps:
+      - name: Update image
+        uses: ./.github/actions/commit-version
+        with:
+          file_path: training/values.yaml
+          version: ${{ needs.merge.outputs.additional_tag }}
+          repository: unil-lettres/k8s
+          branch: main
 
   update-description:
     name: Update Description
     runs-on: ubuntu-latest
     needs: [merge]
-    if: success()
-    continue-on-error: false
 
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          ref: master
 
       - name: Update description
         uses: peter-evans/dockerhub-description@v4
