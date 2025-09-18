@@ -59,7 +59,7 @@ runs:
       with:
         repository: ${{ env.TARGET_REPO }}
         ref: ${{ inputs.branch }}
-        token: ${{ secrets.GITHUB_TOKEN || github.token }}
+        token: ${{ secrets.PAT_TOKEN || github.token }}
         path: target-repo
 
     - id: update
