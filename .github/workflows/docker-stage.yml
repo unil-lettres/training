@@ -40,6 +40,8 @@ jobs:
     name: Merge
     runs-on: ubuntu-latest
     needs: [build]
+    outputs:
+      additional_tag: ${{ steps.cron-tag.outputs.additional_tag }}
 
     steps:
       - name: Checkout

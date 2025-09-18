@@ -42,6 +42,9 @@ jobs:
     name: Merge
     runs-on: ubuntu-latest
     needs: [build]
+    outputs:
+      additional_tag: ${{ steps.cron-tag.outputs.additional_tag }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -81,11 +84,11 @@ jobs:
           dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Get branch SHA
-        if: inputs.event_name == 'schedule'
+        if: github.event_name == 'schedule'
         run: echo "BRANCH_SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
       - name: Set additional tag for cron runs
-        if: inputs.event_name == 'schedule'
+        if: github.event_name == 'schedule'
         id: cron-tag
         run: |
           LATEST_TAG=${{ steps.get_tags.outputs.latestTag }}
