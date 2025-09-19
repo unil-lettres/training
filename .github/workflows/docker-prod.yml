@@ -123,7 +123,7 @@ jobs:
       - name: Update image
         uses: ./.github/actions/commit-version
         with:
-          file_path: training/values.yaml
+          file_path: training/values-prod.yaml
           version: ${{ needs.merge.outputs.additional_tag }}
           token: ${{ secrets.PAT_TOKEN || github.token }}
           repository: unil-lettres/k8s
