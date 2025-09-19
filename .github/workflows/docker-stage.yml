@@ -96,7 +96,7 @@ jobs:
           version: ${{ needs.merge.outputs.additional_tag }}
           token: ${{ secrets.PAT_TOKEN || github.token }}
           repository: unil-lettres/k8s
-          branch: development
+          branch: main
 
   update-description:
     name: Update Description
