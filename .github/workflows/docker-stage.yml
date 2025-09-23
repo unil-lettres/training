@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     outputs:
-      additional_tag: ${{ steps.cron-tag.outputs.additional_tag }}
+      tag: ${{ steps.cron-tag.outputs.additional_tag }}
 
     steps:
       - name: Checkout
@@ -56,17 +56,13 @@ jobs:
           pattern: digests-*
           merge-multiple: true
 
-      - name: Get branch SHA
-        run: echo "BRANCH_SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
-
-      - name: Set additional tag for cron runs
+      - name: Set additional tag
         id: cron-tag
         shell: bash
         run: |
-          SHORT_SHA=$(echo $BRANCH_SHA | cut -c1-7)
+          SHORT_SHA=$(echo $(git rev-parse HEAD) | cut -c1-7)
           TIMESTAMP=$(date -u +"%Y%m%d%H%M%S")
           ADDITIONAL_TAG="stage-${SHORT_SHA}-${TIMESTAMP}"
-          echo "ADDITIONAL_TAG=$ADDITIONAL_TAG" >> $GITHUB_ENV
           echo "additional_tag=$ADDITIONAL_TAG" >> $GITHUB_OUTPUT
 
       - name: Merge digests
@@ -93,7 +89,7 @@ jobs:
         uses: ./.github/actions/commit-version
         with:
           file_path: training/values-stage.yaml
-          version: ${{ needs.merge.outputs.additional_tag }}
+          version: ${{ needs.merge.outputs.tag }}
           token: ${{ secrets.PAT_TOKEN || github.token }}
           repository: unil-lettres/k8s
           branch: main
