@@ -25,7 +25,7 @@ inputs:
   version_pattern:
     description: "Regex pattern to find version (use {key} placeholder)"
     required: false
-    default: '{key}:\s*\S+'
+    default: '{key}:\s*.*'
   version_replacement:
     description: "Replacement pattern (use {key} and {version} placeholders)"
     required: false
@@ -76,16 +76,29 @@ runs:
         REPLACEMENT="${{ inputs.version_replacement }}"
         VERSION_KEY="${{ inputs.version_key }}"
 
-        # Replace placeholders in pattern and replacement
-        PATTERN=${PATTERN//\{key\}/$VERSION_KEY}
-        REPLACEMENT=${REPLACEMENT//\{key\}/$VERSION_KEY}
-        REPLACEMENT=${REPLACEMENT//\{version\}/$NEW_VERSION}
+        # Validations
+        if [ -z "$FILE" ] || [ "$FILE" = " " ]; then
+          echo "Error: file_path cannot be empty"
+          echo "success=false" >> $GITHUB_OUTPUT
+          exit 1
+        fi
+
+        if [ -z "$NEW_VERSION" ] || [ "$NEW_VERSION" = " " ]; then
+          echo "Error: version cannot be empty"
+          echo "success=false" >> $GITHUB_OUTPUT
+          exit 1
+        fi
 
         if [ ! -f "$FILE" ]; then
           echo "Error: File $FILE not found"
           echo "success=false" >> $GITHUB_OUTPUT
           exit 1
         fi
+
+        # Replace placeholders in pattern and replacement
+        PATTERN=${PATTERN//\{key\}/$VERSION_KEY}
+        REPLACEMENT=${REPLACEMENT//\{key\}/$VERSION_KEY}
+        REPLACEMENT=${REPLACEMENT//\{version\}/$NEW_VERSION}
 
         # Extract old version - handle JSON, YAML and ENV formats
         if [[ "$FILE" == *.json ]]; then

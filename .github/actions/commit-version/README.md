@@ -11,7 +11,7 @@ A simple GitHub Actions composite that updates a version number in a specified f
 | `repository` | Target repository (owner/repo format) | No | Current repository |
 | `branch` | Target branch | No | `development` |
 | `commit_message` | Commit message (use `{version}`, `{version_key}`, and `{file_path}` placeholders) | No | `chore: update {version_key} to {version} in {file_path}` |
-| `version_pattern` | Regex pattern to find version (use `{key}` placeholder) | No | `{key}:\s*\S+` |
+| `version_pattern` | Regex pattern to find version (use `{key}` placeholder) | No | `{key}:\s*.*` |
 | `version_replacement` | Replacement pattern (use `{key}` and `{version}` placeholders) | No | `{key}: {version}` |
 | `version_key` | Key name to extract old version from (for YAML/properties files) | No | `app_image_tag` |
 
