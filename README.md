@@ -171,8 +171,8 @@ GitHub Actions workflows generate Docker image tags based on these events:
 - Push a git tag: `vX.Y.Z` (immutable)
 
 Weekly cron jobs:
-- Rebuild the staging image: `stage-<sha>-<timestamp>` (immutable)
-- Create a production candidate: `vX.Y.Z-<sha>-<timestamp>` (immutable)
+- Create an updated staging image: `stage-<sha>-<timestamp>` (immutable)
+- Create an updated production candidate: `vX.Y.Z-<sha>-<timestamp>` (immutable)
 
 All the immutable tags are committed to the [k8s](https://github.com/unil-lettres/k8s) repository.
 
