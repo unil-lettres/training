@@ -165,7 +165,16 @@ Use a reverse proxy configuration to map the url to port `8686`.
 
 # Docker images
 
-Changes in the `development` branch will create new images tagged `latest-dev` & `latest-stage`, while changes in the `master` branch will create an image tagged `latest`. And finally, when a new tag is created, an image with the matching tag will be automatically built.
+GitHub Actions workflows generate Docker image tags based on these events:
+- Push to `development`: `dev-latest`, `stage-latest`, `stage-<sha>-<timestamp>` (immutable)
+- Push to `master`: `latest`
+- Push a git tag: `vX.Y.Z` (immutable)
+
+Weekly cron jobs:
+- Rebuild the staging image: `stage-<sha>-<timestamp>` (immutable)
+- Create a production candidate: `vX.Y.Z-<sha>-<timestamp>` (immutable)
+
+All the immutable tags are committed to the [k8s](https://github.com/unil-lettres/k8s) repository.
 
 # Error tracker
 
