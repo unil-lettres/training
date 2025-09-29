@@ -90,7 +90,8 @@ jobs:
         with:
           file_path: training/values-stage.yaml
           version: ${{ needs.merge.outputs.tag }}
-          token: ${{ secrets.PAT_TOKEN || github.token }}
+          version_keys: "app_image_tag"
+          token: ${{ secrets.PAT_TOKEN }}
           repository: unil-lettres/k8s
           branch: main
 

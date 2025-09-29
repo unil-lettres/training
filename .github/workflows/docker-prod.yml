@@ -91,7 +91,7 @@ jobs:
           LATEST_TAG=${{ steps.get_tags.outputs.latestTag }}
           SHORT_SHA=$(echo $(git rev-parse HEAD) | cut -c1-7)
           TIMESTAMP=$(date -u +"%Y%m%d%H%M%S")
-          ADDITIONAL_TAG="stage-${SHORT_SHA}-${TIMESTAMP}"
+          ADDITIONAL_TAG="${LATEST_TAG}-${SHORT_SHA}-${TIMESTAMP}"
           echo "additional_tag=$ADDITIONAL_TAG" >> $GITHUB_OUTPUT
 
       - name: Merge digests and tag (cron)
@@ -130,7 +130,8 @@ jobs:
         with:
           file_path: training/values-prod.yaml
           version: ${{ needs.merge.outputs.tag }}
-          token: ${{ secrets.PAT_TOKEN || github.token }}
+          version_keys: "app_image_tag"
+          token: ${{ secrets.PAT_TOKEN }}
           repository: unil-lettres/k8s
           branch: main
 
