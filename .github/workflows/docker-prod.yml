@@ -1,7 +1,7 @@
 name: docker-prod
 on:
   schedule:
-    - cron: '0 1 * * 1'  # Every Monday at 1am UTC
+    - cron: '0 1 * * 1'  # Every Monday at 1am
   push:
     branches:
       - "master"
@@ -11,15 +11,13 @@ permissions: read-all
 
 jobs:
   build:
-    name: Build
+    name: Build app (${{ matrix.arch }})
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         include:
-          - os: ubuntu-latest
-            arch: linux/amd64
-          - os: ubuntu-24.04-arm
-            arch: linux/arm64
+          - { arch: linux/amd64, os: ubuntu-latest }
+          - { arch: linux/arm64, os: ubuntu-24.04-arm }
 
     steps:
       - name: Checkout
@@ -84,7 +82,7 @@ jobs:
           dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
           dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set additional tag (cron)
+      - name: Compute additional tag (cron)
         if: github.event_name == 'schedule'
         id: cron-tag
         run: |
@@ -126,10 +124,10 @@ jobs:
           ref: master
 
       - name: Update image
-        uses: unil-lettres/actions/commit-version@v1.0.0
+        uses: unil-lettres/actions/commit-version@v2.0.0
         with:
           file_path: training/values-prod.yaml
-          version: ${{ needs.merge.outputs.tag }}
+          versions: "${{ needs.merge.outputs.tag }}"
           version_keys: "app_image_tag"
           token: ${{ secrets.PAT_TOKEN }}
           repository: unil-lettres/k8s
