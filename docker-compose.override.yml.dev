@@ -4,7 +4,7 @@
 
 services:
   train-app:
-    image: unillett/training:latest-dev
+    image: unillett/training:dev-latest
     build:
       context: ./
       dockerfile: ./docker/app.dockerfile
