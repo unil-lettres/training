@@ -26,7 +26,7 @@ jobs:
           ref: master
 
       - name: Build image
-        uses: unil-lettres/actions/docker-build@v1.0.0
+        uses: unil-lettres/actions/docker-build@v2.2.0
         with:
           dockerfile: ./docker/app.dockerfile
           target: prod
@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     outputs:
-      tag: ${{ steps.set-output-tag.outputs.tag }}
+      tag: ${{ steps.merge.outputs.tag }}
 
     steps:
       - name: Checkout
@@ -49,67 +49,13 @@ jobs:
         with:
           ref: master
 
-      - name: Download digests
-        uses: actions/download-artifact@v4
-        with:
-          path: ${{ runner.temp }}/digests
-          pattern: digests-*
-          merge-multiple: true
-
-      - name: Get tags
-        id: get_tags
-        uses: JinoArch/get-latest-tag@latest
-
-      - name: Compute tag (push)
-        if: github.event_name == 'push'
-        id: push-tag
-        shell: bash
-        run: |
-          if [[ "${GITHUB_REF}" == "refs/heads/master" ]]; then
-            echo "publish_tag=latest" >> $GITHUB_OUTPUT
-          elif [[ "${GITHUB_REF}" =~ ^refs/tags/.*$ ]]; then
-            echo "publish_tag=${{ steps.get_tags.outputs.latestTag }}" >> $GITHUB_OUTPUT
-          else
-            echo "publish_tag=latest" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Merge digests and tag (push)
-        if: github.event_name == 'push'
-        uses: unil-lettres/actions/docker-merge@v1.0.0
+      - name: Merge service
+        id: merge
+        uses: unil-lettres/actions/docker-merge-prod@v2.2.0
         with:
           image_repository: ${{ vars.DOCKERHUB_REPOSITORY }}
-          tag: ${{ steps.push-tag.outputs.publish_tag }}
           dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
           dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Compute additional tag (cron)
-        if: github.event_name == 'schedule'
-        id: cron-tag
-        run: |
-          LATEST_TAG=${{ steps.get_tags.outputs.latestTag }}
-          SHORT_SHA=$(echo $(git rev-parse HEAD) | cut -c1-7)
-          TIMESTAMP=$(date -u +"%Y%m%d%H%M%S")
-          ADDITIONAL_TAG="${LATEST_TAG}-${SHORT_SHA}-${TIMESTAMP}"
-          echo "additional_tag=$ADDITIONAL_TAG" >> $GITHUB_OUTPUT
-
-      - name: Merge digests and tag (cron)
-        if: github.event_name == 'schedule'
-        uses: unil-lettres/actions/docker-merge@v1.0.0
-        with:
-          image_repository: ${{ vars.DOCKERHUB_REPOSITORY }}
-          tag: latest
-          additional_tag: ${{ steps.cron-tag.outputs.additional_tag }}
-          dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
-          dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Set output tag
-        id: set-output-tag
-        run: |
-          if [ "${{ github.event_name }}" = "push" ]; then
-            echo "tag=${{ steps.push-tag.outputs.publish_tag }}" >> $GITHUB_OUTPUT
-          else
-            echo "tag=${{ steps.cron-tag.outputs.additional_tag }}" >> $GITHUB_OUTPUT
-          fi
 
   commit:
     name: Commit Image Tag
@@ -124,7 +70,7 @@ jobs:
           ref: master
 
       - name: Update image
-        uses: unil-lettres/actions/commit-version@v2.0.0
+        uses: unil-lettres/actions/commit-version@v2.2.0
         with:
           file_path: training/values-prod.yaml
           versions: "${{ needs.merge.outputs.tag }}"
