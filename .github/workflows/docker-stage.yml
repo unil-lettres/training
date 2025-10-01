@@ -24,7 +24,7 @@ jobs:
           ref: development
 
       - name: Build image
-        uses: unil-lettres/actions/docker-build@v2.2.0
+        uses: unil-lettres/actions/docker-build@main
         with:
           dockerfile: ./docker/app.dockerfile
           target: prod
@@ -49,7 +49,7 @@ jobs:
 
       - name: Merge service
         id: merge
-        uses: unil-lettres/actions/docker-merge-stage@v2.2.0
+        uses: unil-lettres/actions/docker-merge-stage@main
         with:
           image_repository: ${{ vars.DOCKERHUB_REPOSITORY }}
           dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -67,7 +67,7 @@ jobs:
           ref: development
 
       - name: Update image
-        uses: unil-lettres/actions/commit-version@v2.2.0
+        uses: unil-lettres/actions/commit-version@main
         with:
           file_path: training/values-stage.yaml
           versions: "${{ needs.merge.outputs.tag }}"

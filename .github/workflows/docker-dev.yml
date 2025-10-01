@@ -22,7 +22,7 @@ jobs:
           ref: development
 
       - name: Build image
-        uses: unil-lettres/actions/docker-build@v2.2.0
+        uses: unil-lettres/actions/docker-build@main
         with:
           dockerfile: ./docker/app.dockerfile
           target: dev
@@ -51,7 +51,7 @@ jobs:
           merge-multiple: true
 
       - name: Merge digests
-        uses: unil-lettres/actions/docker-merge@v2.2.0
+        uses: unil-lettres/actions/docker-merge@main
         with:
           image_repository: ${{ vars.DOCKERHUB_REPOSITORY }}
           tag: dev-latest
