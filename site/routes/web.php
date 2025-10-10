@@ -11,7 +11,7 @@
 |
 */
 
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RequestController;
 
@@ -30,7 +30,7 @@ Route::group([
     'middleware' => ['auth'],
     'as' => 'front.',
 ], function () {
-    Route::get('/logout', [LoginController::class, 'logout'])
+    Route::get('/logout', [AuthController::class, 'logout'])
         ->name('logout');
 
     Route::resource('request', RequestController::class)->only([
@@ -44,8 +44,3 @@ Route::get('/login')
 
 Route::get('/login/aai')
     ->middleware('check_aai');
-
-Auth::routes([
-    'register' => false,
-    'login' => false,
-]);
