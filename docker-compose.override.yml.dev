@@ -23,15 +23,6 @@ services:
     networks:
       - training-net
     container_name: train-mysql-testing
-  train-myadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    environment:
-      PMA_ARBITRARY: 1
-    ports:
-      - "127.0.0.1:9999:80"
-    networks:
-      - training-net
-    container_name: train-myadmin
   train-mailhog:
     image: mailhog/mailhog:latest
     ports:

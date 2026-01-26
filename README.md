@@ -82,16 +82,6 @@ To access the debug tool please use the following link.
 
 [http://training.lan:8686/telescope](http://training.lan:8686/telescope)
 
-### phpMyAdmin
-
-To access the database please use the following link.
-
-[http://training.lan:9999](http://training.lan:9999)
-
-+ Server: train-mysql
-+ Username: user
-+ Password: password
-
 ### MailHog
 
 To access mails please use the following link.
@@ -101,6 +91,14 @@ To access mails please use the following link.
 Or to get the messages in JSON format.
 
 [http://training.lan:8025/api/v2/messages](http://training.lan:8025/api/v2/messages)
+
+### Database
+
+To access the database please use the following credentials.
+
++ Server: train-mysql
++ Username: user
++ Password: password
 
 ## PHP code style
 
