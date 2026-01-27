@@ -96,7 +96,7 @@ Or to get the messages in JSON format.
 
 To access the database please use the following credentials.
 
-+ Server: train-mysql
++ Server: 127.0.0.1:3309
 + Username: user
 + Password: password
 
