@@ -10,15 +10,16 @@ export default defineConfig({
     ],
     // Silence Sass deprecation warnings.
     // TODO: Remove when bootsrap deprecations are fixed.
-    // https://github.com/twbs/bootstrap/blob/main/site/src/content/docs/getting-started/vite.mdx#configure-vite
+    // - https://github.com/twbs/bootstrap/blob/main/site/src/content/docs/getting-started/vite.mdx#configure-vite
+    // - https://github.com/twbs/bootstrap/issues/41915
     css: {
         preprocessorOptions: {
             scss: {
                 silenceDeprecations: [
                     'import',
-                    'mixed-decls',
                     'color-functions',
                     'global-builtin',
+                    'if-function',
                 ],
             },
         },
