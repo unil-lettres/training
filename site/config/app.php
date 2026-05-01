@@ -1,12 +1,14 @@
 <?php
 
+use App\Helpers\Helpers;
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\Facades\Redis;
 
 return [
 
     'aliases' => Facade::defaultAliases()->merge([
-        'Helpers' => App\Helpers\Helpers::class,
-        'Redis' => Illuminate\Support\Facades\Redis::class,
+        'Helpers' => Helpers::class,
+        'Redis' => Redis::class,
     ])->toArray(),
 
 ];
