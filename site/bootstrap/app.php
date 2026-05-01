@@ -25,7 +25,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->throttleApi('60,1');
 
-        $middleware->replaceInGroup('web', \Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class, \App\Http\Middleware\VerifyCsrfToken::class);
+        $middleware->replaceInGroup('web', \Illuminate\Foundation\Http\Middleware\PreventRequestForgery::class, \App\Http\Middleware\VerifyCsrfToken::class);
 
         $middleware->alias([
             'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,

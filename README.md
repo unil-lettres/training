@@ -10,7 +10,7 @@ Development:
 
 Development of technical skills in the Faculty of Arts.
 
-A Laravel 12 app with a [Filament](https://filamentphp.com/) administration panel.
+A Laravel 13 app with a [Filament](https://filamentphp.com/) administration panel.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/unil-lettres/training)
 
