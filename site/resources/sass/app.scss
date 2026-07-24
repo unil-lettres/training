@@ -1,29 +1,18 @@
-// Fonts
+@use 'sass:meta';
+@use 'pkg:bootstrap/scss/bootstrap' with (
+  $font-family-sans-serif: 'Nunito',
+  $font-size-base: 0.9rem,
+  $line-height-base: 1.6,
+  $min-contrast-ratio: 3,
+  $primary: #05a69d,
+  $body-bg: #f8fafc,
+);
+// Font
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-// Variables
-@import 'variables';
-
-// Bootstrap
-@import 'bootstrap/scss/bootstrap';
-
-// Jquery UI
-@import 'jquery-ui/themes/base/all.css';
-
-// Legacy styles
-@import 'legacy';
-
-// Header
-@import 'header';
-
-// Footer
-@import 'footer';
-
-// Main content
-@import 'content';
-
-// Page home
-@import 'home';
-
-// Request
-@import 'request';
+@include meta.load-css('legacy');
+@include meta.load-css('header');
+@include meta.load-css('footer');
+@include meta.load-css('content');
+@include meta.load-css('home');
+@include meta.load-css('request');
