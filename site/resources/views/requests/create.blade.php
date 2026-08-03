@@ -47,7 +47,7 @@
 
                     <div class="col-12 mb-3">
                         <label for="deadline" class="form-label">Délai de production du travail:</label>
-                        <input type="text" class="date form-control" name="deadline" autocomplete="off">
+                        <input type="date" class="form-control" name="deadline">
                     </div>
 
                     <div class="col-12 mb-3">
@@ -123,22 +123,6 @@
 
 @section('scripts')
     <script type="module">
-        $.datepicker.setDefaults({
-            altField: "#datepicker",
-            closeText: 'Fermer',
-            prevText: 'Précédent',
-            nextText: 'Suivant',
-            currentText: 'Aujourd\'hui',
-            monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-            monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-            dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-            dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-            dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-            weekHeader: 'Sem.',
-            dateFormat: 'yy-mm-dd'
-        });
-        $('.date').datepicker({ dateFormat: 'yy-mm-dd' });
-
         $('.dropdown-menu a').click(function(event) {
             let studentFields = $("#request-student");
             let researcherFields = $("#request-researcher");
