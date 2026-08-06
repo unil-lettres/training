@@ -30,7 +30,7 @@ class HomeTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                ->assertSee('Demandes de formation')
+                ->assertSee('Demandes de prestation')
                 ->assertSee('Connexion')
                 ->assertDontSee('Mes demandes')
                 ->assertDontSee('Déconnexion')
