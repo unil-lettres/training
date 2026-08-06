@@ -23,9 +23,9 @@ class CheckAai
         }
 
         // Check if the user is authenticated by SwitchAAI
-        if ($this->getServerVariable('Shib-Identity-Provider')) {
+        if ($this->getShibbolethHeader('X-Shib-Identity-Provider')) {
             // Check if the user can be found in the database
-            $user = User::where('email', $this->getServerVariable('mail'))
+            $user = User::where('email', $this->getShibbolethHeader('X-Shib-Mail'))
                 ->first();
 
             if (! $user) {
@@ -50,18 +50,20 @@ class CheckAai
     private function createAaiUser(): User
     {
         return User::create([
-            'name' => $this->getServerVariable('givenName').' '.
-                $this->getServerVariable('surname'),
-            'email' => $this->getServerVariable('mail'),
+            'name' => $this->getShibbolethHeader('X-Shib-GivenName').' '.
+                $this->getShibbolethHeader('X-Shib-Surname'),
+            'email' => $this->getShibbolethHeader('X-Shib-Mail'),
             'password' => 'shibboleth',
         ]);
     }
 
     /**
-     * Wrapper function to be able to retrieve server variables.
+     * Retrieve an attribute forwarded by the Shibboleth proxy.
+     *
+     * Only trust headers specified in SHIB_SESSION_PROPERTIES and SHIB_ATTRIBUTES.
      */
-    private function getServerVariable(string $variableName): ?string
+    private function getShibbolethHeader(string $header): ?string
     {
-        return RequestFacade::server($variableName) ?? RequestFacade::server('REDIRECT_'.$variableName);
+        return RequestFacade::header($header);
     }
 }

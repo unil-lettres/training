@@ -6,8 +6,6 @@ name: training
 
 services:
   train-app:
-    ports:
-      - "127.0.0.1:8686:80"
     depends_on:
       train-mysql:
         condition: service_healthy
