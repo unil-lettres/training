@@ -146,7 +146,7 @@
                     @if($trainings->count())
                         <div class="container trainings">
                             <div class="row">
-                                <div class="col-sm-12 title">
+                                <div class="col-sm-12 title pt-4">
                                     Liste des formations à inscriptions ouvertes
                                 </div>
                             </div>
