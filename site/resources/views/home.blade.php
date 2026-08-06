@@ -11,7 +11,7 @@
             <div class="col-sm-5"  >
                 <div class="row">
                     <div class="col-sm-12">
-                        <h2 style="font-weight: bold;">Demandes de formation</h2>
+                        <h2 style="font-weight: bold;">Demandes de prestation</h2>
                     </div>
                 </div>
                 <div class="row" >
@@ -74,9 +74,7 @@
                                 </div>
                                 <div id="collapse3" class="panel-collapse collapse">
                                     <div class="panel-body" style="font-size: 12px;font-weight: normal;margin: 15px 0 15px;">
-                                        Si c'est en tant que chercheur/se que vous avez des besoins de formation aux démarches
-                                        et outils informatiques, il est possible qu'aucune des offres existantes ne convienne.
-                                        Communiquez-nous quand même votre demande.
+                                        Nous vous rencontrons volontiers pour analyser vos besoins en bases de données ou autre outils informatiques nécessaires à vos projets de recherche.
                                         <ul>
                                             <li>Si nous pouvons vous aider, nous le ferons volontiers.</li>
                                             <li>Sinon, nous vous orienterons vers les services ou les collègues qui seraient
@@ -116,7 +114,8 @@
                         <div class="col-xs-7 col-sm-4 col-lg-4">
                             <div class="img-circle" style="background-color: #E26498;">
                                 <div><b>#3 FORMATION</b></div>
-                                <div><b>Créer des catalogues d'images accessibles en ligne</b></div>
+                                <div><b>Créer des bases de données accessibles en ligne</b></div>
+                                <div>Catima pour catalogues d'images, de vidéos, de documents, etc.</div>
                             </div>
                         </div>
                     </div>
@@ -138,17 +137,9 @@
                         <div class="col-xs-7 col-sm-4 col-lg-4">
                             <div class="img-circle" style="background-color: #BDDD37;">
                                 <div><b>#6 OFFRE</b></div>
-                                <div><b>Bilan de compétences informatiques</b></div>
-                                <div>Établir un plan de formation en autonomie</div>
+                                <div><b>Analyser les besoins techniques de projets de recherche</b></div>
+                                <div>Identifier des solutions ou services</div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="trainings-infos row">
-                        <div class="col-12" style="font-size: 13px;">
-                            Bien qu'organisées sur demande, certaines formations peuvent accueillir des participants
-                            supplémentaires. Si vous souhaitez vous joindre à une offre listée ci-dessous, veuillez le
-                            mentionner dans votre demande.
                         </div>
                     </div>
 
@@ -192,7 +183,7 @@
                     @else
                         <div class="container no-trainings">
                             <div class="row">
-                                <div class="col-sm-12 title">
+                                <div class="col-sm-12 title pt-4">
                                     Pas de formation en groupe annoncée pour l'instant.
                                 </div>
                             </div>
