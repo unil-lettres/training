@@ -24,7 +24,7 @@ A working [Docker](https://docs.docker.com/engine/install/) installation is mand
 
 Please make sure to copy & rename the **example.env** file to **.env**.
 
-``cp docker/example.env docker/.env``
+``cp docker/db.env.example docker/db.env``
 
 You can replace the values if needed, but the default ones should work for local development.
 
@@ -137,8 +137,8 @@ To view the browser tests running in the browser, go to [http://training.lan:444
 Copy and rename the following environment files.
 
 ```
-cp docker/example.env docker/.env
-cp docker/example.shibboleth.env docker/shibboleth.env
+cp docker/db.env.example docker/db.env
+cp docker/shibboleth.env.example docker/shibboleth.env
 cp site/.env.example site/.env
 ```
 

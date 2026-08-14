@@ -4,8 +4,7 @@
 
 # Docker files
 docker-compose.override.yml
-/docker/.env
-/docker/shibboleth.env
+/docker/*.env
 /docker/secrets/*
 !/docker/secrets/.keep
 

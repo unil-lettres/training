@@ -21,7 +21,7 @@ services:
   train-mysql:
     image: mariadb:11.4
     env_file:
-      - ./docker/.env
+      - ./docker/db.env
     volumes:
       - mysql-data:/var/lib/mysql
       - ./docker/config/my.cnf:/etc/mysql/my.cnf
