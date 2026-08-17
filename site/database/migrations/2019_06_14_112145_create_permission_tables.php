@@ -77,9 +77,14 @@ return new class extends Migration
             $table->primary(['permission_id', 'role_id']);
         });
 
-        app('cache')
-            ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
-            ->forget(config('permission.cache.key'));
+        try {
+            app('cache')
+                ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
+                ->forget(config('permission.cache.key'));
+        } catch (\Throwable $e) {
+            // The cache store is not yet available: with the database driver,
+            // the cache table is created by a later migration.
+        }
     }
 
     /**
