@@ -81,7 +81,7 @@ return new class extends Migration
             app('cache')
                 ->store(config('permission.cache.store') != 'default' ? config('permission.cache.store') : null)
                 ->forget(config('permission.cache.key'));
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             // The cache store is not yet available: with the database driver,
             // the cache table is created by a later migration.
         }
