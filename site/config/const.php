@@ -12,9 +12,5 @@ return [
 
     'codespace_name' => env('CODESPACE_NAME'),
 
-    'shibboleth' => [
-        'hostname' => env('SHIB_HOSTNAME', null),
-        'contact' => env('SHIB_CONTACT', null),
-    ],
-
+    'shibboleth_auth_enabled' => env('SHIBBOLETH_AUTH_ENABLED', false),
 ];

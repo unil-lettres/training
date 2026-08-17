@@ -20,7 +20,7 @@ class AuthMethod
         }
 
         // Check if the Shibboleth service is configured, and redirect to the Shibboleth login
-        if (config('const.shibboleth.hostname') && config('const.shibboleth.contact')) {
+        if (config('const.shibboleth_auth_enabled')) {
             return redirect('/login/aai');
         }
 

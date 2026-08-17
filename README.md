@@ -144,7 +144,7 @@ cp site/.env.example site/.env
 
 You should replace the values since the default ones are not ready for production.
 
-To authenticate with Shibboleth, set `SHIB_HOSTNAME` and `SHIB_CONTACT` in `docker/shibboleth.env`, and uncomment & set the same values in `site/.env` — the application uses them to know whether AAI is available. Without them you will only be able to use the Filament authentication.
+To authenticate with Shibboleth, set `SHIB_HOSTNAME` and `SHIB_CONTACT` in `docker/shibboleth.env`, and set `SHIBBOLETH_AUTH_ENABLED` to `true` in `site/.env`. If `SHIBBOLETH_AUTH_ENABLED` is set to `false`m you will only be able to use the Filament authentication.
 
 Please also make sure to copy & rename the **docker-compose.override.yml.prod** file to **docker-compose.override.yml**.
 
