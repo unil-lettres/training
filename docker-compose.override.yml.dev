@@ -9,12 +9,14 @@ services:
       context: ./
       dockerfile: ./docker/app.dockerfile
       target: dev
+    ports:
+      - "127.0.0.1:8686:80"
     volumes:
       - ./site:/var/www/training
   train-mysql-testing:
     image: mariadb:11.4
     env_file:
-      - ./docker/.env
+      - ./docker/db.env
     volumes:
       - dusk-data:/var/lib/mysql
       - ./docker/config/my-testing.cnf:/etc/mysql/my.cnf
