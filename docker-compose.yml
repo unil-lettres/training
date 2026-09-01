@@ -19,7 +19,7 @@ services:
       - training-net
     container_name: train-app
   train-mysql:
-    image: mariadb:11.4
+    image: mariadb:12.3
     env_file:
       - ./docker/db.env
     volumes:
