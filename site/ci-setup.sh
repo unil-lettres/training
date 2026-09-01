@@ -10,7 +10,7 @@ rm .env.dusk.testing
 composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader
 
 # Install js dependencies & compile
-npm install
+npm ci
 npm run prod
 
 # Generate the app key

@@ -95,7 +95,7 @@ RUN cd /var/www/training && \
 
 # Install js dependencies, compile & remove node_modules
 RUN cd /var/www/training && \
-    npm install && \
+    npm ci && \
     npm run prod && \
     npm cache clean --force && \
     rm -rf /root/.npm && \
