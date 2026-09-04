@@ -10,8 +10,8 @@ rm .env.dusk.testing
 composer install --no-interaction --no-progress --prefer-dist --optimize-autoloader
 
 # Install js dependencies & compile
-npm ci
-npm run prod
+pnpm install --frozen-lockfile
+pnpm run prod
 
 # Generate the app key
 php artisan key:generate

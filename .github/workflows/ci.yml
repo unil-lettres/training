@@ -16,7 +16,8 @@ jobs:
         php-versions: [ '8.5' ]
         composer-version: [ '2.9' ]
         mariadb-version: [ '12.3' ]
-        node-version: [ '22' ]
+        node-version: [ '24' ]
+        pnpm-version: [ '11' ]
 
     services:
       mariadb:
@@ -34,10 +35,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
+      - name: Enable Corepack & Prepare Node package manager
+        run: |
+          corepack enable
+          corepack prepare pnpm@${{ matrix.pnpm-version }} --activate
+
       - name: Node Setup
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
+          cache: pnpm
+          cache-dependency-path: site/pnpm-lock.yaml
 
       - name: PHP Setup
         uses: shivammathur/setup-php@v2

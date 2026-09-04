@@ -6,7 +6,8 @@ ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 ENV TZ=Europe/Zurich
 
-ENV NODE_VERSION=22
+ENV NODE_VERSION=24
+ENV PNPM_VERSION=11
 ENV COMPOSER_VERSION=2.9.8
 
 # Update packages
@@ -45,14 +46,17 @@ RUN curl --silent --show-error https://getcomposer.org/installer | php -- \
     --version=$COMPOSER_VERSION \
     --install-dir=/usr/local/bin --filename=composer
 
-# Install specific version of Node
+# Install specific version of Node & pnpm
 RUN mkdir -p /etc/apt/keyrings; \
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
     | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg; \
     echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_VERSION.x nodistro main" \
     | tee /etc/apt/sources.list.d/nodesource.list; \
     apt-get update; \
-    apt-get install -y --no-install-recommends nodejs
+    apt-get install -y --no-install-recommends nodejs && \
+    corepack enable && \
+    corepack prepare pnpm@$PNPM_VERSION --activate && \
+    pnpm --version
 
 # Replace the proxy IP with the real client IP
 RUN a2enmod rewrite remoteip; \
@@ -95,10 +99,9 @@ RUN cd /var/www/training && \
 
 # Install js dependencies, compile & remove node_modules
 RUN cd /var/www/training && \
-    npm ci && \
-    npm run prod && \
-    npm cache clean --force && \
-    rm -rf /root/.npm && \
+    pnpm install --frozen-lockfile && \
+    pnpm run prod && \
+    rm -rf /root/.local/share/pnpm/store && \
     rm -rf /var/www/training/node_modules
 
 # Copy Kubernetes poststart script
