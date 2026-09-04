@@ -35,17 +35,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Enable Corepack & Prepare Node package manager
-        run: |
-          corepack enable
-          corepack prepare pnpm@${{ matrix.pnpm-version }} --activate
-
       - name: Node Setup
         uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
           cache-dependency-path: site/pnpm-lock.yaml
+
+      - name: Enable Corepack & Prepare Node package manager
+        run: |
+          corepack enable
+          corepack prepare pnpm@${{ matrix.pnpm-version }} --activate
 
       - name: PHP Setup
         uses: shivammathur/setup-php@v2
