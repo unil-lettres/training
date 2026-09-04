@@ -45,6 +45,7 @@ jobs:
         with:
           version: ${{ matrix.pnpm-version }}
           working-directory: site
+          install: false
           cache: true
 
       - name: PHP Setup
