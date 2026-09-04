@@ -97,7 +97,7 @@ COPY site/ /var/www/training
 RUN cd /var/www/training && \
     composer install --optimize-autoloader --no-interaction --no-dev
 
-# Install js dependencies, compile & remove node_modules
+# Install js dependencies, compile & remove node_modules and pnpm store to reduce image size
 RUN cd /var/www/training && \
     pnpm install --frozen-lockfile && \
     pnpm run prod && \
