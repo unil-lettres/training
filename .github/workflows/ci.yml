@@ -41,7 +41,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: pnpm Setup
-        uses: pnpm/setup@v2
+        uses: pnpm/setup@v2.1.0
         with:
           version: ${{ matrix.pnpm-version }}
           working-directory: site
