@@ -109,8 +109,9 @@ FROM base AS prod
 # Copy Apache configuration file
 COPY --chown=dockeruser:dockeruser docker/config/vhost-prod.conf /etc/apache2/sites-available/000-default.conf
 
-# Copy the application, except data listed in dockerignore
+# Copy the application, set ownership and permissions
 COPY --chown=dockeruser:dockeruser site/ /var/www/training
+RUN chown dockeruser:dockeruser /var/www/training
 
 # Switch to unprivileged user
 USER dockeruser
