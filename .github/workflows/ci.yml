@@ -17,7 +17,7 @@ jobs:
         composer-version: [ '2.9' ]
         mariadb-version: [ '12.3' ]
         node-version: [ '24' ]
-        pnpm-version: [ '11' ]
+        pnpm-version: [ '12' ]
 
     services:
       mariadb:

@@ -7,7 +7,7 @@ ENV LC_ALL=en_US.UTF-8
 ENV TZ=Europe/Zurich
 
 ENV NODE_VERSION=24
-ENV PNPM_VERSION=11
+ENV PNPM_VERSION=12
 ENV COMPOSER_VERSION=2.9.8
 
 # Update packages
@@ -46,7 +46,7 @@ RUN curl --silent --show-error https://getcomposer.org/installer | php -- \
     --version=$COMPOSER_VERSION \
     --install-dir=/usr/local/bin --filename=composer
 
-# Install specific version of Node & pnpm
+# Install specific version of Node & enable Corepack
 RUN mkdir -p /etc/apt/keyrings; \
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key \
     | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg; \
@@ -54,9 +54,7 @@ RUN mkdir -p /etc/apt/keyrings; \
     | tee /etc/apt/sources.list.d/nodesource.list; \
     apt-get update; \
     apt-get install -y --no-install-recommends nodejs && \
-    corepack enable && \
-    corepack prepare pnpm@$PNPM_VERSION --activate && \
-    pnpm --version
+    corepack enable
 
 # Replace the proxy IP with the real client IP
 RUN a2enmod rewrite remoteip; \
@@ -77,10 +75,15 @@ WORKDIR /var/www/training
 # Create an unprivileged runtime user and prepare Apache runtime directories
 RUN groupadd -r dockeruser --gid=1000 && \
     useradd -r -g dockeruser --uid=1000 \
+      --create-home --home-dir=/home/dockeruser \
       --shell=/sbin/nologin dockeruser && \
     # keep Apache's configured runtime identity aligned with the container user
     sed -i 's/: ${APACHE_RUN_USER:=www-data}/: ${APACHE_RUN_USER:=dockeruser}/' /etc/apache2/envvars && \
     sed -i 's/: ${APACHE_RUN_GROUP:=www-data}/: ${APACHE_RUN_GROUP:=dockeruser}/' /etc/apache2/envvars
+
+# Install pnpm as dockeruser so Corepack's configuration and cache remain accessible
+RUN su -s /bin/sh dockeruser -c \
+    'corepack install --global pnpm@'"$PNPM_VERSION"' && pnpm --version'
 
 # Allow Apache to write its PID, lock, and log files without root privileges
 RUN mkdir -p /var/run/apache2 /var/lock/apache2 /var/log/apache2 && \
@@ -95,6 +98,7 @@ COPY --chown=dockeruser:dockeruser docker/config/vhost-dev.conf /etc/apache2/sit
 COPY --chown=dockeruser:dockeruser docker/config/docker-dev-entrypoint.sh /bin/docker-entrypoint.sh
 RUN chmod +x /bin/docker-entrypoint.sh
 
+# Switch to unprivileged user
 USER dockeruser
 
 ENTRYPOINT ["/bin/docker-entrypoint.sh"]
@@ -108,6 +112,9 @@ COPY --chown=dockeruser:dockeruser docker/config/vhost-prod.conf /etc/apache2/si
 # Copy the application, except data listed in dockerignore
 COPY --chown=dockeruser:dockeruser site/ /var/www/training
 
+# Switch to unprivileged user
+USER dockeruser
+
 # Install php dependencies
 RUN cd /var/www/training && \
     composer install --optimize-autoloader --no-interaction --no-dev
@@ -116,7 +123,7 @@ RUN cd /var/www/training && \
 RUN cd /var/www/training && \
     pnpm install --frozen-lockfile && \
     pnpm run prod && \
-    rm -rf /root/.local/share/pnpm/store && \
+    rm -rf "$(pnpm store path)" && \
     rm -rf /var/www/training/node_modules
 
 # Copy Kubernetes poststart script
@@ -126,8 +133,6 @@ RUN chmod +x /var/www/training/k8s-poststart.sh
 # Copy the entrypoint script
 COPY --chown=dockeruser:dockeruser docker/config/docker-prod-entrypoint.sh /bin/docker-entrypoint.sh
 RUN chmod +x /bin/docker-entrypoint.sh
-
-USER dockeruser
 
 ENTRYPOINT ["/bin/docker-entrypoint.sh"]
 CMD ["apache2-foreground"]

@@ -11,7 +11,7 @@ echo "Install php dependencies..."
 composer install --no-interaction
 
 echo "Install js dependencies & compile for local dev..."
-pnpm install --frozen-lockfile --config.confirmModulesPurge=false
+pnpm install --frozen-lockfile
 pnpm run dev
 
 echo "Starting Migration..."
