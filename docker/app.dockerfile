@@ -74,24 +74,39 @@ COPY docker/config/php.ini /usr/local/etc/php/php.ini
 RUN mkdir -p /var/www/training
 WORKDIR /var/www/training
 
+# Create an unprivileged runtime user and prepare Apache runtime directories
+RUN groupadd -r dockeruser --gid=1000 && \
+    useradd -r -g dockeruser --uid=1000 \
+      --shell=/sbin/nologin dockeruser && \
+    # keep Apache's configured runtime identity aligned with the container user
+    sed -i 's/: ${APACHE_RUN_USER:=www-data}/: ${APACHE_RUN_USER:=dockeruser}/' /etc/apache2/envvars && \
+    sed -i 's/: ${APACHE_RUN_GROUP:=www-data}/: ${APACHE_RUN_GROUP:=dockeruser}/' /etc/apache2/envvars
+
+# Allow Apache to write its PID, lock, and log files without root privileges
+RUN mkdir -p /var/run/apache2 /var/lock/apache2 /var/log/apache2 && \
+    chown -R dockeruser:dockeruser /var/run/apache2 /var/lock/apache2 /var/log/apache2
+
 FROM base AS dev
 
 # Copy Apache configuration file
-COPY docker/config/vhost-dev.conf /etc/apache2/sites-available/000-default.conf
+COPY --chown=dockeruser:dockeruser docker/config/vhost-dev.conf /etc/apache2/sites-available/000-default.conf
 
 # Copy the entrypoint script
-COPY docker/config/docker-dev-entrypoint.sh /bin/docker-entrypoint.sh
+COPY --chown=dockeruser:dockeruser docker/config/docker-dev-entrypoint.sh /bin/docker-entrypoint.sh
 RUN chmod +x /bin/docker-entrypoint.sh
 
+USER dockeruser
+
 ENTRYPOINT ["/bin/docker-entrypoint.sh"]
+CMD ["apache2-foreground"]
 
 FROM base AS prod
 
 # Copy Apache configuration file
-COPY docker/config/vhost-prod.conf /etc/apache2/sites-available/000-default.conf
+COPY --chown=dockeruser:dockeruser docker/config/vhost-prod.conf /etc/apache2/sites-available/000-default.conf
 
 # Copy the application, except data listed in dockerignore
-COPY site/ /var/www/training
+COPY --chown=dockeruser:dockeruser site/ /var/www/training
 
 # Install php dependencies
 RUN cd /var/www/training && \
@@ -105,15 +120,14 @@ RUN cd /var/www/training && \
     rm -rf /var/www/training/node_modules
 
 # Copy Kubernetes poststart script
-COPY docker/config/k8s-poststart.sh /var/www/training/k8s-poststart.sh
+COPY --chown=dockeruser:dockeruser docker/config/k8s-poststart.sh /var/www/training/k8s-poststart.sh
 RUN chmod +x /var/www/training/k8s-poststart.sh
 
-# Change ownership of the application to www-data
-RUN chown -R www-data:www-data /var/www/training
-
 # Copy the entrypoint script
-COPY docker/config/docker-prod-entrypoint.sh /bin/docker-entrypoint.sh
+COPY --chown=dockeruser:dockeruser docker/config/docker-prod-entrypoint.sh /bin/docker-entrypoint.sh
 RUN chmod +x /bin/docker-entrypoint.sh
+
+USER dockeruser
 
 ENTRYPOINT ["/bin/docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
