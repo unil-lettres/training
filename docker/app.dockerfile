@@ -84,7 +84,7 @@ RUN pnpm run prod
 
 FROM base-node AS dev
 
-# Install pnpm as dockeruser so Corepack's configuration and cache remain accessible.
+# Install pnpm as dockeruser so Corepack's configuration and cache remain accessible
 RUN su -s /bin/sh dockeruser -c "corepack install --global pnpm@$PNPM_VERSION && pnpm --version"
 
 # Copy Apache configuration file and entrypoint script
