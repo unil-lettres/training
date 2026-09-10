@@ -13,10 +13,9 @@ window._ = _;
 import $ from 'jquery';
 window.$ = window.jQuery = $;
 
-import Popper from 'popper.js';
-window.Popper = Popper;
-
-import 'bootstrap';
+// Bootstrap 5 (no jQuery plugins). Expose its APIs globally for Blade scripts.
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
