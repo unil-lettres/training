@@ -15,7 +15,6 @@ services:
       - uploads-data:/var/www/training/storage/app/public/uploads
     restart: unless-stopped
     deploy:
-      mode: global
       resources:
         limits:
           memory: 1000M
@@ -39,7 +38,6 @@ services:
       start_period: 30s
     restart: unless-stopped
     deploy:
-      mode: global
       resources:
         limits:
           memory: 100M
@@ -49,7 +47,6 @@ services:
   train-mysql:
     restart: unless-stopped
     deploy:
-      mode: global
       resources:
         limits:
           memory: 500M
